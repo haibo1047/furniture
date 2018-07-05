@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huiyi.meeting.dao.mapper.MeetingTaskCandidateMapper">
+  <resultMap id="BaseResultMap" type="com.huiyi.meeting.dao.model.MeetingTaskCandidate">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="meetingId" jdbcType="INTEGER" property="meetingid" />
+    <result column="processName" jdbcType="VARCHAR" property="processname" />
+    <result column="taskId" jdbcType="VARCHAR" property="taskid" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, meetingId, processName, taskId, userId
+  </sql>
+  <select id="selectByExample" parameterType="com.huiyi.meeting.dao.model.MeetingTaskCandidateExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from MEETING_Task_Candidate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from MEETING_Task_Candidate
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from MEETING_Task_Candidate
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.huiyi.meeting.dao.model.MeetingTaskCandidateExample">
+    delete from MEETING_Task_Candidate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.huiyi.meeting.dao.model.MeetingTaskCandidate">
+    insert into MEETING_Task_Candidate (id, meetingId, processName, 
+      taskId, userId)
+    values (#{id,jdbcType=INTEGER}, #{meetingid,jdbcType=INTEGER}, #{processname,jdbcType=VARCHAR}, 
+      #{taskid,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huiyi.meeting.dao.model.MeetingTaskCandidate">
+    insert into MEETING_Task_Candidate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="meetingid != null">
+        meetingId,
+      </if>
+      <if test="processname != null">
+        processName,
+      </if>
+      <if test="taskid != null">
+        taskId,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="meetingid != null">
+        #{meetingid,jdbcType=INTEGER},
+      </if>
+      <if test="processname != null">
+        #{processname,jdbcType=VARCHAR},
+      </if>
+      <if test="taskid != null">
+        #{taskid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.huiyi.meeting.dao.model.MeetingTaskCandidateExample" resultType="java.lang.Long">
+    select count(*) from MEETING_Task_Candidate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update MEETING_Task_Candidate
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.meetingid != null">
+        meetingId = #{record.meetingid,jdbcType=INTEGER},
+      </if>
+      <if test="record.processname != null">
+        processName = #{record.processname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskid != null">
+        taskId = #{record.taskid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null">
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update MEETING_Task_Candidate
+    set id = #{record.id,jdbcType=INTEGER},
+      meetingId = #{record.meetingid,jdbcType=INTEGER},
+      processName = #{record.processname,jdbcType=VARCHAR},
+      taskId = #{record.taskid,jdbcType=VARCHAR},
+      userId = #{record.userid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huiyi.meeting.dao.model.MeetingTaskCandidate">
+    update MEETING_Task_Candidate
+    <set>
+      <if test="meetingid != null">
+        meetingId = #{meetingid,jdbcType=INTEGER},
+      </if>
+      <if test="processname != null">
+        processName = #{processname,jdbcType=VARCHAR},
+      </if>
+      <if test="taskid != null">
+        taskId = #{taskid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huiyi.meeting.dao.model.MeetingTaskCandidate">
+    update MEETING_Task_Candidate
+    set meetingId = #{meetingid,jdbcType=INTEGER},
+      processName = #{processname,jdbcType=VARCHAR},
+      taskId = #{taskid,jdbcType=VARCHAR},
+      userId = #{userid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

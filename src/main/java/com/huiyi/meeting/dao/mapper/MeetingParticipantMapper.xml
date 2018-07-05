@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huiyi.meeting.dao.mapper.MeetingParticipantMapper">
+  <resultMap id="BaseResultMap" type="com.huiyi.meeting.dao.model.MeetingParticipant">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="meetingId" jdbcType="INTEGER" property="meetingid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="meetingRegisterTime" jdbcType="DATE" property="meetingregistertime" />
+    <result column="productOfInterest" jdbcType="VARCHAR" property="productofinterest" />
+    <result column="hotel" jdbcType="VARCHAR" property="hotel" />
+    <result column="hotelAddress" jdbcType="VARCHAR" property="hoteladdress" />
+    <result column="hotelStatus" jdbcType="VARCHAR" property="hotelstatus" />
+    <result column="arrivalTime" jdbcType="DATE" property="arrivaltime" />
+    <result column="leaveTime" jdbcType="DATE" property="leavetime" />
+    <result column="trafficTool" jdbcType="VARCHAR" property="traffictool" />
+    <result column="receptionStatus" jdbcType="VARCHAR" property="receptionstatus" />
+    <result column="seatStatus" jdbcType="VARCHAR" property="seatstatus" />
+    <result column="seat" jdbcType="VARCHAR" property="seat" />
+    <result column="forumOfInterest" jdbcType="VARCHAR" property="forumofinterest" />
+    <result column="charged" jdbcType="VARCHAR" property="charged" />
+    <result column="meetingFee" jdbcType="REAL" property="meetingfee" />
+    <result column="meetingFeePaidTime" jdbcType="DATE" property="meetingfeepaidtime" />
+    <result column="invoiced" jdbcType="VARCHAR" property="invoiced" />
+    <result column="disguisedGuestCardContent" jdbcType="VARCHAR" property="disguisedguestcardcontent" />
+    <result column="ticketId" jdbcType="VARCHAR" property="ticketid" />
+    <result column="sponsor" jdbcType="VARCHAR" property="sponsor" />
+    <result column="creationTimestamp" jdbcType="BIGINT" property="creationtimestamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, meetingId, name, telephone, company, gender, age, address, meetingRegisterTime, 
+    productOfInterest, hotel, hotelAddress, hotelStatus, arrivalTime, leaveTime, trafficTool, 
+    receptionStatus, seatStatus, seat, forumOfInterest, charged, meetingFee, meetingFeePaidTime, 
+    invoiced, disguisedGuestCardContent, ticketId, sponsor, creationTimestamp
+  </sql>
+  <select id="selectByExample" parameterType="com.huiyi.meeting.dao.model.MeetingParticipantExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from MEETING_Participant
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from MEETING_Participant
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from MEETING_Participant
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.huiyi.meeting.dao.model.MeetingParticipantExample">
+    delete from MEETING_Participant
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.huiyi.meeting.dao.model.MeetingParticipant">
+    insert into MEETING_Participant (id, meetingId, name, 
+      telephone, company, gender, 
+      age, address, meetingRegisterTime, 
+      productOfInterest, hotel, hotelAddress, 
+      hotelStatus, arrivalTime, leaveTime, 
+      trafficTool, receptionStatus, seatStatus, 
+      seat, forumOfInterest, charged, 
+      meetingFee, meetingFeePaidTime, invoiced, 
+      disguisedGuestCardContent, ticketId, sponsor, 
+      creationTimestamp)
+    values (#{id,jdbcType=INTEGER}, #{meetingid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{meetingregistertime,jdbcType=DATE}, 
+      #{productofinterest,jdbcType=VARCHAR}, #{hotel,jdbcType=VARCHAR}, #{hoteladdress,jdbcType=VARCHAR}, 
+      #{hotelstatus,jdbcType=VARCHAR}, #{arrivaltime,jdbcType=DATE}, #{leavetime,jdbcType=DATE}, 
+      #{traffictool,jdbcType=VARCHAR}, #{receptionstatus,jdbcType=VARCHAR}, #{seatstatus,jdbcType=VARCHAR}, 
+      #{seat,jdbcType=VARCHAR}, #{forumofinterest,jdbcType=VARCHAR}, #{charged,jdbcType=VARCHAR}, 
+      #{meetingfee,jdbcType=REAL}, #{meetingfeepaidtime,jdbcType=DATE}, #{invoiced,jdbcType=VARCHAR}, 
+      #{disguisedguestcardcontent,jdbcType=VARCHAR}, #{ticketid,jdbcType=VARCHAR}, #{sponsor,jdbcType=VARCHAR}, 
+      #{creationtimestamp,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huiyi.meeting.dao.model.MeetingParticipant">
+    insert into MEETING_Participant
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="meetingid != null">
+        meetingId,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="meetingregistertime != null">
+        meetingRegisterTime,
+      </if>
+      <if test="productofinterest != null">
+        productOfInterest,
+      </if>
+      <if test="hotel != null">
+        hotel,
+      </if>
+      <if test="hoteladdress != null">
+        hotelAddress,
+      </if>
+      <if test="hotelstatus != null">
+        hotelStatus,
+      </if>
+      <if test="arrivaltime != null">
+        arrivalTime,
+      </if>
+      <if test="leavetime != null">
+        leaveTime,
+      </if>
+      <if test="traffictool != null">
+        trafficTool,
+      </if>
+      <if test="receptionstatus != null">
+        receptionStatus,
+      </if>
+      <if test="seatstatus != null">
+        seatStatus,
+      </if>
+      <if test="seat != null">
+        seat,
+      </if>
+      <if test="forumofinterest != null">
+        forumOfInterest,
+      </if>
+      <if test="charged != null">
+        charged,
+      </if>
+      <if test="meetingfee != null">
+        meetingFee,
+      </if>
+      <if test="meetingfeepaidtime != null">
+        meetingFeePaidTime,
+      </if>
+      <if test="invoiced != null">
+        invoiced,
+      </if>
+      <if test="disguisedguestcardcontent != null">
+        disguisedGuestCardContent,
+      </if>
+      <if test="ticketid != null">
+        ticketId,
+      </if>
+      <if test="sponsor != null">
+        sponsor,
+      </if>
+      <if test="creationtimestamp != null">
+        creationTimestamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="meetingid != null">
+        #{meetingid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingregistertime != null">
+        #{meetingregistertime,jdbcType=DATE},
+      </if>
+      <if test="productofinterest != null">
+        #{productofinterest,jdbcType=VARCHAR},
+      </if>
+      <if test="hotel != null">
+        #{hotel,jdbcType=VARCHAR},
+      </if>
+      <if test="hoteladdress != null">
+        #{hoteladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelstatus != null">
+        #{hotelstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivaltime != null">
+        #{arrivaltime,jdbcType=DATE},
+      </if>
+      <if test="leavetime != null">
+        #{leavetime,jdbcType=DATE},
+      </if>
+      <if test="traffictool != null">
+        #{traffictool,jdbcType=VARCHAR},
+      </if>
+      <if test="receptionstatus != null">
+        #{receptionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="seatstatus != null">
+        #{seatstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="seat != null">
+        #{seat,jdbcType=VARCHAR},
+      </if>
+      <if test="forumofinterest != null">
+        #{forumofinterest,jdbcType=VARCHAR},
+      </if>
+      <if test="charged != null">
+        #{charged,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingfee != null">
+        #{meetingfee,jdbcType=REAL},
+      </if>
+      <if test="meetingfeepaidtime != null">
+        #{meetingfeepaidtime,jdbcType=DATE},
+      </if>
+      <if test="invoiced != null">
+        #{invoiced,jdbcType=VARCHAR},
+      </if>
+      <if test="disguisedguestcardcontent != null">
+        #{disguisedguestcardcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketid != null">
+        #{ticketid,jdbcType=VARCHAR},
+      </if>
+      <if test="sponsor != null">
+        #{sponsor,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtimestamp != null">
+        #{creationtimestamp,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.huiyi.meeting.dao.model.MeetingParticipantExample" resultType="java.lang.Long">
+    select count(*) from MEETING_Participant
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update MEETING_Participant
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.meetingid != null">
+        meetingId = #{record.meetingid,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null">
+        telephone = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.company != null">
+        company = #{record.company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null">
+        gender = #{record.gender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingregistertime != null">
+        meetingRegisterTime = #{record.meetingregistertime,jdbcType=DATE},
+      </if>
+      <if test="record.productofinterest != null">
+        productOfInterest = #{record.productofinterest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotel != null">
+        hotel = #{record.hotel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hoteladdress != null">
+        hotelAddress = #{record.hoteladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotelstatus != null">
+        hotelStatus = #{record.hotelstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.arrivaltime != null">
+        arrivalTime = #{record.arrivaltime,jdbcType=DATE},
+      </if>
+      <if test="record.leavetime != null">
+        leaveTime = #{record.leavetime,jdbcType=DATE},
+      </if>
+      <if test="record.traffictool != null">
+        trafficTool = #{record.traffictool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receptionstatus != null">
+        receptionStatus = #{record.receptionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seatstatus != null">
+        seatStatus = #{record.seatstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seat != null">
+        seat = #{record.seat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.forumofinterest != null">
+        forumOfInterest = #{record.forumofinterest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.charged != null">
+        charged = #{record.charged,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingfee != null">
+        meetingFee = #{record.meetingfee,jdbcType=REAL},
+      </if>
+      <if test="record.meetingfeepaidtime != null">
+        meetingFeePaidTime = #{record.meetingfeepaidtime,jdbcType=DATE},
+      </if>
+      <if test="record.invoiced != null">
+        invoiced = #{record.invoiced,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disguisedguestcardcontent != null">
+        disguisedGuestCardContent = #{record.disguisedguestcardcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ticketid != null">
+        ticketId = #{record.ticketid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sponsor != null">
+        sponsor = #{record.sponsor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creationtimestamp != null">
+        creationTimestamp = #{record.creationtimestamp,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update MEETING_Participant
+    set id = #{record.id,jdbcType=INTEGER},
+      meetingId = #{record.meetingid,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      company = #{record.company,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      meetingRegisterTime = #{record.meetingregistertime,jdbcType=DATE},
+      productOfInterest = #{record.productofinterest,jdbcType=VARCHAR},
+      hotel = #{record.hotel,jdbcType=VARCHAR},
+      hotelAddress = #{record.hoteladdress,jdbcType=VARCHAR},
+      hotelStatus = #{record.hotelstatus,jdbcType=VARCHAR},
+      arrivalTime = #{record.arrivaltime,jdbcType=DATE},
+      leaveTime = #{record.leavetime,jdbcType=DATE},
+      trafficTool = #{record.traffictool,jdbcType=VARCHAR},
+      receptionStatus = #{record.receptionstatus,jdbcType=VARCHAR},
+      seatStatus = #{record.seatstatus,jdbcType=VARCHAR},
+      seat = #{record.seat,jdbcType=VARCHAR},
+      forumOfInterest = #{record.forumofinterest,jdbcType=VARCHAR},
+      charged = #{record.charged,jdbcType=VARCHAR},
+      meetingFee = #{record.meetingfee,jdbcType=REAL},
+      meetingFeePaidTime = #{record.meetingfeepaidtime,jdbcType=DATE},
+      invoiced = #{record.invoiced,jdbcType=VARCHAR},
+      disguisedGuestCardContent = #{record.disguisedguestcardcontent,jdbcType=VARCHAR},
+      ticketId = #{record.ticketid,jdbcType=VARCHAR},
+      sponsor = #{record.sponsor,jdbcType=VARCHAR},
+      creationTimestamp = #{record.creationtimestamp,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huiyi.meeting.dao.model.MeetingParticipant">
+    update MEETING_Participant
+    <set>
+      <if test="meetingid != null">
+        meetingId = #{meetingid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingregistertime != null">
+        meetingRegisterTime = #{meetingregistertime,jdbcType=DATE},
+      </if>
+      <if test="productofinterest != null">
+        productOfInterest = #{productofinterest,jdbcType=VARCHAR},
+      </if>
+      <if test="hotel != null">
+        hotel = #{hotel,jdbcType=VARCHAR},
+      </if>
+      <if test="hoteladdress != null">
+        hotelAddress = #{hoteladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelstatus != null">
+        hotelStatus = #{hotelstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivaltime != null">
+        arrivalTime = #{arrivaltime,jdbcType=DATE},
+      </if>
+      <if test="leavetime != null">
+        leaveTime = #{leavetime,jdbcType=DATE},
+      </if>
+      <if test="traffictool != null">
+        trafficTool = #{traffictool,jdbcType=VARCHAR},
+      </if>
+      <if test="receptionstatus != null">
+        receptionStatus = #{receptionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="seatstatus != null">
+        seatStatus = #{seatstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="seat != null">
+        seat = #{seat,jdbcType=VARCHAR},
+      </if>
+      <if test="forumofinterest != null">
+        forumOfInterest = #{forumofinterest,jdbcType=VARCHAR},
+      </if>
+      <if test="charged != null">
+        charged = #{charged,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingfee != null">
+        meetingFee = #{meetingfee,jdbcType=REAL},
+      </if>
+      <if test="meetingfeepaidtime != null">
+        meetingFeePaidTime = #{meetingfeepaidtime,jdbcType=DATE},
+      </if>
+      <if test="invoiced != null">
+        invoiced = #{invoiced,jdbcType=VARCHAR},
+      </if>
+      <if test="disguisedguestcardcontent != null">
+        disguisedGuestCardContent = #{disguisedguestcardcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketid != null">
+        ticketId = #{ticketid,jdbcType=VARCHAR},
+      </if>
+      <if test="sponsor != null">
+        sponsor = #{sponsor,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtimestamp != null">
+        creationTimestamp = #{creationtimestamp,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huiyi.meeting.dao.model.MeetingParticipant">
+    update MEETING_Participant
+    set meetingId = #{meetingid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      meetingRegisterTime = #{meetingregistertime,jdbcType=DATE},
+      productOfInterest = #{productofinterest,jdbcType=VARCHAR},
+      hotel = #{hotel,jdbcType=VARCHAR},
+      hotelAddress = #{hoteladdress,jdbcType=VARCHAR},
+      hotelStatus = #{hotelstatus,jdbcType=VARCHAR},
+      arrivalTime = #{arrivaltime,jdbcType=DATE},
+      leaveTime = #{leavetime,jdbcType=DATE},
+      trafficTool = #{traffictool,jdbcType=VARCHAR},
+      receptionStatus = #{receptionstatus,jdbcType=VARCHAR},
+      seatStatus = #{seatstatus,jdbcType=VARCHAR},
+      seat = #{seat,jdbcType=VARCHAR},
+      forumOfInterest = #{forumofinterest,jdbcType=VARCHAR},
+      charged = #{charged,jdbcType=VARCHAR},
+      meetingFee = #{meetingfee,jdbcType=REAL},
+      meetingFeePaidTime = #{meetingfeepaidtime,jdbcType=DATE},
+      invoiced = #{invoiced,jdbcType=VARCHAR},
+      disguisedGuestCardContent = #{disguisedguestcardcontent,jdbcType=VARCHAR},
+      ticketId = #{ticketid,jdbcType=VARCHAR},
+      sponsor = #{sponsor,jdbcType=VARCHAR},
+      creationTimestamp = #{creationtimestamp,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

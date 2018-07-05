@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huiyi.meeting.dao.mapper.MeetingScriptmanualMapper">
+  <resultMap id="BaseResultMap" type="com.huiyi.meeting.dao.model.MeetingScriptmanual">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="subTitle" jdbcType="VARCHAR" property="subtitle" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="ownerId" jdbcType="INTEGER" property="ownerid" />
+    <result column="seminarId" jdbcType="INTEGER" property="seminarid" />
+    <result column="meetingId" jdbcType="INTEGER" property="meetingid" />
+    <result column="attachmentManual" jdbcType="VARCHAR" property="attachmentmanual" />
+    <result column="attachmentTranslated" jdbcType="VARCHAR" property="attachmenttranslated" />
+    <result column="creationTimestamp" jdbcType="BIGINT" property="creationtimestamp" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, title, subTitle, category, ownerId, seminarId, meetingId, attachmentManual, attachmentTranslated, 
+    creationTimestamp, status
+  </sql>
+  <select id="selectByExample" parameterType="com.huiyi.meeting.dao.model.MeetingScriptmanualExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from MEETING_ScriptManual
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from MEETING_ScriptManual
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from MEETING_ScriptManual
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.huiyi.meeting.dao.model.MeetingScriptmanualExample">
+    delete from MEETING_ScriptManual
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.huiyi.meeting.dao.model.MeetingScriptmanual">
+    insert into MEETING_ScriptManual (id, title, subTitle, 
+      category, ownerId, seminarId, 
+      meetingId, attachmentManual, attachmentTranslated, 
+      creationTimestamp, status)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{subtitle,jdbcType=VARCHAR}, 
+      #{category,jdbcType=VARCHAR}, #{ownerid,jdbcType=INTEGER}, #{seminarid,jdbcType=INTEGER}, 
+      #{meetingid,jdbcType=INTEGER}, #{attachmentmanual,jdbcType=VARCHAR}, #{attachmenttranslated,jdbcType=VARCHAR}, 
+      #{creationtimestamp,jdbcType=BIGINT}, #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huiyi.meeting.dao.model.MeetingScriptmanual">
+    insert into MEETING_ScriptManual
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="subtitle != null">
+        subTitle,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="ownerid != null">
+        ownerId,
+      </if>
+      <if test="seminarid != null">
+        seminarId,
+      </if>
+      <if test="meetingid != null">
+        meetingId,
+      </if>
+      <if test="attachmentmanual != null">
+        attachmentManual,
+      </if>
+      <if test="attachmenttranslated != null">
+        attachmentTranslated,
+      </if>
+      <if test="creationtimestamp != null">
+        creationTimestamp,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null">
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerid != null">
+        #{ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="seminarid != null">
+        #{seminarid,jdbcType=INTEGER},
+      </if>
+      <if test="meetingid != null">
+        #{meetingid,jdbcType=INTEGER},
+      </if>
+      <if test="attachmentmanual != null">
+        #{attachmentmanual,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmenttranslated != null">
+        #{attachmenttranslated,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtimestamp != null">
+        #{creationtimestamp,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.huiyi.meeting.dao.model.MeetingScriptmanualExample" resultType="java.lang.Long">
+    select count(*) from MEETING_ScriptManual
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update MEETING_ScriptManual
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subtitle != null">
+        subTitle = #{record.subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.category != null">
+        category = #{record.category,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerid != null">
+        ownerId = #{record.ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.seminarid != null">
+        seminarId = #{record.seminarid,jdbcType=INTEGER},
+      </if>
+      <if test="record.meetingid != null">
+        meetingId = #{record.meetingid,jdbcType=INTEGER},
+      </if>
+      <if test="record.attachmentmanual != null">
+        attachmentManual = #{record.attachmentmanual,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachmenttranslated != null">
+        attachmentTranslated = #{record.attachmenttranslated,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creationtimestamp != null">
+        creationTimestamp = #{record.creationtimestamp,jdbcType=BIGINT},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update MEETING_ScriptManual
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      subTitle = #{record.subtitle,jdbcType=VARCHAR},
+      category = #{record.category,jdbcType=VARCHAR},
+      ownerId = #{record.ownerid,jdbcType=INTEGER},
+      seminarId = #{record.seminarid,jdbcType=INTEGER},
+      meetingId = #{record.meetingid,jdbcType=INTEGER},
+      attachmentManual = #{record.attachmentmanual,jdbcType=VARCHAR},
+      attachmentTranslated = #{record.attachmenttranslated,jdbcType=VARCHAR},
+      creationTimestamp = #{record.creationtimestamp,jdbcType=BIGINT},
+      status = #{record.status,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huiyi.meeting.dao.model.MeetingScriptmanual">
+    update MEETING_ScriptManual
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null">
+        subTitle = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerid != null">
+        ownerId = #{ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="seminarid != null">
+        seminarId = #{seminarid,jdbcType=INTEGER},
+      </if>
+      <if test="meetingid != null">
+        meetingId = #{meetingid,jdbcType=INTEGER},
+      </if>
+      <if test="attachmentmanual != null">
+        attachmentManual = #{attachmentmanual,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmenttranslated != null">
+        attachmentTranslated = #{attachmenttranslated,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtimestamp != null">
+        creationTimestamp = #{creationtimestamp,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huiyi.meeting.dao.model.MeetingScriptmanual">
+    update MEETING_ScriptManual
+    set title = #{title,jdbcType=VARCHAR},
+      subTitle = #{subtitle,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      ownerId = #{ownerid,jdbcType=INTEGER},
+      seminarId = #{seminarid,jdbcType=INTEGER},
+      meetingId = #{meetingid,jdbcType=INTEGER},
+      attachmentManual = #{attachmentmanual,jdbcType=VARCHAR},
+      attachmentTranslated = #{attachmenttranslated,jdbcType=VARCHAR},
+      creationTimestamp = #{creationtimestamp,jdbcType=BIGINT},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>
