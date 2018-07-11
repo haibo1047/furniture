@@ -14,6 +14,13 @@
           http://www.springframework.org/schema/aop
           http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+
+	<!-- 装载自定义bean -->
+	<context:component-scan base-package="**.*" use-default-filters="false">
+		<context:include-filter type="assignable" expression="com.ylsq.common.base.BaseInterface"></context:include-filter>
+	</context:component-scan>
+	
+	
     <!-- 引入jdbc配置文件 -->
     <!--<context:property-placeholder location="classpath:jdbc.properties" />-->
     <!-- 配置进行解密  -->
