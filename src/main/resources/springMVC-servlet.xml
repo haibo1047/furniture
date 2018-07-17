@@ -64,14 +64,26 @@
     <!-- </mvc:interceptors> -->
 
      <!--Jsp视图 -->
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp"/>
+    <!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages"/>
         <property name="suffix" value=".jsp"/>
         <property name="contentType" value="text/html; charset=utf-8"/>
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-    </bean>
+    </bean> -->
     
-    
+    <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+  		<property name="resourceLoaderPath" value="/WEB-INF/pages"/>
+  		<property name="configLocation" value="classpath:velocity.properties"/>
+	</bean>
+ 
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+	  	<property name="cache" value="true"/>
+	  	<property name="requestContextAttribute" value="rc"/> 
+		<property name="prefix" value=""/>
+		<property name="suffix" value=".vm"/>
+		<property name="layoutUrl" value="include/layout.vm" /> 
+	</bean>
+  
     <mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
     <mvc:resources location="/images/" mapping="/images/**"></mvc:resources>
     <mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
