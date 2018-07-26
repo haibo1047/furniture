@@ -5,12 +5,6 @@ import java.io.Serializable;
 import com.ylsq.common.base.BaseModel;
 
 public class SecuUser extends BaseModel implements Serializable {
-    /**
-     * 编号
-     *
-     * @mbg.generated
-     */
-    private Long userId;
 
     /**
      * 帐号
@@ -62,14 +56,6 @@ public class SecuUser extends BaseModel implements Serializable {
     private String gender;
 
     private static final long serialVersionUID = 1L;
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
 
     public String getUsername() {
         return username;
@@ -127,15 +113,13 @@ public class SecuUser extends BaseModel implements Serializable {
         this.gender = gender;
     }
 
-
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", userId=").append(userId);
+        sb.append(", id=").append(id);
         sb.append(", username=").append(username);
         sb.append(", password=").append(password);
         sb.append(", salt=").append(salt);
@@ -162,7 +146,7 @@ public class SecuUser extends BaseModel implements Serializable {
             return false;
         }
         SecuUser other = (SecuUser) that;
-        return (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
             && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
             && (this.getSalt() == null ? other.getSalt() == null : this.getSalt().equals(other.getSalt()))
@@ -179,7 +163,7 @@ public class SecuUser extends BaseModel implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
         result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
         result = prime * result + ((getSalt() == null) ? 0 : getSalt().hashCode());
