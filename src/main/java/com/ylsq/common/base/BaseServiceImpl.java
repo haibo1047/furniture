@@ -58,7 +58,7 @@ public abstract class BaseServiceImpl<Mapper, Record, Example> implements BaseSe
 	}
 
 	@Override
-	public int deleteByPrimaryKey(Integer id) {
+	public int deleteByPrimaryKey(Long id) {
 		try {
 			DynamicDataSource.setDataSource(DataSourceEnum.MASTER.getName());
 			Method deleteByPrimaryKey = mapper.getClass().getDeclaredMethod("deleteByPrimaryKey", id.getClass());
@@ -264,7 +264,7 @@ public abstract class BaseServiceImpl<Mapper, Record, Example> implements BaseSe
 	}
 
 	@Override
-	public Record selectByPrimaryKey(Integer id) {
+	public Record selectByPrimaryKey(Long id) {
 		try {
 			DynamicDataSource.setDataSource(DataSourceEnum.SLAVE.getName());
 			Method selectByPrimaryKey = mapper.getClass().getDeclaredMethod("selectByPrimaryKey", id.getClass());
@@ -402,7 +402,7 @@ public abstract class BaseServiceImpl<Mapper, Record, Example> implements BaseSe
 				if (StringUtils.isBlank(idStr)) {
 					continue;
 				}
-				Integer id = Integer.parseInt(idStr);
+				Long id = Long.parseLong(idStr);
 				Method deleteByPrimaryKey = mapper.getClass().getDeclaredMethod("deleteByPrimaryKey", id.getClass());
 				Object result = deleteByPrimaryKey.invoke(mapper, id);
 				count += Integer.parseInt(String.valueOf(result));

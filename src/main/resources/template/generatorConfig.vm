@@ -19,6 +19,11 @@
         <plugin type="com.ylsq.common.plugin.SerializablePlugin">
             <property name="suppressJavaInterface" value="false"/>
         </plugin>
+        
+        <!-- 为生成的Java模型类添加序列化接口，并生成serialVersionUID字段 -->
+        <plugin type="com.ylsq.common.plugin.BaseModelPlugin">
+            <property name="baseModelClass" value="com.ylsq.common.base.BaseModel"/>
+        </plugin>
 
         <!-- 生成一个新的selectByExample方法，这个方法可以接收offset和limit参数，主要用来实现分页，只支持mysql(已使用pagehelper代替) -->
         <!--<plugin type="com.ylsq.common.plugin.PaginationPlugin"></plugin>-->
@@ -46,10 +51,7 @@
         </commentGenerator>
 
         <!-- 数据库连接 -->
-        <jdbcConnection driverClass="${generator.jdbc.driver}"
-                        connectionURL="${generator.jdbc.url}"
-                        userId="${generator.jdbc.username}"
-                        password="${generator_jdbc_password}" />
+        <jdbcConnection driverClass="${generator.jdbc.driver}" connectionURL="${generator.jdbc.url}" userId="${generator.jdbc.username}"  password="${generator_jdbc_password}" />
 
         <!-- model生成 -->
         <javaModelGenerator targetPackage="${generator_javaModelGenerator_targetPackage}" targetProject="${targetProject}/src/main/java" />
@@ -63,11 +65,11 @@
         <!-- 需要映射的表 -->
         #foreach($table in $tables)
             #if($last_insert_id_tables.containsKey($!table.table_name) == true)
-                <table tableName="$!table.table_name" domainObjectName="$!table.model_name">
-                    <generatedKey column="$!last_insert_id_tables.get($!table.table_name)" sqlStatement="MySql" identity="true"/>
-                </table>
+        <table tableName="$!table.table_name" domainObjectName="$!table.model_name">
+            <generatedKey column="$!last_insert_id_tables.get($!table.table_name)" sqlStatement="MySql" identity="true"/>
+        </table>
             #else
-                <table tableName="$!table.table_name" domainObjectName="$!table.model_name"></table>
+        <table tableName="$!table.table_name" domainObjectName="$!table.model_name"></table>
             #end
         #end
     </context>

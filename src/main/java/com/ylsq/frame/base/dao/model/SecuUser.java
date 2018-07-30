@@ -1,10 +1,16 @@
 package com.ylsq.frame.base.dao.model;
 
-import java.io.Serializable;
-
 import com.ylsq.common.base.BaseModel;
+import java.io.Serializable;
+import java.util.Date;
 
-public class SecuUser extends BaseModel implements Serializable {
+public class SecuUser implements BaseModel, Serializable {
+    /**
+     * 编号
+     *
+     * @mbg.generated
+     */
+    private Long id;
 
     /**
      * 帐号
@@ -55,7 +61,36 @@ public class SecuUser extends BaseModel implements Serializable {
      */
     private String gender;
 
+    /**
+     * 创建时间
+     *
+     * @mbg.generated
+     */
+    private Date createTime;
+
+    /**
+     * 创建人
+     *
+     * @mbg.generated
+     */
+    private String createUser;
+
+    /**
+     * 记录状态
+     *
+     * @mbg.generated
+     */
+    private String recStatus;
+
     private static final long serialVersionUID = 1L;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -111,6 +146,30 @@ public class SecuUser extends BaseModel implements Serializable {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
+
+    public String getRecStatus() {
+        return recStatus;
+    }
+
+    public void setRecStatus(String recStatus) {
+        this.recStatus = recStatus;
     }
 
     @Override

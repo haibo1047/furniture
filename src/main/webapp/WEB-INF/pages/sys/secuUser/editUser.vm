@@ -1,0 +1,93 @@
+<br />
+<form id="editForm" data-parsley-validate class="form-horizontal form-label-left" action="$rc.contextPath/sys/user/save.n" method="post">
+	<input type="hidden" name="id" value="$!{user.id}">
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">User Name <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input type="text" id="username" name="username" value="$!{user.username}" required="required" class="form-control col-md-7 col-xs-12">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Password <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input type="password" id="password" name="password" value="$!{user.password}" required="required" class="form-control col-md-7 col-xs-12">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="Phone" class="control-label col-md-3 col-sm-3 col-xs-12"> Real Name </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input id="realname" class="form-control col-md-7 col-xs-12" type="text" name="realname" value="$!{user.realname}">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="Phone" class="control-label col-md-3 col-sm-3 col-xs-12"> Phone </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input id="phone" class="form-control col-md-7 col-xs-12" type="text" name="phone" value="$!{user.phone}">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email" class="control-label col-md-3 col-sm-3 col-xs-12"> Email</label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input id="email" class="form-control col-md-7 col-xs-12" type="text" name="email" value="$!{user.email}">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <div id="gender-div" class="btn-group" data-toggle="buttons">
+        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" onclick="groupselect('male')">
+          <input type="radio" name="gender" value="male" #if("male"==$!{user.gender}) checked #end>  &nbsp; Male &nbsp;
+        </label>
+        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" onclick="groupselect('female')">
+          <input type="radio" name="gender" value="female" #if("female"==$!{user.gender}) checked #end> Female
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+    </div>
+  </div>
+  <div class="ln_solid"></div>
+  <div class="form-group">
+    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+      <button class="btn btn-primary" type="button" onclick="goback()">Cancel</button>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+  </div>
+
+</form>
+<script type="text/javascript">
+
+function frameinit(){
+	#if( ${user.gender} )
+		groupselect('${user.gender}');
+	#end
+}
+
+function goback(){
+	location = "$rc.contextPath/sys/user/list.n";
+}
+
+function groupselect(v){
+	$("input[name='gender']").each(
+		function(){
+			if(v == $(this).val()){
+				$(this).parent().removeClass("btn-default")
+				$(this).parent().addClass(" btn-primary")
+				$(this).checked = true;
+			}
+			else{
+				$(this).parent().removeClass("btn-primary")
+				$(this).parent().addClass(" btn-default")
+			}
+		}
+	)
+}
+
+</script>

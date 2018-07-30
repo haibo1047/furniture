@@ -12,6 +12,7 @@
 
 	<!-- 扫描controller -->
     <context:component-scan base-package="**.*web"/>
+    
     <context:annotation-config/>
     <!-- <bean id="swagger2Config" class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration"/> -->
 
@@ -73,7 +74,7 @@
     
     <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
   		<property name="resourceLoaderPath" value="/WEB-INF/pages"/>
-  		<property name="configLocation" value="classpath:velocity.properties"/>
+  		<property name="configLocation" value="/WEB-INF/velocity/velocity.properties"/>
 	</bean>
  
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
@@ -82,6 +83,7 @@
 		<property name="prefix" value=""/>
 		<property name="suffix" value=".vm"/>
 		<property name="layoutUrl" value="include/layout.vm" /> 
+		<property name="toolboxConfigLocation" value="/WEB-INF/velocity/toolbox.xml"/>
 	</bean>
   
     <mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
