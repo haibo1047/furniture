@@ -17,7 +17,7 @@ public class SecuUser implements BaseModel, Serializable {
      *
      * @mbg.generated
      */
-    private String username;
+    private String userName;
 
     /**
      * 密码MD5(密码+盐)
@@ -38,7 +38,7 @@ public class SecuUser implements BaseModel, Serializable {
      *
      * @mbg.generated
      */
-    private String realname;
+    private String realName;
 
     /**
      * 电话
@@ -92,12 +92,12 @@ public class SecuUser implements BaseModel, Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -116,12 +116,12 @@ public class SecuUser implements BaseModel, Serializable {
         this.salt = salt;
     }
 
-    public String getRealname() {
-        return realname;
+    public String getRealName() {
+        return realName;
     }
 
-    public void setRealname(String realname) {
-        this.realname = realname;
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
     public String getPhone() {
@@ -179,10 +179,10 @@ public class SecuUser implements BaseModel, Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", username=").append(username);
+        sb.append(", userName=").append(userName);
         sb.append(", password=").append(password);
         sb.append(", salt=").append(salt);
-        sb.append(", realname=").append(realname);
+        sb.append(", realName=").append(realName);
         sb.append(", phone=").append(phone);
         sb.append(", email=").append(email);
         sb.append(", gender=").append(gender);
@@ -206,10 +206,10 @@ public class SecuUser implements BaseModel, Serializable {
         }
         SecuUser other = (SecuUser) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
+            && (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
             && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
             && (this.getSalt() == null ? other.getSalt() == null : this.getSalt().equals(other.getSalt()))
-            && (this.getRealname() == null ? other.getRealname() == null : this.getRealname().equals(other.getRealname()))
+            && (this.getRealName() == null ? other.getRealName() == null : this.getRealName().equals(other.getRealName()))
             && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
             && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
             && (this.getGender() == null ? other.getGender() == null : this.getGender().equals(other.getGender()))
@@ -223,10 +223,10 @@ public class SecuUser implements BaseModel, Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
+        result = prime * result + ((getUserName() == null) ? 0 : getUserName().hashCode());
         result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
         result = prime * result + ((getSalt() == null) ? 0 : getSalt().hashCode());
-        result = prime * result + ((getRealname() == null) ? 0 : getRealname().hashCode());
+        result = prime * result + ((getRealName() == null) ? 0 : getRealName().hashCode());
         result = prime * result + ((getPhone() == null) ? 0 : getPhone().hashCode());
         result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
         result = prime * result + ((getGender() == null) ? 0 : getGender().hashCode());

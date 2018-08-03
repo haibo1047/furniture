@@ -34,6 +34,8 @@ public class BaseController {
 			obj.setRecStatus("1");
 		}
 		else {
+			obj.setCreateTime(new Date());
+			obj.setCreateUser("not ready update");
 			obj.setRecStatus("2");
 		}
 		

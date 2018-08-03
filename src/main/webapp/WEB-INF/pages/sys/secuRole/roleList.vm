@@ -16,11 +16,8 @@
         <th>
           <input type="checkbox" id="check-all" class="flat">
         </th>
-        <th class="column-title"> User Name </th>
-        <th class="column-title"> Real Name </th>
-        <th class="column-title"> Gender </th>
-        <th class="column-title"> Phone Number </th>
-        <th class="column-title"> Email </th>
+        <th class="column-title"> Role Name </th>
+        <th class="column-title"> Role Key </th>
         <th class="column-title"> Create Time </th>
         <th class="column-title"> Create User </th>
         <th class="column-title no-link last">
@@ -28,30 +25,27 @@
         		Operation
         	</span>
         </th>
-        <th class="bulk-actions" colspan="8">
+        <th class="bulk-actions" colspan="5">
           <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
         </th>
       </tr>
     </thead>
 
     <tbody>
-    	#foreach ($secuUser in $userList)
+    	#foreach ($secuRole in $roleList)
     
       <tr class="#if($foreach.count %2 ==0) even #else odd #end pointer">
         <td class="a-center ">
-          <input type="checkbox" class="flat" name="table_records" value="$!{secuUser.id}">
+          <input type="checkbox" class="flat" name="table_records" value="$!{secuRole.id}">
         </td>
-        <td class=" "> $!{secuUser.userName} </td>
-        <td class=" "> $!{secuUser.realName} </td>
-        <td class=" "> $!{secuUser.gender} </td>
-        <td class=" "> $!{secuUser.phone} </td>
-        <td class=" "> $!{secuUser.email} </td>
-        <td class=" "> $!date.format("yyyy-MM-dd HH:mm:ss",$!secuUser.createTime ) </td>
-        <td class=" "> $!{secuUser.createUser} </td>
+        <td class=" "> $!{secuRole.roleName} </td>
+        <td class=" "> $!{secuRole.roleKey} </td>
+        <td class=" "> $!date.format("yyyy-MM-dd HH:mm:ss",$!secuRole.createTime ) </td>
+        <td class=" "> $!{secuRole.createUser} </td>
         <td class=" last">
 			<a href="#" onclick="editRecord(this)">Edit</a> &nbsp;
 			<a href="#" onclick="delRecord(this)">Delete</a> &nbsp;
-			<a href="#" onclick="configRoles(this)">Roles</a> &nbsp;
+			<a href="#" onclick="configUsers(this)">Users</a> &nbsp;
         </td>
       </tr>
       #end
@@ -63,7 +57,7 @@
 <script>
 var ID_INDEX=1
 function create(){
-	location = "$rc.contextPath/sys/user/create.n"
+	location = "$rc.contextPath/sys/role/create.n"
 }
 function deletemultiple(){
 	var ids = "";
@@ -75,21 +69,21 @@ function deletemultiple(){
 		return;
 	}
 	if(confirm('确认要删除此'+$(selted).length+'条记录？')){
-		location = "$rc.contextPath/sys/user/delete/"+ids+".n"
+		location = "$rc.contextPath/sys/role/delete/"+ids+".n"
 	}
 }
 function editRecord(o){
 	var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-	location = "$rc.contextPath/sys/user/edit/"+objId+".n"
+	location = "$rc.contextPath/sys/role/edit/"+objId+".n"
 }
 function delRecord(o){
 	if (confirm('确认要删除此记录？')) {
 		var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-		location = "$rc.contextPath/sys/user/delete/"+objId+".n"
+		location = "$rc.contextPath/sys/role/delete/"+objId+".n"
 	}
 }
-function configRoles(o){
+function configUsers(o){
 	var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-	location = "$rc.contextPath/sys/user/configRoles/"+objId+".n"
+	location = "$rc.contextPath/sys/role/configUsers/"+objId+".n"
 }
 </script>

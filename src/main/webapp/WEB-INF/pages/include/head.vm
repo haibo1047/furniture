@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,22 +13,19 @@
 
 
     <!-- Bootstrap -->
-    <link href="$rc.contextPath/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="$rc.contextPath//css/font-awesome.min.css" rel="stylesheet">
+    <link href="<c:url value="/css/font-awesome.min.css"/>" rel="stylesheet">
     <!-- NProgress -->
-    <link href="$rc.contextPath//css/nprogress.css" rel="stylesheet">
+    <link href="<c:url value="/css/nprogress.css"/>" rel="stylesheet">
     <!-- bootstrap-wysiwyg -->
-    <link href="$rc.contextPath//css/prettify.min.css" rel="stylesheet">
+    <link href="<c:url value="/css/prettify.min.css"/>" rel="stylesheet">
     <!-- jQuery custom content scroller -->
-    <link href="$rc.contextPath/css/jquery.mCustomScrollbar.min.css" rel="stylesheet">
-	
-	<link href="$rc.contextPath/css/listswap.css" rel="stylesheet">
-	<link href="$rc.contextPath/css/jquerysctipttop.css" rel="stylesheet">
-	
+    <link href="<c:url value="/css/jquery.mCustomScrollbar.min.css"/>" rel="stylesheet">
+
     <!-- Custom styling plus plugins -->
-    <link href="$rc.contextPath/css/custom.min.css" rel="stylesheet">
-    <link href="$rc.contextPath/css/green.css" rel="stylesheet">
+    <link href="<c:url value="/css/custom.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/green.css"/>" rel="stylesheet">
   </head>
  <body class="nav-md">
     <div class="container body">
@@ -42,7 +41,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="$rc.contextPath/images/img.jpg" alt="..." class="img-circle profile_img">
+                <img src="<c:url value="/images/img.jpg"/>" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
@@ -60,13 +59,13 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="$rc.contextPath/home/index.n">Dashboard</a></li>
+                      <li><a href="<c:url value="/home/index.n"/>">Home page </a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> System Manage <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="$rc.contextPath/sys/user/list.n">Secu User</a></li>
-                      <li><a href="$rc.contextPath/sys/role/list.n">Secu Role</a></li>
+                      <li><a href="<c:url value="/sys/user/list.n"/>">Secu User</a></li>
+                      <li><a href="<c:url value="/sys/role/list.n"/>">Secu Role</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
@@ -165,7 +164,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="$rc.contextPath/images/img.jpg" alt="">John Doe
+                    <img src="<c:url value="/images/img.jpg"/>" alt="">John Doe
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -189,7 +188,7 @@
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                     <li>
                       <a>
-                        <span class="image"><img src="$rc.contextPath/images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="<c:url value="/images/img.jpg"/>" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -201,7 +200,7 @@
                     </li>
                     <li>
                       <a>
-                        <span class="image"><img src="$rc.contextPath/images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="<c:url value="/images/img.jpg"/>" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -213,7 +212,7 @@
                     </li>
                     <li>
                       <a>
-                        <span class="image"><img src="$rc.contextPath/images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="<c:url value="/images/img.jpg"/>" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -225,7 +224,7 @@
                     </li>
                     <li>
                       <a>
-                        <span class="image"><img src="$rc.contextPath/images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="<c:url value="/images/img.jpg"/>" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -255,11 +254,69 @@
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
-            
-            
-            $screen_content
-            
-            
+              <div class="title_left">
+                <h3>Secu users</h3>
+              </div>
+               <div class="x_content">
+
+                    <p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p>
+
+                    <div class="table-responsive">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th>
+                              <input type="checkbox" id="check-all" class="flat">
+                            </th>
+                            <th class="column-title">Invoice </th>
+                            <th class="column-title">Invoice Date </th>
+                            <th class="column-title">Order </th>
+                            <th class="column-title">Bill to Name </th>
+                            <th class="column-title">Status </th>
+                            <th class="column-title">Amount </th>
+                            <th class="column-title no-link last"><span class="nobr">Action</span>
+                            </th>
+                            <th class="bulk-actions" colspan="7">
+                              <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr class="even pointer">
+                            <td class="a-center ">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td class=" ">121000040</td>
+                            <td class=" ">May 23, 2014 11:47:56 PM </td>
+                            <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
+                            <td class=" ">John Blank L</td>
+                            <td class=" ">Paid</td>
+                            <td class="a-right a-right ">$7.45</td>
+                            <td class=" last"><a href="#">View</a>
+                            </td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class="a-center ">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td class=" ">121000039</td>
+                            <td class=" ">May 23, 2014 11:30:12 PM</td>
+                            <td class=" ">121000208 <i class="success fa fa-long-arrow-up"></i>
+                            </td>
+                            <td class=" ">John Blank L</td>
+                            <td class=" ">Paid</td>
+                            <td class="a-right a-right ">$741.20</td>
+                            <td class=" last"><a href="#">View</a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+              
+              
+              
+              
             </div>
           </div>
         </div>
@@ -277,34 +334,25 @@
     </div>
 	
 	<!-- jQuery -->
-    <script src="$rc.contextPath/js/jquery.min.js"></script>
-    <script src="$rc.contextPath/js/popper.min.js"></script>
+    <script src="<c:url value="/js/jquery-3.2.1.min.js"/>"></script>
+    <script src="<c:url value="/js/popper.min.js"/>"></script>
     <!-- Bootstrap -->
-    <script src="$rc.contextPath/js/bootstrap.min.js"></script>
+    <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
     <!-- FastClick -->
-    <script src="$rc.contextPath/js/fastclick.js"></script>
+    <script src="<c:url value="/js/fastclick.js"/>"></script>
     <!-- NProgress -->
-    <script src="$rc.contextPath/js/nprogress.js"></script>
+    <script src="<c:url value="/js/nprogress.js"/>"></script>
     <!-- bootstrap-wysiwyg -->
-    <script src="$rc.contextPath/js/bootstrap-wysiwyg.min.js"></script>
-    <script src="$rc.contextPath/js/jquery.hotkeys.js"></script>
-    <script src="$rc.contextPath/js/prettify.min.js"></script>
+    <script src="<c:url value="/js//bootstrap-wysiwyg.min.js"/>"></script>
+    <script src="<c:url value="/js//jquery.hotkeys.js"/>"></script>
+    <script src="<c:url value="/js//prettify.min.js"/>"></script>
 	<!-- jQuery custom content scroller -->
-    <script src="$rc.contextPath/js//jquery.mCustomScrollbar.concat.min.js"></script>
-    
-    <!-- Custom Theme Scripts -->
-    <script src="$rc.contextPath/js/custom.js"></script>
-    <script src="$rc.contextPath/js/icheck.min.js"></script>
+    <script src="<c:url value="/js//jquery.mCustomScrollbar.concat.min.js"/>"></script>
 
-	<script src="$rc.contextPath/js/jquery.listswap.js"></script>
-	
-<script type="text/javascript">
-$(function() {
-	if($.isFunction(window.frameinit)){
-		frameinit();
-	}
-});
-</script>
+    <!-- Custom Theme Scripts -->
+    <script src="<c:url value="/js/custom.min.js"/>"></script>
+    <script src="<c:url value="/js/icheck.min.js"/>"></script>
+
   </body>
 </html>
 </body>
