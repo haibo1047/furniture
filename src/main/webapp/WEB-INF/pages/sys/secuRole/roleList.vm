@@ -17,7 +17,7 @@
           <input type="checkbox" id="check-all" class="flat">
         </th>
         <th class="column-title"> Role Name </th>
-        <th class="column-title"> Role Key </th>
+        <th class="column-title"> Role Description </th>
         <th class="column-title"> Create Time </th>
         <th class="column-title"> Create User </th>
         <th class="column-title no-link last">

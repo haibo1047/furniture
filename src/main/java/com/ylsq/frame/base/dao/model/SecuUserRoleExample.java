@@ -448,62 +448,52 @@ public class SecuUserRoleExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusEqualTo(String value) {
+        public Criteria andRecStatusEqualTo(Integer value) {
             addCriterion("rec_status =", value, "recStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusNotEqualTo(String value) {
+        public Criteria andRecStatusNotEqualTo(Integer value) {
             addCriterion("rec_status <>", value, "recStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusGreaterThan(String value) {
+        public Criteria andRecStatusGreaterThan(Integer value) {
             addCriterion("rec_status >", value, "recStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusGreaterThanOrEqualTo(String value) {
+        public Criteria andRecStatusGreaterThanOrEqualTo(Integer value) {
             addCriterion("rec_status >=", value, "recStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusLessThan(String value) {
+        public Criteria andRecStatusLessThan(Integer value) {
             addCriterion("rec_status <", value, "recStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusLessThanOrEqualTo(String value) {
+        public Criteria andRecStatusLessThanOrEqualTo(Integer value) {
             addCriterion("rec_status <=", value, "recStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusLike(String value) {
-            addCriterion("rec_status like", value, "recStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andRecStatusNotLike(String value) {
-            addCriterion("rec_status not like", value, "recStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andRecStatusIn(List<String> values) {
+        public Criteria andRecStatusIn(List<Integer> values) {
             addCriterion("rec_status in", values, "recStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusNotIn(List<String> values) {
+        public Criteria andRecStatusNotIn(List<Integer> values) {
             addCriterion("rec_status not in", values, "recStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusBetween(String value1, String value2) {
+        public Criteria andRecStatusBetween(Integer value1, Integer value2) {
             addCriterion("rec_status between", value1, value2, "recStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusNotBetween(String value1, String value2) {
+        public Criteria andRecStatusNotBetween(Integer value1, Integer value2) {
             addCriterion("rec_status not between", value1, value2, "recStatus");
             return (Criteria) this;
         }

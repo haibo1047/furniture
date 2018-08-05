@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
 * SecuUserRoleService实现
-* Created by harper.
+* Created by harper
 */
 @Service
 @Transactional

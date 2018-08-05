@@ -22,6 +22,7 @@ public class BaseController {
 	@ExceptionHandler
 	public String exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception exception) {
 		logger.error(exception.getMessage());
+		exception.printStackTrace();
 		request.setAttribute("ex", exception);
 		return "/common/error";
 	}
@@ -33,12 +34,12 @@ public class BaseController {
 		if(obj.getId() == null) {
 			obj.setCreateTime(new Date());
 			obj.setCreateUser(currUser);
-			obj.setRecStatus("1");
+			obj.setRecStatus(BaseModel.recStatus_valid);
 		}
 		else {
 			obj.setCreateTime(new Date());
 			obj.setCreateUser(currUser);
-			obj.setRecStatus("2");
+			obj.setRecStatus(BaseModel.recStatus_valid);
 		}
 		
 	}

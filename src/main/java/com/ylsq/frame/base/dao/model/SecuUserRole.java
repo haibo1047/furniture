@@ -45,7 +45,7 @@ public class SecuUserRole implements BaseModel, Serializable {
      *
      * @mbg.generated
      */
-    private String recStatus;
+    private Integer recStatus;
 
     private static final long serialVersionUID = 1L;
 
@@ -89,11 +89,11 @@ public class SecuUserRole implements BaseModel, Serializable {
         this.createUser = createUser;
     }
 
-    public String getRecStatus() {
+    public Integer getRecStatus() {
         return recStatus;
     }
 
-    public void setRecStatus(String recStatus) {
+    public void setRecStatus(Integer recStatus) {
         this.recStatus = recStatus;
     }
 

@@ -80,24 +80,21 @@ public class SecuUserController extends BaseController {
 		return list(modelMap);
 	}
 	
-	@RequestMapping(value="/configRoles/{id}", method = RequestMethod.GET)
-	public String configRoles(@PathVariable(name="id")String userId, ModelMap modelMap) {
-		if(!StringUtils.isNumeric(userId)) {
-		}
-		Long theUserId = Long.parseLong(userId);
-		SecuUser currentUser = secuUserService.selectByPrimaryKey(theUserId);
+	@RequestMapping(value="/configRoles/{userName}", method = RequestMethod.GET)
+	public String configRoles(@PathVariable(name="userName")String userName, ModelMap modelMap) {
+		SecuUser currentUser = secuUserService.selectByUsername(userName);
 		SecuUserRoleExample example = new SecuUserRoleExample();
-		example.createCriteria().andUserIdEqualTo(theUserId);
+		example.createCriteria().andUserNameEqualTo(userName);
 		List<SecuUserRole> mappingList = secuUserRoleService.selectByExample(example);
-		Map<Long,SecuUserRole> existingMap = new HashMap<>();
+		Map<String,SecuUserRole> existingMap = new HashMap<>();
 		for(SecuUserRole sur: mappingList)
-			existingMap.put(sur.getRoleId(),sur);
+			existingMap.put(sur.getRoleName(),sur);
 		
 		List<SecuRole> unselectedRoles = new ArrayList<>();
 		List<SecuRole> selectedRoles = new ArrayList<>();
 		List<SecuRole> allRoles = secuRoleService.selectByExample(new SecuRoleExample());
 		for(SecuRole role: allRoles) {
-			if(existingMap.keySet().contains(role.getId())) {
+			if(existingMap.keySet().contains(role.getRoleName())) {
 				selectedRoles.add(role);
 			}
 			else {
@@ -113,25 +110,24 @@ public class SecuUserController extends BaseController {
 	}
 	
 	@RequestMapping(value="/configRoles", method = RequestMethod.POST)
-	public String configUsers(@RequestParam(value="userId") String userId, @RequestParam(value="selectedIds") String selectedRoleIds, ModelMap modelMap) {
-		log.debug(userId);
+	public String configUsers(@RequestParam(value="userName") String userName, @RequestParam(value="selectedIds") String selectedRoleIds, ModelMap modelMap) {
+		log.debug(userName);
 		SecuUserRoleExample example = new SecuUserRoleExample();
-		example.createCriteria().andUserIdEqualTo(Long.parseLong(userId));
+		example.createCriteria().andUserNameEqualTo(userName);
 		List<SecuUserRole> mappingList = secuUserRoleService.selectByExample(example);
-		Map<Long,SecuUserRole> existingMap = new HashMap<>();
+		Map<String,SecuUserRole> existingMap = new HashMap<>();
 		for(SecuUserRole sur: mappingList)
-			existingMap.put(sur.getUserId(),sur);
+			existingMap.put(sur.getUserName(),sur);
 		
 		String[] idArray = StringUtils.defaultIfEmpty(selectedRoleIds, "").split("-");
-		for(String roleId : idArray) {
-			Long rid = Long.parseLong(roleId);
-			if(existingMap.keySet().contains(rid)) {
-				mappingList.remove(existingMap.get(rid));
+		for(String roleName : idArray) {
+			if(existingMap.keySet().contains(roleName)) {
+				mappingList.remove(existingMap.get(roleName));
 			}
 			else {
 				SecuUserRole sur = new SecuUserRole();
-				sur.setRoleId(rid);
-				sur.setUserId(Long.parseLong(userId));
+				sur.setRoleName(roleName);
+				sur.setUserName(userName);
 				initModel(sur);
 				secuUserRoleService.insert(sur);
 			}

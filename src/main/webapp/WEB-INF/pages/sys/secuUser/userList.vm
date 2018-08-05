@@ -51,7 +51,7 @@
         <td class=" last">
 			<a href="#" onclick="editRecord(this)">Edit</a> &nbsp;
 			<a href="#" onclick="delRecord(this)">Delete</a> &nbsp;
-			<a href="#" onclick="configRoles(this)">Roles</a> &nbsp;
+			<a href="#" onclick="configRoles('$!{secuUser.userName}')">Roles</a> &nbsp;
         </td>
       </tr>
       #end
@@ -88,8 +88,7 @@ function delRecord(o){
 		location = "$rc.contextPath/sys/user/delete/"+objId+".n"
 	}
 }
-function configRoles(o){
-	var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-	location = "$rc.contextPath/sys/user/configRoles/"+objId+".n"
+function configRoles(uname){
+	location = "$rc.contextPath/sys/user/configRoles/"+uname+".n"
 }
 </script>

@@ -7,16 +7,16 @@
 <div class="x_content">
 	<form id="configUsersForm" method="post" action="$rc.contextPath/sys/user/configRoles.n">
 		<input type="hidden" name="selectedIds" id="selectedIds">
-		<input type="hidden" name="userId" value="${user.id}">
+		<input type="hidden" name="userName" value="${user.userName}">
 		<div id="jquery-script-center">
 	        <select id="sourceRoles" name="unselected" data-search="Search for options">
 	        	#foreach($left in $unselectedList)
-		            <option value="$!{left.id}">$!{left.roleName}</option>
+		            <option value="$!{left.roleName}">$!{left.roleName} - $!{left.roleDescription} </option>
 	            #end
 	        </select>
 	        <select id="destinationRoles" name="selected"  data-search="Search for options">
 	        	#foreach($right in $selectedList)
-		            <option value="$!{right.id}">$!{right.roleName}</option>
+		            <option value="$!{right.roleName}">$!{right.roleName} - $!{right.roleDescription}</option>
 	            #end
 	        </select>
 		</div>
