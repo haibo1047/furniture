@@ -6,7 +6,7 @@ import com.ylsq.frame.base.dao.model.SecuUserRoleExample;
 
 /**
 * SecuUserRoleService接口
-* Created by shuzheng on 2018/8/2.
+* Created by harper
 */
 public interface SecuUserRoleService extends BaseService<SecuUserRole, SecuUserRoleExample> {
 

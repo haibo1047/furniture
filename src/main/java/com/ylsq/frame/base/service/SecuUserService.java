@@ -6,14 +6,8 @@ import com.ylsq.frame.base.dao.model.SecuUserExample;
 
 /**
 * SecuUserService接口
-* Created by shuzheng on 2018/7/26.
+* Created by harper
 */
 public interface SecuUserService extends BaseService<SecuUser, SecuUserExample> {
 
-	/**
-	 * 根据用户名查询用户对象
-	 * @param username
-	 * @return
-	 */
-	public SecuUser selectByUsername(String username);
 }

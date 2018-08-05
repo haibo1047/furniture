@@ -3,6 +3,8 @@ package com.ylsq.common.base;
 import java.util.Date;
 
 public interface BaseModel {
+	public static int recStatus_valid = 1;
+	public static int recStatus_invalid = 0;
 	
     public Long getId();
     
@@ -16,8 +18,8 @@ public interface BaseModel {
     
     public void setCreateUser(String user);
 
-    public String getRecStatus();
+    public Integer getRecStatus();
     
-    public void setRecStatus(String status);
+    public void setRecStatus(Integer status);
 
 }

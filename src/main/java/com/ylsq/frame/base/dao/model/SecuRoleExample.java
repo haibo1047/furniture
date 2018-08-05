@@ -238,73 +238,73 @@ public class SecuRoleExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andRoleKeyIsNull() {
-            addCriterion("role_key is null");
+        public Criteria andRoleDescriptionIsNull() {
+            addCriterion("role_description is null");
             return (Criteria) this;
         }
 
-        public Criteria andRoleKeyIsNotNull() {
-            addCriterion("role_key is not null");
+        public Criteria andRoleDescriptionIsNotNull() {
+            addCriterion("role_description is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRoleKeyEqualTo(String value) {
-            addCriterion("role_key =", value, "roleKey");
+        public Criteria andRoleDescriptionEqualTo(String value) {
+            addCriterion("role_description =", value, "roleDescription");
             return (Criteria) this;
         }
 
-        public Criteria andRoleKeyNotEqualTo(String value) {
-            addCriterion("role_key <>", value, "roleKey");
+        public Criteria andRoleDescriptionNotEqualTo(String value) {
+            addCriterion("role_description <>", value, "roleDescription");
             return (Criteria) this;
         }
 
-        public Criteria andRoleKeyGreaterThan(String value) {
-            addCriterion("role_key >", value, "roleKey");
+        public Criteria andRoleDescriptionGreaterThan(String value) {
+            addCriterion("role_description >", value, "roleDescription");
             return (Criteria) this;
         }
 
-        public Criteria andRoleKeyGreaterThanOrEqualTo(String value) {
-            addCriterion("role_key >=", value, "roleKey");
+        public Criteria andRoleDescriptionGreaterThanOrEqualTo(String value) {
+            addCriterion("role_description >=", value, "roleDescription");
             return (Criteria) this;
         }
 
-        public Criteria andRoleKeyLessThan(String value) {
-            addCriterion("role_key <", value, "roleKey");
+        public Criteria andRoleDescriptionLessThan(String value) {
+            addCriterion("role_description <", value, "roleDescription");
             return (Criteria) this;
         }
 
-        public Criteria andRoleKeyLessThanOrEqualTo(String value) {
-            addCriterion("role_key <=", value, "roleKey");
+        public Criteria andRoleDescriptionLessThanOrEqualTo(String value) {
+            addCriterion("role_description <=", value, "roleDescription");
             return (Criteria) this;
         }
 
-        public Criteria andRoleKeyLike(String value) {
-            addCriterion("role_key like", value, "roleKey");
+        public Criteria andRoleDescriptionLike(String value) {
+            addCriterion("role_description like", value, "roleDescription");
             return (Criteria) this;
         }
 
-        public Criteria andRoleKeyNotLike(String value) {
-            addCriterion("role_key not like", value, "roleKey");
+        public Criteria andRoleDescriptionNotLike(String value) {
+            addCriterion("role_description not like", value, "roleDescription");
             return (Criteria) this;
         }
 
-        public Criteria andRoleKeyIn(List<String> values) {
-            addCriterion("role_key in", values, "roleKey");
+        public Criteria andRoleDescriptionIn(List<String> values) {
+            addCriterion("role_description in", values, "roleDescription");
             return (Criteria) this;
         }
 
-        public Criteria andRoleKeyNotIn(List<String> values) {
-            addCriterion("role_key not in", values, "roleKey");
+        public Criteria andRoleDescriptionNotIn(List<String> values) {
+            addCriterion("role_description not in", values, "roleDescription");
             return (Criteria) this;
         }
 
-        public Criteria andRoleKeyBetween(String value1, String value2) {
-            addCriterion("role_key between", value1, value2, "roleKey");
+        public Criteria andRoleDescriptionBetween(String value1, String value2) {
+            addCriterion("role_description between", value1, value2, "roleDescription");
             return (Criteria) this;
         }
 
-        public Criteria andRoleKeyNotBetween(String value1, String value2) {
-            addCriterion("role_key not between", value1, value2, "roleKey");
+        public Criteria andRoleDescriptionNotBetween(String value1, String value2) {
+            addCriterion("role_description not between", value1, value2, "roleDescription");
             return (Criteria) this;
         }
 
@@ -448,62 +448,52 @@ public class SecuRoleExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusEqualTo(String value) {
+        public Criteria andRecStatusEqualTo(Integer value) {
             addCriterion("rec_status =", value, "recStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusNotEqualTo(String value) {
+        public Criteria andRecStatusNotEqualTo(Integer value) {
             addCriterion("rec_status <>", value, "recStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusGreaterThan(String value) {
+        public Criteria andRecStatusGreaterThan(Integer value) {
             addCriterion("rec_status >", value, "recStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusGreaterThanOrEqualTo(String value) {
+        public Criteria andRecStatusGreaterThanOrEqualTo(Integer value) {
             addCriterion("rec_status >=", value, "recStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusLessThan(String value) {
+        public Criteria andRecStatusLessThan(Integer value) {
             addCriterion("rec_status <", value, "recStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusLessThanOrEqualTo(String value) {
+        public Criteria andRecStatusLessThanOrEqualTo(Integer value) {
             addCriterion("rec_status <=", value, "recStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusLike(String value) {
-            addCriterion("rec_status like", value, "recStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andRecStatusNotLike(String value) {
-            addCriterion("rec_status not like", value, "recStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andRecStatusIn(List<String> values) {
+        public Criteria andRecStatusIn(List<Integer> values) {
             addCriterion("rec_status in", values, "recStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusNotIn(List<String> values) {
+        public Criteria andRecStatusNotIn(List<Integer> values) {
             addCriterion("rec_status not in", values, "recStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusBetween(String value1, String value2) {
+        public Criteria andRecStatusBetween(Integer value1, Integer value2) {
             addCriterion("rec_status between", value1, value2, "recStatus");
             return (Criteria) this;
         }
 
-        public Criteria andRecStatusNotBetween(String value1, String value2) {
+        public Criteria andRecStatusNotBetween(Integer value1, Integer value2) {
             addCriterion("rec_status not between", value1, value2, "recStatus");
             return (Criteria) this;
         }

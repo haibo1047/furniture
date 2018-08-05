@@ -3,8 +3,8 @@
 <mapper namespace="com.ylsq.frame.base.dao.mapper.SecuUserRoleMapper">
   <resultMap id="BaseResultMap" type="com.ylsq.frame.base.dao.model.SecuUserRole">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="rec_status" jdbcType="VARCHAR" property="recStatus" />
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, role_id, create_time, create_user, rec_status
+    id, user_name, role_name, create_time, create_user, rec_status
   </sql>
   <select id="selectByExample" parameterType="com.ylsq.frame.base.dao.model.SecuUserRoleExample" resultMap="BaseResultMap">
     select
@@ -101,10 +101,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ylsq.frame.base.dao.model.SecuUserRole">
-    insert into secu_user_role (id, user_id, role_id, 
+    insert into secu_user_role (id, user_name, role_name, 
       create_time, create_user, rec_status
       )
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, 
+    values (#{id,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{recStatus,jdbcType=VARCHAR}
       )
   </insert>
@@ -114,11 +114,11 @@
       <if test="id != null">
         id,
       </if>
-      <if test="userId != null">
-        user_id,
+      <if test="userName != null">
+        user_name,
       </if>
-      <if test="roleId != null">
-        role_id,
+      <if test="roleName != null">
+        role_name,
       </if>
       <if test="createTime != null">
         create_time,
@@ -134,11 +134,11 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="roleId != null">
-        #{roleId,jdbcType=BIGINT},
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -163,11 +163,11 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=BIGINT},
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
       </if>
-      <if test="record.roleId != null">
-        role_id = #{record.roleId,jdbcType=BIGINT},
+      <if test="record.roleName != null">
+        role_name = #{record.roleName,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -186,8 +186,8 @@
   <update id="updateByExample" parameterType="map">
     update secu_user_role
     set id = #{record.id,jdbcType=BIGINT},
-      user_id = #{record.userId,jdbcType=BIGINT},
-      role_id = #{record.roleId,jdbcType=BIGINT},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      role_name = #{record.roleName,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       create_user = #{record.createUser,jdbcType=VARCHAR},
       rec_status = #{record.recStatus,jdbcType=VARCHAR}
@@ -198,11 +198,11 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.ylsq.frame.base.dao.model.SecuUserRole">
     update secu_user_role
     <set>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=BIGINT},
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="roleId != null">
-        role_id = #{roleId,jdbcType=BIGINT},
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -218,8 +218,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ylsq.frame.base.dao.model.SecuUserRole">
     update secu_user_role
-    set user_id = #{userId,jdbcType=BIGINT},
-      role_id = #{roleId,jdbcType=BIGINT},
+    set user_name = #{userName,jdbcType=VARCHAR},
+      role_name = #{roleName,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_user = #{createUser,jdbcType=VARCHAR},
       rec_status = #{recStatus,jdbcType=VARCHAR}
