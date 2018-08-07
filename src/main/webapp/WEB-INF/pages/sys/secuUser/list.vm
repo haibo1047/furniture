@@ -35,7 +35,7 @@
     </thead>
 
     <tbody>
-    	#foreach ($secuUser in $userList)
+    	#foreach ($secuUser in $modelList)
     
       <tr class="#if($foreach.count %2 ==0) even #else odd #end pointer">
         <td class="a-center ">

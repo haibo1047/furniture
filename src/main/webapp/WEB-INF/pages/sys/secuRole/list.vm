@@ -32,7 +32,7 @@
     </thead>
 
     <tbody>
-    	#foreach ($secuRole in $roleList)
+    	#foreach ($secuRole in $modelList)
     
       <tr class="#if($foreach.count %2 ==0) even #else odd #end pointer">
         <td class="a-center ">

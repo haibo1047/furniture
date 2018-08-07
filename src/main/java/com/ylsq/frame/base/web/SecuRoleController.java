@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ylsq.common.base.BaseController;
+import com.ylsq.common.base.BaseExample;
+import com.ylsq.common.base.BaseModel;
+import com.ylsq.common.base.BaseService;
 import com.ylsq.frame.base.dao.model.SecuRole;
 import com.ylsq.frame.base.dao.model.SecuRoleExample;
 import com.ylsq.frame.base.dao.model.SecuUser;
@@ -41,25 +44,6 @@ public class SecuRoleController extends BaseController {
 	@Autowired
 	private SecuUserRoleService secuUserRoleService;
 	
-	@RequestMapping(value= "/list", method = RequestMethod.GET)
-	public String list(ModelMap modelMap) {
-		List<SecuRole> list = secuRoleService.selectByExample(new SecuRoleExample());
-		modelMap.put("roleList", list);
-		return WEB_PREFIX+"roleList";
-	}
-	
-	@RequestMapping(value= "/create", method = RequestMethod.GET)
-	public String create() {
-		return WEB_PREFIX+"editRole";
-	}
-	
-	@RequestMapping(value= "/edit/{id}", method = RequestMethod.GET)
-	public String edit(@PathVariable(name="id") String id,ModelMap modelMap) {
-		log.debug(id);
-		SecuRole secuRole = secuRoleService.selectByPrimaryKey(Long.parseLong(id));
-		modelMap.put("role", secuRole);
-		return WEB_PREFIX+"editRole";
-	}
 	
 	@RequestMapping(value= "/save", method = RequestMethod.POST)
 	public String save(SecuRole role,ModelMap modelMap) {
@@ -74,12 +58,6 @@ public class SecuRoleController extends BaseController {
 		return list(modelMap);
 	}
 	
-	@RequestMapping(value= "/delete/{ids}", method = RequestMethod.GET)
-	public String delete(@PathVariable(name="ids") String ids,ModelMap modelMap) {
-		int cnt = secuRoleService.deleteByPrimaryKeys(ids);
-		log.debug(cnt + ":" + ids);
-		return list(modelMap);
-	}
 	
 	@RequestMapping(value="/configUsers/{roleName}", method = RequestMethod.GET)
 	public String configUsers(@PathVariable(name="roleName") String roleName, ModelMap modelMap) {
@@ -138,5 +116,24 @@ public class SecuRoleController extends BaseController {
 			secuUserRoleService.deleteByPrimaryKey(sur.getId());
 		}
 		return list(modelMap);
+	}
+
+	@Override
+	protected BaseService<? extends BaseModel, ? extends BaseExample> getService() {
+		// TODO Auto-generated method stub
+		return secuRoleService;
+	}
+
+	@Override
+	protected List<? extends BaseModel> getModelList() {
+		// TODO Auto-generated method stub
+		List<SecuRole> list = secuRoleService.selectByExample(new SecuRoleExample());
+		return list;
+	}
+
+	@Override
+	protected String webPrefix() {
+		// TODO Auto-generated method stub
+		return "/sys/secuRole/";
 	}
 }

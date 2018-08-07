@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SecuUserRoleExample implements BaseExample, Serializable {
+public class SecuMenuExample implements BaseExample, Serializable {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +15,7 @@ public class SecuUserRoleExample implements BaseExample, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public SecuUserRoleExample() {
+    public SecuMenuExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -169,143 +169,143 @@ public class SecuUserRoleExample implements BaseExample, Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andUserNameIsNull() {
-            addCriterion("user_name is null");
+        public Criteria andMenuNameIsNull() {
+            addCriterion("menu_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameIsNotNull() {
-            addCriterion("user_name is not null");
+        public Criteria andMenuNameIsNotNull() {
+            addCriterion("menu_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameEqualTo(String value) {
-            addCriterion("user_name =", value, "userName");
+        public Criteria andMenuNameEqualTo(String value) {
+            addCriterion("menu_name =", value, "menuName");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameNotEqualTo(String value) {
-            addCriterion("user_name <>", value, "userName");
+        public Criteria andMenuNameNotEqualTo(String value) {
+            addCriterion("menu_name <>", value, "menuName");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameGreaterThan(String value) {
-            addCriterion("user_name >", value, "userName");
+        public Criteria andMenuNameGreaterThan(String value) {
+            addCriterion("menu_name >", value, "menuName");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameGreaterThanOrEqualTo(String value) {
-            addCriterion("user_name >=", value, "userName");
+        public Criteria andMenuNameGreaterThanOrEqualTo(String value) {
+            addCriterion("menu_name >=", value, "menuName");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameLessThan(String value) {
-            addCriterion("user_name <", value, "userName");
+        public Criteria andMenuNameLessThan(String value) {
+            addCriterion("menu_name <", value, "menuName");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameLessThanOrEqualTo(String value) {
-            addCriterion("user_name <=", value, "userName");
+        public Criteria andMenuNameLessThanOrEqualTo(String value) {
+            addCriterion("menu_name <=", value, "menuName");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameLike(String value) {
-            addCriterion("user_name like", value, "userName");
+        public Criteria andMenuNameLike(String value) {
+            addCriterion("menu_name like", value, "menuName");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameNotLike(String value) {
-            addCriterion("user_name not like", value, "userName");
+        public Criteria andMenuNameNotLike(String value) {
+            addCriterion("menu_name not like", value, "menuName");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameIn(List<String> values) {
-            addCriterion("user_name in", values, "userName");
+        public Criteria andMenuNameIn(List<String> values) {
+            addCriterion("menu_name in", values, "menuName");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameNotIn(List<String> values) {
-            addCriterion("user_name not in", values, "userName");
+        public Criteria andMenuNameNotIn(List<String> values) {
+            addCriterion("menu_name not in", values, "menuName");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameBetween(String value1, String value2) {
-            addCriterion("user_name between", value1, value2, "userName");
+        public Criteria andMenuNameBetween(String value1, String value2) {
+            addCriterion("menu_name between", value1, value2, "menuName");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameNotBetween(String value1, String value2) {
-            addCriterion("user_name not between", value1, value2, "userName");
+        public Criteria andMenuNameNotBetween(String value1, String value2) {
+            addCriterion("menu_name not between", value1, value2, "menuName");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameIsNull() {
-            addCriterion("role_name is null");
+        public Criteria andMenuUrlIsNull() {
+            addCriterion("menu_url is null");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameIsNotNull() {
-            addCriterion("role_name is not null");
+        public Criteria andMenuUrlIsNotNull() {
+            addCriterion("menu_url is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameEqualTo(String value) {
-            addCriterion("role_name =", value, "roleName");
+        public Criteria andMenuUrlEqualTo(String value) {
+            addCriterion("menu_url =", value, "menuUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameNotEqualTo(String value) {
-            addCriterion("role_name <>", value, "roleName");
+        public Criteria andMenuUrlNotEqualTo(String value) {
+            addCriterion("menu_url <>", value, "menuUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameGreaterThan(String value) {
-            addCriterion("role_name >", value, "roleName");
+        public Criteria andMenuUrlGreaterThan(String value) {
+            addCriterion("menu_url >", value, "menuUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameGreaterThanOrEqualTo(String value) {
-            addCriterion("role_name >=", value, "roleName");
+        public Criteria andMenuUrlGreaterThanOrEqualTo(String value) {
+            addCriterion("menu_url >=", value, "menuUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameLessThan(String value) {
-            addCriterion("role_name <", value, "roleName");
+        public Criteria andMenuUrlLessThan(String value) {
+            addCriterion("menu_url <", value, "menuUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameLessThanOrEqualTo(String value) {
-            addCriterion("role_name <=", value, "roleName");
+        public Criteria andMenuUrlLessThanOrEqualTo(String value) {
+            addCriterion("menu_url <=", value, "menuUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameLike(String value) {
-            addCriterion("role_name like", value, "roleName");
+        public Criteria andMenuUrlLike(String value) {
+            addCriterion("menu_url like", value, "menuUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameNotLike(String value) {
-            addCriterion("role_name not like", value, "roleName");
+        public Criteria andMenuUrlNotLike(String value) {
+            addCriterion("menu_url not like", value, "menuUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameIn(List<String> values) {
-            addCriterion("role_name in", values, "roleName");
+        public Criteria andMenuUrlIn(List<String> values) {
+            addCriterion("menu_url in", values, "menuUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameNotIn(List<String> values) {
-            addCriterion("role_name not in", values, "roleName");
+        public Criteria andMenuUrlNotIn(List<String> values) {
+            addCriterion("menu_url not in", values, "menuUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameBetween(String value1, String value2) {
-            addCriterion("role_name between", value1, value2, "roleName");
+        public Criteria andMenuUrlBetween(String value1, String value2) {
+            addCriterion("menu_url between", value1, value2, "menuUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameNotBetween(String value1, String value2) {
-            addCriterion("role_name not between", value1, value2, "roleName");
+        public Criteria andMenuUrlNotBetween(String value1, String value2) {
+            addCriterion("menu_url not between", value1, value2, "menuUrl");
             return (Criteria) this;
         }
 

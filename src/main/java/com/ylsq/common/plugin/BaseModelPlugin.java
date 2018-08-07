@@ -9,6 +9,7 @@ import org.mybatis.generator.api.dom.java.TopLevelClass;
 
 public class BaseModelPlugin extends PluginAdapter {
 	private FullyQualifiedJavaType baseModelJavaType;
+	private FullyQualifiedJavaType baseExampleJavaType;
 	
 	public BaseModelPlugin() {
 		super();
@@ -32,4 +33,19 @@ public class BaseModelPlugin extends PluginAdapter {
 		topLevelClass.addSuperInterface(baseModelJavaType);
 		
 	}
+
+	@Override
+	public boolean modelExampleClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+		// TODO Auto-generated method stub
+		String baseExampleClass = getProperties().getProperty("baseExampleClass");
+		baseExampleJavaType = new FullyQualifiedJavaType(baseExampleClass);
+		addBaseExample(topLevelClass, introspectedTable);
+		return super.modelExampleClassGenerated(topLevelClass, introspectedTable);
+	}
+	
+	protected void addBaseExample(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+		topLevelClass.addImportedType(baseExampleJavaType);
+		topLevelClass.addSuperInterface(baseExampleJavaType);
+	}
+	
 }

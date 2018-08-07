@@ -1,11 +1,12 @@
 package com.ylsq.frame.base.dao.model;
 
+import com.ylsq.common.base.BaseExample;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SecuUserExample implements Serializable {
+public class SecuUserExample implements BaseExample, Serializable {
     protected String orderByClause;
 
     protected boolean distinct;
