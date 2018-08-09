@@ -27,6 +27,8 @@
     <!-- Custom styling plus plugins -->
     <link href="$rc.contextPath/css/custom.min.css" rel="stylesheet">
     <link href="$rc.contextPath/css/green.css" rel="stylesheet">
+    
+    <link href="$rc.contextPath/css/jstree.style.min.css" rel="stylesheet">
   </head>
  <body class="nav-md">
     <div class="container body">
@@ -178,7 +180,8 @@
     <script src="$rc.contextPath/js/icheck.min.js"></script>
 
 	<script src="$rc.contextPath/js/jquery.listswap.js"></script>
-	
+	<script src="$rc.contextPath/js/jstree.min.js"></script>
+
 <script type="text/javascript">
 $(function() {
 	if($.isFunction(window.frameinit)){

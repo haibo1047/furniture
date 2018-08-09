@@ -70,7 +70,7 @@
 
     <filter-mapping>
         <filter-name>shiroFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>*.n</url-pattern>
     </filter-mapping>
 
 </web-app>

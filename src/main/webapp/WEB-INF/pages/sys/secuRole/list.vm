@@ -46,6 +46,7 @@
 			<a href="#" onclick="editRecord(this)">Edit</a> &nbsp;
 			<a href="#" onclick="delRecord(this)">Delete</a> &nbsp;
 			<a href="#" onclick="configUsers('${secuRole.roleName}')">Users</a> &nbsp;
+			<a href="#" onclick="configMenus('${secuRole.roleName}')">Menus</a> &nbsp;
         </td>
       </tr>
       #end
@@ -84,5 +85,8 @@ function delRecord(o){
 }
 function configUsers(roleName){
 	location = "$rc.contextPath/sys/role/configUsers/"+roleName+".n"
+}
+function configMenus(roleName){
+	location = "$rc.contextPath/sys/role/configMenus/"+roleName+".n"
 }
 </script>

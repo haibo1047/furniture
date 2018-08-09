@@ -20,12 +20,16 @@ import com.ylsq.common.base.BaseController;
 import com.ylsq.common.base.BaseExample;
 import com.ylsq.common.base.BaseModel;
 import com.ylsq.common.base.BaseService;
+import com.ylsq.frame.base.dao.model.SecuMenu;
+import com.ylsq.frame.base.dao.model.SecuMenuExample;
 import com.ylsq.frame.base.dao.model.SecuRole;
 import com.ylsq.frame.base.dao.model.SecuRoleExample;
+import com.ylsq.frame.base.dao.model.SecuRoleMenu;
 import com.ylsq.frame.base.dao.model.SecuUser;
 import com.ylsq.frame.base.dao.model.SecuUserExample;
 import com.ylsq.frame.base.dao.model.SecuUserRole;
-import com.ylsq.frame.base.dao.model.SecuUserRoleExample;
+import com.ylsq.frame.base.service.SecuMenuService;
+import com.ylsq.frame.base.service.SecuRoleMenuService;
 import com.ylsq.frame.base.service.SecuRoleService;
 import com.ylsq.frame.base.service.SecuUserRoleService;
 import com.ylsq.frame.base.service.SecuUserService;
@@ -44,6 +48,12 @@ public class SecuRoleController extends BaseController {
 	@Autowired
 	private SecuUserRoleService secuUserRoleService;
 	
+	@Autowired
+	private SecuMenuService secuMenuService;
+	@Autowired
+	private SecuRoleMenuService secuRoleMenuService;
+	
+	
 	
 	@RequestMapping(value= "/save", method = RequestMethod.POST)
 	public String save(SecuRole role,ModelMap modelMap) {
@@ -58,13 +68,61 @@ public class SecuRoleController extends BaseController {
 		return list(modelMap);
 	}
 	
+	@RequestMapping(value="/configMenus/{roleName}", method = RequestMethod.GET)
+	public String configMenus(@PathVariable(name="roleName") String roleName, ModelMap modelMap) {
+		SecuRole currentRole = secuRoleService.selectByRoleName(roleName);
+		List<SecuRoleMenu> mappingList = secuRoleMenuService.selectByRoleName(roleName);
+		List<String> selectedMenuNames = new ArrayList<String>();
+		for(SecuRoleMenu srm: mappingList)
+			selectedMenuNames.add(srm.getMenuName());
+		
+		List<SecuMenu> selectedMenus = new ArrayList<>();
+		List<SecuMenu> allMenus = secuMenuService.selectByExample(new SecuMenuExample());
+		for(SecuMenu menu: allMenus) {
+			if(selectedMenuNames.contains(menu.getMenuName())) {
+				selectedMenus.add(menu);
+			}
+		}
+		log.debug("size:" + mappingList.size());
+		modelMap.put("selectedList", selectedMenus);
+		modelMap.put("allMenus", allMenus);
+		modelMap.put("role", currentRole);
+		return webPrefix() + "/configMenus";
+	}
+	
+	@RequestMapping(value="/configMenus", method = RequestMethod.POST)
+	public String configMenus(@RequestParam(name="roleName") String roleName,@RequestParam(value="selectedIds") String selectedMenuIds, ModelMap modelMap) {
+		log.debug(roleName);
+		Map<String,SecuRoleMenu> existingMap = new HashMap<>();
+		List<SecuRoleMenu> mappingList = secuRoleMenuService.selectByRoleName(roleName);
+		for(SecuRoleMenu srm: mappingList)
+			existingMap.put(srm.getRoleName(), srm);
+		
+		String[] idArray = StringUtils.defaultIfEmpty(selectedMenuIds, "").split(",");
+		for(String menuName : idArray) {
+			if(existingMap.keySet().contains(menuName)) {
+				mappingList.remove(existingMap.get(menuName));
+			}
+			else {
+				SecuRoleMenu srm = new SecuRoleMenu();
+				srm.setRoleName(roleName);
+				srm.setMenuName(menuName);
+				initModel(srm);
+				secuRoleMenuService.insert(srm);
+			}
+		}
+		for(SecuRoleMenu srm: mappingList) {
+			secuRoleMenuService.deleteByPrimaryKey(srm.getId());
+		}
+		
+		return list(modelMap);
+	}
+	
 	
 	@RequestMapping(value="/configUsers/{roleName}", method = RequestMethod.GET)
 	public String configUsers(@PathVariable(name="roleName") String roleName, ModelMap modelMap) {
 		SecuRole currentRole = secuRoleService.selectByRoleName(roleName);
-		SecuUserRoleExample example = new SecuUserRoleExample();
-		example.createCriteria().andRoleNameEqualTo(roleName);
-		List<SecuUserRole> mappingList = secuUserRoleService.selectByExample(example);
+		List<SecuUserRole> mappingList = secuUserRoleService.selectByRoleName(roleName);
 		List<String> selectedUserNames = new ArrayList<String>();
 		for(SecuUserRole sur: mappingList)
 			selectedUserNames.add(sur.getUserName());
@@ -85,16 +143,14 @@ public class SecuRoleController extends BaseController {
 		modelMap.put("unselectedList", unselectedUsers);
 		modelMap.put("role", currentRole);
 		
-		return WEB_PREFIX + "/configUsers";
+		return webPrefix() + "/configUsers";
 	}
 	
 	
 	@RequestMapping(value="/configUsers", method = RequestMethod.POST)
 	public String configUsers(@RequestParam(value="roleName") String roleName, @RequestParam(value="selectedIds") String selectedUserNames, ModelMap modelMap) {
 		log.debug(roleName);
-		SecuUserRoleExample example = new SecuUserRoleExample();
-		example.createCriteria().andRoleNameEqualTo(roleName);
-		List<SecuUserRole> mappingList = secuUserRoleService.selectByExample(example);
+		List<SecuUserRole> mappingList = secuUserRoleService.selectByRoleName(roleName);
 		Map<String,SecuUserRole> existingMap = new HashMap<>();
 		for(SecuUserRole sur: mappingList)
 			existingMap.put(sur.getUserName(),sur);
