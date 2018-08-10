@@ -26,6 +26,8 @@ public class SecuMenu implements BaseModel, Serializable {
      */
     private String menuUrl;
 
+    private Integer menuOrder;
+
     /**
      * 创建时间
      *
@@ -73,6 +75,14 @@ public class SecuMenu implements BaseModel, Serializable {
         this.menuUrl = menuUrl;
     }
 
+    public Integer getMenuOrder() {
+        return menuOrder;
+    }
+
+    public void setMenuOrder(Integer menuOrder) {
+        this.menuOrder = menuOrder;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -106,6 +116,7 @@ public class SecuMenu implements BaseModel, Serializable {
         sb.append(", id=").append(id);
         sb.append(", menuName=").append(menuName);
         sb.append(", menuUrl=").append(menuUrl);
+        sb.append(", menuOrder=").append(menuOrder);
         sb.append(", createTime=").append(createTime);
         sb.append(", createUser=").append(createUser);
         sb.append(", recStatus=").append(recStatus);
@@ -128,6 +139,7 @@ public class SecuMenu implements BaseModel, Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getMenuName() == null ? other.getMenuName() == null : this.getMenuName().equals(other.getMenuName()))
             && (this.getMenuUrl() == null ? other.getMenuUrl() == null : this.getMenuUrl().equals(other.getMenuUrl()))
+            && (this.getMenuOrder() == null ? other.getMenuOrder() == null : this.getMenuOrder().equals(other.getMenuOrder()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
             && (this.getRecStatus() == null ? other.getRecStatus() == null : this.getRecStatus().equals(other.getRecStatus()));
@@ -140,6 +152,7 @@ public class SecuMenu implements BaseModel, Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getMenuName() == null) ? 0 : getMenuName().hashCode());
         result = prime * result + ((getMenuUrl() == null) ? 0 : getMenuUrl().hashCode());
+        result = prime * result + ((getMenuOrder() == null) ? 0 : getMenuOrder().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getCreateUser() == null) ? 0 : getCreateUser().hashCode());
         result = prime * result + ((getRecStatus() == null) ? 0 : getRecStatus().hashCode());

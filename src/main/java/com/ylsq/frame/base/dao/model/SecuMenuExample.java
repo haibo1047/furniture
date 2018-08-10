@@ -309,6 +309,66 @@ public class SecuMenuExample implements BaseExample, Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andMenuOrderIsNull() {
+            addCriterion("menu_order is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuOrderIsNotNull() {
+            addCriterion("menu_order is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuOrderEqualTo(Integer value) {
+            addCriterion("menu_order =", value, "menuOrder");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuOrderNotEqualTo(Integer value) {
+            addCriterion("menu_order <>", value, "menuOrder");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuOrderGreaterThan(Integer value) {
+            addCriterion("menu_order >", value, "menuOrder");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuOrderGreaterThanOrEqualTo(Integer value) {
+            addCriterion("menu_order >=", value, "menuOrder");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuOrderLessThan(Integer value) {
+            addCriterion("menu_order <", value, "menuOrder");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuOrderLessThanOrEqualTo(Integer value) {
+            addCriterion("menu_order <=", value, "menuOrder");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuOrderIn(List<Integer> values) {
+            addCriterion("menu_order in", values, "menuOrder");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuOrderNotIn(List<Integer> values) {
+            addCriterion("menu_order not in", values, "menuOrder");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuOrderBetween(Integer value1, Integer value2) {
+            addCriterion("menu_order between", value1, value2, "menuOrder");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuOrderNotBetween(Integer value1, Integer value2) {
+            addCriterion("menu_order not between", value1, value2, "menuOrder");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;

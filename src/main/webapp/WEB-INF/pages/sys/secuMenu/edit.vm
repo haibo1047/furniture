@@ -14,6 +14,12 @@
       <input id="menuURL" class="form-control col-md-7 col-xs-12" type="text" name="menuUrl" value="$!{model.menuUrl}" required="required"> 
     </div>
   </div>
+  <div class="form-group">
+    <label for="menuOrder" class="control-label col-md-3 col-sm-3 col-xs-12"> Menu Order</label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input id="menuOrder" class="form-control col-md-7 col-xs-12" type="text" name="menuOrder" value="$!{model.menuOrder}"> 
+    </div>
+  </div>
   <div class="ln_solid"></div>
   <div class="form-group">
     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
