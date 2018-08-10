@@ -72,19 +72,13 @@ public class SecuRoleController extends BaseController {
 	public String configMenus(@PathVariable(name="roleName") String roleName, ModelMap modelMap) {
 		SecuRole currentRole = secuRoleService.selectByRoleName(roleName);
 		List<SecuRoleMenu> mappingList = secuRoleMenuService.selectByRoleName(roleName);
-		List<String> selectedMenuNames = new ArrayList<String>();
+		List<String> names = new ArrayList<>();
 		for(SecuRoleMenu srm: mappingList)
-			selectedMenuNames.add(srm.getMenuName());
-		
-		List<SecuMenu> selectedMenus = new ArrayList<>();
+			names.add("'" + srm.getMenuName() +"'");
+		String selectedMenuNames = String.join(",", names);
 		List<SecuMenu> allMenus = secuMenuService.selectByExample(new SecuMenuExample());
-		for(SecuMenu menu: allMenus) {
-			if(selectedMenuNames.contains(menu.getMenuName())) {
-				selectedMenus.add(menu);
-			}
-		}
 		log.debug("size:" + mappingList.size());
-		modelMap.put("selectedList", selectedMenus);
+		modelMap.put("selectedMenuNames", "["+selectedMenuNames+"]");
 		modelMap.put("allMenus", allMenus);
 		modelMap.put("role", currentRole);
 		return webPrefix() + "/configMenus";

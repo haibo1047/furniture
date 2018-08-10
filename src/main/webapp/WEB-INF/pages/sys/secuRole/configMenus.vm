@@ -14,18 +14,10 @@
 				<li> system
 					<ul>
 					#foreach($menu in $allMenus)
-				   		<li id="${menu.menuName}">${menu.menuName}</li>
+				   		<li id="${menu.menuName}">${menu.menuName} - ${menu.menuUrl}</li>
 					#end
 					</ul>
 				</li>
-				<li>Root node 1</li>
-				<li>Root node 2</li>
-				<li>furniture
-					<ul>
-						<li>Child node 1</li>
-						<li><a href="#">Child node 2</a></li>
-					</ul>
-				</li>		
 			</ul>
 		</div>
 		
@@ -43,22 +35,20 @@
 
 <script>
 function frameinit(){
-	$(function () { 
-		$('#jstree_menu').jstree(
+	$('#jstree_menu').jstree(
+		{
+			"core" : 
 			{
-				"core" : 
-				{
-					"themes" : {"variant" : "large"},
-				},
-				"checkbox" : 
-				{
-					"keep_selected_style" : true
-				},
-				"plugins" : [ "wholerow", "checkbox" ]
-			}
-		);
-		
-	});
+				"themes" : {"variant" : "large"},
+			},
+			"checkbox" : 
+			{
+				"keep_selected_style" : true
+			},
+			"plugins" : [ "search", "types", "wholerow", "checkbox" ]
+		}
+	);
+	$("#jstree_menu").jstree('check_node',${selectedMenuNames});  
 }
 
 function f_submit(){
