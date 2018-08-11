@@ -1,0 +1,96 @@
+  
+  <div class="title_left">
+    <h3>System Parameters</h3>
+  </div>
+   <div class="x_content">
+
+<p>
+	<button type="button" class="btn btn-round btn-primary" onclick="create()">Create</button>
+	<button type="button" class="btn btn-round btn-primary" onclick="deletemultiple()">Delete</button>
+</p>
+
+<div class="table-responsive">
+  <table class="table table-striped jambo_table bulk_action">
+    <thead>
+      <tr class="headings">
+        <th>
+          <input type="checkbox" id="check-all" class="flat">
+        </th>
+        <th class="column-title"> Parameter Name </th>
+        <th class="column-title"> Parameter Description </th>
+        <th class="column-title"> Create Time </th>
+        <th class="column-title"> Create User </th>
+        <th class="column-title no-link last">
+        	<span class="nobr">
+        		Operation
+        	</span>
+        </th>
+        <th class="bulk-actions" colspan="5">
+          <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+    	#foreach ($model in $modelList)
+    
+      <tr class="#if($foreach.count %2 ==0) even #else odd #end pointer">
+        <td class="a-center ">
+          <input type="checkbox" class="flat" name="table_records" value="$!{model.id}">
+        </td>
+        <td class=" "> $!{model.paramName} </td>
+        <td class=" "> $!{model.paramDescription} </td>
+        <td class=" "> $!date.format("yyyy-MM-dd HH:mm:ss",$!model.createTime ) </td>
+        <td class=" "> $!{model.createUser} </td>
+        <td class=" last">
+			<a href="#" onclick="editRecord(this)">Edit</a> &nbsp;
+			<a href="#" onclick="delRecord(this)">Delete</a> &nbsp;
+			<a href="#" onclick="configParam('${model.paramName}')">Config</a> &nbsp;
+			<a href="#" onclick="paramValues('${model.paramName}')">Values</a> &nbsp;
+        </td>
+      </tr>
+      #end
+    </tbody>
+  </table>
+	</div>
+</div>
+
+<script>
+var ID_INDEX=1
+function create(){
+	location = "$rc.contextPath/sys/param/create.n"
+}
+function deletemultiple(){
+	var ids = "";
+	var selted = $("input[name='table_records']:checked");
+	$(selted).each(function(){
+		ids = ids + (ids.length===0?'':'-') + $(this).val();
+	});
+	if($(selted).length==0){
+		return;
+	}
+	if(confirm('确认要删除此'+$(selted).length+'条记录？')){
+		location = "$rc.contextPath/sys/param/delete/"+ids+".n"
+	}
+}
+function editRecord(o){
+	var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
+	location = "$rc.contextPath/sys/param/edit/"+objId+".n"
+}
+function delRecord(o){
+	if (confirm('确认要删除此记录？')) {
+		var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
+		location = "$rc.contextPath/sys/param/delete/"+objId+".n"
+	}
+}
+
+
+function configParam(paramName){
+	location = "$rc.contextPath/sys/param/config/"+paramName+".n"
+}
+
+function paramValues(paramName){
+	location = "$rc.contextPath/sys/param/values/"+paramName+".n"
+}
+
+</script>

@@ -39,7 +39,6 @@ import com.ylsq.frame.base.service.SecuUserService;
 @RequestMapping("/sys/role")
 public class SecuRoleController extends BaseController {
 	private static Logger log = LoggerFactory.getLogger(SecuRoleController.class);
-	public static String WEB_PREFIX = "/sys/secuRole/";
 	
 	@Autowired
 	private SecuRoleService secuRoleService;

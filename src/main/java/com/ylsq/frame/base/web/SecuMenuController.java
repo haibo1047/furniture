@@ -21,7 +21,6 @@ import com.ylsq.frame.base.service.SecuMenuService;
 @RequestMapping("/sys/menu/")
 public class SecuMenuController extends BaseController {
 	private static Logger log = LoggerFactory.getLogger(SecuMenuController.class);
-	public static String WEB_PREFIX = "/sys/secuMenu/";
 	
 	@Autowired
 	private SecuMenuService secuMenuService;

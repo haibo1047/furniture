@@ -34,7 +34,6 @@ import com.ylsq.frame.base.service.SecuUserService;
 @Controller
 public class SecuUserController extends BaseController {
 	private static Logger log = LoggerFactory.getLogger(SecuUserController.class);
-	private static String WEB_PREFIX = "/sys/secuUser";
 	
 	@Autowired
 	private SecuUserService secuUserService;
@@ -82,7 +81,7 @@ public class SecuUserController extends BaseController {
 		modelMap.put("unselectedList", unselectedRoles);
 		modelMap.put("user", currentUser);
 		
-		return WEB_PREFIX + "/configRoles";
+		return webPrefix() + "/configRoles";
 	}
 	
 	@RequestMapping(value="/configRoles", method = RequestMethod.POST)
