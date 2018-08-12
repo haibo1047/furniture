@@ -1,0 +1,48 @@
+
+##创建select
+#macro( buildSelect $selectValueList $selectName $selectedValue $valueField $displayField )
+	<select class="form-control" name="$selectName">
+		<option>Choose option</option>
+		#foreach($se in $selectValueList )
+		 	#set($valueExpression = "\$se.$valueField")
+		 	#set($displayExpression = "\$se.$displayField")
+		 	#set($tmpValue = "#evaluate($valueExpression)" )
+		 	#set($tmpDisplay = "#evaluate($displayExpression)" )
+		 	#if( $tmpValue.indexOf("$") == 0 ) 
+				#set($tmpValue = "")
+			#end
+		 	#if( $tmpDisplay.indexOf("$") == 0 ) 
+				#set($tmpDisplay = "")
+			#end
+		
+			<option value="$tmpValue" #if( $tmpValue == $selectedValue ) selected="selected" #end> $tmpDisplay </option>
+		#end
+	</select>
+#end
+
+##根据字典值显示名称
+#macro( dictDisplay $dictList $currentValue $valueField $displayField)
+	#set($retvalue = 0)
+	#foreach($de in $dictList )
+		#set($valueExpression = "\$de.$valueField")
+	 	#set($displayExpression = "\$de.$displayField")
+	 	#set($tmpValue = "#evaluate($valueExpression)" )
+	 	#set($tmpDisplay = "#evaluate($displayExpression)" )
+	 	#if( $tmpValue.indexOf("$") == 0 ) 
+			#set($tmpValue = "")
+		#end
+	 	#if( $tmpDisplay.indexOf("$") == 0 ) 
+			#set($tmpDisplay = "")
+		#end
+		
+		#if( $currentValue == $tmpValue )
+			#set($retvalue = 1)
+			#break
+		#end
+	#end
+	#if( $retvalue == 1 )
+		$tmpDisplay
+	#else
+		$currentValue
+	#end
+#end

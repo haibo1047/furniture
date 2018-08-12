@@ -30,7 +30,7 @@
         		Operation
         	</span>
         </th>
-        <th class="bulk-actions" colspan="7">
+        <th class="bulk-actions" colspan="10">
           <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
         </th>
       </tr>
@@ -45,9 +45,9 @@
         </td>
         <td class=" "> $!{model.configName} </td>
         <td class=" "> $!{model.showName} </td>
-        <td class=" "> $!{model.dataType} </td>
+        <td class=" "> #dictDisplay ( $dataTypeList $!{model.dataType} "value1" "value2" ) </td>
         <td class=" "> $!{model.dataLength} </td>
-        <td class=" "> $!{model.notNull} </td>
+        <td class=" "> #dictDisplay ( $alternativeList $!{model.notNull} "value1" "value2" ) </td>
         <td class=" "> $!{model.configOrder} </td>
         <td class=" "> $!date.format("yyyy-MM-dd HH:mm:ss",$!model.createTime ) </td>
         <td class=" "> $!{model.createUser} </td>

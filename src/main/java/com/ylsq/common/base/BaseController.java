@@ -9,14 +9,20 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ylsq.frame.sys.dao.model.SysParamValue;
+import com.ylsq.frame.sys.service.SysParamValueService;
+
 public abstract class BaseController {
 	private static Logger log = LoggerFactory.getLogger(BaseController.class);
+	@Autowired
+	private SysParamValueService sysParamValueService;
 	
 	@RequestMapping(value= "/list", method = RequestMethod.GET)
 	public String list(ModelMap modelMap) {
@@ -43,6 +49,10 @@ public abstract class BaseController {
 		int cnt = getService().deleteByPrimaryKeys(ids);
 		log.debug(cnt + ":" + ids);
 		return list(modelMap);
+	}
+	
+	protected List<SysParamValue> getParams(String paramName){
+		return sysParamValueService.selectByParamName(paramName);
 	}
 	
 	/**

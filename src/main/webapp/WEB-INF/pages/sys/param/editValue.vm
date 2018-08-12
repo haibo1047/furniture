@@ -10,7 +10,7 @@
 	#foreach($config in $configList)
 		#set($dynamicValueExpression = "$model.value$velocityCount")
 		#set($dvalue = "#evaluate($dynamicValueExpression)")
-		#if( $dvalue.contains("$model.value") )
+		#if( $dvalue.indexOf("$model.value") == 0 ) 
 			#set($dvalue = "")
 		#end
 	  <div class="form-group">

@@ -9,7 +9,6 @@
 
     <title>YLSQ frame </title>
 
-
     <!-- Bootstrap -->
     <link href="$rc.contextPath/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -29,7 +28,11 @@
     <link href="$rc.contextPath/css/green.css" rel="stylesheet">
     
     <link href="$rc.contextPath/css/jstree.style.min.css" rel="stylesheet">
+    <link href="$rc.contextPath/css/jselect2.min.css" rel="stylesheet">
   </head>
+
+#parse("/include/macro_base.vm")
+
  <body class="nav-md">
     <div class="container body">
       <div class="main_container">

@@ -15,6 +15,7 @@ import com.ylsq.common.base.BaseController;
 import com.ylsq.common.base.BaseExample;
 import com.ylsq.common.base.BaseModel;
 import com.ylsq.common.base.BaseService;
+import com.ylsq.common.base.SysParamEnum;
 import com.ylsq.frame.sys.dao.model.SysParam;
 import com.ylsq.frame.sys.dao.model.SysParamConfig;
 import com.ylsq.frame.sys.dao.model.SysParamExample;
@@ -39,11 +40,11 @@ public class SysParamController extends BaseController {
 	public String createValue(@PathVariable(value="paramName")String paramName,ModelMap modelMap) {
 		List<SysParamConfig> configList = sysParamConfigService.selectByParamName(paramName);
 		List<SysParamValue> valueList = sysParamValueService.selectByParamName(paramName);
-		modelMap.put("configList", configList);
-		modelMap.put("valueList", valueList);
 		SysParamValue model = new SysParamValue();
 		model.setParamName(paramName);
 		modelMap.put("model", model);
+		modelMap.put("configList", configList);
+		modelMap.put("valueList", valueList);
 		return webPrefix()+"editValue";
 	}
 	
@@ -87,6 +88,8 @@ public class SysParamController extends BaseController {
 	
 	@RequestMapping(value= "/createConfig/{paramName}", method = RequestMethod.GET)
 	public String createConfig(@PathVariable(value="paramName")String paramName,ModelMap modelMap) {
+		modelMap.put("dataTypeList", getParams(SysParamEnum.Param_Data_type.getConstant()));
+		modelMap.put("alternativeList", getParams(SysParamEnum.Alternative.getConstant()));
 		modelMap.put("paramName", paramName);
 		return webPrefix()+"editConfig";
 	}
@@ -97,6 +100,8 @@ public class SysParamController extends BaseController {
 		SysParamConfig model = sysParamConfigService.selectByPrimaryKey(Long.parseLong(id));
 		modelMap.put("model", model);
 		modelMap.put("paramName", model.getParamName());
+		modelMap.put("dataTypeList", getParams(SysParamEnum.Param_Data_type.getConstant()));
+		modelMap.put("alternativeList", getParams(SysParamEnum.Alternative.getConstant()));
 		return webPrefix()+"editConfig";
 	}
 	@RequestMapping(value= "/saveConfig", method = RequestMethod.POST)
@@ -122,6 +127,9 @@ public class SysParamController extends BaseController {
 	public String config(@PathVariable(value="paramName")String paramName, ModelMap modelMap) {
 		List<SysParamConfig> configList = sysParamConfigService.selectByParamName(paramName);
 		
+
+		modelMap.put("dataTypeList", getParams(SysParamEnum.Param_Data_type.getConstant()));
+		modelMap.put("alternativeList", getParams(SysParamEnum.Alternative.getConstant()));
 		modelMap.put("configList", configList);
 		modelMap.put("paramName", paramName);
 		return webPrefix() + "configList";

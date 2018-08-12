@@ -1,5 +1,5 @@
- 
-  <div class="title_left">
+
+<div class="title_left">
     <h3>Config Parameter for [${paramName} ]</h3>
   </div>
    <div class="x_content">
@@ -20,12 +20,15 @@
       <input id="showName" class="form-control col-md-7 col-xs-12" type="text" name="showName" value="$!{model.showName}"> 
     </div>
   </div>
-  <div class="form-group">
-    <label for="dataType" class="control-label col-md-3 col-sm-3 col-xs-12"> Data Type </label>
-    <div class="col-md-6 col-sm-6 col-xs-12">
-      <input id="dataType" class="form-control col-md-7 col-xs-12" type="text" name="dataType" value="$!{model.dataType}"> 
-    </div>
-  </div>
+  
+	<div class="form-group">
+	    <label for="dataType" class="control-label col-md-3 col-sm-3 col-xs-12"> Data Type </label>
+	    <div class="col-md-6 col-sm-6 col-xs-12">
+	    	#buildSelect ($dataTypeList "dataType" "$model.dataType" "value1" "value2")
+		</div>
+	</div>
+	
+  
   <div class="form-group">
     <label for="dataLength" class="control-label col-md-3 col-sm-3 col-xs-12"> Data Length </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -35,7 +38,7 @@
   <div class="form-group">
     <label for="notNull" class="control-label col-md-3 col-sm-3 col-xs-12"> Not Null </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <input id="notNull" class="form-control col-md-7 col-xs-12" type="text" name="notNull" value="$!{model.notNull}"> 
+      #buildSelect ($alternativeList "notNull" "$model.notNull" "value1" "value2")
     </div>
   </div>
   <div class="form-group">
