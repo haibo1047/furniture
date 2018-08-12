@@ -1,6 +1,6 @@
   
   <div class="title_left">
-    <h3>System Parameters</h3>
+    <h3>System Parameters Values</h3>
   </div>
    <div class="x_content">
 
@@ -17,12 +17,9 @@
         <th>
           <input type="checkbox" id="check-all" class="flat">
         </th>
-        <th class="column-title"> Config Name </th>
-        <th class="column-title"> Show Name </th>
-        <th class="column-title"> Data Type </th>
-        <th class="column-title"> Data Length </th>
-        <th class="column-title"> Not Null </th>
-        <th class="column-title"> Order </th>
+        #foreach($config in $configList)
+	        <th class="column-title"> ${config.configName} </th>
+        #end
         <th class="column-title"> Create Time </th>
         <th class="column-title"> Create User </th>
         <th class="column-title no-link last">
@@ -30,32 +27,32 @@
         		Operation
         	</span>
         </th>
-        <th class="bulk-actions" colspan="7">
+        #set( $colspan = ${configList.size()} + 3 )
+        <th class="bulk-actions" colspan="$colspan">
           <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
         </th>
       </tr>
     </thead>
 
-    <tbody>
-    	#foreach ($model in $configList)
-    
-      <tr class="#if($foreach.count %2 ==0) even #else odd #end pointer">
-        <td class="a-center ">
-          <input type="checkbox" class="flat" name="table_records" value="$!{model.id}">
-        </td>
-        <td class=" "> $!{model.configName} </td>
-        <td class=" "> $!{model.showName} </td>
-        <td class=" "> $!{model.dataType} </td>
-        <td class=" "> $!{model.dataLength} </td>
-        <td class=" "> $!{model.notNull} </td>
-        <td class=" "> $!{model.configOrder} </td>
-        <td class=" "> $!date.format("yyyy-MM-dd HH:mm:ss",$!model.createTime ) </td>
-        <td class=" "> $!{model.createUser} </td>
-        <td class=" last">
-			<a href="#" onclick="editRecord(this)">Edit</a> &nbsp;
-			<a href="#" onclick="delRecord(this)">Delete</a> &nbsp;
-        </td>
-      </tr>
+	<tbody>
+    	#foreach ($model in $valueList)
+		<tr class="#if($foreach.count %2 ==0) even #else odd #end pointer">
+			<td class="a-center ">
+			<input type="checkbox" class="flat" name="table_records" value="$!{model.id}">
+			</td>
+			 #foreach($config in $configList)
+			 	 
+			 	 #set($dynamicValueExpression = "$model.value$velocityCount")
+			 	 
+				<td class=" "> #evaluate($dynamicValueExpression)</td>
+			#end
+			<td class=" "> $!date.format("yyyy-MM-dd HH:mm:ss",$!model.createTime ) </td>
+			<td class=" "> $!{model.createUser} </td>
+			<td class=" last">
+				<a href="#" onclick="editRecord(this)">Edit</a> &nbsp;
+				<a href="#" onclick="delRecord(this)">Delete</a> &nbsp;
+			</td>
+		</tr>
       #end
     </tbody>
   </table>
@@ -68,7 +65,7 @@ function goback(){
 	location = "$rc.contextPath/sys/param/list.n"
 }
 function create(){
-	location = "$rc.contextPath/sys/param/createConfig/$!{paramName}.n"
+	location = "$rc.contextPath/sys/param/createValue/$!{paramName}.n"
 }
 function deletemultiple(){
 	var ids = "";
@@ -80,17 +77,17 @@ function deletemultiple(){
 		return;
 	}
 	if(confirm('确认要删除此'+$(selted).length+'条记录？')){
-		location = "$rc.contextPath/sys/param/deleteConfig/"+ids+".n"
+		location = "$rc.contextPath/sys/param/deleteValue/${paramName}/"+ids+".n"
 	}
 }
 function editRecord(o){
 	var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-	location = "$rc.contextPath/sys/param/editConfig/"+objId+".n"
+	location = "$rc.contextPath/sys/param/editValue/"+objId+".n"
 }
 function delRecord(o){
 	if (confirm('确认要删除此记录？')) {
 		var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-		location = "$rc.contextPath/sys/param/deleteConfig/"+objId+".n"
+		location = "$rc.contextPath/sys/param/deleteValue/${paramName}/"+objId+".n"
 	}
 }
 

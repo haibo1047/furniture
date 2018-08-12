@@ -8,6 +8,7 @@
     <result column="data_type" jdbcType="VARCHAR" property="dataType" />
     <result column="data_length" jdbcType="INTEGER" property="dataLength" />
     <result column="show_name" jdbcType="VARCHAR" property="showName" />
+    <result column="not_null" jdbcType="INTEGER" property="notNull" />
     <result column="config_order" jdbcType="INTEGER" property="configOrder" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
@@ -72,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, param_name, config_name, data_type, data_length, show_name, config_order, create_time, 
-    create_user, rec_status
+    id, param_name, config_name, data_type, data_length, show_name, not_null, config_order, 
+    create_time, create_user, rec_status
   </sql>
   <select id="selectByExample" parameterType="com.ylsq.frame.sys.dao.model.SysParamConfigExample" resultMap="BaseResultMap">
     select
@@ -108,12 +109,12 @@
   <insert id="insert" parameterType="com.ylsq.frame.sys.dao.model.SysParamConfig">
     insert into sys_param_config (id, param_name, config_name, 
       data_type, data_length, show_name, 
-      config_order, create_time, create_user, 
-      rec_status)
+      not_null, config_order, create_time, 
+      create_user, rec_status)
     values (#{id,jdbcType=BIGINT}, #{paramName,jdbcType=VARCHAR}, #{configName,jdbcType=VARCHAR}, 
       #{dataType,jdbcType=VARCHAR}, #{dataLength,jdbcType=INTEGER}, #{showName,jdbcType=VARCHAR}, 
-      #{configOrder,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
-      #{recStatus,jdbcType=INTEGER})
+      #{notNull,jdbcType=INTEGER}, #{configOrder,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=VARCHAR}, #{recStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ylsq.frame.sys.dao.model.SysParamConfig">
     insert into sys_param_config
@@ -135,6 +136,9 @@
       </if>
       <if test="showName != null">
         show_name,
+      </if>
+      <if test="notNull != null">
+        not_null,
       </if>
       <if test="configOrder != null">
         config_order,
@@ -167,6 +171,9 @@
       </if>
       <if test="showName != null">
         #{showName,jdbcType=VARCHAR},
+      </if>
+      <if test="notNull != null">
+        #{notNull,jdbcType=INTEGER},
       </if>
       <if test="configOrder != null">
         #{configOrder,jdbcType=INTEGER},
@@ -209,6 +216,9 @@
       <if test="record.showName != null">
         show_name = #{record.showName,jdbcType=VARCHAR},
       </if>
+      <if test="record.notNull != null">
+        not_null = #{record.notNull,jdbcType=INTEGER},
+      </if>
       <if test="record.configOrder != null">
         config_order = #{record.configOrder,jdbcType=INTEGER},
       </if>
@@ -234,6 +244,7 @@
       data_type = #{record.dataType,jdbcType=VARCHAR},
       data_length = #{record.dataLength,jdbcType=INTEGER},
       show_name = #{record.showName,jdbcType=VARCHAR},
+      not_null = #{record.notNull,jdbcType=INTEGER},
       config_order = #{record.configOrder,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       create_user = #{record.createUser,jdbcType=VARCHAR},
@@ -260,6 +271,9 @@
       <if test="showName != null">
         show_name = #{showName,jdbcType=VARCHAR},
       </if>
+      <if test="notNull != null">
+        not_null = #{notNull,jdbcType=INTEGER},
+      </if>
       <if test="configOrder != null">
         config_order = #{configOrder,jdbcType=INTEGER},
       </if>
@@ -282,6 +296,7 @@
       data_type = #{dataType,jdbcType=VARCHAR},
       data_length = #{dataLength,jdbcType=INTEGER},
       show_name = #{showName,jdbcType=VARCHAR},
+      not_null = #{notNull,jdbcType=INTEGER},
       config_order = #{configOrder,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_user = #{createUser,jdbcType=VARCHAR},

@@ -509,6 +509,66 @@ public class SysParamConfigExample implements BaseExample, Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andNotNullIsNull() {
+            addCriterion("not_null is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotNullIsNotNull() {
+            addCriterion("not_null is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotNullEqualTo(Integer value) {
+            addCriterion("not_null =", value, "notNull");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotNullNotEqualTo(Integer value) {
+            addCriterion("not_null <>", value, "notNull");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotNullGreaterThan(Integer value) {
+            addCriterion("not_null >", value, "notNull");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotNullGreaterThanOrEqualTo(Integer value) {
+            addCriterion("not_null >=", value, "notNull");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotNullLessThan(Integer value) {
+            addCriterion("not_null <", value, "notNull");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotNullLessThanOrEqualTo(Integer value) {
+            addCriterion("not_null <=", value, "notNull");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotNullIn(List<Integer> values) {
+            addCriterion("not_null in", values, "notNull");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotNullNotIn(List<Integer> values) {
+            addCriterion("not_null not in", values, "notNull");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotNullBetween(Integer value1, Integer value2) {
+            addCriterion("not_null between", value1, value2, "notNull");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotNullNotBetween(Integer value1, Integer value2) {
+            addCriterion("not_null not between", value1, value2, "notNull");
+            return (Criteria) this;
+        }
+
         public Criteria andConfigOrderIsNull() {
             addCriterion("config_order is null");
             return (Criteria) this;

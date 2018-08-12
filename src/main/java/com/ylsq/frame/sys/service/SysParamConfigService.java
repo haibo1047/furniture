@@ -18,4 +18,5 @@ public interface SysParamConfigService extends BaseService<SysParamConfig, SysPa
 	 * @return
 	 */
 	public List<SysParamConfig> selectByParamName(String paramName);
+	
 }

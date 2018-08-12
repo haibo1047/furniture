@@ -48,6 +48,13 @@ public class SysParamConfig implements BaseModel, Serializable {
     private String showName;
 
     /**
+     * 是否为空
+     *
+     * @mbg.generated
+     */
+    private Integer notNull;
+
+    /**
      * 序号
      *
      * @mbg.generated
@@ -125,6 +132,14 @@ public class SysParamConfig implements BaseModel, Serializable {
         this.showName = showName;
     }
 
+    public Integer getNotNull() {
+        return notNull;
+    }
+
+    public void setNotNull(Integer notNull) {
+        this.notNull = notNull;
+    }
+
     public Integer getConfigOrder() {
         return configOrder;
     }
@@ -169,6 +184,7 @@ public class SysParamConfig implements BaseModel, Serializable {
         sb.append(", dataType=").append(dataType);
         sb.append(", dataLength=").append(dataLength);
         sb.append(", showName=").append(showName);
+        sb.append(", notNull=").append(notNull);
         sb.append(", configOrder=").append(configOrder);
         sb.append(", createTime=").append(createTime);
         sb.append(", createUser=").append(createUser);
@@ -195,6 +211,7 @@ public class SysParamConfig implements BaseModel, Serializable {
             && (this.getDataType() == null ? other.getDataType() == null : this.getDataType().equals(other.getDataType()))
             && (this.getDataLength() == null ? other.getDataLength() == null : this.getDataLength().equals(other.getDataLength()))
             && (this.getShowName() == null ? other.getShowName() == null : this.getShowName().equals(other.getShowName()))
+            && (this.getNotNull() == null ? other.getNotNull() == null : this.getNotNull().equals(other.getNotNull()))
             && (this.getConfigOrder() == null ? other.getConfigOrder() == null : this.getConfigOrder().equals(other.getConfigOrder()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
@@ -211,6 +228,7 @@ public class SysParamConfig implements BaseModel, Serializable {
         result = prime * result + ((getDataType() == null) ? 0 : getDataType().hashCode());
         result = prime * result + ((getDataLength() == null) ? 0 : getDataLength().hashCode());
         result = prime * result + ((getShowName() == null) ? 0 : getShowName().hashCode());
+        result = prime * result + ((getNotNull() == null) ? 0 : getNotNull().hashCode());
         result = prime * result + ((getConfigOrder() == null) ? 0 : getConfigOrder().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getCreateUser() == null) ? 0 : getCreateUser().hashCode());
