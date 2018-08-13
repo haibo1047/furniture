@@ -16,9 +16,10 @@
         <th>
           <input type="checkbox" id="check-all" class="flat">
         </th>
-        <th class="column-title"> menu Name </th>
-        <th class="column-title"> menu URL </th>
-        <th class="column-title"> menu Order </th>
+        <th class="column-title"> Menu Name </th>
+        <th class="column-title"> Menu URL </th>
+        <th class="column-title"> Menu Module </th>
+        <th class="column-title"> Menu Order </th>
         <th class="column-title"> Create Time </th>
         <th class="column-title"> Create User </th>
         <th class="column-title no-link last">
@@ -26,7 +27,7 @@
         		Operation
         	</span>
         </th>
-        <th class="bulk-actions" colspan="6">
+        <th class="bulk-actions" colspan="7">
           <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
         </th>
       </tr>
@@ -41,6 +42,7 @@
         </td>
         <td class=" "> $!{model.menuName} </td>
         <td class=" "> $!{model.menuUrl} </td>
+        <td class=" "> #dictDisplay($moduleList $model.menuModule "value1" "value1") </td>
         <td class=" "> $!{model.menuOrder} </td>
         <td class=" "> $!date.format("yyyy-MM-dd HH:mm:ss",$!model.createTime ) </td>
         <td class=" "> $!{model.createUser} </td>

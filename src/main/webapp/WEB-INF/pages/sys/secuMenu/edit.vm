@@ -14,6 +14,14 @@
       <input id="menuURL" class="form-control col-md-7 col-xs-12" type="text" name="menuUrl" value="$!{model.menuUrl}" required="required"> 
     </div>
   </div>
+  
+	<div class="form-group">
+	    <label for="dataType" class="control-label col-md-3 col-sm-3 col-xs-12"> Menu Module </label>
+	    <div class="col-md-6 col-sm-6 col-xs-12">
+	    	#buildSelect ($moduleList "menuModule" $!{model.menuModule} "value1" "value1")
+		</div>
+	</div>
+	
   <div class="form-group">
     <label for="menuOrder" class="control-label col-md-3 col-sm-3 col-xs-12"> Menu Order</label>
     <div class="col-md-6 col-sm-6 col-xs-12">

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ylsq.common.base.BaseController;
 import com.ylsq.common.base.BaseModel;
 import com.ylsq.common.base.BaseService;
+import com.ylsq.common.base.SysParamEnum;
 import com.ylsq.frame.base.dao.model.SecuMenu;
 import com.ylsq.frame.base.dao.model.SecuMenuExample;
 import com.ylsq.frame.base.service.SecuMenuService;
@@ -25,6 +26,23 @@ public class SecuMenuController extends BaseController {
 	@Autowired
 	private SecuMenuService secuMenuService;
 	
+	
+	
+	@Override
+	public String list(ModelMap modelMap) {
+		// TODO Auto-generated method stub
+		modelMap.put("moduleList", getParams(SysParamEnum.Menu_Module.getConstant()));
+		return super.list(modelMap);
+	}
+
+
+	@Override
+	protected void beforeEdit(ModelMap modelMap) {
+		// TODO Auto-generated method stub
+		modelMap.put("moduleList", getParams(SysParamEnum.Menu_Module.getConstant()));
+		super.beforeEdit(modelMap);
+	}
+
 	@RequestMapping(value= "/save", method = RequestMethod.POST)
 	public String save(SecuMenu menu,ModelMap modelMap) {
 		log.debug(menu.toString());

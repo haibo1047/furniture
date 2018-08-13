@@ -32,13 +32,15 @@ public abstract class BaseController {
 	}
 	
 	@RequestMapping(value= "/create", method = RequestMethod.GET)
-	public String create() {
+	public String create(ModelMap modelMap) {
+		beforeEdit(modelMap);
 		return webPrefix()+"edit";
 	}
 	
 	@RequestMapping(value= "/edit/{id}", method = RequestMethod.GET)
 	public String edit(@PathVariable(name="id") String id,ModelMap modelMap) {
 		log.debug(id);
+		beforeEdit(modelMap);
 		BaseModel model = getService().selectByPrimaryKey(Long.parseLong(id));
 		modelMap.put("model", model);
 		return webPrefix()+"edit";
@@ -55,18 +57,7 @@ public abstract class BaseController {
 		return sysParamValueService.selectByParamName(paramName);
 	}
 	
-	/**
-	 * 统一异常处理
-	 * @param request
-	 * @param response
-	 * @param exception
-	 */
-	@ExceptionHandler
-	public String exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception exception) {
-		log.error(exception.getMessage());
-		exception.printStackTrace();
-		request.setAttribute("ex", exception);
-		return "/common/error";
+	protected void beforeEdit(ModelMap modelMap) {
 	}
 	
 	protected void initModel(BaseModel obj) {
@@ -96,5 +87,19 @@ public abstract class BaseController {
 	
 	protected String webPrefix() {
 		throw new UnsupportedOperationException();
+	}
+	
+	/**
+	 * 统一异常处理
+	 * @param request
+	 * @param response
+	 * @param exception
+	 */
+	@ExceptionHandler
+	public String exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception exception) {
+		log.error(exception.getMessage());
+		exception.printStackTrace();
+		request.setAttribute("ex", exception);
+		return "/common/error";
 	}
 }

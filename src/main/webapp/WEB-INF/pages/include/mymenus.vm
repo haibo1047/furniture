@@ -1,5 +1,6 @@
 #set($layout="/include/layout_blank.vm")
 
+#set($myMenuMap = $session.getAttribute("mymenus_session_id"))
  <!-- sidebar menu -->
 	<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 	  <div class="menu_section">
@@ -7,25 +8,29 @@
 	    <ul class="nav side-menu">
 	      <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
 	        <ul class="nav child_menu">
-	          <li><a href="$rc.contextPath/home/index.n">Dashboard</a></li>
+	          <li><a href="$rc.contextPath/home/index.n">Dashboard </a></li>
 	        </ul>
 	      </li>
-	      <li><a><i class="fa fa-edit"></i> System Manage <span class="fa fa-chevron-down"></span></a>
-	        <ul class="nav child_menu">
-	        <!--
-	          <li><a href="$rc.contextPath/sys/user/list.n">Secu User</a></li>
-	          <li><a href="$rc.contextPath/sys/role/list.n">Secu Role</a></li>
-	          <li><a href="$rc.contextPath/sys/menu/list.n">Secu Menu</a></li>
-	          -->
-	          #foreach($menu in $session.getAttribute("mymenus_session_id") )
-	              <li><a href="${menu.menuUrl}">${menu.menuName}</a></li>
-	          #end
-	        </ul>
-	      </li>
+		#foreach($module in $myMenuMap.keySet() )
+			<li>
+				<a><i class="fa fa-edit"></i> $module <span class="fa fa-chevron-down"></span></a>
+				<ul class="nav child_menu">
+					#foreach($menu in $myMenuMap.get($module) )
+						<li><a href="${menu.menuUrl}">${menu.menuName}</a></li>
+					#end
+				</ul>
+			</li>
+		#end
 	      <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
 	        <ul class="nav child_menu">
 	          <li><a href="general_elements.html">General Elements</a></li>
 	          <li><a href="calendar.html">Calendar</a></li>
+	                
+	      
+<li><a href="$rc.contextPath/sys/user/list.n">Secu User</a></li>
+<li><a href="$rc.contextPath/sys/role/list.n">Secu Role</a></li>
+<li><a href="$rc.contextPath/sys/menu/list.n">Secu Menu</a></li>
+	          
 	        </ul>
 	      </li>
 	      <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>

@@ -5,6 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
     <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+    <result column="menu_module" jdbcType="VARCHAR" property="menuModule" />
     <result column="menu_order" jdbcType="INTEGER" property="menuOrder" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, menu_name, menu_url, menu_order, create_time, create_user, rec_status
+    id, menu_name, menu_url, menu_module, menu_order, create_time, create_user, rec_status
   </sql>
   <select id="selectByExample" parameterType="com.ylsq.frame.base.dao.model.SecuMenuExample" resultMap="BaseResultMap">
     select
@@ -103,11 +104,11 @@
   </delete>
   <insert id="insert" parameterType="com.ylsq.frame.base.dao.model.SecuMenu">
     insert into secu_menu (id, menu_name, menu_url, 
-      menu_order, create_time, create_user, 
-      rec_status)
+      menu_module, menu_order, create_time, 
+      create_user, rec_status)
     values (#{id,jdbcType=BIGINT}, #{menuName,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, 
-      #{menuOrder,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
-      #{recStatus,jdbcType=INTEGER})
+      #{menuModule,jdbcType=VARCHAR}, #{menuOrder,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=VARCHAR}, #{recStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ylsq.frame.base.dao.model.SecuMenu">
     insert into secu_menu
@@ -120,6 +121,9 @@
       </if>
       <if test="menuUrl != null">
         menu_url,
+      </if>
+      <if test="menuModule != null">
+        menu_module,
       </if>
       <if test="menuOrder != null">
         menu_order,
@@ -143,6 +147,9 @@
       </if>
       <if test="menuUrl != null">
         #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuModule != null">
+        #{menuModule,jdbcType=VARCHAR},
       </if>
       <if test="menuOrder != null">
         #{menuOrder,jdbcType=INTEGER},
@@ -176,6 +183,9 @@
       <if test="record.menuUrl != null">
         menu_url = #{record.menuUrl,jdbcType=VARCHAR},
       </if>
+      <if test="record.menuModule != null">
+        menu_module = #{record.menuModule,jdbcType=VARCHAR},
+      </if>
       <if test="record.menuOrder != null">
         menu_order = #{record.menuOrder,jdbcType=INTEGER},
       </if>
@@ -198,6 +208,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       menu_name = #{record.menuName,jdbcType=VARCHAR},
       menu_url = #{record.menuUrl,jdbcType=VARCHAR},
+      menu_module = #{record.menuModule,jdbcType=VARCHAR},
       menu_order = #{record.menuOrder,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       create_user = #{record.createUser,jdbcType=VARCHAR},
@@ -214,6 +225,9 @@
       </if>
       <if test="menuUrl != null">
         menu_url = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuModule != null">
+        menu_module = #{menuModule,jdbcType=VARCHAR},
       </if>
       <if test="menuOrder != null">
         menu_order = #{menuOrder,jdbcType=INTEGER},
@@ -234,6 +248,7 @@
     update secu_menu
     set menu_name = #{menuName,jdbcType=VARCHAR},
       menu_url = #{menuUrl,jdbcType=VARCHAR},
+      menu_module = #{menuModule,jdbcType=VARCHAR},
       menu_order = #{menuOrder,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_user = #{createUser,jdbcType=VARCHAR},

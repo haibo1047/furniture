@@ -1,6 +1,10 @@
 package com.ylsq.common.secu.shiro.realm;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -43,7 +47,15 @@ public class SecuRealm extends AuthenticatingRealm {
 			throw new IncorrectCredentialsException();
 		}
 		List<SecuMenu> menuList = secuMenuService.selectByExample(new SecuMenuExample());
-		SecurityUtils.getSubject().getSession().setAttribute(SystemConstants.System_Menu_Key, menuList);
+		Map<String,List<SecuMenu>> menuMap = new LinkedHashMap<>();
+		for(SecuMenu sm : menuList) {
+			List<SecuMenu> subList = menuMap.get(sm.getMenuModule());
+			if(subList == null) {
+				menuMap.put(sm.getMenuModule(), new ArrayList<SecuMenu>());
+			}
+			menuMap.get(sm.getMenuModule()).add(sm);
+		}
+		SecurityUtils.getSubject().getSession().setAttribute(SystemConstants.System_Menu_Key, menuMap);
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userName, passwd, getName());
 		return info;
 	}
