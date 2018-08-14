@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.ylsq.frame.sys.dao.model.SysParamValue;
-import com.ylsq.frame.sys.service.SysParamValueService;
+import com.ylsq.frame.sys.base.dao.model.SysParamValue;
+import com.ylsq.frame.sys.base.service.SysParamValueService;
 
 public abstract class BaseController {
 	private static Logger log = LoggerFactory.getLogger(BaseController.class);

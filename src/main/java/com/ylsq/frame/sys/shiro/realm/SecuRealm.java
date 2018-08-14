@@ -19,17 +19,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ylsq.frame.base.dao.model.SecuMenu;
-import com.ylsq.frame.base.dao.model.SecuMenuExample;
-import com.ylsq.frame.base.dao.model.SecuUser;
-import com.ylsq.frame.base.obj.MenuObject;
-import com.ylsq.frame.base.service.SecuMenuService;
-import com.ylsq.frame.base.service.SecuUserService;
-import com.ylsq.frame.base.sorter.MenuSorter;
 import com.ylsq.frame.common.base.SysParamEnum;
 import com.ylsq.frame.common.base.SystemConstants;
-import com.ylsq.frame.sys.dao.model.SysParamValue;
-import com.ylsq.frame.sys.service.SysParamValueService;
+import com.ylsq.frame.sys.base.dao.model.SysParamValue;
+import com.ylsq.frame.sys.base.service.SysParamValueService;
+import com.ylsq.frame.sys.secu.custobj.MenuObject;
+import com.ylsq.frame.sys.secu.dao.model.SecuMenu;
+import com.ylsq.frame.sys.secu.dao.model.SecuMenuExample;
+import com.ylsq.frame.sys.secu.dao.model.SecuUser;
+import com.ylsq.frame.sys.secu.service.SecuMenuService;
+import com.ylsq.frame.sys.secu.service.SecuUserService;
+import com.ylsq.frame.sys.secu.sorter.MenuSorter;
 
 public class SecuRealm extends AuthenticatingRealm {
 	private static Logger log = LoggerFactory.getLogger(SecuRealm.class);

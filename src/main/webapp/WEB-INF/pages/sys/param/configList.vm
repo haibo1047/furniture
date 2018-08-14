@@ -79,7 +79,7 @@ function deletemultiple(){
 		return;
 	}
 	if(confirm('确认要删除此'+$(selted).length+'条记录？')){
-		location = "$rc.contextPath/sys/param/deleteConfig/"+ids+".n"
+		location = "$rc.contextPath/sys/param/deleteConfig/$!{paramName}/"+ids+".n"
 	}
 }
 function editRecord(o){
@@ -89,7 +89,7 @@ function editRecord(o){
 function delRecord(o){
 	if (confirm('确认要删除此记录？')) {
 		var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-		location = "$rc.contextPath/sys/param/deleteConfig/"+objId+".n"
+		location = "$rc.contextPath/sys/param/deleteConfig/$!{paramName}/"+objId+".n"
 	}
 }
 
