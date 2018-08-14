@@ -16,10 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ylsq.common.base.BaseController;
-import com.ylsq.common.base.BaseExample;
-import com.ylsq.common.base.BaseModel;
-import com.ylsq.common.base.BaseService;
 import com.ylsq.frame.base.dao.model.SecuRole;
 import com.ylsq.frame.base.dao.model.SecuRoleExample;
 import com.ylsq.frame.base.dao.model.SecuUser;
@@ -29,6 +25,10 @@ import com.ylsq.frame.base.dao.model.SecuUserRoleExample;
 import com.ylsq.frame.base.service.SecuRoleService;
 import com.ylsq.frame.base.service.SecuUserRoleService;
 import com.ylsq.frame.base.service.SecuUserService;
+import com.ylsq.frame.common.base.BaseController;
+import com.ylsq.frame.common.base.BaseExample;
+import com.ylsq.frame.common.base.BaseModel;
+import com.ylsq.frame.common.base.BaseService;
 
 @RequestMapping("/sys/user/")
 @Controller

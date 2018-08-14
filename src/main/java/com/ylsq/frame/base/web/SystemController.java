@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ylsq.common.base.BaseController;
+import com.ylsq.frame.common.base.BaseController;
 
 @RequestMapping("/sys/")
 @Controller

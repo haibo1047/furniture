@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.ylsq.common.base.BaseController;
-import com.ylsq.common.base.BaseExample;
-import com.ylsq.common.base.BaseModel;
-import com.ylsq.common.base.BaseService;
-import com.ylsq.common.base.SysParamEnum;
+import com.ylsq.frame.common.base.BaseController;
+import com.ylsq.frame.common.base.BaseExample;
+import com.ylsq.frame.common.base.BaseModel;
+import com.ylsq.frame.common.base.BaseService;
+import com.ylsq.frame.common.base.SysParamEnum;
 import com.ylsq.frame.sys.dao.model.SysParam;
 import com.ylsq.frame.sys.dao.model.SysParamConfig;
 import com.ylsq.frame.sys.dao.model.SysParamExample;

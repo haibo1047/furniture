@@ -1,10 +1,11 @@
 package com.ylsq.frame.sys.dao.model;
 
-import com.ylsq.common.base.BaseExample;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import com.ylsq.frame.common.base.BaseExample;
 
 public class SysParamValueExample implements BaseExample, Serializable {
     protected String orderByClause;

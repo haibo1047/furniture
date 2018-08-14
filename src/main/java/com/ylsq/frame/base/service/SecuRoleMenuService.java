@@ -2,9 +2,9 @@ package com.ylsq.frame.base.service;
 
 import java.util.List;
 
-import com.ylsq.common.base.BaseService;
 import com.ylsq.frame.base.dao.model.SecuRoleMenu;
 import com.ylsq.frame.base.dao.model.SecuRoleMenuExample;
+import com.ylsq.frame.common.base.BaseService;
 
 /**
 * SecuRoleMenuService接口

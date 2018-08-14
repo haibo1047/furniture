@@ -2,7 +2,7 @@ package com.ylsq.frame.sys.service;
 
 import java.util.List;
 
-import com.ylsq.common.base.BaseService;
+import com.ylsq.frame.common.base.BaseService;
 import com.ylsq.frame.sys.dao.model.SysParamConfig;
 import com.ylsq.frame.sys.dao.model.SysParamConfigExample;
 

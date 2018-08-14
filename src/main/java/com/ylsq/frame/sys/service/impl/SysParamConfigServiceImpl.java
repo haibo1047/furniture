@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ylsq.common.annotation.BaseService;
-import com.ylsq.common.base.BaseServiceImpl;
+import com.ylsq.frame.common.annotation.BaseService;
+import com.ylsq.frame.common.base.BaseServiceImpl;
 import com.ylsq.frame.sys.dao.mapper.SysParamConfigMapper;
 import com.ylsq.frame.sys.dao.model.SysParamConfig;
 import com.ylsq.frame.sys.dao.model.SysParamConfigExample;

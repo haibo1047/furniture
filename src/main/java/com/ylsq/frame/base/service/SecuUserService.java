@@ -1,8 +1,8 @@
 package com.ylsq.frame.base.service;
 
-import com.ylsq.common.base.BaseService;
 import com.ylsq.frame.base.dao.model.SecuUser;
 import com.ylsq.frame.base.dao.model.SecuUserExample;
+import com.ylsq.frame.common.base.BaseService;
 
 /**
 * SecuUserService接口

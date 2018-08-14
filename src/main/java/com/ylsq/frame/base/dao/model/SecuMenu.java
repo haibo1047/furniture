@@ -1,8 +1,9 @@
 package com.ylsq.frame.base.dao.model;
 
-import com.ylsq.common.base.BaseModel;
 import java.io.Serializable;
 import java.util.Date;
+
+import com.ylsq.frame.common.base.BaseModel;
 
 public class SecuMenu implements BaseModel, Serializable {
     /**

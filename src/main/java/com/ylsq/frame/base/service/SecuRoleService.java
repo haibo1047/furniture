@@ -1,8 +1,8 @@
 package com.ylsq.frame.base.service;
 
-import com.ylsq.common.base.BaseService;
 import com.ylsq.frame.base.dao.model.SecuRole;
 import com.ylsq.frame.base.dao.model.SecuRoleExample;
+import com.ylsq.frame.common.base.BaseService;
 
 /**
 * SecuRoleService接口

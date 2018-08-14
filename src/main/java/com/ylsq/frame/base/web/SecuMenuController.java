@@ -10,13 +10,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.ylsq.common.base.BaseController;
-import com.ylsq.common.base.BaseModel;
-import com.ylsq.common.base.BaseService;
-import com.ylsq.common.base.SysParamEnum;
 import com.ylsq.frame.base.dao.model.SecuMenu;
 import com.ylsq.frame.base.dao.model.SecuMenuExample;
 import com.ylsq.frame.base.service.SecuMenuService;
+import com.ylsq.frame.common.base.BaseController;
+import com.ylsq.frame.common.base.BaseModel;
+import com.ylsq.frame.common.base.BaseService;
+import com.ylsq.frame.common.base.SysParamEnum;
 
 @Controller
 @RequestMapping("/sys/menu/")

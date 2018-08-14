@@ -1,6 +1,6 @@
 package com.ylsq.frame.sys.service;
 
-import com.ylsq.common.base.BaseService;
+import com.ylsq.frame.common.base.BaseService;
 import com.ylsq.frame.sys.dao.model.SysParam;
 import com.ylsq.frame.sys.dao.model.SysParamExample;
 

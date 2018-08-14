@@ -1,7 +1,7 @@
 package com.ylsq.frame.sys.service.impl;
 
-import com.ylsq.common.annotation.BaseService;
-import com.ylsq.common.base.BaseServiceImpl;
+import com.ylsq.frame.common.annotation.BaseService;
+import com.ylsq.frame.common.base.BaseServiceImpl;
 import com.ylsq.frame.sys.dao.mapper.SysParamMapper;
 import com.ylsq.frame.sys.dao.model.SysParam;
 import com.ylsq.frame.sys.dao.model.SysParamExample;

@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ylsq.common.annotation.BaseService;
-import com.ylsq.common.base.BaseServiceImpl;
 import com.ylsq.frame.base.dao.mapper.SecuUserRoleMapper;
 import com.ylsq.frame.base.dao.model.SecuUserRole;
 import com.ylsq.frame.base.dao.model.SecuUserRoleExample;
 import com.ylsq.frame.base.service.SecuUserRoleService;
+import com.ylsq.frame.common.annotation.BaseService;
+import com.ylsq.frame.common.base.BaseServiceImpl;
 
 /**
 * SecuUserRoleService实现
