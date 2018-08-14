@@ -1,9 +1,8 @@
 package com.ylsq.frame.sys.dao.model;
 
+import com.ylsq.frame.common.base.BaseModel;
 import java.io.Serializable;
 import java.util.Date;
-
-import com.ylsq.frame.common.base.BaseModel;
 
 public class SysParamValue implements BaseModel, Serializable {
     /**

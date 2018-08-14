@@ -4,7 +4,7 @@ import com.ylsq.frame.common.base.BaseModel;
 import java.io.Serializable;
 import java.util.Date;
 
-public class SysParam implements BaseModel, Serializable {
+public class SecuRole implements BaseModel, Serializable {
     /**
      * 编号
      *
@@ -13,18 +13,18 @@ public class SysParam implements BaseModel, Serializable {
     private Long id;
 
     /**
-     * 参数名
+     * 角色名称
      *
      * @mbg.generated
      */
-    private String paramName;
+    private String roleName;
 
     /**
-     * 参数描述
+     * KEY
      *
      * @mbg.generated
      */
-    private String paramDescription;
+    private String roleDescription;
 
     /**
      * 创建时间
@@ -57,20 +57,20 @@ public class SysParam implements BaseModel, Serializable {
         this.id = id;
     }
 
-    public String getParamName() {
-        return paramName;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setParamName(String paramName) {
-        this.paramName = paramName;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
-    public String getParamDescription() {
-        return paramDescription;
+    public String getRoleDescription() {
+        return roleDescription;
     }
 
-    public void setParamDescription(String paramDescription) {
-        this.paramDescription = paramDescription;
+    public void setRoleDescription(String roleDescription) {
+        this.roleDescription = roleDescription;
     }
 
     public Date getCreateTime() {
@@ -104,8 +104,8 @@ public class SysParam implements BaseModel, Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", paramName=").append(paramName);
-        sb.append(", paramDescription=").append(paramDescription);
+        sb.append(", roleName=").append(roleName);
+        sb.append(", roleDescription=").append(roleDescription);
         sb.append(", createTime=").append(createTime);
         sb.append(", createUser=").append(createUser);
         sb.append(", recStatus=").append(recStatus);
@@ -124,10 +124,10 @@ public class SysParam implements BaseModel, Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        SysParam other = (SysParam) that;
+        SecuRole other = (SecuRole) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getParamName() == null ? other.getParamName() == null : this.getParamName().equals(other.getParamName()))
-            && (this.getParamDescription() == null ? other.getParamDescription() == null : this.getParamDescription().equals(other.getParamDescription()))
+            && (this.getRoleName() == null ? other.getRoleName() == null : this.getRoleName().equals(other.getRoleName()))
+            && (this.getRoleDescription() == null ? other.getRoleDescription() == null : this.getRoleDescription().equals(other.getRoleDescription()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
             && (this.getRecStatus() == null ? other.getRecStatus() == null : this.getRecStatus().equals(other.getRecStatus()));
@@ -138,8 +138,8 @@ public class SysParam implements BaseModel, Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getParamName() == null) ? 0 : getParamName().hashCode());
-        result = prime * result + ((getParamDescription() == null) ? 0 : getParamDescription().hashCode());
+        result = prime * result + ((getRoleName() == null) ? 0 : getRoleName().hashCode());
+        result = prime * result + ((getRoleDescription() == null) ? 0 : getRoleDescription().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getCreateUser() == null) ? 0 : getCreateUser().hashCode());
         result = prime * result + ((getRecStatus() == null) ? 0 : getRecStatus().hashCode());
