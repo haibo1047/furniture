@@ -1,17 +1,19 @@
 #set($layout="/include/layout_blank.vm")
 
 #set($myMenuMap = $session.getAttribute("mymenus_session_id"))
- <!-- sidebar menu -->
-	<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-	  <div class="menu_section">
-	    <h3>General</h3>
-	    <ul class="nav side-menu">
-	      <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-	        <ul class="nav child_menu">
-	          <li><a href="$rc.contextPath/home/index.n">Dashboard </a></li>
-	        </ul>
-	      </li>
-		#foreach($module in $myMenuMap.keySet() )
+
+
+<!-- sidebar menu -->
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+  	<div class="menu_section">
+		<h3>General</h3>
+		<ul class="nav side-menu">
+			<li>
+				<a href="$rc.contextPath/home/index.n">
+					<i class="fa fa-home"></i> Home 
+				</a>
+	 	 	</li>
+			#foreach($module in $myMenuMap.keySet() )
 			<li>
 				<a><i class="fa fa-edit"></i> $module <span class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
@@ -20,29 +22,26 @@
 					#end
 				</ul>
 			</li>
-		#end
-	      </li>
+			#end
 	    </ul>
-	  </div>
-	
-	    </div>
-	   
-	    <!-- /sidebar menu -->
-	
-	    <!-- /menu footer buttons -->
-	    <div class="sidebar-footer hidden-small">
-	  <a data-toggle="tooltip" data-placement="top" title="Settings">
-	    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-	  </a>
-	  <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-	    <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-	  </a>
-	  <a data-toggle="tooltip" data-placement="top" title="Lock">
-	    <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-	  </a>
-	  <a data-toggle="tooltip" data-placement="top" title="Logout" href="$rc.contextPath/sys/logout.n">
-	    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-	  </a>
 	</div>
-	<!-- /menu footer buttons --> 
+</div>
+<!-- /sidebar menu -->
+	
+<!-- /menu footer buttons -->
+<div class="sidebar-footer hidden-small">
+  	<a data-toggle="tooltip" data-placement="top" title="Settings">
+    	<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+  	</a>
+  	<a data-toggle="tooltip" data-placement="top" title="FullScreen">
+	    <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+  	</a>
+  	<a data-toggle="tooltip" data-placement="top" title="Lock">
+	    <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+  	</a>
+  	<a data-toggle="tooltip" data-placement="top" title="Logout" href="$rc.contextPath/sys/logout.n">
+	    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+  <	/a>
+</div>
+<!-- /menu footer buttons --> 
             
