@@ -41,7 +41,7 @@
   	</a>
   	<a data-toggle="tooltip" data-placement="top" title="Logout" href="$rc.contextPath/sys/logout.n">
 	    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-  <	/a>
+  	</a>
 </div>
 <!-- /menu footer buttons --> 
             

@@ -1,7 +1,10 @@
 package com.ylsq.frame.sys.base.web;
 
+import java.lang.reflect.Method;
+import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,7 @@ import com.ylsq.frame.sys.base.dao.model.SysParamValue;
 import com.ylsq.frame.sys.base.service.SysParamConfigService;
 import com.ylsq.frame.sys.base.service.SysParamService;
 import com.ylsq.frame.sys.base.service.SysParamValueService;
+import com.ylsq.frame.sys.base.sorter.ParamConfigSorter;
 
 @Controller
 @RequestMapping("/sys/param")
@@ -57,10 +61,50 @@ public class SysParamController extends BaseController {
 		modelMap.put("configList", configList);
 		return webPrefix()+"editValue";
 	}
+	
+	public String errorEdit(String paramName, ModelMap modelMap) {
+		List<SysParamConfig> configList = sysParamConfigService.selectByParamName(paramName);
+		modelMap.put("configList", configList);
+		return webPrefix()+"editValue";
+	}
+	
+	private void validate(SysParamValue value) throws Exception {
+		List<SysParamConfig> configs = sysParamConfigService.selectByParamName(value.getParamName());
+		Collections.sort(configs, new ParamConfigSorter());
+		for(int index = 0; index < configs.size(); index ++) {
+			SysParamConfig config = configs.get(index);
+			Method mtd = SysParamValue.class.getMethod("getValue"+(index+1) , null);
+			String currValue = mtd.invoke(value, null).toString();
+			
+			String field = config.getShowName()+"["+config.getConfigName() +"]";
+			if(StringUtils.isEmpty(currValue)) {
+				if(config.getNotNull() ==1)
+					throw new Exception(field +"不能为空");
+				else
+					return;
+			}
+			if(currValue.length() > config.getDataLength()) {
+				throw new Exception(field + "超过定义的长度("+config.getDataLength()+")");
+			}
+			
+			if("Integer".equals(config.getDataType()) && !StringUtils.isNumeric(currValue)) {
+				throw new Exception(field + "定义为数值型，请检查"+currValue);
+			}
+		}
+	}
+	
 	@RequestMapping(value= "/saveValue", method = RequestMethod.POST)
 	public String saveValue(SysParamValue param,ModelMap modelMap) {
 		log.debug(param.toString());
 		initModel(param);
+		try {
+			validate(param);
+		}catch(Exception e) {
+			log.error(e.getMessage());
+			modelMap.put("errorMsg", e.getMessage());
+			modelMap.put("model", param);
+			return errorEdit(param.getParamName(),modelMap);
+		}
 		if(param.getId() == null) {
 			sysParamValueService.insert(param);
 		}
@@ -69,6 +113,7 @@ public class SysParamController extends BaseController {
 		}
 		return values(param.getParamName(),modelMap);
 	}
+	
 	@RequestMapping(value= "/deleteValue/{paramName}/{ids}", method = RequestMethod.GET)
 	public String deleteValue(@PathVariable(value="paramName")String paramName,@PathVariable(name="ids") String ids,ModelMap modelMap) {
 		int cnt = sysParamValueService.deleteByPrimaryKeys(ids);
