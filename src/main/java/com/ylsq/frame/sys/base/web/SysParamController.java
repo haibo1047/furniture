@@ -1,6 +1,7 @@
 package com.ylsq.frame.sys.base.web;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import com.ylsq.frame.sys.base.dao.model.SysParam;
 import com.ylsq.frame.sys.base.dao.model.SysParamConfig;
 import com.ylsq.frame.sys.base.dao.model.SysParamExample;
 import com.ylsq.frame.sys.base.dao.model.SysParamValue;
+import com.ylsq.frame.sys.base.dao.model.SysParamValueExample;
 import com.ylsq.frame.sys.base.service.SysParamConfigService;
 import com.ylsq.frame.sys.base.service.SysParamService;
 import com.ylsq.frame.sys.base.service.SysParamValueService;
@@ -71,17 +73,20 @@ public class SysParamController extends BaseController {
 	private void validate(SysParamValue value) throws Exception {
 		List<SysParamConfig> configs = sysParamConfigService.selectByParamName(value.getParamName());
 		Collections.sort(configs, new ParamConfigSorter());
+		SysParamValueExample example = new SysParamValueExample();
+		SysParamValueExample.Criteria criteria = null;
+		List<String> uniqColumns = new ArrayList<>();
 		for(int index = 0; index < configs.size(); index ++) {
 			SysParamConfig config = configs.get(index);
 			Method mtd = SysParamValue.class.getMethod("getValue"+(index+1) , null);
 			String currValue = mtd.invoke(value, null).toString();
 			
 			String field = config.getShowName()+"["+config.getConfigName() +"]";
-			if(StringUtils.isEmpty(currValue)) {
-				if(config.getNotNull() ==1)
+			if(StringUtils.isBlank(currValue)) {
+				if(new Integer(1).equals(config.getNotNull()))
 					throw new Exception(field +"不能为空");
 				else
-					return;
+					continue;
 			}
 			if(currValue.length() > config.getDataLength()) {
 				throw new Exception(field + "超过定义的长度("+config.getDataLength()+")");
@@ -89,6 +94,22 @@ public class SysParamController extends BaseController {
 			
 			if("Integer".equals(config.getDataType()) && !StringUtils.isNumeric(currValue)) {
 				throw new Exception(field + "定义为数值型，请检查"+currValue);
+			}
+			if(new Integer(1).equals(config.getIsOfUniq())) {
+				if(criteria == null)
+					criteria = example.createCriteria();
+				Method md = criteria.getClass().getMethod("andValue"+(index+1)+"EqualTo", currValue.getClass());
+				md.invoke(criteria, currValue);
+				uniqColumns.add(config.getShowName());
+			}
+		}
+		if( criteria != null) {
+			List<SysParamValue> dbList = sysParamValueService.selectByExample(example);
+			if(dbList.size() ==0)
+				return;
+			if(dbList.size()>1 || value.getId() == null) {
+				String tips = String.join("+", uniqColumns);
+				throw new Exception("此参数已经存在，请重新录入:" + tips);
 			}
 		}
 	}

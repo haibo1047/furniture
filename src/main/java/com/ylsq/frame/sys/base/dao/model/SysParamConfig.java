@@ -34,13 +34,6 @@ public class SysParamConfig implements BaseModel, Serializable {
     private String dataType;
 
     /**
-     * 数据类型
-     *
-     * @mbg.generated
-     */
-    private Integer dataLength;
-
-    /**
      * 显示名称
      *
      * @mbg.generated
@@ -48,11 +41,25 @@ public class SysParamConfig implements BaseModel, Serializable {
     private String showName;
 
     /**
+     * 数据类型
+     *
+     * @mbg.generated
+     */
+    private Integer dataLength;
+
+    /**
      * 是否为空
      *
      * @mbg.generated
      */
     private Integer notNull;
+
+    /**
+     * 是否唯一属性之一
+     *
+     * @mbg.generated
+     */
+    private Integer isOfUniq;
 
     /**
      * 序号
@@ -116,14 +123,6 @@ public class SysParamConfig implements BaseModel, Serializable {
         this.dataType = dataType;
     }
 
-    public Integer getDataLength() {
-        return dataLength;
-    }
-
-    public void setDataLength(Integer dataLength) {
-        this.dataLength = dataLength;
-    }
-
     public String getShowName() {
         return showName;
     }
@@ -132,12 +131,28 @@ public class SysParamConfig implements BaseModel, Serializable {
         this.showName = showName;
     }
 
+    public Integer getDataLength() {
+        return dataLength;
+    }
+
+    public void setDataLength(Integer dataLength) {
+        this.dataLength = dataLength;
+    }
+
     public Integer getNotNull() {
         return notNull;
     }
 
     public void setNotNull(Integer notNull) {
         this.notNull = notNull;
+    }
+
+    public Integer getIsOfUniq() {
+        return isOfUniq;
+    }
+
+    public void setIsOfUniq(Integer isOfUniq) {
+        this.isOfUniq = isOfUniq;
     }
 
     public Integer getConfigOrder() {
@@ -182,9 +197,10 @@ public class SysParamConfig implements BaseModel, Serializable {
         sb.append(", paramName=").append(paramName);
         sb.append(", configName=").append(configName);
         sb.append(", dataType=").append(dataType);
-        sb.append(", dataLength=").append(dataLength);
         sb.append(", showName=").append(showName);
+        sb.append(", dataLength=").append(dataLength);
         sb.append(", notNull=").append(notNull);
+        sb.append(", isOfUniq=").append(isOfUniq);
         sb.append(", configOrder=").append(configOrder);
         sb.append(", createTime=").append(createTime);
         sb.append(", createUser=").append(createUser);
@@ -209,9 +225,10 @@ public class SysParamConfig implements BaseModel, Serializable {
             && (this.getParamName() == null ? other.getParamName() == null : this.getParamName().equals(other.getParamName()))
             && (this.getConfigName() == null ? other.getConfigName() == null : this.getConfigName().equals(other.getConfigName()))
             && (this.getDataType() == null ? other.getDataType() == null : this.getDataType().equals(other.getDataType()))
-            && (this.getDataLength() == null ? other.getDataLength() == null : this.getDataLength().equals(other.getDataLength()))
             && (this.getShowName() == null ? other.getShowName() == null : this.getShowName().equals(other.getShowName()))
+            && (this.getDataLength() == null ? other.getDataLength() == null : this.getDataLength().equals(other.getDataLength()))
             && (this.getNotNull() == null ? other.getNotNull() == null : this.getNotNull().equals(other.getNotNull()))
+            && (this.getIsOfUniq() == null ? other.getIsOfUniq() == null : this.getIsOfUniq().equals(other.getIsOfUniq()))
             && (this.getConfigOrder() == null ? other.getConfigOrder() == null : this.getConfigOrder().equals(other.getConfigOrder()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
@@ -226,9 +243,10 @@ public class SysParamConfig implements BaseModel, Serializable {
         result = prime * result + ((getParamName() == null) ? 0 : getParamName().hashCode());
         result = prime * result + ((getConfigName() == null) ? 0 : getConfigName().hashCode());
         result = prime * result + ((getDataType() == null) ? 0 : getDataType().hashCode());
-        result = prime * result + ((getDataLength() == null) ? 0 : getDataLength().hashCode());
         result = prime * result + ((getShowName() == null) ? 0 : getShowName().hashCode());
+        result = prime * result + ((getDataLength() == null) ? 0 : getDataLength().hashCode());
         result = prime * result + ((getNotNull() == null) ? 0 : getNotNull().hashCode());
+        result = prime * result + ((getIsOfUniq() == null) ? 0 : getIsOfUniq().hashCode());
         result = prime * result + ((getConfigOrder() == null) ? 0 : getConfigOrder().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getCreateUser() == null) ? 0 : getCreateUser().hashCode());

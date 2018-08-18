@@ -379,66 +379,6 @@ public class SysParamConfigExample implements BaseExample, Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andDataLengthIsNull() {
-            addCriterion("data_length is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDataLengthIsNotNull() {
-            addCriterion("data_length is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDataLengthEqualTo(Integer value) {
-            addCriterion("data_length =", value, "dataLength");
-            return (Criteria) this;
-        }
-
-        public Criteria andDataLengthNotEqualTo(Integer value) {
-            addCriterion("data_length <>", value, "dataLength");
-            return (Criteria) this;
-        }
-
-        public Criteria andDataLengthGreaterThan(Integer value) {
-            addCriterion("data_length >", value, "dataLength");
-            return (Criteria) this;
-        }
-
-        public Criteria andDataLengthGreaterThanOrEqualTo(Integer value) {
-            addCriterion("data_length >=", value, "dataLength");
-            return (Criteria) this;
-        }
-
-        public Criteria andDataLengthLessThan(Integer value) {
-            addCriterion("data_length <", value, "dataLength");
-            return (Criteria) this;
-        }
-
-        public Criteria andDataLengthLessThanOrEqualTo(Integer value) {
-            addCriterion("data_length <=", value, "dataLength");
-            return (Criteria) this;
-        }
-
-        public Criteria andDataLengthIn(List<Integer> values) {
-            addCriterion("data_length in", values, "dataLength");
-            return (Criteria) this;
-        }
-
-        public Criteria andDataLengthNotIn(List<Integer> values) {
-            addCriterion("data_length not in", values, "dataLength");
-            return (Criteria) this;
-        }
-
-        public Criteria andDataLengthBetween(Integer value1, Integer value2) {
-            addCriterion("data_length between", value1, value2, "dataLength");
-            return (Criteria) this;
-        }
-
-        public Criteria andDataLengthNotBetween(Integer value1, Integer value2) {
-            addCriterion("data_length not between", value1, value2, "dataLength");
-            return (Criteria) this;
-        }
-
         public Criteria andShowNameIsNull() {
             addCriterion("show_name is null");
             return (Criteria) this;
@@ -509,6 +449,66 @@ public class SysParamConfigExample implements BaseExample, Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andDataLengthIsNull() {
+            addCriterion("data_length is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataLengthIsNotNull() {
+            addCriterion("data_length is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataLengthEqualTo(Integer value) {
+            addCriterion("data_length =", value, "dataLength");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataLengthNotEqualTo(Integer value) {
+            addCriterion("data_length <>", value, "dataLength");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataLengthGreaterThan(Integer value) {
+            addCriterion("data_length >", value, "dataLength");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataLengthGreaterThanOrEqualTo(Integer value) {
+            addCriterion("data_length >=", value, "dataLength");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataLengthLessThan(Integer value) {
+            addCriterion("data_length <", value, "dataLength");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataLengthLessThanOrEqualTo(Integer value) {
+            addCriterion("data_length <=", value, "dataLength");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataLengthIn(List<Integer> values) {
+            addCriterion("data_length in", values, "dataLength");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataLengthNotIn(List<Integer> values) {
+            addCriterion("data_length not in", values, "dataLength");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataLengthBetween(Integer value1, Integer value2) {
+            addCriterion("data_length between", value1, value2, "dataLength");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataLengthNotBetween(Integer value1, Integer value2) {
+            addCriterion("data_length not between", value1, value2, "dataLength");
+            return (Criteria) this;
+        }
+
         public Criteria andNotNullIsNull() {
             addCriterion("not_null is null");
             return (Criteria) this;
@@ -566,6 +566,66 @@ public class SysParamConfigExample implements BaseExample, Serializable {
 
         public Criteria andNotNullNotBetween(Integer value1, Integer value2) {
             addCriterion("not_null not between", value1, value2, "notNull");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsOfUniqIsNull() {
+            addCriterion("is_of_uniq is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsOfUniqIsNotNull() {
+            addCriterion("is_of_uniq is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsOfUniqEqualTo(Integer value) {
+            addCriterion("is_of_uniq =", value, "isOfUniq");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsOfUniqNotEqualTo(Integer value) {
+            addCriterion("is_of_uniq <>", value, "isOfUniq");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsOfUniqGreaterThan(Integer value) {
+            addCriterion("is_of_uniq >", value, "isOfUniq");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsOfUniqGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_of_uniq >=", value, "isOfUniq");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsOfUniqLessThan(Integer value) {
+            addCriterion("is_of_uniq <", value, "isOfUniq");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsOfUniqLessThanOrEqualTo(Integer value) {
+            addCriterion("is_of_uniq <=", value, "isOfUniq");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsOfUniqIn(List<Integer> values) {
+            addCriterion("is_of_uniq in", values, "isOfUniq");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsOfUniqNotIn(List<Integer> values) {
+            addCriterion("is_of_uniq not in", values, "isOfUniq");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsOfUniqBetween(Integer value1, Integer value2) {
+            addCriterion("is_of_uniq between", value1, value2, "isOfUniq");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsOfUniqNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_of_uniq not between", value1, value2, "isOfUniq");
             return (Criteria) this;
         }
 

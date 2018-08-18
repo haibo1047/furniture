@@ -48,11 +48,12 @@ public class SecuRealm extends AuthenticatingRealm {
 		String passwd = new String((char[])token.getCredentials());
 		SecuUser secuUser = secuUserService.selectByUsername(userName);
 		if(secuUser == null) {
-			throw new UnknownAccountException();
+			log.error("login failed, username was not found!");
+			throw new UnknownAccountException("账号不存在!");
 		}
 		if(!passwd.equals(secuUser.getPassword())) {
-			log.error("login failed");
-			throw new IncorrectCredentialsException();
+			log.error("login failed, username and password is not matched!");
+			throw new IncorrectCredentialsException("用户名密码不匹配！");
 		}
 		List<SysParamValue> moduleList = sysParamValueService.selectByParamName(SysParamEnum.Menu_Module.getConstant());
 		Map<String,Integer> moduleMap = new HashMap<>();

@@ -22,6 +22,7 @@
         <th class="column-title"> Data Type </th>
         <th class="column-title"> Data Length </th>
         <th class="column-title"> Not Null </th>
+        <th class="column-title"> Is Of Uniq </th>
         <th class="column-title"> Order </th>
         <th class="column-title"> Create Time </th>
         <th class="column-title"> Create User </th>
@@ -47,6 +48,7 @@
         <td class=" "> #dictDisplay ( $dataTypeList $!{model.dataType} "value1" "value2" ) </td>
         <td class=" "> $!{model.dataLength} </td>
         <td class=" "> #dictDisplay ( $alternativeList $!{model.notNull} "value1" "value2" ) </td>
+        <td class=" "> #dictDisplay ( $alternativeList $!{model.isOfUniq} "value1" "value2" )</td>
         <td class=" "> $!{model.configOrder} </td>
         <td class=" "> $!date.format("yyyy-MM-dd HH:mm:ss",$!model.createTime ) </td>
         <td class=" "> $!{model.createUser}</td>

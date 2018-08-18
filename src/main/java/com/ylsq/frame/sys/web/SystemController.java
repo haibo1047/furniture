@@ -23,7 +23,7 @@ public class SystemController extends BaseController {
 	static private Logger log = LoggerFactory.getLogger(SystemController.class);
 	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
-	public String login() {
+	public String login(ModelMap modelMap) {
 		Subject subject = SecurityUtils.getSubject();
 		if(subject.isAuthenticated()) {
 			log.debug((String)subject.getPrincipal());
@@ -40,7 +40,12 @@ public class SystemController extends BaseController {
 		}
 		else {
 			UsernamePasswordToken token = new UsernamePasswordToken(username, passwd);
-			subject.login(token);
+			try {
+				subject.login(token);
+			}catch(Exception e) {
+				modelMap.put("errorMsg", e.getMessage());
+				return login(modelMap);
+			}
 		}
 		SavedRequest sr = WebUtils.getSavedRequest(request);
 		if(sr == null) {
