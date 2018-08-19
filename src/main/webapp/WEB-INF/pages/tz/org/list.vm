@@ -1,0 +1,133 @@
+  
+<div class="title_left">
+	<h3>组织机构</h3>
+</div>
+<div class="x_content">
+	
+	<div class="col-md-3"  style="border-right:dash;height:500px;">
+		<div class="clearfix"></div>
+		<div id="jstree_org">
+			<ul>
+				<li id="0"> Root
+					<ul>
+					#foreach($treenode in $modelList)
+				   		<li id="${treenode.id}">${treenode.orgName}
+					   		#if($treenode.subOrgs)
+					   			<ul>
+								#foreach($subnode in $!{treenode.subOrgs} )
+							   		<li id="${subnode.id}">${subnode.orgName}</li>
+								#end
+								</ul>
+					   		#end
+				   		</li>
+					#end
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="right-col">
+		<p>
+			<button type="button" class="btn btn-round btn-primary" onclick="create()">Create</button>
+			<button type="button" class="btn btn-round btn-primary" onclick="deletemultiple()">Delete</button>
+		</p>
+		
+		<div class="table-responsive">
+		  	<table class="table table-striped jambo_table bulk_action">
+				<thead>
+		  			<tr class="headings">
+					    <th>
+					      	<input type="checkbox" id="check-all" class="flat">
+					    </th>
+					    <th class="column-title"> 机构名称 </th>
+					    <th class="column-title"> 法人 </th>
+					    <th class="column-title"> 创建时间 </th>
+					    <th class="column-title"> 创建人 </th>
+					    <th class="column-title no-link last">
+					    	<span class="nobr">
+					    		Operation
+					    	</span>
+					    </th>
+					    <th class="bulk-actions" colspan="5">
+					      	<a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+				    	</th>
+					 </tr>
+				</thead>
+		
+				<tbody>
+					#foreach ($le in $subList)
+				
+				  	<tr class="#if($foreach.count %2 ==0) even #else odd #end pointer">
+					    <td class="a-center ">
+					      <input type="checkbox" class="flat" name="table_records" value="$!{le.id}">
+					    </td>
+					    <td class=" "> ${le.orgName} </td>
+					    <td class=" "> $!{le.legalPerson} </td>
+					    <td class=" "> $!date.format("yyyy-MM-dd",$!le.foundDate ) </td>
+					    <td class=" "> $!{le.createUser} </td>
+					    <td class=" last">
+							<a href="#" onclick="editRecord(this)">Edit</a> &nbsp;
+							<a href="#" onclick="delRecord(this)">Delete</a> &nbsp;
+				        </td>
+			      	</tr>
+			      	#end
+			    </tbody>
+		  	</table>
+		</div>
+	</div>
+
+</div>
+
+<script>
+var ID_INDEX=1
+var previousNodeId = #defaultIfNull($defaultId, '0');
+function frameinit(){
+	$("#jstree_org").jstree(
+		{
+			"core" : 
+			{
+				"themes" : {"variant" : "large"},
+			},
+			"plugins" : [ "search", "types"]
+		}
+	)
+	;
+	jQuery("#jstree_org").jstree().open_all();
+	jQuery("#jstree_org").jstree().select_node(#defaultIfNull($defaultId, '0'));
+	jQuery("#jstree_org").on('changed.jstree', function (e, data) {
+		if(data && data.selected && data.selected.length) {
+			if( parseInt(previousNodeId) != parseInt(data.selected) ){
+				previousNodeId = data.selected;
+				location = "$rc.contextPath/tz/org/orglist/"+data.selected+".n";
+			}
+		}
+	})
+}
+
+function create(){
+	location = "$rc.contextPath/tz/org/createOrg.n?parentId="+$('#jstree_org').jstree().get_selected();
+}
+function deletemultiple(){
+	var ids = "";
+	var selted = $("input[name='table_records']:checked");
+	$(selted).each(function(){
+		ids = ids + (ids.length===0?'':'-') + $(this).val();
+	});
+	if($(selted).length==0){
+		return;
+	}
+	if(confirm('确认要删除此'+$(selted).length+'条记录？')){
+		location = "$rc.contextPath/tz/org/deleteOrgs/"+ids+".n"
+	}
+}
+function editRecord(o){
+	var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
+	location = "$rc.contextPath/tz/org/editOrg/"+objId+".n"
+}
+function delRecord(o){
+	if (confirm('确认要删除此记录？')) {
+		var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
+		location = "$rc.contextPath/tz/org/deleteOrgs/"+objId+".n"
+	}
+}
+</script>
