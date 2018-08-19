@@ -30,6 +30,8 @@
     <link href="$rc.contextPath/css/jstree.style.min.css" rel="stylesheet">
     <link href="$rc.contextPath/css/select2.min.css" rel="stylesheet">
     <link href="$rc.contextPath/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="$rc.contextPath/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="$rc.contextPath/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 </head>
 
 #parse("/include/macro_base.vm")
@@ -49,7 +51,7 @@
 		             	 <div class="profile_info">
 		              	  	<span>Welcome,</span>
 							#set($loginName = $session.getAttribute("system_login_name_") )
-		               		<h2>$loginName</h2>
+		               		<h2>$!{loginName}</h2>
 		             	 </div>
 		            </div>
 		            <!-- /menu profile quick info -->
@@ -72,7 +74,7 @@
               			<ul class="nav navbar-nav navbar-right">
                 			<li class="">
                  				<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    				<img src="$rc.contextPath/images/img.jpg" alt=""> $loginName
+                    				<img src="$rc.contextPath/images/img.jpg" alt=""> $!{loginName}
                     				<span class=" fa fa-angle-down"></span>
               					</a>
                   				<ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -97,7 +99,9 @@
         	<div class="right_col" role="main">
           		<div class="">
            	 		<div class="page-title">
-            
+            			#if($errorMsg)
+            				$errorMsg
+            			#end
             			$screen_content
             
            	 		</div>
@@ -140,6 +144,9 @@
 
 <script src="$rc.contextPath/js/jquery.listswap.js"></script>
 <script src="$rc.contextPath/js/jstree.min.js"></script>
+
+<script src="$rc.contextPath/js/moment.min.js"></script>
+<script src="$rc.contextPath/js/bootstrap-datetimepicker.min.js"></script>
 
 <script type="text/javascript">
 $(function() {

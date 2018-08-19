@@ -1,5 +1,7 @@
 package com.ylsq.frame.common.base;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -10,8 +12,11 @@ import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +28,13 @@ public abstract class BaseController {
 	private static Logger log = LoggerFactory.getLogger(BaseController.class);
 	@Autowired
 	private SysParamValueService sysParamValueService;
+	
+	@InitBinder
+    public void InitBinder(WebDataBinder binder){
+        DateFormat dateFormat = new SimpleDateFormat(SystemConstants.NormalDF);
+        dateFormat.setLenient(true);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
 	
 	@RequestMapping(value= "/list", method = RequestMethod.GET)
 	public String list(ModelMap modelMap) {

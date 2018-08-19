@@ -1,3 +1,5 @@
+#macro(defaultIfNull $variable $defaultValue)#if( !$variable)#set($variable = $defaultValue)#end$variable#end
+
 #macro(dynamicexp $variable $field)
 	#set($dynamicexp_exp = "\$variable.$field")
 	#set($dynamicexp_tmpValue = "#evaluate($dynamicexp_exp)" )

@@ -60,7 +60,7 @@ public class SystemController extends BaseController {
 	public String logout(HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
 		if(subject.isAuthenticated()) {
-			log.debug((String)subject.getPrincipal());
+			log.debug((String)subject.getPrincipal() + "is logging out");
 			subject.logout();
 		}
 		return "/common/login";
