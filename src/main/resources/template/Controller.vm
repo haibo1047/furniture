@@ -1,25 +1,65 @@
-package ${package_name}.controller;
+package ${package_name}.web;
 
-import com.ylsq.common.base.BaseController;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ylsq.frame.common.base.BaseController;
+import com.ylsq.frame.common.base.BaseExample;
+import com.ylsq.frame.common.base.BaseModel;
+import com.ylsq.frame.common.base.BaseService;
+import ${package_name}.dao.model.${model};
+import ${package_name}.dao.model.${model}Example;
+import ${package_name}.service.${model}Service;
+
+
+
 /**
  * ${modelname}controller
- * Created by shuzheng on ${ctime}.
+ * Created by Harper.
  */
 @Controller
-@RequestMapping("/manage")
-@Api(value = "${modelname}控制器", description = "${modelname}管理")
+@RequestMapping("/${tableName}")
 public class ${model}Controller extends BaseController {
+    private static final Logger log = LoggerFactory.getLogger(${model}Controller.class);
+	
+	@Autowired
+	private ${model}Service ${modelVariable}Service;
+	
+	@RequestMapping(value= "/save", method = RequestMethod.POST)
+	public String save(${model} ${modelVariable},ModelMap modelMap) {
+		log.debug(${modelVariable}.toString());
+		initModel(${modelVariable});
+		if(${modelVariable}.getId() == null) {
+			${modelVariable}Service.insert(${modelVariable});
+		}
+		else {
+			${modelVariable}Service.updateByPrimaryKey(${modelVariable});
+		}
+		return list(modelMap);
+	}
+	
+	@Override
+	protected BaseService<? extends BaseModel, ? extends BaseExample> getService() {
+		// TODO Auto-generated method stub
+		return ${modelVariable}Service;
+	}
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(${model}Controller.class);
+	@Override
+	protected List<? extends BaseModel> getModelList() {
+		// TODO Auto-generated method stub
+		List<${model}> list = ${modelVariable}Service.selectByExample(new ${model}Example());
+		return list;
+	}
 
-
-
+	@Override
+	protected String webPrefix() {
+		// TODO Auto-generated method stub
+		return super.webPrefix();
+	}
 }

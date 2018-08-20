@@ -1,0 +1,61 @@
+ 
+<div class="title_left">
+	<h3>机构用户编辑</h3>
+</div>
+
+<div class="x_content">
+	<br />
+	<form id="editForm" data-parsley-validate class="form-horizontal form-label-left" action="$rc.contextPath/tz/user/save.n" method="post">
+		<input type="hidden" name="id" value="$!{model.id}">
+		<input type="hidden" name="password" value="$!{model.password}">
+		<input type="hidden" name="orgId" value="$!{org.id}">
+		<div class="form-group">
+			<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">登录名 <span class="required">*</span>
+			</label>
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<input type="text" id="loginId" name="loginId" value="$!{model.loginId}" required="required" class="form-control col-md-7 col-xs-12">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">用户名称 <span class="required">*</span>
+			</label>
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<input type="text" id="userName" name="userName" value="$!{model.userName}" required="required" class="form-control col-md-7 col-xs-12">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="parentId" class="control-label col-md-3 col-sm-3 col-xs-12"> 所属机构<span class="required">*</span></label>
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<input id="parentId" class="form-control col-md-7 col-xs-12" type="text"  value="$!{org.orgName}" readonly="true"  required="required"> 
+	  		</div>
+		</div>
+	
+		<div class="form-group">
+			<label for="menuOrder" class="control-label col-md-3 col-sm-3 col-xs-12"> 备注</label>
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<input id="remark" class="form-control col-md-7 col-xs-12" type="text" name="remark" value="$!{model.remark}"> 
+			</div>
+		</div>
+	
+		<div class="ln_solid"></div>
+		<div class="form-group">
+			<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+	  			<button class="btn btn-primary" type="button" onclick="goback()">Cancel</button>
+	  			<button type="button" onclick="saveUser()" class="btn btn-success">Submit</button>
+	    	</div>
+	  	</div>
+	
+	</form>
+</div>
+<script>
+function goback(){
+	location = "$rc.contextPath/tz/user/userlist/$!{org.id}.n";
+}
+function saveUser(){
+ 	$("#editForm").submit();
+}
+
+function frameinit(){
+}
+
+</script>

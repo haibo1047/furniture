@@ -29,6 +29,10 @@ public class TzBaseOrgController extends BaseController {
 	@Autowired
 	private TzBaseOrgService tzBaseOrgService;
 
+	@RequestMapping(value= "/orglist", method = RequestMethod.GET)
+	public String orglist(ModelMap modelMap) {
+		return orglist(TianzeConstant.Root_Org_Id, modelMap);
+	}
 	@RequestMapping(value= "/orglist/{parnetId}", method = RequestMethod.GET)
 	public String orglist(@PathVariable(name="parnetId") Long parentId, ModelMap modelMap) {
 		log.debug("parnet id : " + parentId);

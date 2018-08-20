@@ -113,7 +113,7 @@ public class MybatisGeneratorUtil {
 			deleteDir(new File(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/mapper"));
 			deleteDir(new File(targetProjectSqlMap + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/mapper"));
 //			deleteDir(new File(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/service"));
-			deleteDir(new File(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/controller"));
+//			deleteDir(new File(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/controller"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -136,9 +136,10 @@ public class MybatisGeneratorUtil {
 		String ctime = new SimpleDateFormat("yyyy/M/d").format(new Date());
 		String servicePath = basePath +"/src/main/java/" + packageName.replaceAll("\\.", "/") + "/service";
 		String serviceImplPath = basePath +"/src/main/java/" + packageName.replaceAll("\\.", "/") + "/service/impl";
-		String controllerPath = basePath +"/src/main/java/" + packageName.replaceAll("\\.", "/") + "/controller";
+		String controllerPath = basePath +"/src/main/java/" + packageName.replaceAll("\\.", "/") + "/web";
 		for (int i = 0; i < tables.size(); i++) {
-			String model = StringUtil.lineToHump(ObjectUtils.toString(tables.get(i).get("table_name")));
+			String tableName = ObjectUtils.toString(tables.get(i).get("table_name"));
+			String model = StringUtil.lineToHump(tableName);
 			String service = servicePath + "/" + model + "Service.java";
 			String serviceMock = servicePath + "/" + model + "ServiceMock.java";
 			String serviceImpl = serviceImplPath + "/" + model + "ServiceImpl.java";
@@ -174,7 +175,18 @@ public class MybatisGeneratorUtil {
 				VelocityUtil.generate(serviceImpl_vm, serviceImpl, context);
 				System.out.println(serviceImpl);
 			}
-			
+			// 生成service
+			File controllerFile = new File(controller);
+			if (!controllerFile.exists()) {
+				VelocityContext context = new VelocityContext();
+				context.put("package_name", packageName);
+				context.put("tableName", tableName);
+				context.put("model", model);
+				context.put("modelVariable", StringUtil.toLowerCaseFirstOne(model));
+				context.put("ctime", ctime);
+				VelocityUtil.generate(controller_vm, controller, context);
+				System.out.println(controller);
+			}
 		}
 		System.out.println("========== 结束生成Service ==========");
 	}
