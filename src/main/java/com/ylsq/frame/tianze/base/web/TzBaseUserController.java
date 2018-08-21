@@ -16,6 +16,7 @@ import com.ylsq.frame.common.base.BaseController;
 import com.ylsq.frame.common.base.BaseExample;
 import com.ylsq.frame.common.base.BaseModel;
 import com.ylsq.frame.common.base.BaseService;
+import com.ylsq.frame.common.base.ValidateResult;
 import com.ylsq.frame.common.util.PasswordUtils;
 import com.ylsq.frame.tianze.base.TianzeConstant;
 import com.ylsq.frame.tianze.base.custobj.CustOrg;
@@ -58,12 +59,27 @@ public class TzBaseUserController extends BaseController {
 		return webPrefix() + "list";
 	}
 	
+	protected ValidateResult validate(TzBaseUser model) {
+		TzBaseUser user = tzBaseUserService.selectByLoginId(model.getLoginId());
+		if(user != null && !(user.getId().equals(model.getId()))) {
+			log.warn("已经存在此登录名的用户："+ model.getLoginId());
+			return new ValidateResult("登录名已经存在");
+		}
+		return ValidateResult.Passed;
+	}
+	
 	@RequestMapping(value= "/save", method = RequestMethod.POST)
 	public String save(TzBaseUser tzBaseUser,ModelMap modelMap) {
 		log.debug(tzBaseUser.toString());
 		initModel(tzBaseUser);
+		ValidateResult vr = validate(tzBaseUser);
+		if(!vr.isPassed()) {
+			modelMap.put("model", tzBaseUser);
+			modelMap.put("errorMsg", vr.getMsg());
+			return webPrefix()+"edit";
+		}
 		if(tzBaseUser.getId() == null) {
-			String pwd = PasswordUtils.encode(TianzeConstant.Default_Password);
+			String pwd = PasswordUtils.encode(TianzeConstant.Default_Password, TianzeConstant.Salt_Pwd);
 			tzBaseUser.setPassword(pwd);
 			tzBaseUserService.insert(tzBaseUser);
 		}

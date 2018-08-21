@@ -40,4 +40,15 @@ public class TzBaseUserServiceImpl extends BaseServiceImpl<TzBaseUserMapper, TzB
 		return selectByExample(example);
 	}
 
+	@Override
+	public TzBaseUser selectByLoginId(String loginId) {
+		// TODO Auto-generated method stub
+		TzBaseUserExample example = new TzBaseUserExample();
+		example.createCriteria().andLoginIdEqualTo(loginId);
+		List<TzBaseUser> users = selectByExample(example);
+		if(users.size()>0)
+			return users.get(0);
+		return null;
+	}
+
 }

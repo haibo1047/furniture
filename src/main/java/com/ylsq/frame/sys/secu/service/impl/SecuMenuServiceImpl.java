@@ -1,5 +1,7 @@
 package com.ylsq.frame.sys.secu.service.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +28,13 @@ public class SecuMenuServiceImpl extends BaseServiceImpl<SecuMenuMapper, SecuMen
 
     @Autowired
     SecuMenuMapper secuMenuMapper;
+
+	@Override
+	public List<SecuMenu> selectByUserName(String userName) {
+		// TODO Auto-generated method stub
+		List<SecuMenu> userMenus = secuMenuMapper.selectByUserName(userName);
+		
+		return userMenus;
+	}
 
 }

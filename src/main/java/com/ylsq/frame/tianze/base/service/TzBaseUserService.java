@@ -18,4 +18,11 @@ public interface TzBaseUserService extends BaseService<TzBaseUser, TzBaseUserExa
 	 * @return
 	 */
 	public List<TzBaseUser> selectByOrgId(Long orgId);
+	
+	/**
+	 * 根据登录名查询用户
+	 * @param loginId
+	 * @return
+	 */
+	public TzBaseUser selectByLoginId(String loginId);
 }

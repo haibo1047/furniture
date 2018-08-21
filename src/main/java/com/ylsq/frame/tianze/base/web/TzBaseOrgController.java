@@ -16,6 +16,7 @@ import com.ylsq.frame.common.base.BaseController;
 import com.ylsq.frame.common.base.BaseExample;
 import com.ylsq.frame.common.base.BaseModel;
 import com.ylsq.frame.common.base.BaseService;
+import com.ylsq.frame.common.base.ValidateResult;
 import com.ylsq.frame.tianze.base.TianzeConstant;
 import com.ylsq.frame.tianze.base.dao.model.TzBaseOrg;
 import com.ylsq.frame.tianze.base.dao.model.TzBaseOrgExample;
@@ -79,10 +80,26 @@ public class TzBaseOrgController extends BaseController {
 		return orglist(0l, modelMap);
 	}
 	
+	protected ValidateResult validate(TzBaseOrg model) {
+		TzBaseOrg org = tzBaseOrgService.selectByName(model.getOrgName());
+		if(org != null && !(org.getId().equals(model.getId()))) {
+			log.warn("已经存在此名称的机构："+ model.getOrgName());
+			return new ValidateResult("机构名称已经存在");
+		}
+		return ValidateResult.Passed;
+	}
+	
 	@RequestMapping(value= "/save", method = RequestMethod.POST)
 	public String save(TzBaseOrg org, ModelMap modelMap) {
 		log.debug(org.toString());
 		initModel(org);
+		ValidateResult vr = validate(org);
+		if(!vr.isPassed()) {
+			beforeEditOrg(org.getParentId(), modelMap);
+			modelMap.put("model", org);
+			modelMap.put("errorMsg", vr.getMsg());
+			return webPrefix()+"edit";
+		}
 		if(org.getId() == null) {
 			tzBaseOrgService.insert(org);
 		}

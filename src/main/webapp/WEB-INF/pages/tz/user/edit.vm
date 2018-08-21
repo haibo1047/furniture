@@ -49,7 +49,7 @@
 </div>
 <script>
 function goback(){
-	location = "$rc.contextPath/tz/user/userlist/$!{org.id}.n";
+	location = "$rc.contextPath/tz/user/userlist/#defaultIfNull($!{org.id},${model.orgId}).n";
 }
 function saveUser(){
  	$("#editForm").submit();

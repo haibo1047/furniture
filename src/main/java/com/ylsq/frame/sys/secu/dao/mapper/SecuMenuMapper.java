@@ -1,9 +1,11 @@
 package com.ylsq.frame.sys.secu.dao.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.ylsq.frame.sys.secu.dao.model.SecuMenu;
 import com.ylsq.frame.sys.secu.dao.model.SecuMenuExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface SecuMenuMapper {
     long countByExample(SecuMenuExample example);
@@ -27,4 +29,6 @@ public interface SecuMenuMapper {
     int updateByPrimaryKeySelective(SecuMenu record);
 
     int updateByPrimaryKey(SecuMenu record);
+    
+    List<SecuMenu> selectByUserName(String usreName);
 }

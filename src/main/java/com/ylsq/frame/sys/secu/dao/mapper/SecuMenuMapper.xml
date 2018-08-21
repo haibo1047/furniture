@@ -255,5 +255,18 @@
       rec_status = #{recStatus,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  
+	<select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+	   	select 
+	   	<include refid="Base_Column_List" />
+	   	from secu_menu m
+	   	where exists(
+	   		select 1 from  secu_role r, secu_role_menu rm, secu_user_role ur
+			where m.menu_name=rm.menu_name and r.role_name=rm.role_name
+			and r.role_name=ur.role_name  and ur.user_name=#{userName,jdbcType=VARCHAR}
+			)
+	</select>
+  
   <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
 </mapper>

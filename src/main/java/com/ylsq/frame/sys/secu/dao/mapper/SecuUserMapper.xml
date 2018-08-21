@@ -303,5 +303,6 @@
       rec_status = #{recStatus,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
   <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
 </mapper>

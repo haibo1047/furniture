@@ -21,11 +21,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ylsq.frame.common.base.SysParamEnum;
 import com.ylsq.frame.common.base.SystemConstants;
+import com.ylsq.frame.common.util.PasswordUtils;
 import com.ylsq.frame.sys.base.dao.model.SysParamValue;
 import com.ylsq.frame.sys.base.service.SysParamValueService;
 import com.ylsq.frame.sys.secu.custobj.MenuObject;
 import com.ylsq.frame.sys.secu.dao.model.SecuMenu;
-import com.ylsq.frame.sys.secu.dao.model.SecuMenuExample;
 import com.ylsq.frame.sys.secu.dao.model.SecuUser;
 import com.ylsq.frame.sys.secu.service.SecuMenuService;
 import com.ylsq.frame.sys.secu.service.SecuUserService;
@@ -51,7 +51,7 @@ public class SecuRealm extends AuthenticatingRealm {
 			log.error("login failed, username was not found!");
 			throw new UnknownAccountException("账号不存在!");
 		}
-		if(!passwd.equals(secuUser.getPassword())) {
+		if(!PasswordUtils.encode(passwd).equals(secuUser.getPassword())) {
 			log.error("login failed, username and password is not matched!");
 			throw new IncorrectCredentialsException("用户名密码不匹配！");
 		}
@@ -59,7 +59,7 @@ public class SecuRealm extends AuthenticatingRealm {
 		Map<String,Integer> moduleMap = new HashMap<>();
 		for(SysParamValue m : moduleList)
 			moduleMap.put(m.getValue1(), Integer.parseInt(m.getValue2()));
-		List<SecuMenu> menuList = secuMenuService.selectByExample(new SecuMenuExample());
+		List<SecuMenu> menuList = secuMenuService.selectByUserName(userName);
 		List<MenuObject> mList = new ArrayList<>(menuList.size());
 		for(SecuMenu m : menuList) {
 			MenuObject sm = new MenuObject(m);

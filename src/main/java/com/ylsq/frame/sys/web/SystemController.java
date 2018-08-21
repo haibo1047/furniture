@@ -46,9 +46,11 @@ public class SystemController extends BaseController {
 				modelMap.put("errorMsg", e.getMessage());
 				return login(modelMap);
 			}
+			log.info(username + " 登录成功");
 		}
 		SavedRequest sr = WebUtils.getSavedRequest(request);
-		if(sr == null) {
+		if(sr == null || sr.getRequestUrl().contains("/logout")) {
+			log.debug("redirect to : /" );
 			return "redirect:/";
 		}
 		String url = sr.getRequestUrl().replaceAll(request.getContextPath(), "");
@@ -57,12 +59,12 @@ public class SystemController extends BaseController {
 	}
 	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
-	public String logout(HttpServletRequest request) {
+	public String logout(HttpServletRequest request, ModelMap modelMap) {
 		Subject subject = SecurityUtils.getSubject();
 		if(subject.isAuthenticated()) {
-			log.debug((String)subject.getPrincipal() + "is logging out");
+			log.debug((String)subject.getPrincipal() + "  is logging out");
 			subject.logout();
 		}
-		return "/common/login";
+		return "redirect:/sys/login.n";
 	}
 }
