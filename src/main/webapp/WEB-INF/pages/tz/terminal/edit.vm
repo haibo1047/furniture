@@ -1,0 +1,37 @@
+<br />
+<form id="editForm" data-parsley-validate class="form-horizontal form-label-left" action="$rc.contextPath/tz/terminal/save" method="post">
+	<input type="hidden" name="id" value="$!{model.id}">
+  <div class="form-group">
+	<div class="form-group">
+	    <label for="dataType" class="control-label col-md-3 col-sm-3 col-xs-12"> 状态 </label>
+	    <div class="col-md-6 col-sm-6 col-xs-12">
+	    	#buildSelect ($statusList "terminalStatus" $!{model.terminalStatus} "value1" "value2")
+		</div>
+	</div>
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">设备名称 <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input type="text" id="terminalName" name="terminalName" value="$!{model.terminalName}" required="required" class="form-control col-md-7 col-xs-12">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="versionNum" class="control-label col-md-3 col-sm-3 col-xs-12"> 版本号<span class="required">*</span></label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input id="versionNum" class="form-control col-md-7 col-xs-12" type="text" name="versionNum" value="$!{model.versionNum}" required="required"> 
+    </div>
+  </div>
+  <div class="ln_solid"></div>
+  <div class="form-group">
+    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+      <button class="btn btn-primary" type="button" onclick="goback()">Cancel</button>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+  </div>
+
+</form>
+<script>
+function goback(){
+	location = "$rc.contextPath/tz/terminal/list";
+}
+
+</script>

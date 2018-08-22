@@ -70,8 +70,8 @@
          PropertiesPlaceholderConfigurer and abstract beans or anything else we might need: -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="/sys/login.n"/>
-        <property name="unauthorizedUrl" value="/sys/unauthorized.n"/>
+        <property name="loginUrl" value="/sys/login"/>
+        <property name="unauthorizedUrl" value="/sys/unauthorized"/>
         <!-- The 'filters' property is not necessary since any declared javax.servlet.Filter bean
              defined will be automatically acquired and available via its beanName in chain
              definitions, but you can perform overrides or parent/child consolidated configuration
@@ -87,9 +87,9 @@
                 /*.jpg = anon
                 /*.css = anon
                 /*.js = anon
-                /sys/login.n = anon
-                # allow WebStart to pull the jars for the swing app:
                 /*.jar = anon
+                /sys/login = anon
+                # allow WebStart to pull the jars for the swing app:
                 # protected using SecureRemoteInvocationExecutor
                 /remoting/** = anon
                 # everything else requires authentication:

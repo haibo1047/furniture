@@ -52,7 +52,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>springMVC</servlet-name>
-        <url-pattern>*.n</url-pattern>
+        <url-pattern>/*</url-pattern>
     </servlet-mapping>
 	  
 	<!-- ==================================================================
@@ -70,25 +70,20 @@
 
     <filter-mapping>
         <filter-name>shiroFilter</filter-name>
-        <url-pattern>*.n</url-pattern>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-	<!-- 欢迎页面 -->
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
 
     <!-- 错误页面 -->
     <error-page>
         <error-code>403</error-code>
-        <location>/WEB-INF/jsp/403.jsp</location>
+        <location>/WEB-INF/pages/common/403.vm</location>
     </error-page>
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/jsp/404.jsp</location>
+        <location>/WEB-INF/pages/common/404.vm</location>
     </error-page>
     <error-page>
         <error-code>500</error-code>
-        <location>/WEB-INF/jsp/500.jsp</location>
+        <location>/WEB-INF/pages/common/500.vm</location>
     </error-page>
 </web-app>

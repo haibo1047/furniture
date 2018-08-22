@@ -20,6 +20,7 @@ import com.ylsq.frame.common.base.BaseController;
 import com.ylsq.frame.common.base.BaseExample;
 import com.ylsq.frame.common.base.BaseModel;
 import com.ylsq.frame.common.base.BaseService;
+import com.ylsq.frame.common.util.PasswordUtils;
 import com.ylsq.frame.sys.secu.dao.model.SecuRole;
 import com.ylsq.frame.sys.secu.dao.model.SecuRoleExample;
 import com.ylsq.frame.sys.secu.dao.model.SecuUser;
@@ -46,6 +47,7 @@ public class SecuUserController extends BaseController {
 		log.debug(user.toString());
 		initModel(user);
 		if(user.getId() == null) {
+			user.setPassword(PasswordUtils.encode(user.getPassword()));
 			secuUserService.insert(user);
 		}
 		else {

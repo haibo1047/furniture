@@ -18,4 +18,11 @@ public interface SecuMenuService extends BaseService<SecuMenu, SecuMenuExample> 
 	 * @return
 	 */
 	public List<SecuMenu> selectByUserName(String userName);
+	
+	/**
+	 * 根据菜单名查询
+	 * @param menuName
+	 * @return
+	 */
+	public SecuMenu selectByMenuName(String menuName);
 }

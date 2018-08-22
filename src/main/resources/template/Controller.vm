@@ -20,7 +20,6 @@ import ${package_name}.service.${model}Service;
 
 
 /**
- * ${modelname}controller
  * Created by Harper.
  */
 @Controller
@@ -31,15 +30,26 @@ public class ${model}Controller extends BaseController {
 	@Autowired
 	private ${model}Service ${modelVariable}Service;
 	
+	protected ValidateResult validate(${model} model) {
+		return ValidateResult.Passed;
+	}
+	
 	@RequestMapping(value= "/save", method = RequestMethod.POST)
-	public String save(${model} ${modelVariable},ModelMap modelMap) {
-		log.debug(${modelVariable}.toString());
-		initModel(${modelVariable});
-		if(${modelVariable}.getId() == null) {
-			${modelVariable}Service.insert(${modelVariable});
+	public String save(${model} model,ModelMap modelMap) {
+		log.debug(model.toString());
+		initModel(model);
+		
+		ValidateResult vr = validate(model);
+		if(!vr.isPassed()) {
+			modelMap.put("model", model);
+			modelMap.put("errorMsg", vr.getMsg());
+			return webPrefix()+"edit";
+		}
+		if(model.getId() == null) {
+			${modelVariable}Service.insert(model);
 		}
 		else {
-			${modelVariable}Service.updateByPrimaryKey(${modelVariable});
+			${modelVariable}Service.updateByPrimaryKey(model);
 		}
 		return list(modelMap);
 	}

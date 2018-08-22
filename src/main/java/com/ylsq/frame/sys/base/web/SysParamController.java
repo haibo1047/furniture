@@ -74,7 +74,7 @@ public class SysParamController extends BaseController {
 		List<SysParamConfig> configs = sysParamConfigService.selectByParamName(value.getParamName());
 		Collections.sort(configs, new ParamConfigSorter());
 		SysParamValueExample example = new SysParamValueExample();
-		SysParamValueExample.Criteria criteria = null;
+		SysParamValueExample.Criteria criteria = example.createCriteria().andParamNameEqualTo(value.getParamName());
 		List<String> uniqColumns = new ArrayList<>();
 		for(int index = 0; index < configs.size(); index ++) {
 			SysParamConfig config = configs.get(index);
@@ -96,8 +96,6 @@ public class SysParamController extends BaseController {
 				throw new Exception(field + "定义为数值型，请检查"+currValue);
 			}
 			if(new Integer(1).equals(config.getIsOfUniq())) {
-				if(criteria == null)
-					criteria = example.createCriteria();
 				Method md = criteria.getClass().getMethod("andValue"+(index+1)+"EqualTo", currValue.getClass());
 				md.invoke(criteria, currValue);
 				uniqColumns.add(config.getShowName());

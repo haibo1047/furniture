@@ -37,4 +37,15 @@ public class SecuMenuServiceImpl extends BaseServiceImpl<SecuMenuMapper, SecuMen
 		return userMenus;
 	}
 
+	@Override
+	public SecuMenu selectByMenuName(String menuName) {
+		// TODO Auto-generated method stub
+		SecuMenuExample example = new SecuMenuExample();
+		example.createCriteria().andMenuNameEqualTo(menuName);
+		List<SecuMenu> list = selectByExample(example);
+		if(list.size()>0)
+			return list.get(0);
+		return null;
+	}
+
 }

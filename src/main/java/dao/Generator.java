@@ -10,8 +10,10 @@ public class Generator {
 	// 根据命名规范，只修改此常量值即可
 		private static String MODULE = "dao";
 		private static String DATABASE = "frame";
-		private static String TABLE_PREFIX = "tz_base_";
-		private static String PACKAGE_NAME = "com.ylsq.frame.tianze.base";
+		private static String TABLE_PREFIX = "tz_encrypt_";
+		private static String PACKAGE_NAME = "com.ylsq.frame.tianze.encrypt";
+//		private static String TABLE_PREFIX = "tz_base_";
+//		private static String PACKAGE_NAME = "com.ylsq.frame.tianze.base";
 //		private static String TABLE_PREFIX = "secu_";
 //		private static String PACKAGE_NAME = "com.ylsq.frame.sys.secu";  //注意设置该变量，它会想service项目的该文件夹下覆盖写入东西
 

@@ -11,6 +11,13 @@ import java.util.List;
  */
 public interface BaseService<Record, Example> {
 
+	/**
+	 * 根据唯一属性查询
+	 * @param uniq
+	 * @return
+	 */
+	Record selectByUnique(String field,String uniq);
+	
     /**
      * 根据条件查询记录数量
      * @param example

@@ -1,6 +1,6 @@
   
   <div class="title_left">
-    <h3>System Parameters</h3>
+    <h3>终端设备</h3>
   </div>
    <div class="x_content">
 
@@ -16,16 +16,20 @@
         <th>
           <input type="checkbox" id="check-all" class="flat">
         </th>
-        <th class="column-title"> Parameter Name </th>
-        <th class="column-title"> Parameter Description </th>
-        <th class="column-title"> Create Time </th>
-        <th class="column-title"> Create User </th>
+        <th class="column-title"> 登录名 </th>
+        <th class="column-title"> 终端状态 </th>
+        <th class="column-title"> 终端名称 </th>
+        <th class="column-title"> MAC地址 </th>
+        <th class="column-title"> 最后登录时间 </th>
+        <th class="column-title"> IP </th>
+        <th class="column-title"> 版本号 </th>
+        <th class="column-title"> 设备型号 </th>
         <th class="column-title no-link last">
         	<span class="nobr">
         		Operation
         	</span>
         </th>
-        <th class="bulk-actions" colspan="5">
+        <th class="bulk-actions" colspan="9">
           <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
         </th>
       </tr>
@@ -38,15 +42,17 @@
         <td class="a-center ">
           <input type="checkbox" class="flat" name="table_records" value="$!{model.id}">
         </td>
-        <td class=" "> $!{model.paramName} </td>
-        <td class=" "> $!{model.paramDescription} </td>
-        <td class=" "> $!date.format("yyyy-MM-dd HH:mm:ss",$!model.createTime ) </td>
-        <td class=" "> $!{model.createUser} </td>
+        <td class=" "> $!{model.loginId} </td>
+        <td class=" "> #dictDisplay($statusList $model.terminalStatus "value1" "value2") </td>
+        <td class=" "> $!{model.terminalName} </td>
+        <td class=" "> $!{model.mac} </td>
+        <td class=" "> $!date.format("yyyy-MM-dd HH:mm:ss",$!model.lastLoginTime ) </td>
+        <td class=" "> $!{model.ip} </td>
+        <td class=" "> $!{model.versionNum} </td>
+        <td class=" "> $!{model.modelNum} </td>
         <td class=" last">
 			<a href="#" onclick="editRecord(this)">Edit</a> &nbsp;
 			<a href="#" onclick="delRecord(this)">Delete</a> &nbsp;
-			<a href="#" onclick="configParam('${model.paramName}')">Config</a> &nbsp;
-			<a href="#" onclick="paramValues('${model.paramName}')">Values</a> &nbsp;
         </td>
       </tr>
       #end
@@ -58,7 +64,7 @@
 <script>
 var ID_INDEX=1
 function create(){
-	location = "$rc.contextPath/sys/param/create"
+	location = "$rc.contextPath/tz/terminal/create"
 }
 function deletemultiple(){
 	var ids = "";
@@ -70,27 +76,17 @@ function deletemultiple(){
 		return;
 	}
 	if(confirm('确认要删除此'+$(selted).length+'条记录？')){
-		location = "$rc.contextPath/sys/param/delete/"+ids
+		location = "$rc.contextPath/tz/terminal/delete/"+ids
 	}
 }
 function editRecord(o){
 	var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-	location = "$rc.contextPath/sys/param/edit/"+objId
+	location = "$rc.contextPath/tz/terminal/edit/"+objId
 }
 function delRecord(o){
 	if (confirm('确认要删除此记录？')) {
 		var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-		location = "$rc.contextPath/sys/param/delete/"+objId
+		location = "$rc.contextPath/tz/terminal/delete/"+objId
 	}
 }
-
-
-function configParam(paramName){
-	location = "$rc.contextPath/sys/param/config/"+paramName
-}
-
-function paramValues(paramName){
-	location = "$rc.contextPath/sys/param/values/"+paramName
-}
-
 </script>

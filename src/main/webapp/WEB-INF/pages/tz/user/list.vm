@@ -102,7 +102,7 @@ function frameinit(){
 		if(data && data.selected && data.selected.length) {
 			if( parseInt(previousNodeId) != parseInt(data.selected) ){
 				previousNodeId = data.selected;
-				location = "$rc.contextPath/tz/user/userlist/"+data.selected+".n";
+				location = "$rc.contextPath/tz/user/userlist/"+data.selected;
 			}
 		}
 	})
@@ -114,7 +114,7 @@ function create(){
 		alert("请先选择机构");
 		return;
 	}
-	location = "$rc.contextPath/tz/user/createUser.n?orgId="+orgId;
+	location = "$rc.contextPath/tz/user/createUser?orgId="+orgId;
 }
 function deletemultiple(){
 	var ids = "";
@@ -126,17 +126,17 @@ function deletemultiple(){
 		return;
 	}
 	if(confirm('确认要删除此'+$(selted).length+'条记录？')){
-		location = "$rc.contextPath/tz/user/deleteUsers/"+ids+".n"
+		location = "$rc.contextPath/tz/user/deleteUsers/"+ids
 	}
 }
 function editRecord(o){
 	var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-	location = "$rc.contextPath/tz/user/editUser/"+objId+".n"
+	location = "$rc.contextPath/tz/user/editUser/"+objId
 }
 function delRecord(o){
 	if (confirm('确认要删除此记录？')) {
 		var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-		location = "$rc.contextPath/tz/user/deleteUsers/"+previousNodeId+"/"+objId+".n"
+		location = "$rc.contextPath/tz/user/deleteUsers/"+previousNodeId+"/"+objId
 	}
 }
 </script>

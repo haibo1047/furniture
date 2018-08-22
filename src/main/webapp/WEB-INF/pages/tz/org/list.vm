@@ -98,14 +98,14 @@ function frameinit(){
 		if(data && data.selected && data.selected.length) {
 			if( parseInt(previousNodeId) != parseInt(data.selected) ){
 				previousNodeId = data.selected;
-				location = "$rc.contextPath/tz/org/orglist/"+data.selected+".n";
+				location = "$rc.contextPath/tz/org/orglist/"+data.selected;
 			}
 		}
 	})
 }
 
 function create(){
-	location = "$rc.contextPath/tz/org/createOrg.n?parentId="+$('#jstree_org').jstree().get_selected();
+	location = "$rc.contextPath/tz/org/createOrg?parentId="+$('#jstree_org').jstree().get_selected();
 }
 function deletemultiple(){
 	var ids = "";
@@ -117,17 +117,17 @@ function deletemultiple(){
 		return;
 	}
 	if(confirm('确认要删除此'+$(selted).length+'条记录？')){
-		location = "$rc.contextPath/tz/org/deleteOrgs/"+ids+".n"
+		location = "$rc.contextPath/tz/org/deleteOrgs/"+ids
 	}
 }
 function editRecord(o){
 	var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-	location = "$rc.contextPath/tz/org/editOrg/"+objId+".n"
+	location = "$rc.contextPath/tz/org/editOrg/"+objId
 }
 function delRecord(o){
 	if (confirm('确认要删除此记录？')) {
 		var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-		location = "$rc.contextPath/tz/org/deleteOrgs/"+objId+".n"
+		location = "$rc.contextPath/tz/org/deleteOrgs/"+objId
 	}
 }
 </script>

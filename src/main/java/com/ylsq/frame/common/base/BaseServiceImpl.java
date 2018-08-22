@@ -1,18 +1,18 @@
 package com.ylsq.frame.common.base;
 
 
-import com.github.pagehelper.PageHelper;
-import com.ylsq.frame.common.db.DataSourceEnum;
-import com.ylsq.frame.common.db.DynamicDataSource;
-import com.ylsq.frame.common.util.SpringContextUtil;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.ibatis.annotations.Param;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.ibatis.annotations.Param;
+
+import com.github.pagehelper.PageHelper;
+import com.ylsq.frame.common.db.DataSourceEnum;
+import com.ylsq.frame.common.db.DynamicDataSource;
+import com.ylsq.frame.common.util.SpringContextUtil;
 
 /**
  * 实现BaseService抽象类
@@ -21,6 +21,11 @@ import java.util.List;
 public abstract class BaseServiceImpl<Mapper, Record, Example> implements BaseService<Record, Example> {
 
 	public Mapper mapper;
+
+	@Override
+	public Record selectByUnique(String filed, String uniq) {
+		return null;
+	}
 
 	@Override
 	public int countByExample(Example example) {

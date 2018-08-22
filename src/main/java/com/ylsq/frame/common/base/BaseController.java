@@ -38,6 +38,7 @@ public abstract class BaseController {
 	
 	@RequestMapping(value= "/list", method = RequestMethod.GET)
 	public String list(ModelMap modelMap) {
+		beforeList(modelMap);
 		List<? extends BaseModel> list = getModelList();
 		modelMap.put("modelList", list);
 		return webPrefix()+"list";
@@ -69,9 +70,16 @@ public abstract class BaseController {
 		return sysParamValueService.selectByParamName(paramName);
 	}
 	
+	protected ValidateResult uniqCheck() {
+		return ValidateResult.Passed;
+	}
 	protected void beforeEdit(ModelMap modelMap) {
 	}
-	
+	protected void beforeList(ModelMap modelMap) {
+	}
+	public String currentLogin() {
+		return (String)SecurityUtils.getSubject().getPrincipal();
+	}
 	protected void initModel(BaseModel obj) {
 		if(obj == null)
 			return;

@@ -37,7 +37,7 @@
           $!{errorMsg}
           <br><br>
           <section class="login_content">
-            <form id="login_form" action="$rc.contextPath/sys/login.n" method="post">
+            <form id="login_form" action="$rc.contextPath/sys/login" method="post">
               <h1>Login Form</h1>
               <div>
                 <input type="text" class="form-control" name="username" placeholder="username" required="true" />

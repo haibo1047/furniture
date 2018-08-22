@@ -60,7 +60,7 @@
 <script>
 var ID_INDEX=1
 function create(){
-	location = "$rc.contextPath/sys/menu/create.n"
+	location = "$rc.contextPath/sys/menu/create"
 }
 function deletemultiple(){
 	var ids = "";
@@ -72,17 +72,17 @@ function deletemultiple(){
 		return;
 	}
 	if(confirm('确认要删除此'+$(selted).length+'条记录？')){
-		location = "$rc.contextPath/sys/menu/delete/"+ids+".n"
+		location = "$rc.contextPath/sys/menu/delete/"+ids
 	}
 }
 function editRecord(o){
 	var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-	location = "$rc.contextPath/sys/menu/edit/"+objId+".n"
+	location = "$rc.contextPath/sys/menu/edit/"+objId
 }
 function delRecord(o){
 	if (confirm('确认要删除此记录？')) {
 		var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-		location = "$rc.contextPath/sys/menu/delete/"+objId+".n"
+		location = "$rc.contextPath/sys/menu/delete/"+objId
 	}
 }
 </script>

@@ -14,6 +14,7 @@ import com.ylsq.frame.common.base.BaseController;
 import com.ylsq.frame.common.base.BaseModel;
 import com.ylsq.frame.common.base.BaseService;
 import com.ylsq.frame.common.base.SysParamEnum;
+import com.ylsq.frame.common.base.ValidateResult;
 import com.ylsq.frame.sys.secu.dao.model.SecuMenu;
 import com.ylsq.frame.sys.secu.dao.model.SecuMenuExample;
 import com.ylsq.frame.sys.secu.service.SecuMenuService;
@@ -43,10 +44,25 @@ public class SecuMenuController extends BaseController {
 		super.beforeEdit(modelMap);
 	}
 
+	protected ValidateResult validate(SecuMenu model) {
+		SecuMenu existing = secuMenuService.selectByMenuName(model.getMenuName());
+		if(existing != null && !(existing.getId().equals(model.getId()))) {
+			log.warn("菜单已经存在："+ model.getMenuName());
+			return new ValidateResult("菜单名称已经存在");
+		}
+		return ValidateResult.Passed;
+	}
 	@RequestMapping(value= "/save", method = RequestMethod.POST)
 	public String save(SecuMenu menu,ModelMap modelMap) {
 		log.debug(menu.toString());
 		initModel(menu);
+		
+		ValidateResult vr = validate(menu);
+		if(!vr.isPassed()) {
+			modelMap.put("model", menu);
+			modelMap.put("errorMsg", vr.getMsg());
+			return webPrefix()+"edit";
+		}
 		if(menu.getId() == null) {
 			secuMenuService.insert(menu);
 		}

@@ -110,7 +110,7 @@
 <script>
 var ID_INDEX=1
 function create(){
-	location = "$rc.contextPath/sys/user/create.n"
+	location = "$rc.contextPath/sys/user/create"
 }
 function deletemultiple(){
 	var ids = "";
@@ -122,20 +122,20 @@ function deletemultiple(){
 		return;
 	}
 	if(confirm('确认要删除此'+$(selted).length+'条记录？')){
-		location = "$rc.contextPath/sys/user/delete/"+ids+".n"
+		location = "$rc.contextPath/sys/user/delete/"+ids
 	}
 }
 function editRecord(o){
 	var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-	location = "$rc.contextPath/sys/user/edit/"+objId+".n"
+	location = "$rc.contextPath/sys/user/edit/"+objId
 }
 function delRecord(o){
 	if (confirm('确认要删除此记录？')) {
 		var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-		location = "$rc.contextPath/sys/user/delete/"+objId+".n"
+		location = "$rc.contextPath/sys/user/delete/"+objId
 	}
 }
 function configRoles(uname){
-	location = "$rc.contextPath/sys/user/configRoles/"+uname+".n"
+	location = "$rc.contextPath/sys/user/configRoles/"+uname
 }
 </script>

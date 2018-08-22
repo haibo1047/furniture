@@ -49,7 +49,7 @@ public class SystemController extends BaseController {
 			log.info(username + " 登录成功");
 		}
 		SavedRequest sr = WebUtils.getSavedRequest(request);
-		if(sr == null || sr.getRequestUrl().contains("/logout")) {
+		if(sr == null) {
 			log.debug("redirect to : /" );
 			return "redirect:/";
 		}

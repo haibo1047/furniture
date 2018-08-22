@@ -4,7 +4,7 @@
   </div>
    <div class="x_content">
 <br />
-<form id="editForm" data-parsley-validate class="form-horizontal form-label-left" action="$rc.contextPath/sys/param/saveConfig.n" method="post">
+<form id="editForm" data-parsley-validate class="form-horizontal form-label-left" action="$rc.contextPath/sys/param/saveConfig" method="post">
 	<input type="hidden" name="id" value="$!{model.id}">
 	<input type="hidden" name="paramName" value="${paramName}">
   <div class="form-group">
@@ -67,7 +67,7 @@
 
 <script>
 function goback(){
-	location = "$rc.contextPath/sys/param/config/${paramName}.n";
+	location = "$rc.contextPath/sys/param/config/${paramName}";
 }
 
 </script>

@@ -5,7 +5,7 @@
 
 <div class="x_content">
 	<br />
-	<form id="editForm" data-parsley-validate class="form-horizontal form-label-left" action="$rc.contextPath/tz/user/save.n" method="post">
+	<form id="editForm" data-parsley-validate class="form-horizontal form-label-left" action="$rc.contextPath/tz/user/save" method="post">
 		<input type="hidden" name="id" value="$!{model.id}">
 		<input type="hidden" name="password" value="$!{model.password}">
 		<input type="hidden" name="orgId" value="$!{org.id}">
@@ -49,7 +49,7 @@
 </div>
 <script>
 function goback(){
-	location = "$rc.contextPath/tz/user/userlist/#defaultIfNull($!{org.id},${model.orgId}).n";
+	location = "$rc.contextPath/tz/user/userlist/#defaultIfNull($!{org.id},${model.orgId})";
 }
 function saveUser(){
  	$("#editForm").submit();

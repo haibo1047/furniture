@@ -5,7 +5,7 @@
 
 <div class="x_content">
 	<br />
-	<form id="editForm" data-parsley-validate class="form-horizontal form-label-left" action="$rc.contextPath/tz/org/save.n" method="post">
+	<form id="editForm" data-parsley-validate class="form-horizontal form-label-left" action="$rc.contextPath/tz/org/save" method="post">
 		<input type="hidden" name="id" value="$!{model.id}">
 		<input type="hidden" name="parentId" value="$!{parentOrg.id}">
 		<div class="form-group">
@@ -54,7 +54,7 @@
 </div>
 <script>
 function goback(){
-	location = "$rc.contextPath/tz/org/orglist/$!{parentOrg.id}.n";
+	location = "$rc.contextPath/tz/org/orglist/$!{parentOrg.id}";
 }
 function saveOrg(){
  	$("#editForm").submit();

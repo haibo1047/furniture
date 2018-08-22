@@ -58,7 +58,7 @@
 <script>
 var ID_INDEX=1
 function create(){
-	location = "$rc.contextPath/sys/role/create.n"
+	location = "$rc.contextPath/sys/role/create"
 }
 function deletemultiple(){
 	var ids = "";
@@ -70,23 +70,23 @@ function deletemultiple(){
 		return;
 	}
 	if(confirm('确认要删除此'+$(selted).length+'条记录？')){
-		location = "$rc.contextPath/sys/role/delete/"+ids+".n"
+		location = "$rc.contextPath/sys/role/delete/"+ids
 	}
 }
 function editRecord(o){
 	var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-	location = "$rc.contextPath/sys/role/edit/"+objId+".n"
+	location = "$rc.contextPath/sys/role/edit/"+objId
 }
 function delRecord(o){
 	if (confirm('确认要删除此记录？')) {
 		var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-		location = "$rc.contextPath/sys/role/delete/"+objId+".n"
+		location = "$rc.contextPath/sys/role/delete/"+objId
 	}
 }
 function configUsers(roleName){
-	location = "$rc.contextPath/sys/role/configUsers/"+roleName+".n"
+	location = "$rc.contextPath/sys/role/configUsers/"+roleName
 }
 function configMenus(roleName){
-	location = "$rc.contextPath/sys/role/configMenus/"+roleName+".n"
+	location = "$rc.contextPath/sys/role/configMenus/"+roleName
 }
 </script>

@@ -5,7 +5,7 @@
 <br>
 
 <div class="x_content">
-	<form id="configUsersForm" method="post" action="$rc.contextPath/sys/user/configRoles.n">
+	<form id="configUsersForm" method="post" action="$rc.contextPath/sys/user/configRoles">
 		<input type="hidden" name="selectedIds" id="selectedIds">
 		<input type="hidden" name="userName" value="${user.userName}">
 		<div id="jquery-script-center">
@@ -53,6 +53,6 @@ function f_submit(){
 }
 
 function goback(){
-	location = "$rc.contextPath/sys/user/list.n";
+	location = "$rc.contextPath/sys/user/list";
 }
 </script>

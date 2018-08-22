@@ -1,5 +1,5 @@
 <br />
-<form id="editForm" data-parsley-validate class="form-horizontal form-label-left" action="$rc.contextPath/sys/role/save.n" method="post">
+<form id="editForm" data-parsley-validate class="form-horizontal form-label-left" action="$rc.contextPath/sys/role/save" method="post">
 	<input type="hidden" name="id" value="$!{model.id}">
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Role Name <span class="required">*</span></label>
@@ -26,7 +26,7 @@
 
 
 function goback(){
-	location = "$rc.contextPath/sys/role/list.n";
+	location = "$rc.contextPath/sys/role/list";
 }
 
 </script>
