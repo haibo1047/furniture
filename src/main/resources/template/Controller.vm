@@ -13,6 +13,7 @@ import com.ylsq.frame.common.base.BaseController;
 import com.ylsq.frame.common.base.BaseExample;
 import com.ylsq.frame.common.base.BaseModel;
 import com.ylsq.frame.common.base.BaseService;
+import com.ylsq.frame.common.base.ValidateResult;
 import ${package_name}.dao.model.${model};
 import ${package_name}.dao.model.${model}Example;
 import ${package_name}.service.${model}Service;

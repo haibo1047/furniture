@@ -1,0 +1,91 @@
+ 
+<div class="title_left">
+	<h3>应用软件编辑</h3>
+</div>
+
+<div class="x_content">
+	<br />
+	<form id="editForm" data-parsley-validate class="form-horizontal form-label-left" action="$rc.contextPath/tz/app/save" method="post">
+		<input type="hidden" name="id" value="$!{model.id}">
+		<div class="form-group">
+			<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> 进程名 <span class="required">*</span>
+			</label>
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<input type="text" name="processName" value="$!{model.processName}" required="required" class="form-control col-md-7 col-xs-12">
+			</div>
+		</div>
+		<div class="form-group">
+		    <label for="dataType" class="control-label col-md-3 col-sm-3 col-xs-12"> 应用软件类型 </label>
+		    <div class="col-md-6 col-sm-6 col-xs-12">
+		    	#buildSelect ($appTypeList "applicationType" $!{model.applicationType} "value1" "value2")
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> 进程路径
+			</label>
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<input type="text" name="processPath" value="$!{model.processPath}"class="form-control col-md-7 col-xs-12">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> 加密扩展名
+			</label>
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<input type="text" name="encryptExtension" value="$!{model.encryptExtension}"class="form-control col-md-7 col-xs-12">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> 监控扩展名
+			</label>
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<input type="text" name="monitorExtension" value="$!{model.monitorExtension}"class="form-control col-md-7 col-xs-12">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> 智能扩展名
+			</label>
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<input type="text" name="smartExtension" value="$!{model.smartExtension}"class="form-control col-md-7 col-xs-12">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> 特殊文件名
+			</label>
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<input type="text" name="specialFilename" value="$!{model.specialFilename}"class="form-control col-md-7 col-xs-12">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> 特殊路径
+			</label>
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<input type="text" name="specialPath" value="$!{model.specialPath}"class="form-control col-md-7 col-xs-12">
+			</div>
+		</div>
+	
+		<div class="form-group">
+			<label for="menuOrder" class="control-label col-md-3 col-sm-3 col-xs-12"> PE路径</label>
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<input id="pePath" class="form-control col-md-7 col-xs-12" type="text" name="pePath" value="$!{model.pePath}"> 
+			</div>
+		</div>
+	
+		<div class="ln_solid"></div>
+		<div class="form-group">
+			<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+	  			<button class="btn btn-primary" type="button" onclick="goback()">Cancel</button>
+	  			<button type="button" onclick="saveApp()" class="btn btn-success">Submit</button>
+	    	</div>
+	  	</div>
+	
+	</form>
+</div>
+<script>
+function goback(){
+	location = "$rc.contextPath/tz/app/list";
+}
+function saveApp(){
+ 	$("#editForm").submit();
+}
+
+</script>
