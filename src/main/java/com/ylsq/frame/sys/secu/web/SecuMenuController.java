@@ -1,12 +1,16 @@
 package com.ylsq.frame.sys.secu.web;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -17,7 +21,9 @@ import com.ylsq.frame.common.base.SysParamEnum;
 import com.ylsq.frame.common.base.ValidateResult;
 import com.ylsq.frame.sys.secu.dao.model.SecuMenu;
 import com.ylsq.frame.sys.secu.dao.model.SecuMenuExample;
+import com.ylsq.frame.sys.secu.dao.model.SecuRoleMenu;
 import com.ylsq.frame.sys.secu.service.SecuMenuService;
+import com.ylsq.frame.sys.secu.service.SecuRoleMenuService;
 
 @Controller
 @RequestMapping("/sys/menu/")
@@ -26,14 +32,48 @@ public class SecuMenuController extends BaseController {
 	
 	@Autowired
 	private SecuMenuService secuMenuService;
-	
-	
+	@Autowired
+	private SecuRoleMenuService secuRoleMenuService;
 	
 	@Override
 	public String list(ModelMap modelMap) {
 		// TODO Auto-generated method stub
 		modelMap.put("moduleList", getParams(SysParamEnum.Menu_Module.getConstant()));
 		return super.list(modelMap);
+	}
+
+
+	@Override
+	public String delete(@PathVariable(name="ids") String ids, ModelMap modelMap) {
+		// TODO Auto-generated method stub
+		if(StringUtils.isNotBlank(ids)) {
+			String[] idArray = ids.split("-");
+			Set<String> failedNames = new HashSet<>();
+			for (String idStr : idArray) {
+				if (StringUtils.isBlank(idStr)) {
+					continue;
+				}
+				Long mid = Long.parseLong(idStr);
+				SecuMenu menu = secuMenuService.selectByPrimaryKey(mid);
+				if(menu != null) {
+					List<SecuRoleMenu> list = secuRoleMenuService.selectByMenuName(menu.getMenuName());
+					if(list.size() > 0 ) {
+						log.warn(menu.getMenuName() + "已经被配置给某些角色，请先移除绑定的角色");
+						failedNames.add(menu.getMenuName());
+						continue;
+					}
+					secuMenuService.deleteByPrimaryKey(mid);
+				}
+			}
+			
+			if(failedNames.size()> 0) {
+				modelMap.put("errorMsg", "菜单("+String.join(",",failedNames)+")未删除成功，请先移除绑定的角色再重试");
+			}
+			else {
+				modelMap.put("errorMsg", "操作成功");
+			}
+		}
+		return list(modelMap);
 	}
 
 

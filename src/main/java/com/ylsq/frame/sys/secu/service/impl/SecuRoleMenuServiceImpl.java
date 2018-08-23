@@ -36,4 +36,12 @@ public class SecuRoleMenuServiceImpl extends BaseServiceImpl<SecuRoleMenuMapper,
 		example.createCriteria().andRoleNameEqualTo(roleName);
 		return selectByExample(example);
 	}
+
+	@Override
+	public List<SecuRoleMenu> selectByMenuName(String menuName) {
+		// TODO Auto-generated method stub
+		SecuRoleMenuExample example = new SecuRoleMenuExample();
+		example.createCriteria().andMenuNameEqualTo(menuName);
+		return selectByExample(example);
+	}
 }

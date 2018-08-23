@@ -2,8 +2,10 @@ package com.ylsq.frame.sys.secu.web;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -52,7 +54,45 @@ public class SecuRoleController extends BaseController {
 	@Autowired
 	private SecuRoleMenuService secuRoleMenuService;
 	
-	
+	@Override
+	public String delete(@PathVariable(name="ids") String ids, ModelMap modelMap) {
+		// TODO Auto-generated method stub
+		if(StringUtils.isNotBlank(ids)) {
+			String[] idArray = ids.split("-");
+			Set<String> failedNames = new HashSet<>();
+			for (String idStr : idArray) {
+				if (StringUtils.isBlank(idStr)) {
+					continue;
+				}
+				Long rid = Long.parseLong(idStr);
+				SecuRole role = secuRoleService.selectByPrimaryKey(rid);
+				if(role != null) {
+					List<SecuRoleMenu> mlist = secuRoleMenuService.selectByRoleName(role.getRoleName());
+					if(mlist.size() > 0 ) {
+						log.warn(role.getRoleName() + "已经被配置了某些菜单，请先移除绑定的菜单");
+						failedNames.add(role.getRoleName());
+						continue;
+					}
+					
+					List<SecuUserRole> ulist = secuUserRoleService.selectByRoleName(role.getRoleName());
+					if(ulist.size() > 0) {
+						log.warn(role.getRoleName() + "已经被配置了某些用户，请先移除绑定的用户");
+						failedNames.add(role.getRoleName());
+						continue;
+					}
+					secuRoleService.deleteByPrimaryKey(rid);
+				}
+			}
+			
+			if(failedNames.size()> 0) {
+				modelMap.put("errorMsg", "角色("+String.join(",",failedNames)+")未删除成功，请先移除绑定的用户或菜单再重试");
+			}
+			else {
+				modelMap.put("errorMsg", "操作成功");
+			}
+		}
+		return list(modelMap);
+	}
 	
 	@RequestMapping(value= "/save", method = RequestMethod.POST)
 	public String save(SecuRole role,ModelMap modelMap) {

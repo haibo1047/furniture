@@ -18,4 +18,11 @@ public interface SecuRoleMenuService extends BaseService<SecuRoleMenu, SecuRoleM
 	 * @return
 	 */
 	public List<SecuRoleMenu> selectByRoleName(String roleName);
+	
+	/**
+	 * 根据菜单查询角色菜单关联关系
+	 * @param menuName
+	 * @return
+	 */
+	public List<SecuRoleMenu> selectByMenuName(String menuName);
 }

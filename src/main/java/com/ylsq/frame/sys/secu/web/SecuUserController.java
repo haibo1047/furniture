@@ -2,8 +2,10 @@ package com.ylsq.frame.sys.secu.web;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -41,6 +43,40 @@ public class SecuUserController extends BaseController {
 	private SecuRoleService secuRoleService;
 	@Autowired
 	private SecuUserRoleService secuUserRoleService;
+	
+	
+	@Override
+	public String delete(@PathVariable(name="ids") String ids, ModelMap modelMap) {
+		// TODO Auto-generated method stub
+		if(StringUtils.isNotBlank(ids)) {
+			String[] idArray = ids.split("-");
+			Set<String> failedNames = new HashSet<>();
+			for (String idStr : idArray) {
+				if (StringUtils.isBlank(idStr)) {
+					continue;
+				}
+				Long uid = Long.parseLong(idStr);
+				SecuUser user = secuUserService.selectByPrimaryKey(uid);
+				if(user != null) {
+					List<SecuUserRole> list = secuUserRoleService.selectByUserName(user.getUserName());
+					if(list.size() > 0) {
+						log.warn(user.getUserName() + "已经被配置了某些角色，请先移除绑定的角色");
+						failedNames.add(user.getUserName());
+						continue;
+					}
+					secuUserService.deleteByPrimaryKey(uid);
+				}
+			}
+			
+			if(failedNames.size()> 0) {
+				modelMap.put("errorMsg", "用户("+String.join(",",failedNames)+")未删除成功，请先移除绑定的角色再重试");
+			}
+			else {
+				modelMap.put("errorMsg", "操作成功");
+			}
+		}
+		return list(modelMap);
+	}
 	
 	@RequestMapping(value= "/save", method = RequestMethod.POST)
 	public String save(SecuUser user,ModelMap modelMap) {

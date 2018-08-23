@@ -1,7 +1,10 @@
 package com.ylsq.frame.tianze.base.web;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +23,9 @@ import com.ylsq.frame.common.base.ValidateResult;
 import com.ylsq.frame.tianze.base.TianzeConstant;
 import com.ylsq.frame.tianze.base.dao.model.TzBaseOrg;
 import com.ylsq.frame.tianze.base.dao.model.TzBaseOrgExample;
+import com.ylsq.frame.tianze.base.dao.model.TzBaseUser;
 import com.ylsq.frame.tianze.base.service.TzBaseOrgService;
+import com.ylsq.frame.tianze.base.service.TzBaseUserService;
 
 @Controller
 @RequestMapping("/tz/org")
@@ -29,6 +34,8 @@ public class TzBaseOrgController extends BaseController {
 	
 	@Autowired
 	private TzBaseOrgService tzBaseOrgService;
+	@Autowired
+	private TzBaseUserService tzBaseUserService;
 
 	@RequestMapping(value= "/orglist", method = RequestMethod.GET)
 	public String orglist(ModelMap modelMap) {
@@ -75,9 +82,40 @@ public class TzBaseOrgController extends BaseController {
 	}
 	@RequestMapping(value= "/deleteOrgs/{ids}", method = RequestMethod.GET)
 	public String delete(@PathVariable(name="ids") String ids,ModelMap modelMap) {
-		int cnt = getService().deleteByPrimaryKeys(ids);
-		log.debug(cnt + ":" + ids);
-		return orglist(0l, modelMap);
+		if(StringUtils.isNotBlank(ids)) {
+			String[] idArray = ids.split("-");
+			Set<String> failedNames = new HashSet<>();
+			for (String idStr : idArray) {
+				if (StringUtils.isBlank(idStr)) {
+					continue;
+				}
+				Long oid = Long.parseLong(idStr);
+				List<TzBaseUser> list = tzBaseUserService.selectByOrgId(oid);
+				if(list.size() == 0) {
+					tzBaseOrgService.deleteByPrimaryKey(oid);
+				}
+				else {
+					log.warn(oid + "已经被配置了某些用户，请先移除绑定的用户");
+					failedNames.add(oid+"");
+				}
+				List<TzBaseOrg> olist = tzBaseOrgService.selectByParentId(oid);
+				if(olist.size() == 0) {
+					tzBaseOrgService.deleteByPrimaryKey(oid);
+				}
+				else {
+					log.warn(oid + "存在子机构，请先移除子机构");
+					failedNames.add(oid+"");
+				}
+			}
+			
+			if(failedNames.size()> 0) {
+				modelMap.put("errorMsg", "机构("+String.join(",",failedNames)+")未删除成功，请先移除子机构再重试");
+			}
+			else {
+				modelMap.put("errorMsg", "操作成功");
+			}
+		}
+		return orglist(TianzeConstant.Root_Org_Id, modelMap);
 	}
 	
 	protected ValidateResult validate(TzBaseOrg model) {
