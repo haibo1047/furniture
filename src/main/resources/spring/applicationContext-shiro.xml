@@ -83,10 +83,11 @@
         </property> -->
         <property name="filterChainDefinitions">
             <value>
+                /css/** = anon
+                /fonts/** = anon
+                /js/** = anon
+                /images/** = anon
                 /favicon.ico = anon
-                /*.jpg = anon
-                /*.css = anon
-                /*.js = anon
                 /*.jar = anon
                 /sys/login = anon
                 # allow WebStart to pull the jars for the swing app:
