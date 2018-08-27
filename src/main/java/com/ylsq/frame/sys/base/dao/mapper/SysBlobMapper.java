@@ -31,4 +31,6 @@ public interface SysBlobMapper {
     int updateByPrimaryKeySelective(SysBlob record);
 
     int updateByPrimaryKeyWithBLOBs(SysBlob record);
+
+    int updateByPrimaryKey(SysBlob record);
 }

@@ -15,5 +15,12 @@ public interface SysBlobService extends BaseService<SysBlob, SysBlobExample> {
 	 * @param bytes
 	 * @return
 	 */
-	public Long insert(byte[] bytes);
+	public Long insert(byte[] bytes, Long businessId);
+	
+	/**
+	 * 根据业务ID获取数据
+	 * @param businessId
+	 * @return
+	 */
+	public byte[] getData(Long businessId);
 }

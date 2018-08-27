@@ -12,6 +12,13 @@ public class SysBlob implements Serializable {
     private Long blobId;
 
     /**
+     * 业务id
+     *
+     * @mbg.generated
+     */
+    private Long businessId;
+
+    /**
      * 数据
      *
      * @mbg.generated
@@ -26,6 +33,14 @@ public class SysBlob implements Serializable {
 
     public void setBlobId(Long blobId) {
         this.blobId = blobId;
+    }
+
+    public Long getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(Long businessId) {
+        this.businessId = businessId;
     }
 
     public byte[] getData() {
@@ -43,6 +58,7 @@ public class SysBlob implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", blobId=").append(blobId);
+        sb.append(", businessId=").append(businessId);
         sb.append(", data=").append(data);
         sb.append("]");
         return sb.toString();
@@ -61,6 +77,7 @@ public class SysBlob implements Serializable {
         }
         SysBlob other = (SysBlob) that;
         return (this.getBlobId() == null ? other.getBlobId() == null : this.getBlobId().equals(other.getBlobId()))
+            && (this.getBusinessId() == null ? other.getBusinessId() == null : this.getBusinessId().equals(other.getBusinessId()))
             && (Arrays.equals(this.getData(), other.getData()));
     }
 
@@ -69,6 +86,7 @@ public class SysBlob implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getBlobId() == null) ? 0 : getBlobId().hashCode());
+        result = prime * result + ((getBusinessId() == null) ? 0 : getBusinessId().hashCode());
         result = prime * result + (Arrays.hashCode(getData()));
         return result;
     }

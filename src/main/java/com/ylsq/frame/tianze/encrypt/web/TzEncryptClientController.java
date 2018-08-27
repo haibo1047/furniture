@@ -1,7 +1,13 @@
 package com.ylsq.frame.tianze.encrypt.web;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.kahadb.util.ByteArrayInputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +24,7 @@ import com.ylsq.frame.common.base.BaseExample;
 import com.ylsq.frame.common.base.BaseModel;
 import com.ylsq.frame.common.base.BaseService;
 import com.ylsq.frame.common.base.ValidateResult;
+import com.ylsq.frame.sys.base.service.SysBlobService;
 import com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptClient;
 import com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptClientExample;
 import com.ylsq.frame.tianze.encrypt.service.TzEncryptClientService;
@@ -34,6 +41,26 @@ public class TzEncryptClientController extends BaseController {
 	
 	@Autowired
 	private TzEncryptClientService tzEncryptClientService;
+	@Autowired
+	private SysBlobService sysBlobService;
+	
+	@RequestMapping(value="/download/{clientId}", method = RequestMethod.GET)
+	public void download(@PathVariable(value="clientId") Long clientId,HttpServletResponse response) {
+		try {
+			byte[] data = sysBlobService.getData(clientId);
+			if(data == null) {
+				response.getWriter().write("未找到文件!");
+				return;
+			}
+			InputStream is = new ByteArrayInputStream(data);
+			IOUtils.copy(is, response.getOutputStream());
+			response.flushBuffer();
+		} catch (IOException ex) {
+			log.error("下载文件失败：" + ex.getMessage());
+			throw new RuntimeException("下载文件失败:" + ex.getMessage());
+		}
+	}
+	
 	
 	protected ValidateResult validate(TzEncryptClient model) {
 		return ValidateResult.Passed;

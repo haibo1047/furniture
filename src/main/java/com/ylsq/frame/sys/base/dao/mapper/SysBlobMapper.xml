@@ -3,6 +3,7 @@
 <mapper namespace="com.ylsq.frame.sys.base.dao.mapper.SysBlobMapper">
   <resultMap id="BaseResultMap" type="com.ylsq.frame.sys.base.dao.model.SysBlob">
     <id column="blob_id" jdbcType="BIGINT" property="blobId" />
+    <result column="business_id" jdbcType="BIGINT" property="businessId" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ylsq.frame.sys.base.dao.model.SysBlob">
     <result column="data" jdbcType="LONGVARBINARY" property="data" />
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    blob_id
+    blob_id, business_id
   </sql>
   <sql id="Blob_Column_List">
     data
@@ -120,23 +121,31 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ylsq.frame.sys.base.dao.model.SysBlob">
-    <selectKey keyProperty="blobId" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into sys_blob (data)
-    values (#{data,jdbcType=LONGVARBINARY})
+    insert into sys_blob (blob_id, business_id, data
+      )
+    values (#{blobId,jdbcType=BIGINT}, #{businessId,jdbcType=BIGINT}, #{data,jdbcType=LONGVARBINARY}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.ylsq.frame.sys.base.dao.model.SysBlob">
-    <selectKey keyProperty="blobId" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into sys_blob
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="blobId != null">
+        blob_id,
+      </if>
+      <if test="businessId != null">
+        business_id,
+      </if>
       <if test="data != null">
         data,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="blobId != null">
+        #{blobId,jdbcType=BIGINT},
+      </if>
+      <if test="businessId != null">
+        #{businessId,jdbcType=BIGINT},
+      </if>
       <if test="data != null">
         #{data,jdbcType=LONGVARBINARY},
       </if>
@@ -154,6 +163,9 @@
       <if test="record.blobId != null">
         blob_id = #{record.blobId,jdbcType=BIGINT},
       </if>
+      <if test="record.businessId != null">
+        business_id = #{record.businessId,jdbcType=BIGINT},
+      </if>
       <if test="record.data != null">
         data = #{record.data,jdbcType=LONGVARBINARY},
       </if>
@@ -165,6 +177,7 @@
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update sys_blob
     set blob_id = #{record.blobId,jdbcType=BIGINT},
+      business_id = #{record.businessId,jdbcType=BIGINT},
       data = #{record.data,jdbcType=LONGVARBINARY}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -172,7 +185,8 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update sys_blob
-    set blob_id = #{record.blobId,jdbcType=BIGINT}
+    set blob_id = #{record.blobId,jdbcType=BIGINT},
+      business_id = #{record.businessId,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -180,6 +194,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.ylsq.frame.sys.base.dao.model.SysBlob">
     update sys_blob
     <set>
+      <if test="businessId != null">
+        business_id = #{businessId,jdbcType=BIGINT},
+      </if>
       <if test="data != null">
         data = #{data,jdbcType=LONGVARBINARY},
       </if>
@@ -188,7 +205,13 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ylsq.frame.sys.base.dao.model.SysBlob">
     update sys_blob
-    set data = #{data,jdbcType=LONGVARBINARY}
+    set business_id = #{businessId,jdbcType=BIGINT},
+      data = #{data,jdbcType=LONGVARBINARY}
+    where blob_id = #{blobId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ylsq.frame.sys.base.dao.model.SysBlob">
+    update sys_blob
+    set business_id = #{businessId,jdbcType=BIGINT}
     where blob_id = #{blobId,jdbcType=BIGINT}
   </update>
   <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />

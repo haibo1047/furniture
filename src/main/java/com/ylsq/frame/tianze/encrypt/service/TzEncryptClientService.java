@@ -19,4 +19,5 @@ public interface TzEncryptClientService extends BaseService<TzEncryptClient, TzE
 	 * @return
 	 */
 	public boolean uploadClientFile(Long clientId, MultipartFile file);
+	
 }

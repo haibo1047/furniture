@@ -37,7 +37,7 @@ public class TzEncryptClientServiceImpl extends BaseServiceImpl<TzEncryptClientM
 	public boolean uploadClientFile(Long clientId, MultipartFile file) {
 		// TODO Auto-generated method stub
 		try {
-			Long blobId = sysBlobService.insert(file.getBytes());
+			Long blobId = sysBlobService.insert(file.getBytes(),clientId);
 			log.debug("data id" + blobId);
 			TzEncryptClient client = new TzEncryptClient();
 			client.setId(clientId);
