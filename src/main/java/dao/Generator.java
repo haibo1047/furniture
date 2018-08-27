@@ -12,6 +12,8 @@ public class Generator {
 		private static String DATABASE = "frame";
 		private static String TABLE_PREFIX = "tz_encrypt_";
 		private static String PACKAGE_NAME = "com.ylsq.frame.tianze.encrypt";
+//		private static String TABLE_PREFIX = "sys_";
+//		private static String PACKAGE_NAME = "com.ylsq.frame.sys.base";
 //		private static String TABLE_PREFIX = "tz_base_";
 //		private static String PACKAGE_NAME = "com.ylsq.frame.tianze.base";
 //		private static String TABLE_PREFIX = "secu_";
@@ -24,7 +26,7 @@ public class Generator {
 		// 需要insert后返回主键的表配置，key:表名,value:主键名
 		private static Map<String, String> LAST_INSERT_ID_TABLES = new HashMap<>();
 		static {
-//			LAST_INSERT_ID_TABLES.put("upms_user", "user_id");
+//			LAST_INSERT_ID_TABLES.put("sys_blob", "blob_id");
 		}
 
 		/**

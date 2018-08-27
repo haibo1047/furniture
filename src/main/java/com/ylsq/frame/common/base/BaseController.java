@@ -38,6 +38,7 @@ public abstract class BaseController {
 	
 	@RequestMapping(value= "/list", method = RequestMethod.GET)
 	public String list(ModelMap modelMap) {
+		log.debug("displaying LIST page");
 		beforeList(modelMap);
 		List<? extends BaseModel> list = getModelList();
 		modelMap.put("modelList", list);
