@@ -1,0 +1,32 @@
+  
+<div class="title_left">
+	<h3>日志</h3>
+</div>
+<div class="x_content">
+
+	<div class="table-responsive">
+	  	<table class="table table-striped jambo_table">
+	    	<thead>
+		      	<tr class="headings">
+			        <th class="column-title"> 操作类型 </th>
+			        <th class="column-title"> 登录名 </th>
+			        <th class="column-title"> 操作时间 </th>
+			        <th class="column-title"> IP </th>
+			        <th class="column-title"> 详情 </th>
+		      	</tr>
+		    </thead>
+	
+		    <tbody>
+		    	#foreach ($model in $modelList)
+		      	<tr class="#if($foreach.count %2 ==0) even #else odd #end pointer">
+        			<td class=" "> #dictDisplay($logTypeList ${model.logType} "value1" "value2") </td>
+			        <td class=" "> ${model.login} </td>
+			        <td class=" "> $!date.format("yyyy-MM-dd HH:mm:ss",$!{model.operateTime} ) </td>
+			        <td class=" "> $!{model.operateIp} </td>
+			        <td class=" "> #defaultIfNull($!{model.logContent},'N/A') </td>
+		     	 </tr>
+		     	 #end
+		    </tbody>
+	  	</table>
+	</div>
+</div>

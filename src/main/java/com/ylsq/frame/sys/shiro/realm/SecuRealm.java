@@ -79,6 +79,7 @@ public class SecuRealm extends AuthenticatingRealm {
 		SecurityUtils.getSubject().getSession().setAttribute(SystemConstants.System_Login, userName);
 		
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userName, passwd, getName());
+		
 		return info;
 	}
 

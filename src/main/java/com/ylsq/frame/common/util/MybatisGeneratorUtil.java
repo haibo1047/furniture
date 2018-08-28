@@ -33,6 +33,8 @@ public class MybatisGeneratorUtil {
 	private static String serviceImpl_vm = "/template/ServiceImpl.vm";
 	// Controller模板路径
 	private static String controller_vm = "/template/Controller.vm";
+	private static String listPage_vm = "/template/list.vm";
+	private static String editPage_vm = "/template/edit.vm";
 
 	/**
 	 * 根据模板生成generatorConfig.xml文件
@@ -72,12 +74,14 @@ public class MybatisGeneratorUtil {
 			serviceMock_vm = MybatisGeneratorUtil.class.getResource(serviceMock_vm).getPath();
 			serviceImpl_vm = MybatisGeneratorUtil.class.getResource(serviceImpl_vm).getPath();
 			controller_vm = MybatisGeneratorUtil.class.getResource(controller_vm).getPath();
+			listPage_vm = MybatisGeneratorUtil.class.getResource(listPage_vm).getPath();
+			editPage_vm = MybatisGeneratorUtil.class.getResource(editPage_vm).getPath();
 		}
 
 		String generatorConfigXml = MybatisGeneratorUtil.class.getResource("/").getPath().replace("/target/classes/", "") + "/src/main/resources/generatorConfig.xml";
 //		targetProject = basePath + targetProject;
 		targetProject = basePath + "/";
-		String sql = "SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = '" + database + "' AND table_name LIKE '" + tablePrefix + "_%';";
+		String sql = "SELECT table_name, table_comment FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = '" + database + "' AND table_name LIKE '" + tablePrefix + "_%';";
 
 		System.out.println("========== 开始生成generatorConfig.xml文件 ==========");
 		List<Map<String, Object>> tables = new ArrayList<>();
@@ -92,6 +96,7 @@ public class MybatisGeneratorUtil {
 				System.out.println(map.get("TABLE_NAME"));
 				table = new HashMap<>(2);
 				table.put("table_name", map.get("TABLE_NAME"));
+				table.put("table_comment", map.get("TABLE_COMMENT"));
 				table.put("model_name", lineToHump(ObjectUtils.toString(map.get("TABLE_NAME"))));
 				tables.add(table);
 			}
@@ -137,6 +142,7 @@ public class MybatisGeneratorUtil {
 		String servicePath = basePath +"/src/main/java/" + packageName.replaceAll("\\.", "/") + "/service";
 		String serviceImplPath = basePath +"/src/main/java/" + packageName.replaceAll("\\.", "/") + "/service/impl";
 		String controllerPath = basePath +"/src/main/java/" + packageName.replaceAll("\\.", "/") + "/web";
+		String pagesPath = basePath +"/src/main/webapp/WEB-INF/pages/";
 		for (int i = 0; i < tables.size(); i++) {
 			String tableName = ObjectUtils.toString(tables.get(i).get("table_name"));
 			String model = StringUtil.lineToHump(tableName);
@@ -144,6 +150,8 @@ public class MybatisGeneratorUtil {
 			String serviceMock = servicePath + "/" + model + "ServiceMock.java";
 			String serviceImpl = serviceImplPath + "/" + model + "ServiceImpl.java";
 			String controller = controllerPath + "/" + model + "Controller.java";
+			String listPage = pagesPath + "/" + "list.vm";
+			String editPage = pagesPath + "/" + "edit.vm";
 			// 生成service
 			File serviceFile = new File(service);
 			if (!serviceFile.exists()) {
@@ -175,17 +183,19 @@ public class MybatisGeneratorUtil {
 				VelocityUtil.generate(serviceImpl_vm, serviceImpl, context);
 				System.out.println(serviceImpl);
 			}
-			// 生成service
-			File controllerFile = new File(controller);
-			if (!controllerFile.exists()) {
+			// 生成page
+			File listPageFolder = new File(pagesPath);
+			if (listPageFolder.exists()) {
 				VelocityContext context = new VelocityContext();
 				context.put("package_name", packageName);
 				context.put("tableName", tableName);
+				context.put("tableComment", tables.get(i).get("table_comment"));
 				context.put("model", model);
 				context.put("modelVariable", StringUtil.toLowerCaseFirstOne(model));
 				context.put("ctime", ctime);
-				VelocityUtil.generate(controller_vm, controller, context);
-				System.out.println(controller);
+//				VelocityUtil.generate(listPage_vm, pagesPath+"/list.vm", context);
+//				VelocityUtil.generate(listPage_vm, pagesPath+"/edit.vm", context);
+				System.out.println(pagesPath);
 			}
 		}
 		System.out.println("========== 结束生成Service ==========");
