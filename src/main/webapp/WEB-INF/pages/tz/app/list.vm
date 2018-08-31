@@ -61,6 +61,8 @@
     </tbody>
   </table>
 	</div>
+	
+	#parse("include/pagination.vm")
 </div>
 
 <script>

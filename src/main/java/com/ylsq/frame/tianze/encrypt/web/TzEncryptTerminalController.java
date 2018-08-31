@@ -1,8 +1,8 @@
 package com.ylsq.frame.tianze.encrypt.web;
 
 import java.util.Date;
-import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ylsq.frame.common.base.BaseController;
 import com.ylsq.frame.common.base.BaseExample;
@@ -33,9 +34,14 @@ public class TzEncryptTerminalController extends BaseController {
 	private TzEncryptTerminalService tzEncryptTerminalService;
 	
 	@Override
-	protected void beforeList(ModelMap modelMap) {
+	public String list(@RequestParam(required = false, defaultValue = "1", value = "pageNum")int pageNum, ModelMap modelMap) {
 		// TODO Auto-generated method stub
+		int pageSize = (int)SecurityUtils.getSubject().getSession().getAttribute("pageSize");
+		pageSize=1;
+		modelMap.put("modelList", tzEncryptTerminalService.selectByExampleForStartPage(new TzEncryptTerminalExample(), pageNum, pageSize));
+		modelMap.put("total", tzEncryptTerminalService.countByExample(new TzEncryptTerminalExample()));
 		modelMap.put("statusList", getParams("terminal_status"));
+		return webPrefix() + "list";
 	}
 
 	@Override
@@ -64,13 +70,6 @@ public class TzEncryptTerminalController extends BaseController {
 	protected BaseService<? extends BaseModel, ? extends BaseExample> getService() {
 		// TODO Auto-generated method stub
 		return tzEncryptTerminalService;
-	}
-
-	@Override
-	protected List<? extends BaseModel> getModelList() {
-		// TODO Auto-generated method stub
-		List<TzEncryptTerminal> list = tzEncryptTerminalService.selectByExample(new TzEncryptTerminalExample());
-		return list;
 	}
 
 	@Override

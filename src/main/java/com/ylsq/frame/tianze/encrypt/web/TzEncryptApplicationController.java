@@ -1,7 +1,6 @@
 package com.ylsq.frame.tianze.encrypt.web;
 
-import java.util.List;
-
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ylsq.frame.common.base.BaseController;
 import com.ylsq.frame.common.base.BaseExample;
@@ -34,10 +34,14 @@ public class TzEncryptApplicationController extends BaseController {
 	private TzEncryptApplicationService tzEncryptApplicationService;
 	
 	@Override
-	public String list(ModelMap modelMap) {
+	public String list(@RequestParam(required = false, defaultValue = "1", value = "pageNum")int pageNum,ModelMap modelMap) {
 		// TODO Auto-generated method stub
+		int pageSize = (int)SecurityUtils.getSubject().getSession().getAttribute("pageSize");
+		pageSize = 1;
+		modelMap.put("modelList", tzEncryptApplicationService.selectByExampleForStartPage(new TzEncryptApplicationExample(), pageNum, pageSize));
+		modelMap.put("total", tzEncryptApplicationService.countByExample(new TzEncryptApplicationExample()));
 		modelMap.put("appTypeList", getParams(SysParamEnum.Application_Type.getConstant()));
-		return super.list(modelMap);
+		return webPrefix() + "list";
 	}
 
 	protected ValidateResult validate(TzEncryptApplication model) {
@@ -53,6 +57,7 @@ public class TzEncryptApplicationController extends BaseController {
 		if(!vr.isPassed()) {
 			modelMap.put("model", model);
 			modelMap.put("errorMsg", vr.getMsg());
+			log.error(vr.getMsg());
 			return webPrefix()+"edit";
 		}
 		if(model.getId() == null) {
@@ -75,13 +80,6 @@ public class TzEncryptApplicationController extends BaseController {
 	protected BaseService<? extends BaseModel, ? extends BaseExample> getService() {
 		// TODO Auto-generated method stub
 		return tzEncryptApplicationService;
-	}
-
-	@Override
-	protected List<? extends BaseModel> getModelList() {
-		// TODO Auto-generated method stub
-		List<TzEncryptApplication> list = tzEncryptApplicationService.selectByExample(new TzEncryptApplicationExample());
-		return list;
 	}
 
 	@Override

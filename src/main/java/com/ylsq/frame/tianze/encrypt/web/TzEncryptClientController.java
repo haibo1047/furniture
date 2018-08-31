@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.kahadb.util.ByteArrayInputStream;
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import com.ylsq.frame.common.base.BaseController;
 import com.ylsq.frame.common.base.BaseExample;
 import com.ylsq.frame.common.base.BaseModel;
 import com.ylsq.frame.common.base.BaseService;
+import com.ylsq.frame.common.base.SysParamEnum;
 import com.ylsq.frame.common.base.ValidateResult;
 import com.ylsq.frame.sys.base.service.SysBlobService;
 import com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptClient;
@@ -62,6 +64,17 @@ public class TzEncryptClientController extends BaseController {
 	}
 	
 	
+	@Override
+	public String list(@RequestParam(required = false, defaultValue = "1", value = "pageNum")int pageNum, ModelMap modelMap) {
+		// TODO Auto-generated method stub
+		int pageSize = (int)SecurityUtils.getSubject().getSession().getAttribute("pageSize");
+		modelMap.put("modelList", tzEncryptClientService.selectByExampleForStartPage(new TzEncryptClientExample(), pageNum, pageSize));
+		modelMap.put("total", tzEncryptClientService.countByExample(new TzEncryptClientExample()));
+		modelMap.put("appTypeList", getParams(SysParamEnum.Application_Type.getConstant()));
+		return webPrefix() + "list";
+	}
+
+
 	protected ValidateResult validate(TzEncryptClient model) {
 		return ValidateResult.Passed;
 	}
@@ -87,6 +100,7 @@ public class TzEncryptClientController extends BaseController {
 		if(!vr.isPassed()) {
 			modelMap.put("model", model);
 			modelMap.put("errorMsg", vr.getMsg());
+			log.error(vr.getMsg());
 			return webPrefix()+"edit";
 		}
 		if(model.getId() == null) {
