@@ -7,4 +7,6 @@ public class SystemConstants {
 	public static String NormalDF = "yyyy-MM-dd";
 	
 	public static String Salt_System_User_Pwd = "fra18me";
+	
+	public static int Default_Page_Size = 12;
 }

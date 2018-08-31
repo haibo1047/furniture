@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,15 @@ public class SecuUserController extends BaseController {
 	private SecuUserRoleService secuUserRoleService;
 	
 	
+	@Override
+	public String list(@RequestParam(required = false, defaultValue = "1", value = "pageNum")int pageNum, ModelMap modelMap) {
+		// TODO Auto-generated method stub
+		int pageSize = (int)SecurityUtils.getSubject().getSession().getAttribute("pageSize");
+		modelMap.put("total", secuUserService.countByExample(new SecuUserExample()));
+		modelMap.put("modelList", secuUserService.selectByExampleForStartPage(new SecuUserExample(), pageNum, pageSize));
+		return webPrefix() + "list";
+	}
+
 	@Override
 	public String delete(@PathVariable(name="ids") String ids, ModelMap modelMap) {
 		// TODO Auto-generated method stub
@@ -150,13 +160,6 @@ public class SecuUserController extends BaseController {
 	protected BaseService<? extends BaseModel, ? extends BaseExample> getService() {
 		// TODO Auto-generated method stub
 		return secuUserService;
-	}
-
-	@Override
-	protected List<? extends BaseModel> getModelList() {
-		// TODO Auto-generated method stub
-		List<SecuUser> list = secuUserService.selectByExample(new SecuUserExample());
-		return list;
 	}
 
 	@Override

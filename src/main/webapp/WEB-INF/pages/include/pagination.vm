@@ -1,7 +1,8 @@
-##set($layout="/include/layout_blank.vm")
-	
+
+#set($pageSize = $session.getAttribute("pageSize"))
+
 #set($aroundIndex = 3)
-#set($totalPages = ${total}*1.0/${modelList.pageSize})
+#set($totalPages = ${total}*1.0/${pageSize})
 #set($totalPages = $math.ceil($totalPages))
 #set($totalPages_1 = $totalPages - 1 )
 #set($pageNum = ${modelList.pageNum})
@@ -18,11 +19,13 @@
 
 #set( $the2nd = $math.min($totalPages, $the2nd )  )
 #set( $the2nd = $math.min($totalPages_1, $the2nd )  )
+
 <script>
 function gotopage(pageNum){
 	location = window.location.pathname+"?pageNum="+pageNum
 }
 </script>
+
 <div class="row">
 	<div class="col-sm-5">
 		<div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">Showing ${pageNum}/${totalPages} page of ${total} entries</div>
@@ -38,7 +41,8 @@ function gotopage(pageNum){
 					<a href="#" aria-controls="datatable" data-dt-idx="1" tabindex="0" onclick="gotopage(1)">1</a>
 				</li>
 				#end
-				#if($totalPages > $aroundIndex*2)
+				##if($totalPages > $aroundIndex*2)
+				#if($the2nd > $the1st)
 					#foreach( $i  in [$the1st..$the2nd])
 					<li class="paginate_button #if($i == $pageNum) active #end ">
 						<a href="#" aria-controls="datatable" onclick="gotopage($i)">$i</a>

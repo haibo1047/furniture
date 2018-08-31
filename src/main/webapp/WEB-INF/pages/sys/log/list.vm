@@ -23,10 +23,12 @@
 			        <td class=" "> ${model.login} </td>
 			        <td class=" "> $!date.format("yyyy-MM-dd HH:mm:ss",$!{model.operateTime} ) </td>
 			        <td class=" "> $!{model.operateIp} </td>
-			        <td class=" "> #defaultIfNull($!{model.logContent},'N/A') </td>
-		     	 </tr>
-		     	 #end
+			    	<td class=" "> #defaultIfNull($!{model.logContent},'N/A') </td>
+		     	</tr>
+		    	#end
 		    </tbody>
 	  	</table>
 	</div>
+	
+	#parse("/include/pagination.vm")
 </div>

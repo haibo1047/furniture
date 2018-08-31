@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ylsq.frame.common.base.BaseController;
-import com.ylsq.frame.common.base.BaseModel;
 import com.ylsq.frame.common.base.BaseService;
 import com.ylsq.frame.common.base.SysParamEnum;
 import com.ylsq.frame.common.base.ValidateResult;
@@ -36,10 +37,13 @@ public class SecuMenuController extends BaseController {
 	private SecuRoleMenuService secuRoleMenuService;
 	
 	@Override
-	public String list(ModelMap modelMap) {
+	public String list(@RequestParam(required = false, defaultValue = "1", value = "pageNum") int pageNum,ModelMap modelMap) {
 		// TODO Auto-generated method stub
+		int pageSize = (int)SecurityUtils.getSubject().getSession().getAttribute("pageSize");
 		modelMap.put("moduleList", getParams(SysParamEnum.Menu_Module.getConstant()));
-		return super.list(modelMap);
+		modelMap.put("total", secuMenuService.countByExample(new SecuMenuExample()));
+		modelMap.put("modelList", secuMenuService.selectByExampleForStartPage(new SecuMenuExample(), pageNum, pageSize));
+		return webPrefix()+"list";
 	}
 
 
@@ -110,14 +114,6 @@ public class SecuMenuController extends BaseController {
 			secuMenuService.updateByPrimaryKey(menu);
 		}
 		return list(modelMap);
-	}
-
-
-	@Override
-	protected List<? extends BaseModel> getModelList() {
-		// TODO Auto-generated method stub
-		List<SecuMenu> menuList = secuMenuService.selectByExample(new SecuMenuExample());
-		return menuList;
 	}
 
 	@Override

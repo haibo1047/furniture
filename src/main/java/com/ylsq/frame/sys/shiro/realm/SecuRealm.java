@@ -77,6 +77,7 @@ public class SecuRealm extends AuthenticatingRealm {
 		}
 		SecurityUtils.getSubject().getSession().setAttribute(SystemConstants.System_Menu_Key, menuMap);
 		SecurityUtils.getSubject().getSession().setAttribute(SystemConstants.System_Login, userName);
+		SecurityUtils.getSubject().getSession().setAttribute("pageSize", SystemConstants.Default_Page_Size);
 		
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userName, passwd, getName());
 		

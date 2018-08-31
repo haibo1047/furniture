@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ylsq.frame.sys.base.dao.model.SysParamValue;
 import com.ylsq.frame.sys.base.service.SysParamValueService;
@@ -37,8 +38,13 @@ public abstract class BaseController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 	
-	@RequestMapping(value= "/list", method = RequestMethod.GET)
+	@RequestMapping(value= "/defaultlist", method = RequestMethod.GET)
 	public String list(ModelMap modelMap) {
+		return list(1, modelMap);
+	}
+	
+	@RequestMapping(value= "/list", method = RequestMethod.GET)
+	public String list(@RequestParam(required = false, defaultValue = "1", value = "pageNum") int pageNum, ModelMap modelMap) {
 		log.debug("displaying LIST page");
 		beforeList(modelMap);
 		List<? extends BaseModel> list = getModelList();

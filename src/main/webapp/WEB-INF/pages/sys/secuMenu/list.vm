@@ -1,6 +1,6 @@
   
   <div class="title_left">
-    <h3>Secu Users</h3>
+    <h3>Secu Menu</h3>
   </div>
    <div class="x_content">
 
@@ -55,6 +55,8 @@
     </tbody>
   </table>
 	</div>
+	
+	#parse("/include/pagination.vm")
 </div>
 
 <script>
