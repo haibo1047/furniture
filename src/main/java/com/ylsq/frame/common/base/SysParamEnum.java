@@ -8,6 +8,7 @@ public enum SysParamEnum {
 	Terminal_Status("terminal_status"),
 	Application_Type("application_type"),
 	Sys_Log_Type("system_log_type"),
+	System_Config("system_config"),
 	
 	;
 	

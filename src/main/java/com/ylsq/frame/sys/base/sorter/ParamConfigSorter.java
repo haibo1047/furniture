@@ -15,7 +15,9 @@ public class ParamConfigSorter implements Comparator<SysParamConfig> {
 			return -1;
 		if(o2 == null)
 			return 1;
-		return o1.getConfigOrder() - o2.getConfigOrder();
+		int order1 = o1.getConfigOrder()==null? 0 : o1.getConfigOrder();
+		int order2 = o2.getConfigOrder()==null? 0 : o2.getConfigOrder();
+		return order1 - order2;
 	}
 
 }

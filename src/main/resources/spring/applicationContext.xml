@@ -13,6 +13,7 @@
 
 	<!-- 装载service -->
 	<context:component-scan base-package="**.service" />
+	<context:component-scan base-package="**.quartz" />
 
 	<!-- 启动时初始化Spring上下文环境工具类 -->
 	<bean id="springContextUtil" class="com.ylsq.frame.common.util.SpringContextUtil"></bean>

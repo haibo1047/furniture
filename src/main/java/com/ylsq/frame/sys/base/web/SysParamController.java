@@ -22,6 +22,8 @@ import com.ylsq.frame.common.base.BaseExample;
 import com.ylsq.frame.common.base.BaseModel;
 import com.ylsq.frame.common.base.BaseService;
 import com.ylsq.frame.common.base.SysParamEnum;
+import com.ylsq.frame.common.base.ValidateResult;
+import com.ylsq.frame.common.util.DataTypeValidator;
 import com.ylsq.frame.sys.base.dao.model.SysParam;
 import com.ylsq.frame.sys.base.dao.model.SysParamConfig;
 import com.ylsq.frame.sys.base.dao.model.SysParamExample;
@@ -84,20 +86,24 @@ public class SysParamController extends BaseController {
 			String currValue = mtd.invoke(value, null).toString();
 			
 			String field = config.getShowName()+"["+config.getConfigName() +"]";
-			if(StringUtils.isBlank(currValue)) {
-				if(new Integer(1).equals(config.getNotNull()))
-					throw new Exception(field +"不能为空");
-				else
-					continue;
+//			if(StringUtils.isBlank(currValue)) {
+//				if(new Integer(1).equals(config.getNotNull()))
+//					throw new Exception(field +"不能为空");
+//				else
+//					continue;
+//			}
+//			if(currValue.length() > config.getDataLength()) {
+//				throw new Exception(field + "超过定义的长度("+config.getDataLength()+")");
+//			}
+//			
+//			if("Integer".equals(config.getDataType()) && !StringUtils.isNumeric(currValue)) {
+//				throw new Exception(field + "定义为数值型，请检查"+currValue);
+//			}
+			ValidateResult vr = new DataTypeValidator().validate(field, currValue, config.getDataType(), config.getDataLength(), config.getNotNull());
+			if(!vr.isPassed()) {
+				throw new Exception(vr.getMsg());
 			}
-			if(currValue.length() > config.getDataLength()) {
-				throw new Exception(field + "超过定义的长度("+config.getDataLength()+")");
-			}
-			
-			if("Integer".equals(config.getDataType()) && !StringUtils.isNumeric(currValue)) {
-				throw new Exception(field + "定义为数值型，请检查"+currValue);
-			}
-			if(new Integer(1).equals(config.getIsOfUniq())) {
+			if(StringUtils.isNotBlank(currValue) && new Integer(1).equals(config.getIsOfUniq())) {
 				Method md = criteria.getClass().getMethod("andValue"+(index+1)+"EqualTo", currValue.getClass());
 				md.invoke(criteria, currValue);
 				uniqColumns.add(config.getShowName());
@@ -121,6 +127,7 @@ public class SysParamController extends BaseController {
 		try {
 			validate(param);
 		}catch(Exception e) {
+			e.printStackTrace();
 			log.error(e.getMessage());
 			modelMap.put("errorMsg", e.getMessage());
 			modelMap.put("model", param);

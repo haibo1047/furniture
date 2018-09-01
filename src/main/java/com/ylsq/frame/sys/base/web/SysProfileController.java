@@ -9,39 +9,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ylsq.frame.common.base.BaseController;
-import com.ylsq.frame.common.base.BaseExample;
-import com.ylsq.frame.common.base.BaseModel;
-import com.ylsq.frame.common.base.BaseService;
 import com.ylsq.frame.common.base.ValidateResult;
 import com.ylsq.frame.sys.base.dao.model.SysProfile;
 import com.ylsq.frame.sys.base.service.SysProfileService;
 import com.ylsq.frame.sys.shiro.utils.ShiroSessionUtil;
 
 @Controller
-@RequestMapping("/sys/profile")
+@RequestMapping("/myprofile")
 public class SysProfileController extends BaseController {
 	private Logger log = LoggerFactory.getLogger(SysProfileController.class);
 	
 	@Autowired
 	private SysProfileService sysProfileService;
 	
-	@RequestMapping(value = "/" , method= RequestMethod.GET)
+	@RequestMapping(method= RequestMethod.GET)
 	public String myprofile(ModelMap modelMap) {
 		SysProfile myProfile = sysProfileService.selectByLogin(currentLogin());
 		modelMap.put("myProfile", myProfile);
-		return webPrefix() + "edit";
+		return webPrefix() + "profile";
 	}
 	
-	@RequestMapping(value= "/", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public String save(SysProfile profile,ModelMap modelMap) {
 		log.debug(profile.toString());
 		initModel(profile);
 		
 		ValidateResult vr = validate(profile);
 		if(!vr.isPassed()) {
-			modelMap.put("model", profile);
+			modelMap.put("myProfile", profile);
 			modelMap.put("errorMsg", vr.getMsg());
-			return webPrefix()+"edit";
+			return webPrefix()+"profile";
 		}
 		if(profile.getId() == null) {
 			sysProfileService.insert(profile);
@@ -61,17 +58,11 @@ public class SysProfileController extends BaseController {
 		}
 		return ValidateResult.Passed;
 	}
-	
-	@Override
-	protected BaseService<? extends BaseModel, ? extends BaseExample> getService() {
-		// TODO Auto-generated method stub
-		return sysProfileService;
-	}
 
 	@Override
 	protected String webPrefix() {
 		// TODO Auto-generated method stub
-		return "/sys/profile/";
+		return "/sys/common/";
 	}
 
 }

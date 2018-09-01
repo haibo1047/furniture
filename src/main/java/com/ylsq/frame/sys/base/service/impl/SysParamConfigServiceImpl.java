@@ -33,6 +33,7 @@ public class SysParamConfigServiceImpl extends BaseServiceImpl<SysParamConfigMap
 	public List<SysParamConfig> selectByParamName(String paramName) {
 		SysParamConfigExample example = new SysParamConfigExample();
 		example.createCriteria().andParamNameEqualTo(paramName);
+		example.setOrderByClause(" config_order");
 		return selectByExample(example);
 	}
 
