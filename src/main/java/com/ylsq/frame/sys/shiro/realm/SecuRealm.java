@@ -23,13 +23,16 @@ import com.ylsq.frame.common.base.SysParamEnum;
 import com.ylsq.frame.common.base.SystemConstants;
 import com.ylsq.frame.common.util.PasswordUtils;
 import com.ylsq.frame.sys.base.dao.model.SysParamValue;
+import com.ylsq.frame.sys.base.dao.model.SysProfile;
 import com.ylsq.frame.sys.base.service.SysParamValueService;
+import com.ylsq.frame.sys.base.service.SysProfileService;
 import com.ylsq.frame.sys.secu.custobj.MenuObject;
 import com.ylsq.frame.sys.secu.dao.model.SecuMenu;
 import com.ylsq.frame.sys.secu.dao.model.SecuUser;
 import com.ylsq.frame.sys.secu.service.SecuMenuService;
 import com.ylsq.frame.sys.secu.service.SecuUserService;
 import com.ylsq.frame.sys.secu.sorter.MenuSorter;
+import com.ylsq.frame.sys.shiro.utils.ShiroSessionUtil;
 
 public class SecuRealm extends AuthenticatingRealm {
 	private static Logger log = LoggerFactory.getLogger(SecuRealm.class);
@@ -40,6 +43,8 @@ public class SecuRealm extends AuthenticatingRealm {
 	private SecuMenuService secuMenuService;
 	@Autowired
 	private SysParamValueService sysParamValueService;
+	@Autowired
+	private SysProfileService sysProfileService;
 	
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
@@ -77,7 +82,10 @@ public class SecuRealm extends AuthenticatingRealm {
 		}
 		SecurityUtils.getSubject().getSession().setAttribute(SystemConstants.System_Menu_Key, menuMap);
 		SecurityUtils.getSubject().getSession().setAttribute(SystemConstants.System_Login, userName);
-		SecurityUtils.getSubject().getSession().setAttribute("pageSize", SystemConstants.Default_Page_Size);
+		
+		/*setup User Profile*/
+		SysProfile profile = sysProfileService.selectByLogin(userName);
+		ShiroSessionUtil.replace("pageSize", profile.getPageSize());
 		
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userName, passwd, getName());
 		

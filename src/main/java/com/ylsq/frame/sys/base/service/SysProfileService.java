@@ -10,4 +10,16 @@ import com.ylsq.frame.sys.base.dao.model.SysProfileExample;
 */
 public interface SysProfileService extends BaseService<SysProfile, SysProfileExample> {
 
+	/**
+	 * 根据登录名查询配置
+	 * @param login
+	 * @return
+	 */
+	public SysProfile selectByLogin(String login);
+	
+	/**
+	 * 创建一个默认配置
+	 * @return
+	 */
+	public SysProfile buildDefault(String login);
 }

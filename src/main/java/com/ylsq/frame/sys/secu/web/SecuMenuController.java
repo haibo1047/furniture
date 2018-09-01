@@ -96,6 +96,8 @@ public class SecuMenuController extends BaseController {
 		}
 		return ValidateResult.Passed;
 	}
+	
+	
 	@RequestMapping(value= "/save", method = RequestMethod.POST)
 	public String save(SecuMenu menu,ModelMap modelMap) {
 		log.debug(menu.toString());
