@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,17 @@ public class SecuRoleController extends BaseController {
 	@Autowired
 	private SecuRoleMenuService secuRoleMenuService;
 	
+	@Override
+	public String list(@RequestParam(required = false, defaultValue = "1", value = "pageNum") int pageNum,ModelMap modelMap) {
+		// TODO Auto-generated method stub
+		int pageSize = (int)SecurityUtils.getSubject().getSession().getAttribute("pageSize");
+		List<SecuRole> list = secuRoleService.selectByExampleForStartPage(new SecuRoleExample(),pageNum,pageSize);
+		
+		modelMap.put("modelList", list);
+		modelMap.put("total", secuRoleService.countByExample(new SecuRoleExample()));
+		return webPrefix() + "list";
+	}
+
 	@Override
 	public String delete(@PathVariable(name="ids") String ids, ModelMap modelMap) {
 		// TODO Auto-generated method stub
@@ -211,13 +223,6 @@ public class SecuRoleController extends BaseController {
 	protected BaseService<? extends BaseModel, ? extends BaseExample> getService() {
 		// TODO Auto-generated method stub
 		return secuRoleService;
-	}
-
-	@Override
-	protected List<? extends BaseModel> getModelList() {
-		// TODO Auto-generated method stub
-		List<SecuRole> list = secuRoleService.selectByExample(new SecuRoleExample());
-		return list;
 	}
 
 	@Override

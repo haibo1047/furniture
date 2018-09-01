@@ -37,7 +37,6 @@ public class TzEncryptTerminalController extends BaseController {
 	public String list(@RequestParam(required = false, defaultValue = "1", value = "pageNum")int pageNum, ModelMap modelMap) {
 		// TODO Auto-generated method stub
 		int pageSize = (int)SecurityUtils.getSubject().getSession().getAttribute("pageSize");
-		pageSize=1;
 		modelMap.put("modelList", tzEncryptTerminalService.selectByExampleForStartPage(new TzEncryptTerminalExample(), pageNum, pageSize));
 		modelMap.put("total", tzEncryptTerminalService.countByExample(new TzEncryptTerminalExample()));
 		modelMap.put("statusList", getParams("terminal_status"));

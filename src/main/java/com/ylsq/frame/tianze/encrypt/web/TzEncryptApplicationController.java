@@ -37,7 +37,6 @@ public class TzEncryptApplicationController extends BaseController {
 	public String list(@RequestParam(required = false, defaultValue = "1", value = "pageNum")int pageNum,ModelMap modelMap) {
 		// TODO Auto-generated method stub
 		int pageSize = (int)SecurityUtils.getSubject().getSession().getAttribute("pageSize");
-		pageSize = 1;
 		modelMap.put("modelList", tzEncryptApplicationService.selectByExampleForStartPage(new TzEncryptApplicationExample(), pageNum, pageSize));
 		modelMap.put("total", tzEncryptApplicationService.countByExample(new TzEncryptApplicationExample()));
 		modelMap.put("appTypeList", getParams(SysParamEnum.Application_Type.getConstant()));

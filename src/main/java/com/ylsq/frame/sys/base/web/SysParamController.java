@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ylsq.frame.common.base.BaseController;
 import com.ylsq.frame.common.base.BaseExample;
@@ -199,6 +201,15 @@ public class SysParamController extends BaseController {
 		return webPrefix() + "configList";
 	}
 	
+	@Override
+	public String list(@RequestParam(required = false, defaultValue = "1", value = "pageNum") int pageNum, ModelMap modelMap) {
+		// TODO Auto-generated method stub
+		int pageSize = (int)SecurityUtils.getSubject().getSession().getAttribute("pageSize");
+		List<SysParam> list =  sysParamService.selectByExampleForStartPage(new SysParamExample(), pageNum, pageSize);
+		modelMap.put("modelList", list);
+		modelMap.put("total", sysParamService.countByExample(new SysParamExample()));
+		return webPrefix() + "list";
+	}
 	@RequestMapping(value= "/save", method = RequestMethod.POST)
 	public String save(SysParam param,ModelMap modelMap) {
 		log.debug(param.toString());
@@ -216,12 +227,6 @@ public class SysParamController extends BaseController {
 	protected BaseService<? extends BaseModel, ? extends BaseExample> getService() {
 		// TODO Auto-generated method stub
 		return sysParamService;
-	}
-
-	@Override
-	protected List<? extends BaseModel> getModelList() {
-		// TODO Auto-generated method stub
-		return sysParamService.selectByExample(new SysParamExample());
 	}
 
 	@Override

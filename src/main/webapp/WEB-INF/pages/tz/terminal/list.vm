@@ -1,63 +1,60 @@
-  
-  <div class="title_left">
+ <div class="title_left">
     <h3>终端设备</h3>
-  </div>
-   <div class="x_content">
-
-<p style="display:none">
-	<button type="button" class="btn btn-round btn-primary" onclick="create()">Create</button>
-	<button type="button" class="btn btn-round btn-primary" onclick="deletemultiple()">Delete</button>
-</p>
-
-<div class="table-responsive">
-  <table class="table table-striped jambo_table bulk_action">
-    <thead>
-      <tr class="headings">
-        <th>
-          <input type="checkbox" id="check-all" class="flat">
-        </th>
-        <th class="column-title"> 登录名 </th>
-        <th class="column-title"> 终端状态 </th>
-        <th class="column-title"> 终端名称 </th>
-        <th class="column-title"> MAC地址 </th>
-        <th class="column-title"> 最后登录时间 </th>
-        <th class="column-title"> IP </th>
-        <th class="column-title"> 版本号 </th>
-        <th class="column-title"> 设备型号 </th>
-        <th class="column-title no-link last" style="display:none">
-        	<span class="nobr">
-        		Operation
-        	</span>
-        </th>
-        <th class="bulk-actions" colspan="9">
-          <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-        </th>
-      </tr>
-    </thead>
-
-    <tbody>
-    	#foreach ($model in $modelList)
-    
-      <tr class="#if($foreach.count %2 ==0) even #else odd #end pointer">
-        <td class="a-center ">
-          <input type="checkbox" class="flat" name="table_records" value="$!{model.id}">
-        </td>
-        <td class=" "> $!{model.loginId} </td>
-        <td class=" "> #dictDisplay($statusList $model.terminalStatus "value1" "value2") </td>
-        <td class=" "> $!{model.terminalName} </td>
-        <td class=" "> $!{model.mac} </td>
-        <td class=" "> $!date.format("yyyy-MM-dd HH:mm:ss",$!model.lastLoginTime ) </td>
-        <td class=" "> $!{model.ip} </td>
-        <td class=" "> $!{model.versionNum} </td>
-        <td class=" "> $!{model.modelNum} </td>
-        <td class=" last" style="display:none">
-			<a href="#" onclick="editRecord(this)">Edit</a> &nbsp;
-			<a href="#" onclick="delRecord(this)">Delete</a> &nbsp;
-        </td>
-      </tr>
-      #end
-    </tbody>
-  </table>
+</div>
+<div class="x_content">
+	
+	<p style="display:none">
+		<button type="button" class="btn btn-round btn-primary" onclick="create()">Create</button>
+		<button type="button" class="btn btn-round btn-primary" onclick="deletemultiple()">Delete</button>
+	</p>
+	
+	<div class="table-responsive">
+	  	<table class="table table-striped jambo_table bulk_action">
+	    	<thead>
+	      		<tr class="headings">
+			        <th>
+			          <input type="checkbox" id="check-all" class="flat">
+			        </th>
+			        <th class="column-title"> 登录名 </th>
+			        <th class="column-title"> 终端状态 </th>
+			        <th class="column-title"> 终端名称 </th>
+			        <th class="column-title"> MAC地址 </th>
+			        <th class="column-title"> 最后登录时间 </th>
+			        <th class="column-title"> IP </th>
+			        <th class="column-title"> 版本号 </th>
+			        <th class="column-title"> 设备型号 </th>
+			        <th class="column-title no-link last" style="display:none">
+			        	<span class="nobr">
+			        		Operation
+			        	</span>
+			        </th>
+			        <th class="bulk-actions" colspan="9">
+			          <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+			        </th>
+	     		</tr>
+	    	</thead>
+	    	<tbody>
+	    	#foreach ($model in $modelList)
+	      		<tr class="#if($foreach.count %2 ==0) even #else odd #end pointer">
+			        <td class="a-center ">
+			          <input type="checkbox" class="flat" name="table_records" value="$!{model.id}">
+			        </td>
+			        <td class=" "> $!{model.loginId} </td>
+			        <td class=" "> #dictDisplay($statusList $model.terminalStatus "value1" "value2") </td>
+			        <td class=" "> $!{model.terminalName} </td>
+			        <td class=" "> $!{model.mac} </td>
+			        <td class=" "> $!date.format("yyyy-MM-dd HH:mm:ss",$!model.lastLoginTime ) </td>
+			        <td class=" "> $!{model.ip} </td>
+			        <td class=" "> $!{model.versionNum} </td>
+			        <td class=" "> $!{model.modelNum} </td>
+			        <td class=" last" style="display:none">
+						<a href="#" onclick="editRecord(this)">Edit</a> &nbsp;
+						<a href="#" onclick="delRecord(this)">Delete</a> &nbsp;
+			        </td>
+	      		</tr>
+	      		#end
+	    	</tbody>
+	  	</table>
 	</div>
 	
 	#parse("include/pagination.vm")

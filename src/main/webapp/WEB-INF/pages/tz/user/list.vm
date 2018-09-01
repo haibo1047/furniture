@@ -1,9 +1,7 @@
-  
 <div class="title_left">
 	<h3>机构用户</h3>
 </div>
 <div class="x_content">
-	
 	<div class="col-md-3"  style="border-right:dash;height:500px;">
 		<div class="clearfix"></div>
 		<div id="jstree_org">

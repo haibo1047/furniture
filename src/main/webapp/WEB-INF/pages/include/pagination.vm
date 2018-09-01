@@ -5,20 +5,20 @@
 #set($totalPages = ${total}*1.0/${pageSize})
 #set($totalPages = $math.ceil($totalPages))
 #set($totalPages_1 = $totalPages - 1 )
+#set($totalPages_1 = $math.max( 0, $totalPages_1 ) )
 #set($pageNum = ${modelList.pageNum})
-#set( $the1st = $pageNum - $aroundIndex )
-#set( $the2nd = $pageNum + $aroundIndex )
+#set($the1st = $pageNum - $aroundIndex )
+#set($the2nd = $pageNum + $aroundIndex )
 #if($the1st <= 2)
 	#set( $the2nd = 2 + $aroundIndex*2  )
 #end
 #if($the2nd >= $totalPages)
 	#set( $the1st = $totalPages_1 - $aroundIndex*2  )
 #end
-#set( $the1st = $math.max(2, $the1st ) )
-#set( $the1st = $math.min($the1st, $totalPages) )
+#set($the1st = $math.max(2, $the1st ) )
+#set($the1st = $math.min($the1st, $totalPages) )
 
-#set( $the2nd = $math.min($totalPages, $the2nd )  )
-#set( $the2nd = $math.min($totalPages_1, $the2nd )  )
+#set($the2nd = $math.min($totalPages_1, $the2nd )  )
 
 <script>
 function gotopage(pageNum){
@@ -27,10 +27,12 @@ function gotopage(pageNum){
 </script>
 
 <div class="row">
-	<div class="col-sm-5">
-		<div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">Showing ${pageNum}/${totalPages} page of ${total} entries</div>
+	<div class="col-sm-6">
+		<div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">
+		Showing ${pageNum}/${totalPages} page of ${total} entries  ##[for debug 1st: $the1st / 2nd: $the2nd]
+		</div>
 	</div>
-	<div class="col-sm-7">
+	<div class="col-sm-6">
 		<div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
 			<ul class="pagination">
 				<li class="paginate_button previous #if($pageNum <= 1) disabled #end" id="datatable_previous">
@@ -42,7 +44,7 @@ function gotopage(pageNum){
 				</li>
 				#end
 				##if($totalPages > $aroundIndex*2)
-				#if($the2nd > $the1st)
+				#if($the2nd >= $the1st)
 					#foreach( $i  in [$the1st..$the2nd])
 					<li class="paginate_button #if($i == $pageNum) active #end ">
 						<a href="#" aria-controls="datatable" onclick="gotopage($i)">$i</a>
