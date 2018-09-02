@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ylsq.frame.common.base.BaseController;
+import com.ylsq.frame.common.base.BaseModelController;
 import com.ylsq.frame.common.base.BaseExample;
 import com.ylsq.frame.common.base.BaseModel;
 import com.ylsq.frame.common.base.BaseService;
@@ -38,7 +38,7 @@ import com.ylsq.frame.tianze.encrypt.service.TzEncryptClientService;
  */
 @Controller
 @RequestMapping("/tz/client")
-public class TzEncryptClientController extends BaseController {
+public class TzEncryptClientController extends BaseModelController {
     private static final Logger log = LoggerFactory.getLogger(TzEncryptClientController.class);
 	
 	@Autowired

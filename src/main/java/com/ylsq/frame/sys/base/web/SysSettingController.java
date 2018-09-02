@@ -86,6 +86,7 @@ public class SysSettingController extends BaseController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String save(HttpServletRequest request,ModelMap modelMap) throws Exception{
+		@SuppressWarnings("unchecked")
 		Enumeration<String> pns = request.getParameterNames();
 		Map<String,String> valueMap = new HashMap<>();
 		Long valueId = 0l;

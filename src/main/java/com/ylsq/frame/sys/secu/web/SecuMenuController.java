@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ylsq.frame.common.base.BaseController;
+import com.ylsq.frame.common.base.BaseModelController;
 import com.ylsq.frame.common.base.BaseService;
 import com.ylsq.frame.common.base.SysParamEnum;
 import com.ylsq.frame.common.base.ValidateResult;
@@ -28,7 +28,7 @@ import com.ylsq.frame.sys.secu.service.SecuRoleMenuService;
 
 @Controller
 @RequestMapping("/sys/menu/")
-public class SecuMenuController extends BaseController {
+public class SecuMenuController extends BaseModelController {
 	private static Logger log = LoggerFactory.getLogger(SecuMenuController.class);
 	
 	@Autowired

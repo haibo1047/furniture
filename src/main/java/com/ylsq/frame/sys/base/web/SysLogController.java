@@ -11,7 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ylsq.frame.common.base.BaseController;
+import com.ylsq.frame.common.base.BaseModelController;
 import com.ylsq.frame.common.base.SysParamEnum;
 import com.ylsq.frame.sys.base.dao.model.SysLog;
 import com.ylsq.frame.sys.base.dao.model.SysLogExample;
@@ -24,7 +24,7 @@ import com.ylsq.frame.sys.base.service.SysLogService;
  */
 @Controller
 @RequestMapping("/sys/log")
-public class SysLogController extends BaseController {
+public class SysLogController extends BaseModelController {
     private static final Logger log = LoggerFactory.getLogger(SysLogController.class);
 	
 	@Autowired

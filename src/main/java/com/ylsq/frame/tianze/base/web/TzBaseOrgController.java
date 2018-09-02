@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ylsq.frame.common.base.BaseController;
+import com.ylsq.frame.common.base.BaseModelController;
 import com.ylsq.frame.common.base.BaseExample;
 import com.ylsq.frame.common.base.BaseModel;
 import com.ylsq.frame.common.base.BaseService;
@@ -29,7 +29,7 @@ import com.ylsq.frame.tianze.base.service.TzBaseUserService;
 
 @Controller
 @RequestMapping("/tz/org")
-public class TzBaseOrgController extends BaseController {
+public class TzBaseOrgController extends BaseModelController {
 	private static Logger log = LoggerFactory.getLogger(TzBaseOrgController.class);
 	
 	@Autowired
