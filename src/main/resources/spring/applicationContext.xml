@@ -11,16 +11,14 @@
           http://www.springframework.org/schema/task
           http://www.springframework.org/schema/task/spring-task.xsd">
 
-	<!-- 装载service -->
-	<context:component-scan base-package="**.service" />
-	<context:component-scan base-package="**.quartz" />
-
-	<!-- 启动时初始化Spring上下文环境工具类 -->
-	<bean id="springContextUtil" class="com.ylsq.frame.common.util.SpringContextUtil"></bean>
 
 	<!-- 启动任务注解 -->
 	<task:annotation-driven />
-	<context:component-scan base-package="**.task" />
+	
+	<context:component-scan base-package="**.service" />
+	
+	<!-- 启动时初始化Spring上下文环境工具类 -->
+	<bean id="springContextUtil" class="com.ylsq.frame.common.util.SpringContextUtil"></bean>
 
 	<!-- 上传文件配置 20*1024*1024即20M resolveLazily属性启用是为了推迟文件解析，以便捕获文件大小异常 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

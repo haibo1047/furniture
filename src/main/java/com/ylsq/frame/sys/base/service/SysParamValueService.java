@@ -18,4 +18,21 @@ public interface SysParamValueService extends BaseService<SysParamValue, SysPara
 	 * @return
 	 */
 	public List<SysParamValue> selectByParamName(String paramName);
+	
+	/**
+	 * 根据值索引查询值
+	 * @param value
+	 * @param valueIndex
+	 * @return
+	 */
+	public String getValue(SysParamValue paramValue, int valueIndex);
+	
+	/**
+	 * 根据索引设置参数值
+	 * @param paramValue
+	 * @param valueIndex
+	 * @param value
+	 * @return
+	 */
+	public boolean setValue(SysParamValue paramValue, int valueIndex, String value);
 }

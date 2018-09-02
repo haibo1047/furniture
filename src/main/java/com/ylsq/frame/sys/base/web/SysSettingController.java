@@ -1,7 +1,6 @@
 package com.ylsq.frame.sys.base.web;
 
 import java.io.File;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -74,8 +73,7 @@ public class SysSettingController extends BaseController {
 			st.setDataLength(spc.getDataLength());
 			settings.add(st);
 			if(value != null) {
-				Method mtd = SysParamValue.class.getMethod("getValue"+index , null);
-				String currValue = mtd.invoke(value, null).toString();
+				String currValue = sysParamValueService.getValue(value, index);
 				st.setValue(currValue);
 			}
 			index++;
@@ -108,8 +106,7 @@ public class SysSettingController extends BaseController {
 			if(pvalue.equals(st.getValue())) {
 				continue;
 			}
-			Method mtd = SysParamValue.class.getMethod("setValue"+st.getValueIndex() , String.class);
-			mtd.invoke(thevalue, pvalue);
+			sysParamValueService.setValue(thevalue, st.getValueIndex(), pvalue);
 			st.setValue(pvalue);
 			updated = true;
 		}
