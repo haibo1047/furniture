@@ -5,6 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="param_name" jdbcType="VARCHAR" property="paramName" />
     <result column="param_description" jdbcType="VARCHAR" property="paramDescription" />
+    <result column="not_allow_edit" jdbcType="INTEGER" property="notAllowEdit" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="rec_status" jdbcType="INTEGER" property="recStatus" />
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, param_name, param_description, create_time, create_user, rec_status
+    id, param_name, param_description, not_allow_edit, create_time, create_user, rec_status
   </sql>
   <select id="selectByExample" parameterType="com.ylsq.frame.sys.base.dao.model.SysParamExample" resultMap="BaseResultMap">
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.ylsq.frame.sys.base.dao.model.SysParam">
     insert into sys_param (id, param_name, param_description, 
-      create_time, create_user, rec_status
-      )
+      not_allow_edit, create_time, create_user, 
+      rec_status)
     values (#{id,jdbcType=BIGINT}, #{paramName,jdbcType=VARCHAR}, #{paramDescription,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{recStatus,jdbcType=INTEGER}
-      )
+      #{notAllowEdit,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
+      #{recStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ylsq.frame.sys.base.dao.model.SysParam">
     insert into sys_param
@@ -119,6 +120,9 @@
       </if>
       <if test="paramDescription != null">
         param_description,
+      </if>
+      <if test="notAllowEdit != null">
+        not_allow_edit,
       </if>
       <if test="createTime != null">
         create_time,
@@ -139,6 +143,9 @@
       </if>
       <if test="paramDescription != null">
         #{paramDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="notAllowEdit != null">
+        #{notAllowEdit,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -169,6 +176,9 @@
       <if test="record.paramDescription != null">
         param_description = #{record.paramDescription,jdbcType=VARCHAR},
       </if>
+      <if test="record.notAllowEdit != null">
+        not_allow_edit = #{record.notAllowEdit,jdbcType=INTEGER},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -188,6 +198,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       param_name = #{record.paramName,jdbcType=VARCHAR},
       param_description = #{record.paramDescription,jdbcType=VARCHAR},
+      not_allow_edit = #{record.notAllowEdit,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       create_user = #{record.createUser,jdbcType=VARCHAR},
       rec_status = #{record.recStatus,jdbcType=INTEGER}
@@ -203,6 +214,9 @@
       </if>
       <if test="paramDescription != null">
         param_description = #{paramDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="notAllowEdit != null">
+        not_allow_edit = #{notAllowEdit,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -220,6 +234,7 @@
     update sys_param
     set param_name = #{paramName,jdbcType=VARCHAR},
       param_description = #{paramDescription,jdbcType=VARCHAR},
+      not_allow_edit = #{notAllowEdit,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_user = #{createUser,jdbcType=VARCHAR},
       rec_status = #{recStatus,jdbcType=INTEGER}

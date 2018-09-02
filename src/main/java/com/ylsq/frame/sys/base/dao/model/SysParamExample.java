@@ -309,6 +309,66 @@ public class SysParamExample implements BaseExample, Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andNotAllowEditIsNull() {
+            addCriterion("not_allow_edit is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotAllowEditIsNotNull() {
+            addCriterion("not_allow_edit is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotAllowEditEqualTo(Integer value) {
+            addCriterion("not_allow_edit =", value, "notAllowEdit");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotAllowEditNotEqualTo(Integer value) {
+            addCriterion("not_allow_edit <>", value, "notAllowEdit");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotAllowEditGreaterThan(Integer value) {
+            addCriterion("not_allow_edit >", value, "notAllowEdit");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotAllowEditGreaterThanOrEqualTo(Integer value) {
+            addCriterion("not_allow_edit >=", value, "notAllowEdit");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotAllowEditLessThan(Integer value) {
+            addCriterion("not_allow_edit <", value, "notAllowEdit");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotAllowEditLessThanOrEqualTo(Integer value) {
+            addCriterion("not_allow_edit <=", value, "notAllowEdit");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotAllowEditIn(List<Integer> values) {
+            addCriterion("not_allow_edit in", values, "notAllowEdit");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotAllowEditNotIn(List<Integer> values) {
+            addCriterion("not_allow_edit not in", values, "notAllowEdit");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotAllowEditBetween(Integer value1, Integer value2) {
+            addCriterion("not_allow_edit between", value1, value2, "notAllowEdit");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotAllowEditNotBetween(Integer value1, Integer value2) {
+            addCriterion("not_allow_edit not between", value1, value2, "notAllowEdit");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;

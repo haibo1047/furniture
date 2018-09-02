@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ylsq.frame.common.base.BaseModelController;
 import com.ylsq.frame.common.base.BaseExample;
 import com.ylsq.frame.common.base.BaseModel;
+import com.ylsq.frame.common.base.BaseModelController;
 import com.ylsq.frame.common.base.BaseService;
 import com.ylsq.frame.common.base.SysParamEnum;
 import com.ylsq.frame.common.base.ValidateResult;
@@ -214,9 +214,19 @@ public class SysParamController extends BaseModelController {
 		int pageSize = (int)SecurityUtils.getSubject().getSession().getAttribute("pageSize");
 		List<SysParam> list =  sysParamService.selectByExampleForStartPage(new SysParamExample(), pageNum, pageSize);
 		modelMap.put("modelList", list);
+		modelMap.put("alternative", getParams(SysParamEnum.Alternative.getConstant()));
 		modelMap.put("total", sysParamService.countByExample(new SysParamExample()));
 		return webPrefix() + "list";
 	}
+	
+	
+	@Override
+	protected void beforeEdit(ModelMap modelMap) {
+		// TODO Auto-generated method stub
+		modelMap.put("alternative", getParams(SysParamEnum.Alternative.getConstant()));
+		super.beforeEdit(modelMap);
+	}
+
 	@RequestMapping(value= "/save", method = RequestMethod.POST)
 	public String save(SysParam param,ModelMap modelMap) {
 		log.debug(param.toString());
