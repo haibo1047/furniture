@@ -17,6 +17,7 @@
       <input type="text" id="username" name="userName" value="$!{model.userName}" required="required" class="form-control col-md-7 col-xs-12">
     </div>
   </div>
+  #if(!${model.id})
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Password <span class="required">*</span>
     </label>
@@ -24,6 +25,7 @@
       <input type="password" id="password" name="password" value="$!{model.password}" required="required" class="form-control col-md-7 col-xs-12">
     </div>
   </div>
+  #end
   <div class="form-group">
     <label for="Phone" class="control-label col-md-3 col-sm-3 col-xs-12"> Real Name </label>
     <div class="col-md-6 col-sm-6 col-xs-12">

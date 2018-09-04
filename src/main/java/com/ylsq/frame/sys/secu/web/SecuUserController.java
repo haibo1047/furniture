@@ -156,7 +156,8 @@ public class SecuUserController extends BaseController {
 			secuUserService.insert(user);
 		}
 		else {
-			secuUserService.updateByPrimaryKey(user);
+			user.setPassword(null);//密码不能在编辑页面更改
+			secuUserService.updateByPrimaryKeySelective(user);
 		}
 		return userList(user.getOrgId(), 1, modelMap);
 	}
