@@ -42,4 +42,20 @@ public class SecuUserServiceImpl extends BaseServiceImpl<SecuUserMapper, SecuUse
 		return null;
 	}
 
+	@Override
+	public List<SecuUser> selectByOrgId(long orgId, int pageNum, int pageSize) {
+		// TODO Auto-generated method stub
+		SecuUserExample example = new SecuUserExample();
+		example.createCriteria().andOrgIdEqualTo(orgId);
+		return selectByExampleForStartPage(example, pageNum, pageSize);
+	}
+
+	@Override
+	public int countbyOrgId(long orgId) {
+		// TODO Auto-generated method stub
+		SecuUserExample example = new SecuUserExample();
+		example.createCriteria().andOrgIdEqualTo(orgId);
+		return countByExample(example);
+	}
+
 }

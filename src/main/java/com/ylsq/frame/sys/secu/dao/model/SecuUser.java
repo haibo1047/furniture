@@ -20,6 +20,13 @@ public class SecuUser implements BaseModel, Serializable {
     private String userName;
 
     /**
+     * 机构id
+     *
+     * @mbg.generated
+     */
+    private Long orgId;
+
+    /**
      * 密码MD5(密码+盐)
      *
      * @mbg.generated
@@ -98,6 +105,14 @@ public class SecuUser implements BaseModel, Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Long getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(Long orgId) {
+        this.orgId = orgId;
     }
 
     public String getPassword() {
@@ -180,6 +195,7 @@ public class SecuUser implements BaseModel, Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", userName=").append(userName);
+        sb.append(", orgId=").append(orgId);
         sb.append(", password=").append(password);
         sb.append(", salt=").append(salt);
         sb.append(", realName=").append(realName);
@@ -207,6 +223,7 @@ public class SecuUser implements BaseModel, Serializable {
         SecuUser other = (SecuUser) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
+            && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
             && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
             && (this.getSalt() == null ? other.getSalt() == null : this.getSalt().equals(other.getSalt()))
             && (this.getRealName() == null ? other.getRealName() == null : this.getRealName().equals(other.getRealName()))
@@ -224,6 +241,7 @@ public class SecuUser implements BaseModel, Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getUserName() == null) ? 0 : getUserName().hashCode());
+        result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
         result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
         result = prime * result + ((getSalt() == null) ? 0 : getSalt().hashCode());
         result = prime * result + ((getRealName() == null) ? 0 : getRealName().hashCode());

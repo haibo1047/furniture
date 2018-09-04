@@ -53,6 +53,6 @@ function f_submit(){
 }
 
 function goback(){
-	location = "$rc.contextPath/sys/user/list";
+	location = "$rc.contextPath/sys/user/userlist/${user.orgId}";
 }
 </script>

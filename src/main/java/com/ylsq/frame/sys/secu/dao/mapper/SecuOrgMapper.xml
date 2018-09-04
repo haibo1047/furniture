@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ylsq.frame.sys.secu.dao.mapper.SecuUserMapper">
-  <resultMap id="BaseResultMap" type="com.ylsq.frame.sys.secu.dao.model.SecuUser">
+<mapper namespace="com.ylsq.frame.sys.secu.dao.mapper.SecuOrgMapper">
+  <resultMap id="BaseResultMap" type="com.ylsq.frame.sys.secu.dao.model.SecuOrg">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="org_id" jdbcType="BIGINT" property="orgId" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="salt" jdbcType="VARCHAR" property="salt" />
-    <result column="real_name" jdbcType="VARCHAR" property="realName" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="org_name" jdbcType="VARCHAR" property="orgName" />
+    <result column="org_address" jdbcType="VARCHAR" property="orgAddress" />
+    <result column="found_date" jdbcType="TIMESTAMP" property="foundDate" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="rec_status" jdbcType="INTEGER" property="recStatus" />
@@ -74,16 +70,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_name, org_id, password, salt, real_name, phone, email, gender, create_time, 
-    create_user, rec_status
+    id, parent_id, org_name, org_address, found_date, create_time, create_user, rec_status
   </sql>
-  <select id="selectByExample" parameterType="com.ylsq.frame.sys.secu.dao.model.SecuUserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.ylsq.frame.sys.secu.dao.model.SecuOrgExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from secu_user
+    from secu_org
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -94,60 +89,44 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from secu_user
+    from secu_org
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from secu_user
+    delete from secu_org
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ylsq.frame.sys.secu.dao.model.SecuUserExample">
-    delete from secu_user
+  <delete id="deleteByExample" parameterType="com.ylsq.frame.sys.secu.dao.model.SecuOrgExample">
+    delete from secu_org
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ylsq.frame.sys.secu.dao.model.SecuUser">
-    insert into secu_user (id, user_name, org_id, 
-      password, salt, real_name, 
-      phone, email, gender, 
-      create_time, create_user, rec_status
-      )
-    values (#{id,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{orgId,jdbcType=BIGINT}, 
-      #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{recStatus,jdbcType=INTEGER}
-      )
+  <insert id="insert" parameterType="com.ylsq.frame.sys.secu.dao.model.SecuOrg">
+    insert into secu_org (id, parent_id, org_name, 
+      org_address, found_date, create_time, 
+      create_user, rec_status)
+    values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR}, 
+      #{orgAddress,jdbcType=VARCHAR}, #{foundDate,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=VARCHAR}, #{recStatus,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.ylsq.frame.sys.secu.dao.model.SecuUser">
-    insert into secu_user
+  <insert id="insertSelective" parameterType="com.ylsq.frame.sys.secu.dao.model.SecuOrg">
+    insert into secu_org
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="userName != null">
-        user_name,
+      <if test="parentId != null">
+        parent_id,
       </if>
-      <if test="orgId != null">
-        org_id,
+      <if test="orgName != null">
+        org_name,
       </if>
-      <if test="password != null">
-        password,
+      <if test="orgAddress != null">
+        org_address,
       </if>
-      <if test="salt != null">
-        salt,
-      </if>
-      <if test="realName != null">
-        real_name,
-      </if>
-      <if test="phone != null">
-        phone,
-      </if>
-      <if test="email != null">
-        email,
-      </if>
-      <if test="gender != null">
-        gender,
+      <if test="foundDate != null">
+        found_date,
       </if>
       <if test="createTime != null">
         create_time,
@@ -163,29 +142,17 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
       </if>
-      <if test="orgId != null">
-        #{orgId,jdbcType=BIGINT},
+      <if test="orgName != null">
+        #{orgName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+      <if test="orgAddress != null">
+        #{orgAddress,jdbcType=VARCHAR},
       </if>
-      <if test="salt != null">
-        #{salt,jdbcType=VARCHAR},
-      </if>
-      <if test="realName != null">
-        #{realName,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null">
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        #{gender,jdbcType=VARCHAR},
+      <if test="foundDate != null">
+        #{foundDate,jdbcType=TIMESTAMP},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -198,41 +165,29 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ylsq.frame.sys.secu.dao.model.SecuUserExample" resultType="java.lang.Long">
-    select count(*) from secu_user
+  <select id="countByExample" parameterType="com.ylsq.frame.sys.secu.dao.model.SecuOrgExample" resultType="java.lang.Long">
+    select count(*) from secu_org
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update secu_user
+    update secu_org
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.userName != null">
-        user_name = #{record.userName,jdbcType=VARCHAR},
+      <if test="record.parentId != null">
+        parent_id = #{record.parentId,jdbcType=BIGINT},
       </if>
-      <if test="record.orgId != null">
-        org_id = #{record.orgId,jdbcType=BIGINT},
+      <if test="record.orgName != null">
+        org_name = #{record.orgName,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null">
-        password = #{record.password,jdbcType=VARCHAR},
+      <if test="record.orgAddress != null">
+        org_address = #{record.orgAddress,jdbcType=VARCHAR},
       </if>
-      <if test="record.salt != null">
-        salt = #{record.salt,jdbcType=VARCHAR},
-      </if>
-      <if test="record.realName != null">
-        real_name = #{record.realName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.phone != null">
-        phone = #{record.phone,jdbcType=VARCHAR},
-      </if>
-      <if test="record.email != null">
-        email = #{record.email,jdbcType=VARCHAR},
-      </if>
-      <if test="record.gender != null">
-        gender = #{record.gender,jdbcType=VARCHAR},
+      <if test="record.foundDate != null">
+        found_date = #{record.foundDate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -249,16 +204,12 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update secu_user
+    update secu_org
     set id = #{record.id,jdbcType=BIGINT},
-      user_name = #{record.userName,jdbcType=VARCHAR},
-      org_id = #{record.orgId,jdbcType=BIGINT},
-      password = #{record.password,jdbcType=VARCHAR},
-      salt = #{record.salt,jdbcType=VARCHAR},
-      real_name = #{record.realName,jdbcType=VARCHAR},
-      phone = #{record.phone,jdbcType=VARCHAR},
-      email = #{record.email,jdbcType=VARCHAR},
-      gender = #{record.gender,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=BIGINT},
+      org_name = #{record.orgName,jdbcType=VARCHAR},
+      org_address = #{record.orgAddress,jdbcType=VARCHAR},
+      found_date = #{record.foundDate,jdbcType=TIMESTAMP},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       create_user = #{record.createUser,jdbcType=VARCHAR},
       rec_status = #{record.recStatus,jdbcType=INTEGER}
@@ -266,32 +217,20 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ylsq.frame.sys.secu.dao.model.SecuUser">
-    update secu_user
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylsq.frame.sys.secu.dao.model.SecuOrg">
+    update secu_org
     <set>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
       </if>
-      <if test="orgId != null">
-        org_id = #{orgId,jdbcType=BIGINT},
+      <if test="orgName != null">
+        org_name = #{orgName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
+      <if test="orgAddress != null">
+        org_address = #{orgAddress,jdbcType=VARCHAR},
       </if>
-      <if test="salt != null">
-        salt = #{salt,jdbcType=VARCHAR},
-      </if>
-      <if test="realName != null">
-        real_name = #{realName,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        gender = #{gender,jdbcType=VARCHAR},
+      <if test="foundDate != null">
+        found_date = #{foundDate,jdbcType=TIMESTAMP},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -305,16 +244,12 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ylsq.frame.sys.secu.dao.model.SecuUser">
-    update secu_user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      org_id = #{orgId,jdbcType=BIGINT},
-      password = #{password,jdbcType=VARCHAR},
-      salt = #{salt,jdbcType=VARCHAR},
-      real_name = #{realName,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.ylsq.frame.sys.secu.dao.model.SecuOrg">
+    update secu_org
+    set parent_id = #{parentId,jdbcType=BIGINT},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      org_address = #{orgAddress,jdbcType=VARCHAR},
+      found_date = #{foundDate,jdbcType=TIMESTAMP},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_user = #{createUser,jdbcType=VARCHAR},
       rec_status = #{recStatus,jdbcType=INTEGER}

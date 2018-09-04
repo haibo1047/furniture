@@ -1,5 +1,7 @@
 package com.ylsq.frame.common.base;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +13,11 @@ import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.InitBinder;
 
 import com.ylsq.frame.sys.base.dao.model.SysParamValue;
 import com.ylsq.frame.sys.base.service.SysParamValueService;
@@ -23,6 +28,13 @@ public abstract class BaseController {
 	
 	@Autowired
 	protected SysParamValueService sysParamValueService;
+
+	@InitBinder
+    public void InitBinder(WebDataBinder binder){
+        DateFormat dateFormat = new SimpleDateFormat(SystemConstants.NormalDF);
+        dateFormat.setLenient(true);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
 	
 	protected List<SysParamValue> getParams(String paramName){
 		return sysParamValueService.selectByParamName(paramName);

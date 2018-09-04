@@ -143,12 +143,18 @@ public class SecuRoleController extends BaseModelController {
 		for(SecuRoleMenu srm: mappingList)
 			existingMap.put(srm.getRoleName(), srm);
 		
+		List<SecuMenu> allMenus = secuMenuService.selectByExample(new SecuMenuExample());
+		Set<String> allMenuNames = new HashSet<>();
+		for(SecuMenu sm : allMenus)
+			allMenuNames.add(sm.getMenuName());
 		String[] idArray = StringUtils.defaultIfEmpty(selectedMenuIds, "").split(",");
 		for(String menuName : idArray) {
 			if(existingMap.keySet().contains(menuName)) {
 				mappingList.remove(existingMap.get(menuName));
 			}
 			else {
+				if(!allMenuNames.contains(menuName))
+					continue;
 				SecuRoleMenu srm = new SecuRoleMenu();
 				srm.setRoleName(roleName);
 				srm.setMenuName(menuName);
