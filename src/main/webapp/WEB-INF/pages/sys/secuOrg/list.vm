@@ -9,14 +9,22 @@
 			<ul>
 				<li id="0"> Root
 					<ul>
-					#foreach($treenode in $modelList)
-				   		<li id="${treenode.id}">${treenode.orgName}
-					   		#if($treenode.subOrgs)
-					   			<ul>
-								#foreach($subnode in $!{treenode.subOrgs} )
-							   		<li id="${subnode.id}">${subnode.orgName}</li>
+					#foreach($lv1node in $orgList)
+				   		<li id="${lv1node.id}">${lv1node.orgName}
+					   		#if($lv1node.subOrgs)
+					   			<ul>##level2 start
+								#foreach($lv2node in $!{lv1node.subOrgs} )
+							   		<li id="${lv2node.id}">${lv2node.orgName}
+								   		#if($lv2node.subOrgs)
+								   			<ul>##level3 start
+											#foreach($lv3node in $!{lv2node.subOrgs} )
+										   		<li id="${lv3node.id}">${lv3node.orgName}</li>
+											#end
+											</ul>##level3 end
+								   		#end
+							   		</li>
 								#end
-								</ul>
+								</ul>##level2 end
 					   		#end
 				   		</li>
 					#end
@@ -54,7 +62,7 @@
 				</thead>
 		
 				<tbody>
-					#foreach ($le in $subList)
+					#foreach ($le in $modelList)
 				
 				  	<tr class="#if($foreach.count %2 ==0) even #else odd #end pointer">
 					    <td class="a-center ">
@@ -86,6 +94,11 @@ function frameinit(){
 			"core" : 
 			{
 				"themes" : {"variant" : ""},
+			},
+			"types" : {
+				"default" : {
+					"icon" : "glyphicon glyphicon-flash"
+				}
 			},
 			"plugins" : [ "search", "types"]
 		}

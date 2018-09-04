@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ylsq.frame.common.base.BaseModelController;
 import com.ylsq.frame.common.base.BaseExample;
 import com.ylsq.frame.common.base.BaseModel;
+import com.ylsq.frame.common.base.BaseModelController;
 import com.ylsq.frame.common.base.BaseService;
+import com.ylsq.frame.common.base.SystemConstants;
 import com.ylsq.frame.common.base.ValidateResult;
 import com.ylsq.frame.common.util.PasswordUtils;
 import com.ylsq.frame.tianze.base.TianzeConstant;
@@ -44,7 +45,7 @@ public class TzBaseUserController extends BaseModelController {
 	
 	@RequestMapping("/userlist")
 	public String userList(ModelMap modelMap) {
-		return userList(TianzeConstant.Root_Org_Id, modelMap);
+		return userList(SystemConstants.Root_Org_Id, modelMap);
 	}
 	
 	@RequestMapping("/userlist/{orgId}")
@@ -91,7 +92,7 @@ public class TzBaseUserController extends BaseModelController {
 	
 	@RequestMapping(value= "/createUser", method = RequestMethod.GET)
 	public String create(@RequestParam("orgId") Long orgId, ModelMap modelMap) {
-		beforeEditOrg(orgId, modelMap);
+		beforeEdit(orgId, modelMap);
 		return webPrefix()+"edit";
 	}
 	
@@ -99,16 +100,16 @@ public class TzBaseUserController extends BaseModelController {
 	public String edit(@PathVariable(name="id") String id,ModelMap modelMap) {
 		log.debug(id);
 		TzBaseUser model = tzBaseUserService.selectByPrimaryKey(Long.parseLong(id));
-		beforeEditOrg(model.getOrgId(), modelMap);
+		beforeEdit(model.getOrgId(), modelMap);
 		modelMap.put("model", model);
 		return webPrefix()+"edit";
 	}
 	
-	protected void beforeEditOrg(Long orgId, ModelMap modelMap) {
+	protected void beforeEdit(Long orgId, ModelMap modelMap) {
 		TzBaseOrg org = new TzBaseOrg();
-		if(orgId == TianzeConstant.Root_Org_Id) {
+		if(orgId == SystemConstants.Root_Org_Id) {
 			org.setOrgName("Root");
-			org.setId(TianzeConstant.Root_Org_Id);
+			org.setId(SystemConstants.Root_Org_Id);
 		}
 		else {
 			org = tzBaseOrgService.selectByPrimaryKey(orgId);

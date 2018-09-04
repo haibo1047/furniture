@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ylsq.frame.common.base.BaseController;
 import com.ylsq.frame.common.base.SystemConstants;
 import com.ylsq.frame.common.base.ValidateResult;
+import com.ylsq.frame.sys.secu.custobj.CustOrg;
 import com.ylsq.frame.sys.secu.dao.model.SecuOrg;
 import com.ylsq.frame.sys.secu.dao.model.SecuOrgExample;
 import com.ylsq.frame.sys.secu.service.SecuOrgService;
 import com.ylsq.frame.sys.secu.service.SecuUserService;
-import com.ylsq.frame.tianze.base.TianzeConstant;
 
 
 
@@ -43,12 +43,12 @@ public class SecuOrgController extends BaseController {
 	@RequestMapping(value = "/orglist", method = RequestMethod.GET)
 	public String list(@RequestParam(required = false, defaultValue = "0", value = "parentId") Long parentId,ModelMap modelMap) {
 		// TODO Auto-generated method stub
-		List<SecuOrg> list = secuOrgService.selectByExample(new SecuOrgExample());
+		List<SecuOrg> secuOrgs = secuOrgService.selectByExample(new SecuOrgExample());
+		List<CustOrg> orgList = secuOrgService.buildCustomOrgs(secuOrgs);
 		List<SecuOrg> subList = secuOrgService.selectByParentId(parentId);
 		modelMap.put("parentId", parentId);
-		modelMap.put("subList", subList);
-		modelMap.put("modelList", list);
-		modelMap.put("total", secuOrgService.countByExample(new SecuOrgExample()));
+		modelMap.put("modelList", subList);
+		modelMap.put("orgList", orgList);
 		return webPrefix() + "list";
 	}
 	
@@ -74,9 +74,9 @@ public class SecuOrgController extends BaseController {
 	protected void beforeEditOrg(Long parentId, ModelMap modelMap) {
 		// TODO Auto-generated method stub
 		SecuOrg parentOrg = new SecuOrg();
-		if(parentId == TianzeConstant.Root_Org_Id) {
+		if(parentId == SystemConstants.Root_Org_Id) {
 			parentOrg.setOrgName("Root");
-			parentOrg.setId(TianzeConstant.Root_Org_Id);
+			parentOrg.setId(SystemConstants.Root_Org_Id);
 		}
 		else {
 			parentOrg = secuOrgService.selectByPrimaryKey(parentId);

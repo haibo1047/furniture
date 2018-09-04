@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ylsq.frame.common.annotation.BaseService;
 import com.ylsq.frame.common.base.BaseServiceImpl;
-import com.ylsq.frame.tianze.base.TianzeConstant;
+import com.ylsq.frame.common.base.SystemConstants;
 import com.ylsq.frame.tianze.base.custobj.CustOrg;
 import com.ylsq.frame.tianze.base.dao.mapper.TzBaseOrgMapper;
 import com.ylsq.frame.tianze.base.dao.model.TzBaseOrg;
@@ -64,7 +64,7 @@ public class TzBaseOrgServiceImpl extends BaseServiceImpl<TzBaseOrgMapper, TzBas
 		for(TzBaseOrg e : list) {
 			CustOrg org = new CustOrg(e);
 			orgMap.put(e.getId(), org);
-			if(TianzeConstant.Root_Org_Id == e.getParentId()) {
+			if(SystemConstants.Root_Org_Id == e.getParentId()) {
 				orgList.add(org);
 			}
 			else {

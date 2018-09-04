@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ylsq.frame.common.annotation.BaseService;
 import com.ylsq.frame.common.base.BaseServiceImpl;
-import com.ylsq.frame.tianze.base.TianzeConstant;
+import com.ylsq.frame.common.base.SystemConstants;
 import com.ylsq.frame.tianze.base.dao.mapper.TzBaseUserMapper;
 import com.ylsq.frame.tianze.base.dao.model.TzBaseUser;
 import com.ylsq.frame.tianze.base.dao.model.TzBaseUserExample;
@@ -34,7 +34,7 @@ public class TzBaseUserServiceImpl extends BaseServiceImpl<TzBaseUserMapper, TzB
 	public List<TzBaseUser> selectByOrgId(Long orgId) {
 		// TODO Auto-generated method stub
 		TzBaseUserExample example = new TzBaseUserExample();
-		if(TianzeConstant.Root_Org_Id != orgId) {
+		if(SystemConstants.Root_Org_Id != orgId) {
 			example.createCriteria().andOrgIdEqualTo(orgId);
 		}
 		return selectByExample(example);

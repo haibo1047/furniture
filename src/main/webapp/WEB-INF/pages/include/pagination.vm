@@ -20,6 +20,7 @@
 
 #set($the2nd = $math.min($totalPages_1, $the2nd )  )
 
+#if(${total} >0)
 <script>
 function gotopage(pageNum){
 	location = window.location.pathname+"?pageNum="+pageNum
@@ -61,3 +62,4 @@ function gotopage(pageNum){
 		</div> ##datatable
 	</div>
 </div>  ##row       
+#end

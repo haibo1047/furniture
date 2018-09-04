@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ylsq.frame.common.base.BaseModelController;
 import com.ylsq.frame.common.base.BaseExample;
 import com.ylsq.frame.common.base.BaseModel;
+import com.ylsq.frame.common.base.BaseModelController;
 import com.ylsq.frame.common.base.BaseService;
+import com.ylsq.frame.common.base.SystemConstants;
 import com.ylsq.frame.common.base.ValidateResult;
-import com.ylsq.frame.tianze.base.TianzeConstant;
 import com.ylsq.frame.tianze.base.dao.model.TzBaseOrg;
 import com.ylsq.frame.tianze.base.dao.model.TzBaseOrgExample;
 import com.ylsq.frame.tianze.base.dao.model.TzBaseUser;
@@ -39,7 +39,7 @@ public class TzBaseOrgController extends BaseModelController {
 
 	@RequestMapping(value= "/orglist", method = RequestMethod.GET)
 	public String orglist(ModelMap modelMap) {
-		return orglist(TianzeConstant.Root_Org_Id, modelMap);
+		return orglist(SystemConstants.Root_Org_Id, modelMap);
 	}
 	@RequestMapping(value= "/orglist/{parnetId}", method = RequestMethod.GET)
 	public String orglist(@PathVariable(name="parnetId") Long parentId, ModelMap modelMap) {
@@ -68,9 +68,9 @@ public class TzBaseOrgController extends BaseModelController {
 	
 	protected void beforeEditOrg(Long parentId, ModelMap modelMap) {
 		TzBaseOrg parentOrg = new TzBaseOrg();
-		if(parentId == TianzeConstant.Root_Org_Id) {
+		if(parentId == SystemConstants.Root_Org_Id) {
 			parentOrg.setOrgName("Root");
-			parentOrg.setId(TianzeConstant.Root_Org_Id);
+			parentOrg.setId(SystemConstants.Root_Org_Id);
 		}
 		else {
 			parentOrg = tzBaseOrgService.selectByPrimaryKey(parentId);
@@ -115,7 +115,7 @@ public class TzBaseOrgController extends BaseModelController {
 				modelMap.put("errorMsg", "操作成功");
 			}
 		}
-		return orglist(TianzeConstant.Root_Org_Id, modelMap);
+		return orglist(SystemConstants.Root_Org_Id, modelMap);
 	}
 	
 	protected ValidateResult validate(TzBaseOrg model) {
