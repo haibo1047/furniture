@@ -37,12 +37,15 @@
 function frameinit(){
 	$('#jstree_menu').jstree(
 		{
-			"core" : 
-			{
+			"core" :{
 				"themes" : {"variant" : "large"},
 			},
-			"checkbox" : 
-			{
+			"types" : {
+				"default" : {
+					"icon" : "glyphicon glyphicon-ok"
+				}
+			},
+			"checkbox" :{
 				"keep_selected_style" : true
 			},
 			"plugins" : [ "search", "types", "wholerow", "checkbox" ]
