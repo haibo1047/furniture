@@ -56,7 +56,8 @@ public class MybatisGeneratorUtil {
 			String database,
 			String tablePrefix,
 			String packageName,
-			Map<String, String> lastInsertIdTables) throws Exception{
+			Map<String, String> lastInsertIdTables,
+			boolean deletefolder) throws Exception{
 
 		String os = System.getProperty("os.name");
 		String targetProject = module + "/" + module + "-dao";
@@ -81,7 +82,7 @@ public class MybatisGeneratorUtil {
 		String generatorConfigXml = MybatisGeneratorUtil.class.getResource("/").getPath().replace("/target/classes/", "") + "/src/main/resources/generatorConfig.xml";
 //		targetProject = basePath + targetProject;
 		targetProject = basePath + "/";
-		String sql = "SELECT table_name, table_comment FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = '" + database + "' AND table_name LIKE '" + tablePrefix + "_%';";
+		String sql = "SELECT table_name, table_comment FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = '" + database + "' AND table_name LIKE '" + tablePrefix + "%';";
 
 		System.out.println("========== 开始生成generatorConfig.xml文件 ==========");
 		List<Map<String, Object>> tables = new ArrayList<>();
@@ -94,7 +95,7 @@ public class MybatisGeneratorUtil {
 			List<Map> result = jdbcUtil.selectByParams(sql, null);
 			for (Map map : result) {
 				System.out.println(map.get("TABLE_NAME"));
-				table = new HashMap<>(2);
+				table = new HashMap<>(3);
 				table.put("table_name", map.get("TABLE_NAME"));
 				table.put("table_comment", map.get("TABLE_COMMENT"));
 				table.put("model_name", lineToHump(ObjectUtils.toString(map.get("TABLE_NAME"))));
@@ -114,11 +115,16 @@ public class MybatisGeneratorUtil {
 			context.put("last_insert_id_tables", lastInsertIdTables);
 			VelocityUtil.generate(generatorConfig_vm, generatorConfigXml, context);
 			// 删除旧代码
-			deleteDir(new File(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/model"));
-			deleteDir(new File(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/mapper"));
-			deleteDir(new File(targetProjectSqlMap + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/mapper"));
-//			deleteDir(new File(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/service"));
-//			deleteDir(new File(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/controller"));
+			
+			if(deletefolder) {
+				deleteDir(new File(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/model"));
+				deleteDir(new File(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/mapper"));
+				deleteDir(new File(targetProjectSqlMap + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/mapper"));
+			}
+			else {
+				deleteExisting(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/mapper",tables,false);
+				deleteExisting(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/model",tables,true);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -183,6 +189,19 @@ public class MybatisGeneratorUtil {
 				VelocityUtil.generate(serviceImpl_vm, serviceImpl, context);
 				System.out.println(serviceImpl);
 			}
+			// 生成controller
+			File controllerFile = new File(controller);
+			if (!controllerFile.exists()) {
+				VelocityContext context = new VelocityContext();
+				context.put("package_name", packageName);
+				context.put("model", model);
+				context.put("tableName", tableName);
+				context.put("mapper", StringUtil.toLowerCaseFirstOne(model));
+				context.put("modelVariable", StringUtil.toLowerCaseFirstOne(model));
+				context.put("ctime", ctime);
+				VelocityUtil.generate(controller_vm, controller, context);
+				System.out.println(controller);
+			}
 			// 生成page
 			File listPageFolder = new File(pagesPath);
 			if (listPageFolder.exists()) {
@@ -199,6 +218,37 @@ public class MybatisGeneratorUtil {
 			}
 		}
 		System.out.println("========== 结束生成Service ==========");
+	}
+	
+	public static void deleteExisting(String path,List<Map<String, Object>> tables, boolean ismodel) {
+		for(Map<String,Object> map : tables) {
+			String modelName = (String)map.get("model_name");
+			if(ismodel) {
+				File modelJava = new File(path + File.separator + modelName +".java");
+				File exampleJava = new File(path + File.separator + modelName +"Example.java");
+				
+				if(modelJava.exists()) {
+					System.out.println(modelJava);
+					modelJava.delete();
+				}
+				if(exampleJava.exists()) {
+					System.out.println(exampleJava);
+					exampleJava.deleteOnExit();
+				}
+			}
+			else {
+				File mapperJava = new File(path + File.separator + modelName +"Mapper.java");
+				File mapperXml = new File(path + File.separator + modelName +"Mapper.xml");
+				if(mapperJava.exists()) {
+					System.out.println(mapperJava);
+					mapperJava.deleteOnExit();
+				}
+				if(mapperXml.exists()) {
+					System.out.println(mapperXml);
+					mapperXml.deleteOnExit();
+				}
+			}
+		}
 	}
 
 	// 递归删除非空文件夹
