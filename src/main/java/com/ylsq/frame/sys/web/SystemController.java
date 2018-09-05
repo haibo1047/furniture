@@ -75,6 +75,6 @@ public class SystemController extends BaseController {
 			sysLogService.doLogout(currentLogin(), new Date(), getIp(request), null);
 			subject.logout();
 		}
-		return "redirect:/sys/login.n";
+		return "redirect:/sys/login";
 	}
 }
