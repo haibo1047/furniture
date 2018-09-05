@@ -40,9 +40,12 @@
 				        </th>
 				        <th class="column-title"> User Name </th>
 				        <th class="column-title"> Real Name </th>
+				        <th class="column-title"> Org Name </th>
+				        #**
 				        <th class="column-title"> Gender </th>
 				        <th class="column-title"> Phone Number </th>
 				        <th class="column-title"> Email </th>
+				        **#
 				        <th class="column-title"> Create Time </th>
 				        <th class="column-title"> Create User </th>
 				        <th class="column-title no-link last">
@@ -63,9 +66,11 @@
 				        </td>
 				        <td class=" "> $!{secuUser.userName} </td>
 				        <td class=" "> $!{secuUser.realName} </td>
-				        <td class=" "> $!{secuUser.gender} </td>
+				        <td class=" "> #dictDisplay($secuOrglist $secuUser.orgId "id" "orgName") </td>
+				        #**<td class=" "> $!{secuUser.gender} </td>
 				        <td class=" "> $!{secuUser.phone} </td>
 				        <td class=" "> $!{secuUser.email} </td>
+				        **#
 				        <td class=" "> $!date.format("yyyy-MM-dd HH:mm:ss",$!secuUser.createTime ) </td>
 				        <td class=" "> $!{secuUser.createUser} </td>
 				        <td class=" last">

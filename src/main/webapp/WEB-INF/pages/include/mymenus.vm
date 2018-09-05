@@ -2,7 +2,10 @@
 
 #set($myMenuMap = $session.getAttribute("mymenus_session_id"))
 
-
+<script>
+	function openurl(url){
+	}
+</script>
 <!-- sidebar menu -->
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
   	<div class="menu_section">

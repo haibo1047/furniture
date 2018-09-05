@@ -59,11 +59,12 @@ public class SecuUserController extends BaseController {
 			@RequestParam(required = false, defaultValue = "1", value = "pageNum") int pageNum, ModelMap modelMap) {
 		// TODO Auto-generated method stub
 		int pageSize = (int)SecurityUtils.getSubject().getSession().getAttribute("pageSize");
-		List<SecuOrg> list = secuOrgService.selectByExample(new SecuOrgExample());
-		List<CustOrg> orgList = secuOrgService.buildCustomOrgs(list);
+		List<SecuOrg> secuOrglist = secuOrgService.selectByExample(new SecuOrgExample());
+		List<CustOrg> orgList = secuOrgService.buildCustomOrgs(secuOrglist);
 		List<SecuUser> userList = secuUserService.selectByOrgId(orgId, pageNum, pageSize);
 		
 		modelMap.put("total", secuUserService.countbyOrgId(orgId));
+		modelMap.put("secuOrglist", secuOrglist);
 		modelMap.put("orgList", orgList);
 		modelMap.put("orgId", orgId);
 		modelMap.put("modelList", userList);

@@ -41,7 +41,7 @@ public class SecuOrgController extends BaseController {
 	
 	
 	@RequestMapping(value = "/orglist", method = RequestMethod.GET)
-	public String list(@RequestParam(required = false, defaultValue = "0", value = "parentId") Long parentId,ModelMap modelMap) {
+	public String orglist(@RequestParam(required = false, defaultValue = "0", value = "parentId") Long parentId,ModelMap modelMap) {
 		// TODO Auto-generated method stub
 		List<SecuOrg> secuOrgs = secuOrgService.selectByExample(new SecuOrgExample());
 		List<CustOrg> orgList = secuOrgService.buildCustomOrgs(secuOrgs);
@@ -52,8 +52,9 @@ public class SecuOrgController extends BaseController {
 		return webPrefix() + "list";
 	}
 	
-	private String orglist(ModelMap modelMap) {
-		return list(SystemConstants.Root_Org_Id, modelMap);
+	@RequestMapping(value="/list", method = RequestMethod.GET)
+	private String list(ModelMap modelMap) {
+		return orglist(SystemConstants.Root_Org_Id, modelMap);
 	}
 	
 	@RequestMapping(value= "/createOrg", method = RequestMethod.GET)
@@ -120,7 +121,7 @@ public class SecuOrgController extends BaseController {
 				modelMap.put("errorMsg", "操作成功");
 			}
 		}
-		return orglist(modelMap);
+		return list(modelMap);
 	}
 	
 	protected ValidateResult validate(SecuOrg model) {
@@ -150,7 +151,7 @@ public class SecuOrgController extends BaseController {
 		else {
 			secuOrgService.updateByPrimaryKey(model);
 		}
-		return list(model.getParentId() , modelMap);
+		return orglist(model.getParentId() , modelMap);
 	}
 	
 	@Override
