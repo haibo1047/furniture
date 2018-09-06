@@ -40,10 +40,10 @@
             <form id="login_form" action="$rc.contextPath/sys/login" method="post">
               <h1>Login Form</h1>
               <div>
-                <input type="text" class="form-control" name="username" placeholder="username" required="true" />
+                <input type="text" class="form-control" id="username" name="username" placeholder="username" required="true" />
               </div>
               <div>
-                <input type="password" class="form-control" name="password" placeholder="password" required="true" />
+                <input type="password" class="form-control" id="password" name="password" placeholder="password" required="true" />
               </div>
               <div>
                 <a class="btn btn-default submit" href="#" onclick="login()">Log in</a>
@@ -71,7 +71,22 @@
 
 <!-- jQuery -->
 <script src="$rc.contextPath/js/jquery.min.js"></script>
-<script>
+<script type="text/javascript">
+$(function() {
+	$('#username').focus();
+	
+	$('#username').bind('keypress',function(event){
+		if(event.keyCode == "13"){
+			$("#password").focus();
+		}
+	});
+	
+	$('#password').bind('keypress',function(event){
+		if(event.keyCode == "13"){
+			login();
+		}
+	});
+});
 function login(){
 	$("#login_form").submit();
 }
