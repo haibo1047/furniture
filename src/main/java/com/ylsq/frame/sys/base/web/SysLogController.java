@@ -36,7 +36,9 @@ public class SysLogController extends BaseController {
 	public String list(@RequestParam(required = false, defaultValue = "1", value = "pageNum") int pageNum, ModelMap modelMap) {
 		// TODO Auto-generated method stub
 		int pageSize = (int)SecurityUtils.getSubject().getSession().getAttribute("pageSize");
-		List<SysLog> list = sysLogService.selectByExampleForStartPage(new SysLogExample(), pageNum, pageSize);
+		SysLogExample example = new SysLogExample();
+		example.setOrderByClause(" operate_time desc ");
+		List<SysLog> list = sysLogService.selectByExampleForStartPage(example, pageNum, pageSize);
 		modelMap.put("total",sysLogService.countByExample(new SysLogExample()));
 		modelMap.put("logTypeList", getParams(SysParamEnum.Sys_Log_Type.getConstant()));
 		modelMap.put("modelList", list);

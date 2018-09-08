@@ -23,4 +23,11 @@ public interface TzEncryptTerminalService extends BaseService<TzEncryptTerminal,
 	 * @return
 	 */
 	public boolean offline(TzEncryptTerminal terminal);
+	
+	/**
+	 * 根据用户名更新时间
+	 * @param id
+	 * @return
+	 */
+	public boolean heartbeat(String userName);
 }

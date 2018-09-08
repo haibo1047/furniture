@@ -5,6 +5,15 @@
           http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<bean id="remotingLoginStatusUpdateJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ylsq.frame.sys.quartz.RemotingLoginStatusUpdateJob" />
+        <property name="jobDataMap">
+            <map>
+            </map>
+        </property>
+        <property name="durability" value="true" />
+    </bean>
+    
 	<bean id="dbAutomatBackUpJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
         <property name="jobClass" value="com.ylsq.frame.sys.quartz.DbAutomatBackUpJob" />
         <property name="jobDataMap">
@@ -17,9 +26,15 @@
         <property name="durability" value="true" />
     </bean>
     
+	<bean id="remotingLoginCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="remotingLoginStatusUpdateJob"/>
+		<!-- run every 3 minutes -->
+		<property name="cronExpression" value="0 0/3 * * * ?"/>
+	</bean>
+    
 	<bean id="dbBackupCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="dbAutomatBackUpJob"/>
-		<!-- run every 10 minutes -->
+		<!-- run every 4AM -->
 		<property name="cronExpression" value="0 0 4 * * ?"/>
 	</bean>
 
@@ -27,6 +42,7 @@
 		<property name="triggers">
 			<list>
 				<ref bean="dbBackupCronTrigger"/>
+				<ref bean="remotingLoginCronTrigger"/>
 			</list>
 		</property>
 	</bean>

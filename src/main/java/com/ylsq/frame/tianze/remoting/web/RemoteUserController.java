@@ -86,4 +86,34 @@ public class RemoteUserController {
 		}
 		return new RemotingResult();
 	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/heartbeat", method = RequestMethod.GET)
+	public RemotingResult heartbeat(
+			@RequestParam(required = false,name="userName") String userName, 
+			@RequestParam(required = false,name="token") String token) {
+		if(verifyToken(userName, token) && terminalService.heartbeat(userName)){
+			return new RemotingResult(1);
+		}
+		return new RemotingResult();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/changepassword", method = RequestMethod.GET)
+	public RemotingResult changepassword(
+			@RequestParam(required = false,name="userName") String userName, 
+			@RequestParam(required = false,name="oldPassword") String oldPassword, 
+			@RequestParam(required = false,name="newPassword") String newPassword) {
+		if(StringUtils.isBlank(newPassword) || StringUtils.isBlank(oldPassword))
+			return new RemotingResult();
+		SecuUser user = secuUserService.selectByUsername(userName);
+		if(user != null && StringUtils.reverse(user.getPassword()).equals(oldPassword)) {
+			SecuUser toBeUpdated = new SecuUser();
+			toBeUpdated.setId(user.getId());
+			toBeUpdated.setPassword(StringUtils.reverse(newPassword));
+			secuUserService.updateByPrimaryKeySelective(toBeUpdated);
+		}
+		return new RemotingResult();
+	}
 }

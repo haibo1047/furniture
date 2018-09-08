@@ -11,6 +11,7 @@
     <result column="IP" jdbcType="VARCHAR" property="ip" />
     <result column="version_num" jdbcType="VARCHAR" property="versionNum" />
     <result column="model_num" jdbcType="VARCHAR" property="modelNum" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="rec_status" jdbcType="INTEGER" property="recStatus" />
@@ -75,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, login_id, terminal_status, terminal_name, MAC, last_login_time, IP, version_num, 
-    model_num, create_time, create_user, rec_status
+    model_num, update_time, create_time, create_user, rec_status
   </sql>
   <select id="selectByExample" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptTerminalExample" resultMap="BaseResultMap">
     select
@@ -111,13 +112,13 @@
     insert into tz_encrypt_terminal (id, login_id, terminal_status, 
       terminal_name, MAC, last_login_time, 
       IP, version_num, model_num, 
-      create_time, create_user, rec_status
-      )
+      update_time, create_time, create_user, 
+      rec_status)
     values (#{id,jdbcType=BIGINT}, #{loginId,jdbcType=VARCHAR}, #{terminalStatus,jdbcType=INTEGER}, 
       #{terminalName,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
       #{ip,jdbcType=VARCHAR}, #{versionNum,jdbcType=VARCHAR}, #{modelNum,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{recStatus,jdbcType=INTEGER}
-      )
+      #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
+      #{recStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptTerminal">
     insert into tz_encrypt_terminal
@@ -148,6 +149,9 @@
       </if>
       <if test="modelNum != null">
         model_num,
+      </if>
+      <if test="updateTime != null">
+        update_time,
       </if>
       <if test="createTime != null">
         create_time,
@@ -186,6 +190,9 @@
       </if>
       <if test="modelNum != null">
         #{modelNum,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -234,6 +241,9 @@
       <if test="record.modelNum != null">
         model_num = #{record.modelNum,jdbcType=VARCHAR},
       </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -259,6 +269,7 @@
       IP = #{record.ip,jdbcType=VARCHAR},
       version_num = #{record.versionNum,jdbcType=VARCHAR},
       model_num = #{record.modelNum,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       create_user = #{record.createUser,jdbcType=VARCHAR},
       rec_status = #{record.recStatus,jdbcType=INTEGER}
@@ -293,6 +304,9 @@
       <if test="modelNum != null">
         model_num = #{modelNum,jdbcType=VARCHAR},
       </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -315,6 +329,7 @@
       IP = #{ip,jdbcType=VARCHAR},
       version_num = #{versionNum,jdbcType=VARCHAR},
       model_num = #{modelNum,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_user = #{createUser,jdbcType=VARCHAR},
       rec_status = #{recStatus,jdbcType=INTEGER}

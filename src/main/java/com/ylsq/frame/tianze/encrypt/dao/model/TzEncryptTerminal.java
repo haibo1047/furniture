@@ -69,6 +69,13 @@ public class TzEncryptTerminal implements BaseModel, Serializable {
     private String modelNum;
 
     /**
+     * 更新时间
+     *
+     * @mbg.generated
+     */
+    private Date updateTime;
+
+    /**
      * 创建时间
      *
      * @mbg.generated
@@ -163,6 +170,14 @@ public class TzEncryptTerminal implements BaseModel, Serializable {
         this.modelNum = modelNum;
     }
 
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -202,6 +217,7 @@ public class TzEncryptTerminal implements BaseModel, Serializable {
         sb.append(", ip=").append(ip);
         sb.append(", versionNum=").append(versionNum);
         sb.append(", modelNum=").append(modelNum);
+        sb.append(", updateTime=").append(updateTime);
         sb.append(", createTime=").append(createTime);
         sb.append(", createUser=").append(createUser);
         sb.append(", recStatus=").append(recStatus);
@@ -230,6 +246,7 @@ public class TzEncryptTerminal implements BaseModel, Serializable {
             && (this.getIp() == null ? other.getIp() == null : this.getIp().equals(other.getIp()))
             && (this.getVersionNum() == null ? other.getVersionNum() == null : this.getVersionNum().equals(other.getVersionNum()))
             && (this.getModelNum() == null ? other.getModelNum() == null : this.getModelNum().equals(other.getModelNum()))
+            && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
             && (this.getRecStatus() == null ? other.getRecStatus() == null : this.getRecStatus().equals(other.getRecStatus()));
@@ -248,6 +265,7 @@ public class TzEncryptTerminal implements BaseModel, Serializable {
         result = prime * result + ((getIp() == null) ? 0 : getIp().hashCode());
         result = prime * result + ((getVersionNum() == null) ? 0 : getVersionNum().hashCode());
         result = prime * result + ((getModelNum() == null) ? 0 : getModelNum().hashCode());
+        result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getCreateUser() == null) ? 0 : getCreateUser().hashCode());
         result = prime * result + ((getRecStatus() == null) ? 0 : getRecStatus().hashCode());

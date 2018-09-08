@@ -72,4 +72,18 @@ public class TzEncryptTerminalServiceImpl extends BaseServiceImpl<TzEncryptTermi
 		return false;
 	}
 
+	@Override
+	public boolean heartbeat(String userName) {
+		// TODO Auto-generated method stub
+		TzEncryptTerminal terminal = new TzEncryptTerminal();
+		terminal.setLoginId(userName);
+		terminal.setUpdateTime(new Date());
+		TzEncryptTerminalExample example = new TzEncryptTerminalExample();
+		example.createCriteria().andLoginIdEqualTo(userName);
+		int cnt = updateByExampleSelective(terminal, example);
+		if(cnt ==1)
+			return true;
+		return false;
+	}
+
 }
