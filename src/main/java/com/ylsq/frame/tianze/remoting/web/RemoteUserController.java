@@ -19,10 +19,11 @@ import com.ylsq.frame.tianze.base.RemotingResult;
 import com.ylsq.frame.tianze.base.utils.TokenUtil;
 import com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptTerminal;
 import com.ylsq.frame.tianze.encrypt.service.TzEncryptTerminalService;
+import com.ylsq.frame.tianze.remoting.base.BaseRemotingController;
 
 @Controller
 @RequestMapping("/remoting/user")
-public class RemoteUserController {
+public class RemoteUserController extends BaseRemotingController{
 	private Logger log = LoggerFactory.getLogger(RemoteUserController.class);
 	
 	@Autowired
@@ -53,13 +54,6 @@ public class RemoteUserController {
 		
 	}
 	
-	private boolean verifyToken(String userName,String token) {
-		if(StringUtils.isNotBlank(userName) && StringUtils.isNotBlank(token)) {
-			if(token.equals(TokenUtil.buildToken(userName)))
-				return true;
-		}
-		return false;
-	}
 	@ResponseBody
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public RemotingResult logout(

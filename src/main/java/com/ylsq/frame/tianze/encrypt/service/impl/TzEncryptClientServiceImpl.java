@@ -52,4 +52,10 @@ public class TzEncryptClientServiceImpl extends BaseServiceImpl<TzEncryptClientM
 		return false;
 	}
 
+	@Override
+	public String getLatestVersion() {
+		// TODO Auto-generated method stub
+		return tzEncryptClientMapper.getLatestVersion();
+	}
+
 }

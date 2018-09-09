@@ -20,4 +20,11 @@ public interface TzEncryptClientService extends BaseService<TzEncryptClient, TzE
 	 */
 	public boolean uploadClientFile(Long clientId, MultipartFile file);
 	
+	
+	/**
+	 * 获取最新版本号
+	 * @return
+	 */
+	public String getLatestVersion();
+	
 }

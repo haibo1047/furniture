@@ -21,7 +21,7 @@ public class RemotingLoginStatusUpdateJob extends QuartzJobBean {
 	private Logger log = LoggerFactory.getLogger(RemotingLoginStatusUpdateJob.class);
 	
 	@Autowired
-	private TzEncryptTerminalService tzEncryptTerminalService;
+	private TzEncryptTerminalService terminalService;
 	
 	@Override
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
@@ -30,15 +30,15 @@ public class RemotingLoginStatusUpdateJob extends QuartzJobBean {
 		log.debug("Remoting login status update job is been triggered now.");
 		
 		TzEncryptTerminalExample example = new TzEncryptTerminalExample();
-		example.createCriteria().andUpdateTimeLessThan(DateUtils.addMinutes(new Date(), -4));
-		example.or().andUpdateTimeIsNull();
-		List<TzEncryptTerminal> list = tzEncryptTerminalService.selectByExample(example);
+		example.createCriteria().andTerminalStatusEqualTo(TerminalStatus.Normal);
+		example.or().andUpdateTimeIsNull().andUpdateTimeLessThan(DateUtils.addMinutes(new Date(), -4));
+		List<TzEncryptTerminal> list = terminalService.selectByExample(example);
 		for(TzEncryptTerminal e : list) {
 			log.info("about to offline the login:" + e.getLoginId() );
 			TzEncryptTerminal terminal = new TzEncryptTerminal();
 			terminal.setId(e.getId());
 			terminal.setTerminalStatus(TerminalStatus.Offline);
-			tzEncryptTerminalService.updateByPrimaryKeySelective(terminal);
+			terminalService.updateByPrimaryKeySelective(terminal);
 		}
 	}
 

@@ -13,6 +13,11 @@
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="rec_status" jdbcType="INTEGER" property="recStatus" />
   </resultMap>
+  
+  <select id="getLatestVersion" resultType="java.lang.String">
+    select  max(client_version) from tz_encrypt_client
+  </select>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

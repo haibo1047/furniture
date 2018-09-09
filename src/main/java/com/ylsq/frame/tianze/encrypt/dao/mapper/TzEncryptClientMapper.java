@@ -6,6 +6,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface TzEncryptClientMapper {
+	
+
+    String getLatestVersion();
+    
     long countByExample(TzEncryptClientExample example);
 
     int deleteByExample(TzEncryptClientExample example);
