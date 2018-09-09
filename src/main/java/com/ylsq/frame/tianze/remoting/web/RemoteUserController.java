@@ -50,8 +50,7 @@ public class RemoteUserController extends BaseRemotingController{
 			}
 		}
 		log.warn("remote user login failed-" + userName);
-		return new RemotingResult();
-		
+		return RemotingResult.FA;
 	}
 	
 	@ResponseBody
@@ -64,9 +63,9 @@ public class RemoteUserController extends BaseRemotingController{
 			terminal.setLoginId(userName);
 			terminalService.offline(terminal);
 			sysLogService.doLogout(userName, new Date(), null, "remoting logout");
-			return new RemotingResult(1);
+			return RemotingResult.SU;
 		}
-		return new RemotingResult();
+		return RemotingResult.FA;
 	}
 	
 	@ResponseBody
@@ -78,7 +77,7 @@ public class RemoteUserController extends BaseRemotingController{
 			SecuUser user = secuUserService.selectByUsername(userName);
 			return new RemotingResult(token, user);
 		}
-		return new RemotingResult();
+		return RemotingResult.FA;
 	}
 	
 	
@@ -88,9 +87,9 @@ public class RemoteUserController extends BaseRemotingController{
 			@RequestParam(required = false,name="userName") String userName, 
 			@RequestParam(required = false,name="token") String token) {
 		if(verifyToken(userName, token) && terminalService.heartbeat(userName)){
-			return new RemotingResult(1);
+			return RemotingResult.SU;
 		}
-		return new RemotingResult();
+		return RemotingResult.FA;
 	}
 	
 	@ResponseBody
@@ -100,14 +99,15 @@ public class RemoteUserController extends BaseRemotingController{
 			@RequestParam(required = false,name="oldPassword") String oldPassword, 
 			@RequestParam(required = false,name="newPassword") String newPassword) {
 		if(StringUtils.isBlank(newPassword) || StringUtils.isBlank(oldPassword))
-			return new RemotingResult();
+			return RemotingResult.FA;
 		SecuUser user = secuUserService.selectByUsername(userName);
 		if(user != null && StringUtils.reverse(user.getPassword()).equals(oldPassword)) {
 			SecuUser toBeUpdated = new SecuUser();
 			toBeUpdated.setId(user.getId());
 			toBeUpdated.setPassword(StringUtils.reverse(newPassword));
 			secuUserService.updateByPrimaryKeySelective(toBeUpdated);
+			return RemotingResult.SU;
 		}
-		return new RemotingResult();
+		return RemotingResult.FA;
 	}
 }

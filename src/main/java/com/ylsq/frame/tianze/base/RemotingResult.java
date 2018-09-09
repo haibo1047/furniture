@@ -5,6 +5,9 @@ public class RemotingResult {
 	private String token;
 	private Object content;
 	
+	public static RemotingResult SU = new RemotingResult(1);
+	public static RemotingResult FA = new RemotingResult(0);
+	
 	public RemotingResult() {
 		setStatus(0);
 	}

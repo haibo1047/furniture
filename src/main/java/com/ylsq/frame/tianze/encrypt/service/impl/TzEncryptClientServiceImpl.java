@@ -1,6 +1,7 @@
 package com.ylsq.frame.tianze.encrypt.service.impl;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,9 +54,12 @@ public class TzEncryptClientServiceImpl extends BaseServiceImpl<TzEncryptClientM
 	}
 
 	@Override
-	public String getLatestVersion() {
+	public TzEncryptClient getLatestVersion() {
 		// TODO Auto-generated method stub
-		return tzEncryptClientMapper.getLatestVersion();
+		TzEncryptClientExample example = new TzEncryptClientExample();
+		example.setOrderByClause(" client_version desc");
+		List<TzEncryptClient> list = selectByExampleForStartPage(example, 1, 1);
+		return list.get(0);
 	}
 
 }
