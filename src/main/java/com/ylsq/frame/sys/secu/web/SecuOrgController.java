@@ -125,6 +125,12 @@ public class SecuOrgController extends BaseController {
 	}
 	
 	protected ValidateResult validate(SecuOrg model) {
+		if(model.getId() != null) {
+			SecuOrg existing = secuOrgService.selectByPrimaryKey(model.getId());
+			if(existing != null && !existing.getOrgName().equals(model.getOrgName())) {
+				return new ValidateResult("机构名称不允许修改");
+			}
+		}
 		SecuOrg org = secuOrgService.selectByName(model.getOrgName());
 		if(org != null && !(org.getId().equals(model.getId()))) {
 			log.warn("已经存在此名称的机构："+ model.getOrgName());

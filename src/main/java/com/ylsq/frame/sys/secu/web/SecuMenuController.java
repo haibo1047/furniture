@@ -89,6 +89,12 @@ public class SecuMenuController extends BaseModelController {
 	}
 
 	protected ValidateResult validate(SecuMenu model) {
+		if(model.getId() != null) {
+			SecuMenu existing = secuMenuService.selectByPrimaryKey(model.getId());
+			if(existing != null && !existing.getMenuName().equals(model.getMenuName())) {
+				return new ValidateResult("菜单名不允许修改");
+			}
+		}
 		SecuMenu existing = secuMenuService.selectByMenuName(model.getMenuName());
 		if(existing != null && !(existing.getId().equals(model.getId()))) {
 			log.warn("菜单已经存在："+ model.getMenuName());

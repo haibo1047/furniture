@@ -133,6 +133,12 @@ public class SecuUserController extends BaseController {
 	}
 	
 	protected ValidateResult validate(SecuUser model) {
+		if(model.getId() != null) {
+			SecuUser existing = secuUserService.selectByPrimaryKey(model.getId());
+			if(existing != null && !existing.getUserName().equals(model.getUserName())) {
+				return new ValidateResult("登录名不允许修改");
+			}
+		}
 		SecuUser user = secuUserService.selectByUsername(model.getUserName());
 		if(user != null && !(user.getId().equals(model.getId()))) {
 			log.warn("已经存在此登录名的用户："+ model.getUserName());

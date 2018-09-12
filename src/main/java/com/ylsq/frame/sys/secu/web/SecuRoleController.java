@@ -19,10 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ylsq.frame.common.base.BaseModelController;
 import com.ylsq.frame.common.base.BaseExample;
 import com.ylsq.frame.common.base.BaseModel;
+import com.ylsq.frame.common.base.BaseModelController;
 import com.ylsq.frame.common.base.BaseService;
+import com.ylsq.frame.common.base.ValidateResult;
 import com.ylsq.frame.sys.secu.dao.model.SecuMenu;
 import com.ylsq.frame.sys.secu.dao.model.SecuMenuExample;
 import com.ylsq.frame.sys.secu.dao.model.SecuRole;
@@ -106,10 +107,34 @@ public class SecuRoleController extends BaseModelController {
 		return list(modelMap);
 	}
 	
+	protected ValidateResult validate(SecuRole model) {
+		if(model.getId() != null) {
+			SecuRole role = secuRoleService.selectByPrimaryKey(model.getId());
+			if(role != null && !role.getRoleName().equals(model.getRoleName())) {
+				log.warn("角色名不可修改！");
+				return new ValidateResult("角色名不允许修改");
+			}
+		}
+		if(StringUtils.isNotBlank(model.getRoleName())) {
+			SecuRole role = secuRoleService.selectByRoleName(model.getRoleName());
+			if(role != null && !(role.getId().equals(model.getId()))) {
+				log.warn("已经存在此名的角色："+ model.getRoleName());
+				return new ValidateResult("角色名已经存在");
+			}
+		}
+		return ValidateResult.Passed;
+	}
+	
 	@RequestMapping(value= "/save", method = RequestMethod.POST)
 	public String save(SecuRole role,ModelMap modelMap) {
 		log.debug(role.toString());
 		initModel(role);
+		ValidateResult vr = validate(role);
+		if(!vr.isPassed()) {
+			modelMap.put("model", role);
+			modelMap.put("errorMsg", vr.getMsg());
+			return webPrefix()+"edit";
+		}
 		if(role.getId() == null) {
 			secuRoleService.insert(role);
 		}

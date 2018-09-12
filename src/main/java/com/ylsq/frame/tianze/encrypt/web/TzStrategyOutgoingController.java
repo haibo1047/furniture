@@ -126,6 +126,19 @@ public class TzStrategyOutgoingController extends BaseModelController {
 	}
 	
 	protected ValidateResult validate(TzStrategyOutgoing model) {
+		if(model.getId() != null) {
+			TzStrategyOutgoing strategy = tzStrategyOutgoingService.selectByPrimaryKey(model.getId());
+			if(!strategy.getStrategyName().equals(model.getStrategyName())) {
+				log.warn("策略名不可修改！");
+				return new ValidateResult("策略名不允许修改");
+			}
+		}
+		if(StringUtils.isNotBlank(model.getStrategyName())) {
+			TzStrategyOutgoing strategy = tzStrategyOutgoingService.selectByStrategyName(model.getStrategyName());
+			if(strategy != null && !strategy.getId().equals(model.getId())) {
+				return new ValidateResult("策略名已经存在");
+			}
+		}
 		return ValidateResult.Passed;
 	}
 	
