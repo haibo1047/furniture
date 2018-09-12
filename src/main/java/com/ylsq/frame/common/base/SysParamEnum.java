@@ -9,7 +9,8 @@ public enum SysParamEnum {
 	Application_Type("application_type"),
 	Sys_Log_Type("system_log_type"),
 	System_Config("system_config"),
-	
+	Strategy_Type("strategy_type"),
+	Strategy_outgoing_level("outgoing_level")
 	;
 	
 	private final String constant;
