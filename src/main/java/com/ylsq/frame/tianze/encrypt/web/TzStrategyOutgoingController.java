@@ -2,8 +2,10 @@ package com.ylsq.frame.tianze.encrypt.web;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -169,6 +171,40 @@ public class TzStrategyOutgoingController extends BaseModelController {
 		return list(modelMap);
 	}
 	
+	@Override
+	public String delete(@PathVariable(name="ids")String ids, ModelMap modelMap) {
+		// TODO Auto-generated method stub
+		if(StringUtils.isNotBlank(ids)) {
+			String[] idArray = ids.split("-");
+			Set<String> failedNames = new HashSet<>();
+			for (String idStr : idArray) {
+				if (StringUtils.isBlank(idStr)) {
+					continue;
+				}
+				Long uid = Long.parseLong(idStr);
+				TzStrategyOutgoing strategy = tzStrategyOutgoingService.selectByPrimaryKey(uid);
+				if(strategy != null) {
+					List<TzStrategyUser> list = strategyUserService.selectByStrategyName(strategy.getStrategyName());
+					if(list.size() > 0) {
+						log.warn(strategy.getStrategyName() + "已经被配置了某些用户，请先移除绑定的用户");
+						failedNames.add(strategy.getStrategyName());
+						continue;
+					}
+					tzStrategyOutgoingService.deleteByPrimaryKey(uid);
+				}
+			}
+			
+			if(failedNames.size()> 0) {
+				modelMap.put("errorMsg", "策略("+String.join(",",failedNames)+")未删除成功，请先移除绑定的用户再重试");
+			}
+			else {
+				modelMap.put("errorMsg", "操作成功");
+			}
+		}
+		return list(1, modelMap);
+	}
+
+
 	@Override
 	protected BaseService<? extends BaseModel, ? extends BaseExample> getService() {
 		// TODO Auto-generated method stub
