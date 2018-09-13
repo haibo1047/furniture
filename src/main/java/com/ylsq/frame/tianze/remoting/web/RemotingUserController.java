@@ -23,8 +23,8 @@ import com.ylsq.frame.tianze.remoting.base.BaseRemotingController;
 
 @Controller
 @RequestMapping("/remoting/user")
-public class RemoteUserController extends BaseRemotingController{
-	private Logger log = LoggerFactory.getLogger(RemoteUserController.class);
+public class RemotingUserController extends BaseRemotingController{
+	private Logger log = LoggerFactory.getLogger(RemotingUserController.class);
 	
 	@Autowired
 	private SecuUserService secuUserService;
