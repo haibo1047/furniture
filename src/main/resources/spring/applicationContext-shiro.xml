@@ -93,6 +93,9 @@
                 # allow WebStart to pull the jars for the swing app:
                 # protected using SecureRemoteInvocationExecutor
                 /remoting/** = anon
+                /403 = anon
+                /404 = anon
+                /500 = anon
                 # everything else requires authentication:
                 /** = authc
             </value>
