@@ -1,0 +1,97 @@
+
+<div class="title_left">
+    <h3>加密策略设置</h3>
+</div>
+<div class="x_content">
+
+	<form id="editForm" data-parsley-validate class="form-horizontal form-label-left" action="$rc.contextPath/tz/strategy/encrypt/save" method="post">
+		<input type="hidden" name="id" value="$!{model.id}">
+		
+		<div class="" role="tabpanel" data-example-id="togglable-tabs">
+		  	<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+				<li role="presentation" class="">
+					<a href="tab_1b" role="tab" id="basic-tab" data-toggle="tab" aria-expanded="false" onclick="tabchange(this)">基本信息</a>
+				</li>
+				<li role="presentation" class="">
+					<a href="tab_2p" role="tab" id="permission-tab" data-toggle="tab" aria-expanded="false" onclick="tabchange(this)">权限设置</a>
+				</li>
+				<li role="presentation" class="">
+					<a href="tab_3s" role="tab" id="software-tab" data-toggle="tab" aria-expanded="false" onclick="tabchange(this)">软件类型</a>
+				</li>
+				<li role="presentation" class="">
+					<a href="tab_4w" role="tab" id="watermark-tab" data-toggle="tab" aria-expanded="false" onclick="tabchange(this)">水印</a>
+				</li>
+		  	</ul>
+		  	<div id="myTabContent" class="tab-content">
+				<div role="tabpanel" class="tab-pane fade" id="tab_1b" aria-labelledby="basic-tab">
+		  			<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> 策略名 <span class="required">*</span>
+						</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<input type="text" name="strategyName" value="$!{model.strategyName}" required="required" class="form-control col-md-7 col-xs-12">
+						</div>
+					</div>
+		  			<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> 备注信息
+						</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<textarea class="form-control" name="remark" rows=3 value="$!{model.remark}" placeholder="备注"></textarea>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane fade" id="tab_2p" aria-labelledby="permission-tab">
+	  				<div class="checkbox">
+	            		<label>
+	                  		<input type="checkbox" value=""> 允许拷贝
+	                    </label>
+                  	</div>
+				</div>
+				<div role="tabpanel" class="tab-pane fade" id="tab_3s" aria-labelledby="software-tab">
+		  			<p>software</p>
+		   	 	</div>
+				<div role="tabpanel" class="tab-pane fade" id="tab_4w" aria-labelledby="watermark-tab">
+		  			<p>watermark</p>
+		   	 	</div>
+		  	</div>
+		</div>
+		
+	  	<div class="ln_solid"></div>
+	  	<div class="form-group">
+			<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+	  			<button class="btn btn-primary" type="button" onclick="goback()">Cancel</button>
+				<button type="submit" class="btn btn-success">Submit</button>
+	    	</div>
+	  	</div>
+  	</form>
+  	
+</div>
+
+<script type="text/javascript">
+
+function frameinit(){
+	tabchange($("#basic-tab"));
+}
+
+function tabchange(aobj){
+	$(aobj).parent().parent().find("li>a").each(
+		function(){
+			if($(aobj).attr("href")==$(this).attr("href")){
+				$(this).parent().attr("class","active");
+				$(this).attr("aria-expanded", "true");
+				$("#"+$(this).attr("href")).attr("class","tab-pane fade active in");
+			}
+			else{
+				$(this).parent().attr("class","");
+				$(this).attr("aria-expanded", "false");
+				$("#"+$(this).attr("href")).attr("class"," tab-pane fade ");
+			}
+		}
+	);
+}
+
+
+function goback(){
+	location = "$rc.contextPath/tz/strategy/encrypt/list";
+}
+
+</script>
