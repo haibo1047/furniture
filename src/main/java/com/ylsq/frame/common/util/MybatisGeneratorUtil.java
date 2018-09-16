@@ -113,7 +113,6 @@ public class MybatisGeneratorUtil {
 			context.put("targetProject_sqlMap", targetProjectSqlMap);
 			context.put("generator_jdbc_password", AESUtil.aesDecode(jdbcPassword));
 			context.put("last_insert_id_tables", lastInsertIdTables);
-			VelocityUtil.generate(generatorConfig_vm, generatorConfigXml, context);
 			// 删除旧代码
 			
 			if(deletefolder) {
@@ -125,6 +124,7 @@ public class MybatisGeneratorUtil {
 				deleteExisting(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/mapper",tables,false);
 				deleteExisting(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/model",tables,true);
 			}
+			VelocityUtil.generate(generatorConfig_vm, generatorConfigXml, context);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
