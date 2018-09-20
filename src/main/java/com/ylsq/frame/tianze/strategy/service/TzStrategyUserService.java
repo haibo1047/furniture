@@ -1,10 +1,10 @@
-package com.ylsq.frame.tianze.encrypt.service;
+package com.ylsq.frame.tianze.strategy.service;
 
 import java.util.List;
 
 import com.ylsq.frame.common.base.BaseService;
-import com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyUser;
-import com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyUserExample;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyUser;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyUserExample;
 
 /**
 * TzStrategyUserService接口

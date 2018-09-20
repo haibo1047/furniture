@@ -1,8 +1,8 @@
-package com.ylsq.frame.tianze.encrypt.service;
+package com.ylsq.frame.tianze.strategy.service;
 
 import com.ylsq.frame.common.base.BaseService;
-import com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyOutgoing;
-import com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyOutgoingExample;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyOutgoing;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyOutgoingExample;
 
 /**
 * TzStrategyOutgoingService接口

@@ -1,7 +1,7 @@
-package com.ylsq.frame.tianze.encrypt.dao.mapper;
+package com.ylsq.frame.tianze.strategy.dao.mapper;
 
-import com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyOutgoing;
-import com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyOutgoingExample;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyOutgoing;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyOutgoingExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

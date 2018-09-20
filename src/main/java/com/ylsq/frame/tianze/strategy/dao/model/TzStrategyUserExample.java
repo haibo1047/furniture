@@ -1,4 +1,4 @@
-package com.ylsq.frame.tianze.encrypt.dao.model;
+package com.ylsq.frame.tianze.strategy.dao.model;
 
 import com.ylsq.frame.common.base.BaseExample;
 import java.io.Serializable;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TzStrategyOutgoingExample implements BaseExample, Serializable {
+public class TzStrategyUserExample implements BaseExample, Serializable {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +15,7 @@ public class TzStrategyOutgoingExample implements BaseExample, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public TzStrategyOutgoingExample() {
+    public TzStrategyUserExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -239,63 +239,143 @@ public class TzStrategyOutgoingExample implements BaseExample, Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andOutgoingLevelIsNull() {
-            addCriterion("outgoing_level is null");
+        public Criteria andStrategyTypeIsNull() {
+            addCriterion("strategy_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andOutgoingLevelIsNotNull() {
-            addCriterion("outgoing_level is not null");
+        public Criteria andStrategyTypeIsNotNull() {
+            addCriterion("strategy_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOutgoingLevelEqualTo(Integer value) {
-            addCriterion("outgoing_level =", value, "outgoingLevel");
+        public Criteria andStrategyTypeEqualTo(String value) {
+            addCriterion("strategy_type =", value, "strategyType");
             return (Criteria) this;
         }
 
-        public Criteria andOutgoingLevelNotEqualTo(Integer value) {
-            addCriterion("outgoing_level <>", value, "outgoingLevel");
+        public Criteria andStrategyTypeNotEqualTo(String value) {
+            addCriterion("strategy_type <>", value, "strategyType");
             return (Criteria) this;
         }
 
-        public Criteria andOutgoingLevelGreaterThan(Integer value) {
-            addCriterion("outgoing_level >", value, "outgoingLevel");
+        public Criteria andStrategyTypeGreaterThan(String value) {
+            addCriterion("strategy_type >", value, "strategyType");
             return (Criteria) this;
         }
 
-        public Criteria andOutgoingLevelGreaterThanOrEqualTo(Integer value) {
-            addCriterion("outgoing_level >=", value, "outgoingLevel");
+        public Criteria andStrategyTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("strategy_type >=", value, "strategyType");
             return (Criteria) this;
         }
 
-        public Criteria andOutgoingLevelLessThan(Integer value) {
-            addCriterion("outgoing_level <", value, "outgoingLevel");
+        public Criteria andStrategyTypeLessThan(String value) {
+            addCriterion("strategy_type <", value, "strategyType");
             return (Criteria) this;
         }
 
-        public Criteria andOutgoingLevelLessThanOrEqualTo(Integer value) {
-            addCriterion("outgoing_level <=", value, "outgoingLevel");
+        public Criteria andStrategyTypeLessThanOrEqualTo(String value) {
+            addCriterion("strategy_type <=", value, "strategyType");
             return (Criteria) this;
         }
 
-        public Criteria andOutgoingLevelIn(List<Integer> values) {
-            addCriterion("outgoing_level in", values, "outgoingLevel");
+        public Criteria andStrategyTypeLike(String value) {
+            addCriterion("strategy_type like", value, "strategyType");
             return (Criteria) this;
         }
 
-        public Criteria andOutgoingLevelNotIn(List<Integer> values) {
-            addCriterion("outgoing_level not in", values, "outgoingLevel");
+        public Criteria andStrategyTypeNotLike(String value) {
+            addCriterion("strategy_type not like", value, "strategyType");
             return (Criteria) this;
         }
 
-        public Criteria andOutgoingLevelBetween(Integer value1, Integer value2) {
-            addCriterion("outgoing_level between", value1, value2, "outgoingLevel");
+        public Criteria andStrategyTypeIn(List<String> values) {
+            addCriterion("strategy_type in", values, "strategyType");
             return (Criteria) this;
         }
 
-        public Criteria andOutgoingLevelNotBetween(Integer value1, Integer value2) {
-            addCriterion("outgoing_level not between", value1, value2, "outgoingLevel");
+        public Criteria andStrategyTypeNotIn(List<String> values) {
+            addCriterion("strategy_type not in", values, "strategyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrategyTypeBetween(String value1, String value2) {
+            addCriterion("strategy_type between", value1, value2, "strategyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrategyTypeNotBetween(String value1, String value2) {
+            addCriterion("strategy_type not between", value1, value2, "strategyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNameIsNull() {
+            addCriterion("user_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNameIsNotNull() {
+            addCriterion("user_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNameEqualTo(String value) {
+            addCriterion("user_name =", value, "userName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNameNotEqualTo(String value) {
+            addCriterion("user_name <>", value, "userName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNameGreaterThan(String value) {
+            addCriterion("user_name >", value, "userName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNameGreaterThanOrEqualTo(String value) {
+            addCriterion("user_name >=", value, "userName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNameLessThan(String value) {
+            addCriterion("user_name <", value, "userName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNameLessThanOrEqualTo(String value) {
+            addCriterion("user_name <=", value, "userName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNameLike(String value) {
+            addCriterion("user_name like", value, "userName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNameNotLike(String value) {
+            addCriterion("user_name not like", value, "userName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNameIn(List<String> values) {
+            addCriterion("user_name in", values, "userName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNameNotIn(List<String> values) {
+            addCriterion("user_name not in", values, "userName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNameBetween(String value1, String value2) {
+            addCriterion("user_name between", value1, value2, "userName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNameNotBetween(String value1, String value2) {
+            addCriterion("user_name not between", value1, value2, "userName");
             return (Criteria) this;
         }
 

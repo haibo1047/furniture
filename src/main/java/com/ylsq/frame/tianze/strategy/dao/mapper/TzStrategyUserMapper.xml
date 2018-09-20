@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ylsq.frame.tianze.encrypt.dao.mapper.TzStrategyUserMapper">
-  <resultMap id="BaseResultMap" type="com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyUser">
+<mapper namespace="com.ylsq.frame.tianze.strategy.dao.mapper.TzStrategyUserMapper">
+  <resultMap id="BaseResultMap" type="com.ylsq.frame.tianze.strategy.dao.model.TzStrategyUser">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="strategy_name" jdbcType="VARCHAR" property="strategyName" />
     <result column="strategy_type" jdbcType="VARCHAR" property="strategyType" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List">
     id, strategy_name, strategy_type, user_name, create_time, create_user, rec_status
   </sql>
-  <select id="selectByExample" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyUserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.ylsq.frame.tianze.strategy.dao.model.TzStrategyUserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -95,13 +95,13 @@
     delete from tz_strategy_user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyUserExample">
+  <delete id="deleteByExample" parameterType="com.ylsq.frame.tianze.strategy.dao.model.TzStrategyUserExample">
     delete from tz_strategy_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyUser">
+  <insert id="insert" parameterType="com.ylsq.frame.tianze.strategy.dao.model.TzStrategyUser">
     insert into tz_strategy_user (id, strategy_name, strategy_type, 
       user_name, create_time, create_user, 
       rec_status)
@@ -109,7 +109,7 @@
       #{userName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
       #{recStatus,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyUser">
+  <insert id="insertSelective" parameterType="com.ylsq.frame.tianze.strategy.dao.model.TzStrategyUser">
     insert into tz_strategy_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -158,7 +158,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyUserExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.ylsq.frame.tianze.strategy.dao.model.TzStrategyUserExample" resultType="java.lang.Long">
     select count(*) from tz_strategy_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -206,7 +206,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyUser">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylsq.frame.tianze.strategy.dao.model.TzStrategyUser">
     update tz_strategy_user
     <set>
       <if test="strategyName != null">
@@ -230,7 +230,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyUser">
+  <update id="updateByPrimaryKey" parameterType="com.ylsq.frame.tianze.strategy.dao.model.TzStrategyUser">
     update tz_strategy_user
     set strategy_name = #{strategyName,jdbcType=VARCHAR},
       strategy_type = #{strategyType,jdbcType=VARCHAR},

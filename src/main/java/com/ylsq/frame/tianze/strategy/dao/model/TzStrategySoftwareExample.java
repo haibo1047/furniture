@@ -1,4 +1,4 @@
-package com.ylsq.frame.tianze.encrypt.dao.model;
+package com.ylsq.frame.tianze.strategy.dao.model;
 
 import com.ylsq.frame.common.base.BaseExample;
 import java.io.Serializable;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TzStrategyUserExample implements BaseExample, Serializable {
+public class TzStrategySoftwareExample implements BaseExample, Serializable {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +15,7 @@ public class TzStrategyUserExample implements BaseExample, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public TzStrategyUserExample() {
+    public TzStrategySoftwareExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -239,143 +239,73 @@ public class TzStrategyUserExample implements BaseExample, Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andStrategyTypeIsNull() {
-            addCriterion("strategy_type is null");
+        public Criteria andSoftwareCodeIsNull() {
+            addCriterion("software_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyTypeIsNotNull() {
-            addCriterion("strategy_type is not null");
+        public Criteria andSoftwareCodeIsNotNull() {
+            addCriterion("software_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyTypeEqualTo(String value) {
-            addCriterion("strategy_type =", value, "strategyType");
+        public Criteria andSoftwareCodeEqualTo(String value) {
+            addCriterion("software_code =", value, "softwareCode");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyTypeNotEqualTo(String value) {
-            addCriterion("strategy_type <>", value, "strategyType");
+        public Criteria andSoftwareCodeNotEqualTo(String value) {
+            addCriterion("software_code <>", value, "softwareCode");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyTypeGreaterThan(String value) {
-            addCriterion("strategy_type >", value, "strategyType");
+        public Criteria andSoftwareCodeGreaterThan(String value) {
+            addCriterion("software_code >", value, "softwareCode");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyTypeGreaterThanOrEqualTo(String value) {
-            addCriterion("strategy_type >=", value, "strategyType");
+        public Criteria andSoftwareCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("software_code >=", value, "softwareCode");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyTypeLessThan(String value) {
-            addCriterion("strategy_type <", value, "strategyType");
+        public Criteria andSoftwareCodeLessThan(String value) {
+            addCriterion("software_code <", value, "softwareCode");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyTypeLessThanOrEqualTo(String value) {
-            addCriterion("strategy_type <=", value, "strategyType");
+        public Criteria andSoftwareCodeLessThanOrEqualTo(String value) {
+            addCriterion("software_code <=", value, "softwareCode");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyTypeLike(String value) {
-            addCriterion("strategy_type like", value, "strategyType");
+        public Criteria andSoftwareCodeLike(String value) {
+            addCriterion("software_code like", value, "softwareCode");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyTypeNotLike(String value) {
-            addCriterion("strategy_type not like", value, "strategyType");
+        public Criteria andSoftwareCodeNotLike(String value) {
+            addCriterion("software_code not like", value, "softwareCode");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyTypeIn(List<String> values) {
-            addCriterion("strategy_type in", values, "strategyType");
+        public Criteria andSoftwareCodeIn(List<String> values) {
+            addCriterion("software_code in", values, "softwareCode");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyTypeNotIn(List<String> values) {
-            addCriterion("strategy_type not in", values, "strategyType");
+        public Criteria andSoftwareCodeNotIn(List<String> values) {
+            addCriterion("software_code not in", values, "softwareCode");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyTypeBetween(String value1, String value2) {
-            addCriterion("strategy_type between", value1, value2, "strategyType");
+        public Criteria andSoftwareCodeBetween(String value1, String value2) {
+            addCriterion("software_code between", value1, value2, "softwareCode");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyTypeNotBetween(String value1, String value2) {
-            addCriterion("strategy_type not between", value1, value2, "strategyType");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameIsNull() {
-            addCriterion("user_name is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameIsNotNull() {
-            addCriterion("user_name is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameEqualTo(String value) {
-            addCriterion("user_name =", value, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameNotEqualTo(String value) {
-            addCriterion("user_name <>", value, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameGreaterThan(String value) {
-            addCriterion("user_name >", value, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameGreaterThanOrEqualTo(String value) {
-            addCriterion("user_name >=", value, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameLessThan(String value) {
-            addCriterion("user_name <", value, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameLessThanOrEqualTo(String value) {
-            addCriterion("user_name <=", value, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameLike(String value) {
-            addCriterion("user_name like", value, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameNotLike(String value) {
-            addCriterion("user_name not like", value, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameIn(List<String> values) {
-            addCriterion("user_name in", values, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameNotIn(List<String> values) {
-            addCriterion("user_name not in", values, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameBetween(String value1, String value2) {
-            addCriterion("user_name between", value1, value2, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameNotBetween(String value1, String value2) {
-            addCriterion("user_name not between", value1, value2, "userName");
+        public Criteria andSoftwareCodeNotBetween(String value1, String value2) {
+            addCriterion("software_code not between", value1, value2, "softwareCode");
             return (Criteria) this;
         }
 

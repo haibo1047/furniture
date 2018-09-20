@@ -1,12 +1,10 @@
-package com.ylsq.frame.tianze.encrypt.dao.model;
+package com.ylsq.frame.tianze.strategy.dao.model;
 
 import com.ylsq.frame.common.base.BaseModel;
 import java.io.Serializable;
 import java.util.Date;
 
-public class TzStrategyOutgoing implements BaseModel, Serializable {
-	public static String Strategy_Type = "outgoing";
-	
+public class TzStrategySoftware implements BaseModel, Serializable {
     /**
      * 编号
      *
@@ -15,18 +13,18 @@ public class TzStrategyOutgoing implements BaseModel, Serializable {
     private Long id;
 
     /**
-     * 模板名
+     * 策略名
      *
      * @mbg.generated
      */
     private String strategyName;
 
     /**
-     * 申请等级
+     * 软件类型
      *
      * @mbg.generated
      */
-    private Integer outgoingLevel;
+    private String softwareCode;
 
     /**
      * 创建时间
@@ -67,12 +65,12 @@ public class TzStrategyOutgoing implements BaseModel, Serializable {
         this.strategyName = strategyName;
     }
 
-    public Integer getOutgoingLevel() {
-        return outgoingLevel;
+    public String getSoftwareCode() {
+        return softwareCode;
     }
 
-    public void setOutgoingLevel(Integer outgoingLevel) {
-        this.outgoingLevel = outgoingLevel;
+    public void setSoftwareCode(String softwareCode) {
+        this.softwareCode = softwareCode;
     }
 
     public Date getCreateTime() {
@@ -107,7 +105,7 @@ public class TzStrategyOutgoing implements BaseModel, Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", strategyName=").append(strategyName);
-        sb.append(", outgoingLevel=").append(outgoingLevel);
+        sb.append(", softwareCode=").append(softwareCode);
         sb.append(", createTime=").append(createTime);
         sb.append(", createUser=").append(createUser);
         sb.append(", recStatus=").append(recStatus);
@@ -126,10 +124,10 @@ public class TzStrategyOutgoing implements BaseModel, Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        TzStrategyOutgoing other = (TzStrategyOutgoing) that;
+        TzStrategySoftware other = (TzStrategySoftware) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getStrategyName() == null ? other.getStrategyName() == null : this.getStrategyName().equals(other.getStrategyName()))
-            && (this.getOutgoingLevel() == null ? other.getOutgoingLevel() == null : this.getOutgoingLevel().equals(other.getOutgoingLevel()))
+            && (this.getSoftwareCode() == null ? other.getSoftwareCode() == null : this.getSoftwareCode().equals(other.getSoftwareCode()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
             && (this.getRecStatus() == null ? other.getRecStatus() == null : this.getRecStatus().equals(other.getRecStatus()));
@@ -141,7 +139,7 @@ public class TzStrategyOutgoing implements BaseModel, Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getStrategyName() == null) ? 0 : getStrategyName().hashCode());
-        result = prime * result + ((getOutgoingLevel() == null) ? 0 : getOutgoingLevel().hashCode());
+        result = prime * result + ((getSoftwareCode() == null) ? 0 : getSoftwareCode().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getCreateUser() == null) ? 0 : getCreateUser().hashCode());
         result = prime * result + ((getRecStatus() == null) ? 0 : getRecStatus().hashCode());

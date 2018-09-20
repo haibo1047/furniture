@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ylsq.frame.tianze.encrypt.dao.mapper.TzStrategyEncryptMapper">
-  <resultMap id="BaseResultMap" type="com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyEncrypt">
+<mapper namespace="com.ylsq.frame.tianze.strategy.dao.mapper.TzStrategySoftwareMapper">
+  <resultMap id="BaseResultMap" type="com.ylsq.frame.tianze.strategy.dao.model.TzStrategySoftware">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="strategy_name" jdbcType="VARCHAR" property="strategyName" />
-    <result column="allow_copy" jdbcType="INTEGER" property="allowCopy" />
-    <result column="allow_screen" jdbcType="INTEGER" property="allowScreen" />
-    <result column="allow_print" jdbcType="INTEGER" property="allowPrint" />
-    <result column="watermark" jdbcType="INTEGER" property="watermark" />
+    <result column="software_code" jdbcType="VARCHAR" property="softwareCode" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="rec_status" jdbcType="INTEGER" property="recStatus" />
@@ -71,16 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, strategy_name, allow_copy, allow_screen, allow_print, watermark, create_time, 
-    create_user, rec_status
+    id, strategy_name, software_code, create_time, create_user, rec_status
   </sql>
-  <select id="selectByExample" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyEncryptExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.ylsq.frame.tianze.strategy.dao.model.TzStrategySoftwareExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tz_strategy_encrypt
+    from tz_strategy_software
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,31 +87,29 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tz_strategy_encrypt
+    from tz_strategy_software
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from tz_strategy_encrypt
+    delete from tz_strategy_software
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyEncryptExample">
-    delete from tz_strategy_encrypt
+  <delete id="deleteByExample" parameterType="com.ylsq.frame.tianze.strategy.dao.model.TzStrategySoftwareExample">
+    delete from tz_strategy_software
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyEncrypt">
-    insert into tz_strategy_encrypt (id, strategy_name, allow_copy, 
-      allow_screen, allow_print, watermark, 
+  <insert id="insert" parameterType="com.ylsq.frame.tianze.strategy.dao.model.TzStrategySoftware">
+    insert into tz_strategy_software (id, strategy_name, software_code, 
       create_time, create_user, rec_status
       )
-    values (#{id,jdbcType=BIGINT}, #{strategyName,jdbcType=VARCHAR}, #{allowCopy,jdbcType=INTEGER}, 
-      #{allowScreen,jdbcType=INTEGER}, #{allowPrint,jdbcType=INTEGER}, #{watermark,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=BIGINT}, #{strategyName,jdbcType=VARCHAR}, #{softwareCode,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{recStatus,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyEncrypt">
-    insert into tz_strategy_encrypt
+  <insert id="insertSelective" parameterType="com.ylsq.frame.tianze.strategy.dao.model.TzStrategySoftware">
+    insert into tz_strategy_software
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -123,17 +117,8 @@
       <if test="strategyName != null">
         strategy_name,
       </if>
-      <if test="allowCopy != null">
-        allow_copy,
-      </if>
-      <if test="allowScreen != null">
-        allow_screen,
-      </if>
-      <if test="allowPrint != null">
-        allow_print,
-      </if>
-      <if test="watermark != null">
-        watermark,
+      <if test="softwareCode != null">
+        software_code,
       </if>
       <if test="createTime != null">
         create_time,
@@ -152,17 +137,8 @@
       <if test="strategyName != null">
         #{strategyName,jdbcType=VARCHAR},
       </if>
-      <if test="allowCopy != null">
-        #{allowCopy,jdbcType=INTEGER},
-      </if>
-      <if test="allowScreen != null">
-        #{allowScreen,jdbcType=INTEGER},
-      </if>
-      <if test="allowPrint != null">
-        #{allowPrint,jdbcType=INTEGER},
-      </if>
-      <if test="watermark != null">
-        #{watermark,jdbcType=INTEGER},
+      <if test="softwareCode != null">
+        #{softwareCode,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -175,14 +151,14 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyEncryptExample" resultType="java.lang.Long">
-    select count(*) from tz_strategy_encrypt
+  <select id="countByExample" parameterType="com.ylsq.frame.tianze.strategy.dao.model.TzStrategySoftwareExample" resultType="java.lang.Long">
+    select count(*) from tz_strategy_software
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tz_strategy_encrypt
+    update tz_strategy_software
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
@@ -190,17 +166,8 @@
       <if test="record.strategyName != null">
         strategy_name = #{record.strategyName,jdbcType=VARCHAR},
       </if>
-      <if test="record.allowCopy != null">
-        allow_copy = #{record.allowCopy,jdbcType=INTEGER},
-      </if>
-      <if test="record.allowScreen != null">
-        allow_screen = #{record.allowScreen,jdbcType=INTEGER},
-      </if>
-      <if test="record.allowPrint != null">
-        allow_print = #{record.allowPrint,jdbcType=INTEGER},
-      </if>
-      <if test="record.watermark != null">
-        watermark = #{record.watermark,jdbcType=INTEGER},
+      <if test="record.softwareCode != null">
+        software_code = #{record.softwareCode,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -217,13 +184,10 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tz_strategy_encrypt
+    update tz_strategy_software
     set id = #{record.id,jdbcType=BIGINT},
       strategy_name = #{record.strategyName,jdbcType=VARCHAR},
-      allow_copy = #{record.allowCopy,jdbcType=INTEGER},
-      allow_screen = #{record.allowScreen,jdbcType=INTEGER},
-      allow_print = #{record.allowPrint,jdbcType=INTEGER},
-      watermark = #{record.watermark,jdbcType=INTEGER},
+      software_code = #{record.softwareCode,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       create_user = #{record.createUser,jdbcType=VARCHAR},
       rec_status = #{record.recStatus,jdbcType=INTEGER}
@@ -231,23 +195,14 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyEncrypt">
-    update tz_strategy_encrypt
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylsq.frame.tianze.strategy.dao.model.TzStrategySoftware">
+    update tz_strategy_software
     <set>
       <if test="strategyName != null">
         strategy_name = #{strategyName,jdbcType=VARCHAR},
       </if>
-      <if test="allowCopy != null">
-        allow_copy = #{allowCopy,jdbcType=INTEGER},
-      </if>
-      <if test="allowScreen != null">
-        allow_screen = #{allowScreen,jdbcType=INTEGER},
-      </if>
-      <if test="allowPrint != null">
-        allow_print = #{allowPrint,jdbcType=INTEGER},
-      </if>
-      <if test="watermark != null">
-        watermark = #{watermark,jdbcType=INTEGER},
+      <if test="softwareCode != null">
+        software_code = #{softwareCode,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -261,13 +216,10 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyEncrypt">
-    update tz_strategy_encrypt
+  <update id="updateByPrimaryKey" parameterType="com.ylsq.frame.tianze.strategy.dao.model.TzStrategySoftware">
+    update tz_strategy_software
     set strategy_name = #{strategyName,jdbcType=VARCHAR},
-      allow_copy = #{allowCopy,jdbcType=INTEGER},
-      allow_screen = #{allowScreen,jdbcType=INTEGER},
-      allow_print = #{allowPrint,jdbcType=INTEGER},
-      watermark = #{watermark,jdbcType=INTEGER},
+      software_code = #{softwareCode,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_user = #{createUser,jdbcType=VARCHAR},
       rec_status = #{recStatus,jdbcType=INTEGER}

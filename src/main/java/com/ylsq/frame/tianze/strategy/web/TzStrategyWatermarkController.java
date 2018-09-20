@@ -1,4 +1,4 @@
-package com.ylsq.frame.tianze.encrypt.web;
+package com.ylsq.frame.tianze.strategy.web;
 
 import java.util.List;
 import org.slf4j.Logger;
@@ -16,9 +16,9 @@ import com.ylsq.frame.common.base.BaseExample;
 import com.ylsq.frame.common.base.BaseModel;
 import com.ylsq.frame.common.base.BaseService;
 import com.ylsq.frame.common.base.ValidateResult;
-import com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyEncrypt;
-import com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyEncryptExample;
-import com.ylsq.frame.tianze.encrypt.service.TzStrategyEncryptService;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyWatermark;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyWatermarkExample;
+import com.ylsq.frame.tianze.strategy.service.TzStrategyWatermarkService;
 
 
 
@@ -26,31 +26,31 @@ import com.ylsq.frame.tianze.encrypt.service.TzStrategyEncryptService;
  * Created by Harper.
  */
 @Controller
-@RequestMapping("/tz/strategy/encrypt")
-public class TzStrategyEncryptController extends BaseModelController {
-    private static final Logger log = LoggerFactory.getLogger(TzStrategyEncryptController.class);
+@RequestMapping("tz_strategy_watermark")
+public class TzStrategyWatermarkController extends BaseModelController {
+    private static final Logger log = LoggerFactory.getLogger(TzStrategyWatermarkController.class);
 	
 	@Autowired
-	private TzStrategyEncryptService tzStrategyEncryptService;
+	private TzStrategyWatermarkService tzStrategyWatermarkService;
 	
 	
 	@Override
 	public String list(@RequestParam(required = false, defaultValue = "1", value = "pageNum") int pageNum,ModelMap modelMap) {
 		// TODO Auto-generated method stub
 		int pageSize = (int)SecurityUtils.getSubject().getSession().getAttribute("pageSize");
-		List<TzStrategyEncrypt> list = tzStrategyEncryptService.selectByExampleForStartPage(new TzStrategyEncryptExample(),pageNum,pageSize);
+		List<TzStrategyWatermark> list = tzStrategyWatermarkService.selectByExampleForStartPage(new TzStrategyWatermarkExample(),pageNum,pageSize);
 		
 		modelMap.put("modelList", list);
-		modelMap.put("total", tzStrategyEncryptService.countByExample(new TzStrategyEncryptExample()));
+		modelMap.put("total", tzStrategyWatermarkService.countByExample(new TzStrategyWatermarkExample()));
 		return webPrefix() + "list";
 	}
 	
-	protected ValidateResult validate(TzStrategyEncrypt model) {
+	protected ValidateResult validate(TzStrategyWatermark model) {
 		return ValidateResult.Passed;
 	}
 	
 	@RequestMapping(value= "/save", method = RequestMethod.POST)
-	public String save(TzStrategyEncrypt model,ModelMap modelMap) {
+	public String save(TzStrategyWatermark model,ModelMap modelMap) {
 		log.debug(model.toString());
 		initModel(model);
 		
@@ -61,10 +61,10 @@ public class TzStrategyEncryptController extends BaseModelController {
 			return webPrefix()+"edit";
 		}
 		if(model.getId() == null) {
-			tzStrategyEncryptService.insert(model);
+			tzStrategyWatermarkService.insert(model);
 		}
 		else {
-			tzStrategyEncryptService.updateByPrimaryKey(model);
+			tzStrategyWatermarkService.updateByPrimaryKey(model);
 		}
 		return list(modelMap);
 	}
@@ -72,19 +72,19 @@ public class TzStrategyEncryptController extends BaseModelController {
 	@Override
 	protected BaseService<? extends BaseModel, ? extends BaseExample> getService() {
 		// TODO Auto-generated method stub
-		return tzStrategyEncryptService;
+		return tzStrategyWatermarkService;
 	}
 
 	@Override
 	protected List<? extends BaseModel> getModelList() {
 		// TODO Auto-generated method stub
-		List<TzStrategyEncrypt> list = tzStrategyEncryptService.selectByExample(new TzStrategyEncryptExample());
+		List<TzStrategyWatermark> list = tzStrategyWatermarkService.selectByExample(new TzStrategyWatermarkExample());
 		return list;
 	}
 
 	@Override
 	protected String webPrefix() {
 		// TODO Auto-generated method stub
-		return "/tz/strategy/encrypt/";
+		return super.webPrefix();
 	}
 }

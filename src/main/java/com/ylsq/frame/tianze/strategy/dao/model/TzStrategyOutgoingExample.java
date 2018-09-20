@@ -1,4 +1,4 @@
-package com.ylsq.frame.tianze.encrypt.dao.model;
+package com.ylsq.frame.tianze.strategy.dao.model;
 
 import com.ylsq.frame.common.base.BaseExample;
 import java.io.Serializable;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TzStrategyEncryptExample implements BaseExample, Serializable {
+public class TzStrategyOutgoingExample implements BaseExample, Serializable {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +15,7 @@ public class TzStrategyEncryptExample implements BaseExample, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public TzStrategyEncryptExample() {
+    public TzStrategyOutgoingExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -239,243 +239,63 @@ public class TzStrategyEncryptExample implements BaseExample, Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andAllowCopyIsNull() {
-            addCriterion("allow_copy is null");
+        public Criteria andOutgoingLevelIsNull() {
+            addCriterion("outgoing_level is null");
             return (Criteria) this;
         }
 
-        public Criteria andAllowCopyIsNotNull() {
-            addCriterion("allow_copy is not null");
+        public Criteria andOutgoingLevelIsNotNull() {
+            addCriterion("outgoing_level is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAllowCopyEqualTo(Integer value) {
-            addCriterion("allow_copy =", value, "allowCopy");
+        public Criteria andOutgoingLevelEqualTo(Integer value) {
+            addCriterion("outgoing_level =", value, "outgoingLevel");
             return (Criteria) this;
         }
 
-        public Criteria andAllowCopyNotEqualTo(Integer value) {
-            addCriterion("allow_copy <>", value, "allowCopy");
+        public Criteria andOutgoingLevelNotEqualTo(Integer value) {
+            addCriterion("outgoing_level <>", value, "outgoingLevel");
             return (Criteria) this;
         }
 
-        public Criteria andAllowCopyGreaterThan(Integer value) {
-            addCriterion("allow_copy >", value, "allowCopy");
+        public Criteria andOutgoingLevelGreaterThan(Integer value) {
+            addCriterion("outgoing_level >", value, "outgoingLevel");
             return (Criteria) this;
         }
 
-        public Criteria andAllowCopyGreaterThanOrEqualTo(Integer value) {
-            addCriterion("allow_copy >=", value, "allowCopy");
+        public Criteria andOutgoingLevelGreaterThanOrEqualTo(Integer value) {
+            addCriterion("outgoing_level >=", value, "outgoingLevel");
             return (Criteria) this;
         }
 
-        public Criteria andAllowCopyLessThan(Integer value) {
-            addCriterion("allow_copy <", value, "allowCopy");
+        public Criteria andOutgoingLevelLessThan(Integer value) {
+            addCriterion("outgoing_level <", value, "outgoingLevel");
             return (Criteria) this;
         }
 
-        public Criteria andAllowCopyLessThanOrEqualTo(Integer value) {
-            addCriterion("allow_copy <=", value, "allowCopy");
+        public Criteria andOutgoingLevelLessThanOrEqualTo(Integer value) {
+            addCriterion("outgoing_level <=", value, "outgoingLevel");
             return (Criteria) this;
         }
 
-        public Criteria andAllowCopyIn(List<Integer> values) {
-            addCriterion("allow_copy in", values, "allowCopy");
+        public Criteria andOutgoingLevelIn(List<Integer> values) {
+            addCriterion("outgoing_level in", values, "outgoingLevel");
             return (Criteria) this;
         }
 
-        public Criteria andAllowCopyNotIn(List<Integer> values) {
-            addCriterion("allow_copy not in", values, "allowCopy");
+        public Criteria andOutgoingLevelNotIn(List<Integer> values) {
+            addCriterion("outgoing_level not in", values, "outgoingLevel");
             return (Criteria) this;
         }
 
-        public Criteria andAllowCopyBetween(Integer value1, Integer value2) {
-            addCriterion("allow_copy between", value1, value2, "allowCopy");
+        public Criteria andOutgoingLevelBetween(Integer value1, Integer value2) {
+            addCriterion("outgoing_level between", value1, value2, "outgoingLevel");
             return (Criteria) this;
         }
 
-        public Criteria andAllowCopyNotBetween(Integer value1, Integer value2) {
-            addCriterion("allow_copy not between", value1, value2, "allowCopy");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowScreenIsNull() {
-            addCriterion("allow_screen is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowScreenIsNotNull() {
-            addCriterion("allow_screen is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowScreenEqualTo(Integer value) {
-            addCriterion("allow_screen =", value, "allowScreen");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowScreenNotEqualTo(Integer value) {
-            addCriterion("allow_screen <>", value, "allowScreen");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowScreenGreaterThan(Integer value) {
-            addCriterion("allow_screen >", value, "allowScreen");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowScreenGreaterThanOrEqualTo(Integer value) {
-            addCriterion("allow_screen >=", value, "allowScreen");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowScreenLessThan(Integer value) {
-            addCriterion("allow_screen <", value, "allowScreen");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowScreenLessThanOrEqualTo(Integer value) {
-            addCriterion("allow_screen <=", value, "allowScreen");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowScreenIn(List<Integer> values) {
-            addCriterion("allow_screen in", values, "allowScreen");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowScreenNotIn(List<Integer> values) {
-            addCriterion("allow_screen not in", values, "allowScreen");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowScreenBetween(Integer value1, Integer value2) {
-            addCriterion("allow_screen between", value1, value2, "allowScreen");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowScreenNotBetween(Integer value1, Integer value2) {
-            addCriterion("allow_screen not between", value1, value2, "allowScreen");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowPrintIsNull() {
-            addCriterion("allow_print is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowPrintIsNotNull() {
-            addCriterion("allow_print is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowPrintEqualTo(Integer value) {
-            addCriterion("allow_print =", value, "allowPrint");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowPrintNotEqualTo(Integer value) {
-            addCriterion("allow_print <>", value, "allowPrint");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowPrintGreaterThan(Integer value) {
-            addCriterion("allow_print >", value, "allowPrint");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowPrintGreaterThanOrEqualTo(Integer value) {
-            addCriterion("allow_print >=", value, "allowPrint");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowPrintLessThan(Integer value) {
-            addCriterion("allow_print <", value, "allowPrint");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowPrintLessThanOrEqualTo(Integer value) {
-            addCriterion("allow_print <=", value, "allowPrint");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowPrintIn(List<Integer> values) {
-            addCriterion("allow_print in", values, "allowPrint");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowPrintNotIn(List<Integer> values) {
-            addCriterion("allow_print not in", values, "allowPrint");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowPrintBetween(Integer value1, Integer value2) {
-            addCriterion("allow_print between", value1, value2, "allowPrint");
-            return (Criteria) this;
-        }
-
-        public Criteria andAllowPrintNotBetween(Integer value1, Integer value2) {
-            addCriterion("allow_print not between", value1, value2, "allowPrint");
-            return (Criteria) this;
-        }
-
-        public Criteria andWatermarkIsNull() {
-            addCriterion("watermark is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andWatermarkIsNotNull() {
-            addCriterion("watermark is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andWatermarkEqualTo(Integer value) {
-            addCriterion("watermark =", value, "watermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andWatermarkNotEqualTo(Integer value) {
-            addCriterion("watermark <>", value, "watermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andWatermarkGreaterThan(Integer value) {
-            addCriterion("watermark >", value, "watermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andWatermarkGreaterThanOrEqualTo(Integer value) {
-            addCriterion("watermark >=", value, "watermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andWatermarkLessThan(Integer value) {
-            addCriterion("watermark <", value, "watermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andWatermarkLessThanOrEqualTo(Integer value) {
-            addCriterion("watermark <=", value, "watermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andWatermarkIn(List<Integer> values) {
-            addCriterion("watermark in", values, "watermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andWatermarkNotIn(List<Integer> values) {
-            addCriterion("watermark not in", values, "watermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andWatermarkBetween(Integer value1, Integer value2) {
-            addCriterion("watermark between", value1, value2, "watermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andWatermarkNotBetween(Integer value1, Integer value2) {
-            addCriterion("watermark not between", value1, value2, "watermark");
+        public Criteria andOutgoingLevelNotBetween(Integer value1, Integer value2) {
+            addCriterion("outgoing_level not between", value1, value2, "outgoingLevel");
             return (Criteria) this;
         }
 

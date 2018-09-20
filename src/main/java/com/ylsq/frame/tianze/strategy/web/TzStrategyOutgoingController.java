@@ -1,4 +1,4 @@
-package com.ylsq.frame.tianze.encrypt.web;
+package com.ylsq.frame.tianze.strategy.web;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,11 +28,11 @@ import com.ylsq.frame.common.base.ValidateResult;
 import com.ylsq.frame.sys.secu.dao.model.SecuUser;
 import com.ylsq.frame.sys.secu.dao.model.SecuUserExample;
 import com.ylsq.frame.sys.secu.service.SecuUserService;
-import com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyOutgoing;
-import com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyOutgoingExample;
-import com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyUser;
-import com.ylsq.frame.tianze.encrypt.service.TzStrategyOutgoingService;
-import com.ylsq.frame.tianze.encrypt.service.TzStrategyUserService;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyOutgoing;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyOutgoingExample;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyUser;
+import com.ylsq.frame.tianze.strategy.service.TzStrategyOutgoingService;
+import com.ylsq.frame.tianze.strategy.service.TzStrategyUserService;
 
 
 

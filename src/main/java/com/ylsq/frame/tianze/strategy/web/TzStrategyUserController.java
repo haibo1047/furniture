@@ -1,6 +1,8 @@
-package com.ylsq.frame.tianze.encrypt.web;
+package com.ylsq.frame.tianze.strategy.web;
 
 import java.util.List;
+
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import org.apache.shiro.SecurityUtils;
-import com.ylsq.frame.common.base.BaseModelController;
 import com.ylsq.frame.common.base.BaseExample;
 import com.ylsq.frame.common.base.BaseModel;
+import com.ylsq.frame.common.base.BaseModelController;
 import com.ylsq.frame.common.base.BaseService;
 import com.ylsq.frame.common.base.ValidateResult;
-import com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyUser;
-import com.ylsq.frame.tianze.encrypt.dao.model.TzStrategyUserExample;
-import com.ylsq.frame.tianze.encrypt.service.TzStrategyUserService;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyUser;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyUserExample;
+import com.ylsq.frame.tianze.strategy.service.TzStrategyUserService;
 
 
 
