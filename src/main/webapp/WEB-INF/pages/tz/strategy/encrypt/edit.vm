@@ -38,20 +38,121 @@
 							<textarea class="form-control" name="remark" rows=3 value="$!{model.remark}" placeholder="备注"></textarea>
 						</div>
 					</div>
-				</div>
+				</div> ## tabpanel
 				<div role="tabpanel" class="tab-pane fade" id="tab_2p" aria-labelledby="permission-tab">
 	  				<div class="checkbox">
-	            		<label>
+	            		<label class="col-xs-4">
 	                  		<input type="checkbox" value=""> 允许拷贝
 	                    </label>
+	                    
+	            		<label class="col-xs-4">
+	                  		<input type="checkbox" value=""> 允许截屏
+	                    </label>
+	                    
+	            		<label class="col-xs-4">
+	                  		<input type="checkbox" value=""> 允许打印
+	                    </label>
                   	</div>
-				</div>
+	  				<div class="checkbox">
+	            		<label class="col-xs-4">
+	                  		<input type="checkbox" value=""> 允许外发转加密
+	                    </label>
+	            		<label class="col-xs-4">
+	                  		<input type="checkbox" value=""> 标识加密文件
+	                    </label>
+	            		<label class="col-xs-4">
+	                  		<input type="checkbox" value=""> 允许运行黑客软件
+	                    </label>
+                  	</div>
+	  				<div class="checkbox">
+	            		<label class="col-xs-4">
+	                  		<input type="checkbox" value=""> 允许脱机
+	                    </label>
+                  	</div>
+				</div> ## tabpanel
 				<div role="tabpanel" class="tab-pane fade" id="tab_3s" aria-labelledby="software-tab">
 		  			<p>software</p>
-		   	 	</div>
+		   	 	</div> ## tabpanel
 				<div role="tabpanel" class="tab-pane fade" id="tab_4w" aria-labelledby="watermark-tab">
-		  			<p>watermark</p>
-		   	 	</div>
+		  			<div class="checkbox">
+	            		<label class="col-xs-12">
+	                  		<input type="checkbox" value=""> 显示水印
+	                    </label>
+	                </div>
+	                <div class="form-group">
+						<label class="control-label col-xs-4" for="first-name">水印内容</label>
+						<div class="col-xs-8">
+							<input type="text" name="strategyName" value="$!{model.strategyName}" required="required" class="form-control col-md-7 col-xs-12">
+						</div>
+					</div>
+					<div class="form-group">
+	            		<label class="col-xs-3">
+	                    </label>
+	            		<label class="col-xs-2">
+	                  		<input type="checkbox" value=""> 用户名
+	                    </label>
+	            		<label class="col-xs-2">
+	                  		<input type="checkbox" value=""> 计算机名
+	                    </label>
+	            		<label class="col-xs-2">
+	                  		<input type="checkbox" value=""> 终端IP
+	                    </label>
+	            		<label class="col-xs-2">
+	                  		<input type="checkbox" value=""> 登录时间
+	                    </label>
+                  	</div>
+                  	
+                  	<div class="form-group">
+						<label class="control-label col-xs-4" for="first-name">水印位置</label>
+						<label class="col-xs-2">
+	                  		<input type="checkbox" value=""> 居中
+	                    </label>
+	            		<label class="col-xs-2">
+	                  		<input type="checkbox" value=""> 左上
+	                    </label>
+	            		<label class="col-xs-2">
+	                  		<input type="checkbox" value=""> 左下
+	                    </label>
+	            		<label class="col-xs-2">
+	                  		<input type="checkbox" value=""> 右上
+	                    </label>
+	            		<label class="col-xs-2">
+	                  		<input type="checkbox" value=""> 右下
+	                    </label>
+					</div>
+                  	
+                  	<div class="form-group">
+						<label class="control-label col-xs-4" for="first-name">版式</label>
+						<div class="radio">
+                        	<label>
+                              	<input type="radio" checked="" value="oblique" id="oblique" name="layout"> 斜式
+                        	</label>
+                        	<label>
+                              	<input type="radio" checked="" value="horizontal" id="horizontal" name="layout"> 水平
+                        	</label>
+                        	<label>
+                              	<input type="radio" checked="" value="vertical" id="vertical" name="layout"> 垂直
+                        	</label>
+                 	 	</div>
+					</div>
+                  	<div class="form-group">
+						<label class="control-label col-xs-4" for="first-name">显示条件</label>
+						<div class="radio">
+                        	<label>
+                              	<input type="radio" checked="" value="option1" id="optionsRadios1" name="displayCondition"> 一直显示
+                        	</label>
+                        	<label>
+                              	<input type="radio" checked="" value="option1" id="optionsRadios1" name="displayCondition"> 打开受控软件
+                        	</label>
+                 	 	</div>
+					</div>
+                  	<div class="form-group">
+						<label class="control-label col-xs-4" for="first-name">透明度</label>
+						<div class="col-md-2">
+                      		<input class="knob" data-width="100" data-height="120" data-angleOffset=-125 data-angleArc=250 data-fgColor="#34495E" data-rotation="anticlockwise" value="35">
+                    	</div>
+					</div>
+		   	 	</div> ## tabpanel
 		  	</div>
 		</div>
 		

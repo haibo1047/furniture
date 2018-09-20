@@ -32,6 +32,7 @@
     <link href="$rc.contextPath/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="$rc.contextPath/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="$rc.contextPath/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    
 </head>
 
 #parse("/include/macro_base.vm")
@@ -147,6 +148,8 @@
 
 <script src="$rc.contextPath/js/moment.min.js"></script>
 <script src="$rc.contextPath/js/bootstrap-datetimepicker.min.js"></script>
+
+<script src="$rc.contextPath/js/jquery.knob.js"></script>
 
 <script type="text/javascript">
 $(function() {
