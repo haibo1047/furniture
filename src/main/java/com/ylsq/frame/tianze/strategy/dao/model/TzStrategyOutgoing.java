@@ -7,7 +7,7 @@ import com.ylsq.frame.common.base.BaseModel;
 
 public class TzStrategyOutgoing implements BaseModel, Serializable {
 	
-	public static String Strategy_Type = "";
+	public static String Strategy_Type = "outgoing";
     /**
      * 编号
      *
