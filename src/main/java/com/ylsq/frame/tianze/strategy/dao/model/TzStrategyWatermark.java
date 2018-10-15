@@ -13,11 +13,11 @@ public class TzStrategyWatermark implements BaseModel, Serializable {
     private Long id;
 
     /**
-     * 策略名
+     * 策略ID
      *
      * @mbg.generated
      */
-    private String strategyName;
+    private Long strategyId;
 
     /**
      * 水印内容
@@ -141,12 +141,12 @@ public class TzStrategyWatermark implements BaseModel, Serializable {
         this.id = id;
     }
 
-    public String getStrategyName() {
-        return strategyName;
+    public Long getStrategyId() {
+        return strategyId;
     }
 
-    public void setStrategyName(String strategyName) {
-        this.strategyName = strategyName;
+    public void setStrategyId(Long strategyId) {
+        this.strategyId = strategyId;
     }
 
     public String getContent() {
@@ -284,7 +284,7 @@ public class TzStrategyWatermark implements BaseModel, Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", strategyName=").append(strategyName);
+        sb.append(", strategyId=").append(strategyId);
         sb.append(", content=").append(content);
         sb.append(", displayUsrname=").append(displayUsrname);
         sb.append(", displayPcname=").append(displayPcname);
@@ -318,7 +318,7 @@ public class TzStrategyWatermark implements BaseModel, Serializable {
         }
         TzStrategyWatermark other = (TzStrategyWatermark) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getStrategyName() == null ? other.getStrategyName() == null : this.getStrategyName().equals(other.getStrategyName()))
+            && (this.getStrategyId() == null ? other.getStrategyId() == null : this.getStrategyId().equals(other.getStrategyId()))
             && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()))
             && (this.getDisplayUsrname() == null ? other.getDisplayUsrname() == null : this.getDisplayUsrname().equals(other.getDisplayUsrname()))
             && (this.getDisplayPcname() == null ? other.getDisplayPcname() == null : this.getDisplayPcname().equals(other.getDisplayPcname()))
@@ -342,7 +342,7 @@ public class TzStrategyWatermark implements BaseModel, Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getStrategyName() == null) ? 0 : getStrategyName().hashCode());
+        result = prime * result + ((getStrategyId() == null) ? 0 : getStrategyId().hashCode());
         result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
         result = prime * result + ((getDisplayUsrname() == null) ? 0 : getDisplayUsrname().hashCode());
         result = prime * result + ((getDisplayPcname() == null) ? 0 : getDisplayPcname().hashCode());

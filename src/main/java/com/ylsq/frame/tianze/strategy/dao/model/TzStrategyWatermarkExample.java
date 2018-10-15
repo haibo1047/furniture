@@ -169,73 +169,63 @@ public class TzStrategyWatermarkExample implements BaseExample, Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andStrategyNameIsNull() {
-            addCriterion("strategy_name is null");
+        public Criteria andStrategyIdIsNull() {
+            addCriterion("strategy_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyNameIsNotNull() {
-            addCriterion("strategy_name is not null");
+        public Criteria andStrategyIdIsNotNull() {
+            addCriterion("strategy_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyNameEqualTo(String value) {
-            addCriterion("strategy_name =", value, "strategyName");
+        public Criteria andStrategyIdEqualTo(Long value) {
+            addCriterion("strategy_id =", value, "strategyId");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyNameNotEqualTo(String value) {
-            addCriterion("strategy_name <>", value, "strategyName");
+        public Criteria andStrategyIdNotEqualTo(Long value) {
+            addCriterion("strategy_id <>", value, "strategyId");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyNameGreaterThan(String value) {
-            addCriterion("strategy_name >", value, "strategyName");
+        public Criteria andStrategyIdGreaterThan(Long value) {
+            addCriterion("strategy_id >", value, "strategyId");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyNameGreaterThanOrEqualTo(String value) {
-            addCriterion("strategy_name >=", value, "strategyName");
+        public Criteria andStrategyIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("strategy_id >=", value, "strategyId");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyNameLessThan(String value) {
-            addCriterion("strategy_name <", value, "strategyName");
+        public Criteria andStrategyIdLessThan(Long value) {
+            addCriterion("strategy_id <", value, "strategyId");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyNameLessThanOrEqualTo(String value) {
-            addCriterion("strategy_name <=", value, "strategyName");
+        public Criteria andStrategyIdLessThanOrEqualTo(Long value) {
+            addCriterion("strategy_id <=", value, "strategyId");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyNameLike(String value) {
-            addCriterion("strategy_name like", value, "strategyName");
+        public Criteria andStrategyIdIn(List<Long> values) {
+            addCriterion("strategy_id in", values, "strategyId");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyNameNotLike(String value) {
-            addCriterion("strategy_name not like", value, "strategyName");
+        public Criteria andStrategyIdNotIn(List<Long> values) {
+            addCriterion("strategy_id not in", values, "strategyId");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyNameIn(List<String> values) {
-            addCriterion("strategy_name in", values, "strategyName");
+        public Criteria andStrategyIdBetween(Long value1, Long value2) {
+            addCriterion("strategy_id between", value1, value2, "strategyId");
             return (Criteria) this;
         }
 
-        public Criteria andStrategyNameNotIn(List<String> values) {
-            addCriterion("strategy_name not in", values, "strategyName");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrategyNameBetween(String value1, String value2) {
-            addCriterion("strategy_name between", value1, value2, "strategyName");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrategyNameNotBetween(String value1, String value2) {
-            addCriterion("strategy_name not between", value1, value2, "strategyName");
+        public Criteria andStrategyIdNotBetween(Long value1, Long value2) {
+            addCriterion("strategy_id not between", value1, value2, "strategyId");
             return (Criteria) this;
         }
 

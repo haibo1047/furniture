@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,9 +18,12 @@ import com.ylsq.frame.common.base.BaseModel;
 import com.ylsq.frame.common.base.BaseModelController;
 import com.ylsq.frame.common.base.BaseService;
 import com.ylsq.frame.common.base.ValidateResult;
+import com.ylsq.frame.tianze.remoting.tranfer.StrategyEncrypt;
 import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyEncrypt;
 import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyEncryptExample;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyWatermark;
 import com.ylsq.frame.tianze.strategy.service.TzStrategyEncryptService;
+import com.ylsq.frame.tianze.strategy.service.TzStrategyWatermarkService;
 
 
 
@@ -33,7 +37,8 @@ public class TzStrategyEncryptController extends BaseModelController {
 	
 	@Autowired
 	private TzStrategyEncryptService tzStrategyEncryptService;
-	
+	@Autowired
+    private TzStrategyWatermarkService watermarkService;
 	
 	@Override
 	public String list(@RequestParam(required = false, defaultValue = "1", value = "pageNum") int pageNum,ModelMap modelMap) {
@@ -46,14 +51,13 @@ public class TzStrategyEncryptController extends BaseModelController {
 		return webPrefix() + "list";
 	}
 	
-	protected ValidateResult validate(TzStrategyEncrypt model) {
+	protected ValidateResult validate(StrategyEncrypt model) {
 		return ValidateResult.Passed;
 	}
 	
 	@RequestMapping(value= "/save", method = RequestMethod.POST)
-	public String save(TzStrategyEncrypt model,ModelMap modelMap) {
+	public String save(StrategyEncrypt model,ModelMap modelMap) {
 		log.debug(model.toString());
-		initModel(model);
 		
 		ValidateResult vr = validate(model);
 		if(!vr.isPassed()) {
@@ -61,13 +65,27 @@ public class TzStrategyEncryptController extends BaseModelController {
 			modelMap.put("errorMsg", vr.getMsg());
 			return webPrefix()+"edit";
 		}
+		TzStrategyEncrypt strategy = model.toStrategy();
+		TzStrategyWatermark watermark = model.toWatermark();
+		initModel(strategy);
+		initModel(watermark);
 		if(model.getId() == null) {
-			tzStrategyEncryptService.insert(model);
+			tzStrategyEncryptService.insert(strategy, watermark);
 		}
 		else {
-			tzStrategyEncryptService.updateByPrimaryKey(model);
+			tzStrategyEncryptService.update(strategy, watermark);
 		}
 		return list(modelMap);
+	}
+	
+	@RequestMapping(value= "/edit/{id}", method = RequestMethod.GET)
+	public String edit(@PathVariable(name="id") String id,ModelMap modelMap) {
+		log.debug(id);
+		beforeEdit(modelMap);
+		TzStrategyEncrypt strategy = tzStrategyEncryptService.selectByPrimaryKey(Long.parseLong(id));
+		TzStrategyWatermark watermark = watermarkService.selectByStrategyId(Long.parseLong(id));
+		modelMap.put("model", new StrategyEncrypt(strategy,watermark));
+		return webPrefix()+"edit";
 	}
 	
 	@Override

@@ -10,114 +10,114 @@
 		<div class="" role="tabpanel" data-example-id="togglable-tabs">
 		  	<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
 				<li role="presentation" class="">
-					<a href="tab_1b" role="tab" id="basic-tab" data-toggle="tab" aria-expanded="false" onclick="tabchange(this)">基本信息</a>
+					<a href="tab_1b" role="tab" id="basic_tab" data-toggle="tab" aria-expanded="false" onclick="tabchange(this)">基本信息</a>
 				</li>
 				<li role="presentation" class="">
-					<a href="tab_2p" role="tab" id="permission-tab" data-toggle="tab" aria-expanded="false" onclick="tabchange(this)">权限设置</a>
+					<a href="tab_2p" role="tab" id="permission_tab" data-toggle="tab" aria-expanded="false" onclick="tabchange(this)">权限设置</a>
 				</li>
 				<li role="presentation" class="">
-					<a href="tab_3s" role="tab" id="software-tab" data-toggle="tab" aria-expanded="false" onclick="tabchange(this)">软件类型</a>
+					<a href="tab_3s" role="tab" id="software_tab" data-toggle="tab" aria-expanded="false" onclick="tabchange(this)">软件类型</a>
 				</li>
 				<li role="presentation" class="">
-					<a href="tab_4w" role="tab" id="watermark-tab" data-toggle="tab" aria-expanded="false" onclick="tabchange(this)">水印</a>
+					<a href="tab_4w" role="tab" id="watermark_tab" data-toggle="tab" aria-expanded="false" onclick="tabchange(this)">水印</a>
 				</li>
 		  	</ul>
 		  	<div id="myTabContent" class="tab-content">
-				<div role="tabpanel" class="tab-pane fade" id="tab_1b" aria-labelledby="basic-tab">
+				<div role="tabpanel" class="tab-pane fade" id="tab_1b" aria-labelledby="basic_tab">
 		  			<div class="form-group">
 						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> 策略名 <span class="required">*</span>
 						</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
-							<input type="text" name="strategyName" value="$!{model.strategyName}" required="required" class="form-control col-md-7 col-xs-12">
+							<input type="text" id="strategyName" name="strategyName" value="$!{model.strategyName}" required="required" class="form-control col-md-7 col-xs-12">
 						</div>
 					</div>
 		  			<div class="form-group">
 						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> 备注信息
 						</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
-							<textarea class="form-control" name="remark" rows=3 value="$!{model.remark}" placeholder="备注"></textarea>
+							<textarea class="form-control" name="strategyRemark" rows=3 value="$!{model.strategyRemark}" placeholder="备注"></textarea>
 						</div>
 					</div>
 				</div> ## tabpanel
-				<div role="tabpanel" class="tab-pane fade" id="tab_2p" aria-labelledby="permission-tab">
+				<div role="tabpanel" class="tab-pane fade" id="tab_2p" aria-labelledby="permission_tab">
 	  				<div class="checkbox">
 	            		<label class="col-xs-4">
-	                  		<input type="checkbox" value=""> 允许拷贝
+	                  		<input type="checkbox" name="allowCopy" #if($!{model.allowCopy} == "1") checked #end> 允许拷贝
 	                    </label>
 	                    
 	            		<label class="col-xs-4">
-	                  		<input type="checkbox" value=""> 允许截屏
+	                  		<input type="checkbox" name="allowScreen" #if($!{model.allowScreen} == "1") checked #end> 允许截屏
 	                    </label>
 	                    
 	            		<label class="col-xs-4">
-	                  		<input type="checkbox" value=""> 允许打印
+	                  		<input type="checkbox" name="allowPrint" #if($!{model.allowPrint} == "1") checked #end> 允许打印
 	                    </label>
                   	</div>
 	  				<div class="checkbox">
 	            		<label class="col-xs-4">
-	                  		<input type="checkbox" value=""> 允许外发转加密
+	                  		<input type="checkbox" name="allowSendout" #if($!{model.allowSendout} == "1") checked #end> 允许外发转加密
 	                    </label>
 	            		<label class="col-xs-4">
-	                  		<input type="checkbox" value=""> 标识加密文件
+	                  		<input type="checkbox" name="encryptFlag" #if($!{model.encryptFlag} == "1") checked #end> 标识加密文件
 	                    </label>
 	            		<label class="col-xs-4">
-	                  		<input type="checkbox" value=""> 允许运行黑客软件
+	                  		<input type="checkbox" name="allowHackerSoftware" #if($!{model.allowHackerSoftware} == "1") checked #end> 允许运行黑客软件
 	                    </label>
                   	</div>
 	  				<div class="checkbox">
 	            		<label class="col-xs-4">
-	                  		<input type="checkbox" value=""> 允许脱机
+	                  		<input type="checkbox" name="allowOffline" #if($!{model.allowOffline} == "1") checked #end> 允许脱机
 	                    </label>
                   	</div>
 				</div> ## tabpanel
-				<div role="tabpanel" class="tab-pane fade" id="tab_3s" aria-labelledby="software-tab">
+				<div role="tabpanel" class="tab-pane fade" id="tab_3s" aria-labelledby="software_tab">
 		  			<p>software</p>
 		   	 	</div> ## tabpanel
-				<div role="tabpanel" class="tab-pane fade" id="tab_4w" aria-labelledby="watermark-tab">
+				<div role="tabpanel" class="tab-pane fade" id="tab_4w" aria-labelledby="watermark_tab">
 		  			<div class="checkbox">
 	            		<label class="col-xs-12">
-	                  		<input type="checkbox" value=""> 显示水印
+	                  		<input type="checkbox" name="watermark" #if($!{model.watermark} == "1") checked #end> 显示水印
 	                    </label>
 	                </div>
 	                <div class="form-group">
 						<label class="control-label col-xs-4" for="first-name">水印内容</label>
 						<div class="col-xs-8">
-							<input type="text" name="strategyName" value="$!{model.strategyName}" required="required" class="form-control col-md-7 col-xs-12">
+							<input type="text" name="watermarkContent" value="$!{model.watermarkContent}"  class="form-control col-md-7 col-xs-12">
 						</div>
 					</div>
 					<div class="form-group">
 	            		<label class="col-xs-3">
 	                    </label>
 	            		<label class="col-xs-2">
-	                  		<input type="checkbox" value=""> 用户名
+	                  		<input type="checkbox" name="displayUsrname" #if($!{model.displayUsrname} == "1") checked #end> 用户名
 	                    </label>
 	            		<label class="col-xs-2">
-	                  		<input type="checkbox" value=""> 计算机名
+	                  		<input type="checkbox" name="displayPcname" #if($!{model.displayPcname} == "1") checked #end> 计算机名
 	                    </label>
 	            		<label class="col-xs-2">
-	                  		<input type="checkbox" value=""> 终端IP
+	                  		<input type="checkbox" name="displayIp" #if($!{model.displayIp} == "1") checked #end> 终端IP
 	                    </label>
 	            		<label class="col-xs-2">
-	                  		<input type="checkbox" value=""> 登录时间
+	                  		<input type="checkbox" name="displayLoginTime" #if($!{model.displayLoginTime} == "1") checked #end> 登录时间
 	                    </label>
                   	</div>
                   	
                   	<div class="form-group">
 						<label class="control-label col-xs-4" for="first-name">水印位置</label>
 						<label class="col-xs-2">
-	                  		<input type="checkbox" value=""> 居中
+	                  		<input type="checkbox" name="posCenter" #if($!{model.posCenter} == "1") checked #end> 居中
 	                    </label>
 	            		<label class="col-xs-2">
-	                  		<input type="checkbox" value=""> 左上
+	                  		<input type="checkbox" name="posLefttop" #if($!{model.posLefttop} == "1") checked #end> 左上
 	                    </label>
 	            		<label class="col-xs-2">
-	                  		<input type="checkbox" value=""> 左下
+	                  		<input type="checkbox" name="posLeftbottom" #if($!{model.posLeftbottom} == "1") checked #end> 左下
 	                    </label>
 	            		<label class="col-xs-2">
-	                  		<input type="checkbox" value=""> 右上
+	                  		<input type="checkbox" name="posRighttop" #if($!{model.posRighttop} == "1") checked #end> 右上
 	                    </label>
 	            		<label class="col-xs-2">
-	                  		<input type="checkbox" value=""> 右下
+	                  		<input type="checkbox" name="posRightbottom" #if($!{model.posRightbottom} == "1") checked #end> 右下
 	                    </label>
 					</div>
                   	
@@ -149,7 +149,7 @@
                   	<div class="form-group">
 						<label class="control-label col-xs-4" for="first-name">透明度</label>
 						<div class="col-md-2">
-                      		<input class="knob" data-width="100" data-height="120" data-angleOffset=-125 data-angleArc=250 data-fgColor="#34495E" data-rotation="anticlockwise" value="35">
+                      		<input name="transparency" class="knob" data-width="100" data-height="120" data-angleOffset=-125 data-angleArc=250 data-fgColor="#34495E" data-rotation="anticlockwise" value="35">
                     	</div>
 					</div>
 		   	 	</div> ## tabpanel
@@ -167,12 +167,42 @@
   	
 </div>
 
+
 <script type="text/javascript">
+var basic_tab = false;
+var permission_tab = false;
+var software_tab = false;
+var watermark_tab = false;
 
 function frameinit(){
-	tabchange($("#basic-tab"));
+	tabchange($("#basic_tab"));
+	
+	$("#editForm").submit(function(e){
+		e.preventDefault();
+		var submit = true;
+		// you can put your own custom validations below
+	
+		// check all the rerquired fields
+		if( !validator.checkAll( $(this) ) )
+			submit = false;
+	
+		if( submit ){
+			$("#editForm").find('input[type="checkbox"]').each( function () {
+		        var checkbox_this = $(this);
+		        if( checkbox_this.is(":checked") == true ) {
+		            checkbox_this.attr('value','1');
+		        } 
+		        else {
+		            checkbox_this.prop('checked',true);
+		            checkbox_this.attr('value','0');
+		        }
+	    	})
+			this.submit();
+		}
+		return false;
+	});
+	
 }
-
 function tabchange(aobj){
 	$(aobj).parent().parent().find("li>a").each(
 		function(){
@@ -189,7 +219,6 @@ function tabchange(aobj){
 		}
 	);
 }
-
 
 function goback(){
 	location = "$rc.contextPath/tz/strategy/encrypt/list";

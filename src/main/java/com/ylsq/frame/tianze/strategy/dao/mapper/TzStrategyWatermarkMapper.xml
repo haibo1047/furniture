@@ -3,7 +3,7 @@
 <mapper namespace="com.ylsq.frame.tianze.strategy.dao.mapper.TzStrategyWatermarkMapper">
   <resultMap id="BaseResultMap" type="com.ylsq.frame.tianze.strategy.dao.model.TzStrategyWatermark">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="strategy_name" jdbcType="VARCHAR" property="strategyName" />
+    <result column="strategy_id" jdbcType="BIGINT" property="strategyId" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="display_usrname" jdbcType="INTEGER" property="displayUsrname" />
     <result column="display_pcname" jdbcType="INTEGER" property="displayPcname" />
@@ -80,7 +80,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, strategy_name, content, display_usrname, display_pcname, display_ip, display_login_time, 
+    id, strategy_id, content, display_usrname, display_pcname, display_ip, display_login_time, 
     pos_center, pos_lefttop, pos_leftbottom, pos_righttop, pos_rightbottom, layout, display_condition, 
     transparency, create_time, create_user, rec_status
   </sql>
@@ -115,14 +115,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ylsq.frame.tianze.strategy.dao.model.TzStrategyWatermark">
-    insert into tz_strategy_watermark (id, strategy_name, content, 
+    insert into tz_strategy_watermark (id, strategy_id, content, 
       display_usrname, display_pcname, display_ip, 
       display_login_time, pos_center, pos_lefttop, 
       pos_leftbottom, pos_righttop, pos_rightbottom, 
       layout, display_condition, transparency, 
       create_time, create_user, rec_status
       )
-    values (#{id,jdbcType=BIGINT}, #{strategyName,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{strategyId,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, 
       #{displayUsrname,jdbcType=INTEGER}, #{displayPcname,jdbcType=INTEGER}, #{displayIp,jdbcType=INTEGER}, 
       #{displayLoginTime,jdbcType=INTEGER}, #{posCenter,jdbcType=INTEGER}, #{posLefttop,jdbcType=INTEGER}, 
       #{posLeftbottom,jdbcType=INTEGER}, #{posRighttop,jdbcType=INTEGER}, #{posRightbottom,jdbcType=INTEGER}, 
@@ -136,8 +136,8 @@
       <if test="id != null">
         id,
       </if>
-      <if test="strategyName != null">
-        strategy_name,
+      <if test="strategyId != null">
+        strategy_id,
       </if>
       <if test="content != null">
         content,
@@ -192,8 +192,8 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="strategyName != null">
-        #{strategyName,jdbcType=VARCHAR},
+      <if test="strategyId != null">
+        #{strategyId,jdbcType=BIGINT},
       </if>
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
@@ -257,8 +257,8 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.strategyName != null">
-        strategy_name = #{record.strategyName,jdbcType=VARCHAR},
+      <if test="record.strategyId != null">
+        strategy_id = #{record.strategyId,jdbcType=BIGINT},
       </if>
       <if test="record.content != null">
         content = #{record.content,jdbcType=VARCHAR},
@@ -316,7 +316,7 @@
   <update id="updateByExample" parameterType="map">
     update tz_strategy_watermark
     set id = #{record.id,jdbcType=BIGINT},
-      strategy_name = #{record.strategyName,jdbcType=VARCHAR},
+      strategy_id = #{record.strategyId,jdbcType=BIGINT},
       content = #{record.content,jdbcType=VARCHAR},
       display_usrname = #{record.displayUsrname,jdbcType=INTEGER},
       display_pcname = #{record.displayPcname,jdbcType=INTEGER},
@@ -340,8 +340,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.ylsq.frame.tianze.strategy.dao.model.TzStrategyWatermark">
     update tz_strategy_watermark
     <set>
-      <if test="strategyName != null">
-        strategy_name = #{strategyName,jdbcType=VARCHAR},
+      <if test="strategyId != null">
+        strategy_id = #{strategyId,jdbcType=BIGINT},
       </if>
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
@@ -396,7 +396,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ylsq.frame.tianze.strategy.dao.model.TzStrategyWatermark">
     update tz_strategy_watermark
-    set strategy_name = #{strategyName,jdbcType=VARCHAR},
+    set strategy_id = #{strategyId,jdbcType=BIGINT},
       content = #{content,jdbcType=VARCHAR},
       display_usrname = #{displayUsrname,jdbcType=INTEGER},
       display_pcname = #{displayPcname,jdbcType=INTEGER},
