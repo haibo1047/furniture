@@ -151,6 +151,9 @@
 
 <script src="$rc.contextPath/js/jquery.knob.js"></script>
 
+
+<script src="$rc.contextPath/js/validator.js"></script>
+
 <script type="text/javascript">
 $(function() {
 	if($.isFunction(window.frameinit)){
