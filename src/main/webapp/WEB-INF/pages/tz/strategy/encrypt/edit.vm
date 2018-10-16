@@ -35,7 +35,7 @@
 						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> 备注信息
 						</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
-							<textarea class="form-control" name="strategyRemark" rows=3 value="$!{model.strategyRemark}" placeholder="备注"></textarea>
+							<textarea class="form-control" name="strategyRemark" rows=3 placeholder="备注">$!{model.strategyRemark}</textarea>
 						</div>
 					</div>
 				</div> ## tabpanel
@@ -125,13 +125,13 @@
 						<label class="control-label col-xs-4" for="first-name">版式</label>
 						<div class="radio">
                         	<label>
-                              	<input type="radio" checked="" value="oblique" id="oblique" name="layout"> 斜式
+                              	<input type="radio" #if($!{model.layout} == "oblique") checked #end value="oblique" id="oblique" name="layout"> 斜式
                         	</label>
                         	<label>
-                              	<input type="radio" checked="" value="horizontal" id="horizontal" name="layout"> 水平
+                              	<input type="radio" #if($!{model.layout} == "horizontal") checked #end value="horizontal" id="horizontal" name="layout"> 水平
                         	</label>
                         	<label>
-                              	<input type="radio" checked="" value="vertical" id="vertical" name="layout"> 垂直
+                              	<input type="radio" #if($!{model.layout} == "vertical") checked #end value="vertical" id="vertical" name="layout"> 垂直
                         	</label>
                  	 	</div>
 					</div>
@@ -139,17 +139,18 @@
 						<label class="control-label col-xs-4" for="first-name">显示条件</label>
 						<div class="radio">
                         	<label>
-                              	<input type="radio" checked="" value="option1" id="optionsRadios1" name="displayCondition"> 一直显示
+                              	<input type="radio" #if($!{model.displayCondition} == "always") checked #end value="always" id="always" name="displayCondition"> 一直显示
                         	</label>
                         	<label>
-                              	<input type="radio" checked="" value="option1" id="optionsRadios1" name="displayCondition"> 打开受控软件
+                              	<input type="radio" #if($!{model.displayCondition} == "whenopen") checked #end value="whenopen" id="whenopen" name="displayCondition"> 打开受控软件
                         	</label>
                  	 	</div>
 					</div>
                   	<div class="form-group">
 						<label class="control-label col-xs-4" for="first-name">透明度</label>
 						<div class="col-md-2">
-                      		<input name="transparency" class="knob" data-width="100" data-height="120" data-angleOffset=-125 data-angleArc=250 data-fgColor="#34495E" data-rotation="anticlockwise" value="35">
+                      		<input name="transparency" class="knob" data-width="100" data-height="120" data-angleOffset=-125 data-angleArc=250 data-fgColor="#34495E" data-rotation="anticlockwise" 
+                      			value="$!{model.transparency}">
                     	</div>
 					</div>
 		   	 	</div> ## tabpanel

@@ -48,15 +48,13 @@ public class TzStrategyEncryptServiceImpl extends BaseServiceImpl<TzStrategyEncr
 		// TODO Auto-generated method stub
 		int total = 0;
 		total += this.updateByPrimaryKey(strategy);
-		if(1 == strategy.getWatermark()) {
-			TzStrategyWatermark idmodel = watermarkService.selectByStrategyId(strategy.getId());
-			if(idmodel == null) {
-				watermarkService.insert(watermark);
-			}
-			else {
-				watermark.setId(idmodel.getId());
-				total += watermarkService.updateByPrimaryKey(watermark);
-			}
+		TzStrategyWatermark idmodel = watermarkService.selectByStrategyId(strategy.getId());
+		if(idmodel == null) {
+			watermarkService.insert(watermark);
+		}
+		else {
+			watermark.setId(idmodel.getId());
+			total += watermarkService.updateByPrimaryKey(watermark);
 		}
 		return total;
 	}

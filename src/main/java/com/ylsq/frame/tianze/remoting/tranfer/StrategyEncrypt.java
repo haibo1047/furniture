@@ -43,6 +43,7 @@ public class StrategyEncrypt {
     		setPosRightbottom(watermark.getPosRightbottom());
     		setPosRighttop(watermark.getPosRighttop());
     		setWatermarkContent(watermark.getContent());
+    		setTransparency(watermark.getTransparency());
     	}
     }
     

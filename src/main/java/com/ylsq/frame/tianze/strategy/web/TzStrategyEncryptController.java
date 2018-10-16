@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ylsq.frame.common.base.BaseExample;
-import com.ylsq.frame.common.base.BaseModel;
-import com.ylsq.frame.common.base.BaseModelController;
-import com.ylsq.frame.common.base.BaseService;
+import com.ylsq.frame.common.base.BaseController;
 import com.ylsq.frame.common.base.ValidateResult;
 import com.ylsq.frame.tianze.remoting.tranfer.StrategyEncrypt;
 import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyEncrypt;
@@ -32,7 +29,7 @@ import com.ylsq.frame.tianze.strategy.service.TzStrategyWatermarkService;
  */
 @Controller
 @RequestMapping("/tz/strategy/encrypt")
-public class TzStrategyEncryptController extends BaseModelController {
+public class TzStrategyEncryptController extends BaseController {
     private static final Logger log = LoggerFactory.getLogger(TzStrategyEncryptController.class);
 	
 	@Autowired
@@ -40,7 +37,11 @@ public class TzStrategyEncryptController extends BaseModelController {
 	@Autowired
     private TzStrategyWatermarkService watermarkService;
 	
-	@Override
+	public String list(ModelMap modelMap) {
+		return list(1,modelMap);
+	}
+	
+	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public String list(@RequestParam(required = false, defaultValue = "1", value = "pageNum") int pageNum,ModelMap modelMap) {
 		// TODO Auto-generated method stub
 		int pageSize = (int)SecurityUtils.getSubject().getSession().getAttribute("pageSize");
@@ -78,27 +79,20 @@ public class TzStrategyEncryptController extends BaseModelController {
 		return list(modelMap);
 	}
 	
+	@RequestMapping(value= "/delete/{ids}", method = RequestMethod.GET)
+	public String delete(@PathVariable(name="ids") String ids,ModelMap modelMap) {
+		int cnt = tzStrategyEncryptService.deleteByPrimaryKeys(ids);
+		log.debug(cnt + ":" + ids);
+		return list(modelMap);
+	}
+	
 	@RequestMapping(value= "/edit/{id}", method = RequestMethod.GET)
 	public String edit(@PathVariable(name="id") String id,ModelMap modelMap) {
 		log.debug(id);
-		beforeEdit(modelMap);
 		TzStrategyEncrypt strategy = tzStrategyEncryptService.selectByPrimaryKey(Long.parseLong(id));
 		TzStrategyWatermark watermark = watermarkService.selectByStrategyId(Long.parseLong(id));
 		modelMap.put("model", new StrategyEncrypt(strategy,watermark));
 		return webPrefix()+"edit";
-	}
-	
-	@Override
-	protected BaseService<? extends BaseModel, ? extends BaseExample> getService() {
-		// TODO Auto-generated method stub
-		return tzStrategyEncryptService;
-	}
-
-	@Override
-	protected List<? extends BaseModel> getModelList() {
-		// TODO Auto-generated method stub
-		List<TzStrategyEncrypt> list = tzStrategyEncryptService.selectByExample(new TzStrategyEncryptExample());
-		return list;
 	}
 
 	@Override
