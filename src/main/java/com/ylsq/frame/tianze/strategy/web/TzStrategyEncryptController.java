@@ -1,6 +1,9 @@
 package com.ylsq.frame.tianze.strategy.web;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
@@ -14,8 +17,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ylsq.frame.common.base.BaseController;
+import com.ylsq.frame.common.base.SysParamEnum;
 import com.ylsq.frame.common.base.ValidateResult;
+import com.ylsq.frame.sys.base.dao.model.SysParamValue;
+import com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptApplication;
+import com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptApplicationExample;
+import com.ylsq.frame.tianze.encrypt.service.TzEncryptApplicationService;
 import com.ylsq.frame.tianze.remoting.tranfer.StrategyEncrypt;
+import com.ylsq.frame.tianze.strategy.custobj.StrategyApplications;
 import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyEncrypt;
 import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyEncryptExample;
 import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyWatermark;
@@ -36,6 +45,9 @@ public class TzStrategyEncryptController extends BaseController {
 	private TzStrategyEncryptService tzStrategyEncryptService;
 	@Autowired
     private TzStrategyWatermarkService watermarkService;
+	@Autowired
+	private TzEncryptApplicationService applicationService;
+	
 	
 	public String list(ModelMap modelMap) {
 		return list(1,modelMap);
@@ -91,7 +103,30 @@ public class TzStrategyEncryptController extends BaseController {
 		log.debug(id);
 		TzStrategyEncrypt strategy = tzStrategyEncryptService.selectByPrimaryKey(Long.parseLong(id));
 		TzStrategyWatermark watermark = watermarkService.selectByStrategyId(Long.parseLong(id));
+		Map<Integer,String> appTypeMap = new HashMap<>();
+		List<SysParamValue> appTypes =  getParams(SysParamEnum.Application_Type.getConstant());
+		for(SysParamValue spv : appTypes)
+			appTypeMap.put(Integer.parseInt(spv.getValue1()), spv.getValue2());
+		List<TzEncryptApplication> appList = applicationService.selectByExample(new TzEncryptApplicationExample());
+		Map<Integer,List<TzEncryptApplication>> map = new HashMap<>();
+		for(TzEncryptApplication tea: appList) {
+			List<TzEncryptApplication> mapValues = map.get(tea.getApplicationType());
+			if(mapValues == null) {
+				mapValues = new ArrayList<TzEncryptApplication>();
+				map.put(tea.getApplicationType(), mapValues);
+			}
+			mapValues.add(tea);
+		}
+		List<StrategyApplications> strategApps = new ArrayList<>(map.size());
+		for(Map.Entry<Integer, List<TzEncryptApplication>> e: map.entrySet()) {
+			StrategyApplications sa = new StrategyApplications();
+			sa.setAppType(e.getKey());
+			sa.setAppTypeName(appTypeMap.get(e.getKey()));
+			sa.setAppList(e.getValue());
+			strategApps.add(sa);
+		}
 		modelMap.put("model", new StrategyEncrypt(strategy,watermark));
+		modelMap.put("strategApps", strategApps);
 		return webPrefix()+"edit";
 	}
 

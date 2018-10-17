@@ -71,7 +71,22 @@
                   	</div>
 				</div> ## tabpanel
 				<div role="tabpanel" class="tab-pane fade" id="tab_3s" aria-labelledby="software_tab">
-		  			<p>software</p>
+					<div class="clearfix"></div>
+					<div id="jstree_org">
+						<ul>
+						#foreach($sa in $strategApps)
+					   		<li class="jstree-closed">${sa.appTypeName}
+						   		#if($sa.appList)
+						   			<ul>##level2 start
+									#foreach($e in $!{sa.appList} )
+								   		<li id="$!{e.id}">${e.processName}</li>
+									#end
+									</ul>##level2 end
+						   		#end
+					   		</li>
+						#end
+						</ul>
+					</div>
 		   	 	</div> ## tabpanel
 				<div role="tabpanel" class="tab-pane fade" id="tab_4w" aria-labelledby="watermark_tab">
 		  			<div class="checkbox">
@@ -176,6 +191,8 @@ var software_tab = false;
 var watermark_tab = false;
 
 function frameinit(){
+	initJstree();
+	
 	tabchange($("#basic_tab"));
 	
 	$("#editForm").submit(function(e){
@@ -203,6 +220,25 @@ function frameinit(){
 		return false;
 	});
 	
+}
+
+function initJstree(){
+	$("#jstree_org").jstree(
+		{
+			"core" : 
+			{
+				"themes" : {"variant" : ""},
+			},
+			"types" : {
+				"default" : {
+					"icon" : "glyphicon glyphicon-flash"
+				}
+			},
+			"plugins" : [ "checkbox", "types"]
+		}
+	)
+	;
+	jQuery("#jstree_org").jstree().open_all();
 }
 function tabchange(aobj){
 	$(aobj).parent().parent().find("li>a").each(
