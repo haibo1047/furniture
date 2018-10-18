@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
@@ -27,8 +28,10 @@ import com.ylsq.frame.tianze.remoting.tranfer.StrategyEncrypt;
 import com.ylsq.frame.tianze.strategy.custobj.StrategyApplications;
 import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyEncrypt;
 import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyEncryptExample;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategySoftware;
 import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyWatermark;
 import com.ylsq.frame.tianze.strategy.service.TzStrategyEncryptService;
+import com.ylsq.frame.tianze.strategy.service.TzStrategySoftwareService;
 import com.ylsq.frame.tianze.strategy.service.TzStrategyWatermarkService;
 
 
@@ -47,6 +50,8 @@ public class TzStrategyEncryptController extends BaseController {
     private TzStrategyWatermarkService watermarkService;
 	@Autowired
 	private TzEncryptApplicationService applicationService;
+	@Autowired
+	private TzStrategySoftwareService softwareService;
 	
 	
 	public String list(ModelMap modelMap) {
@@ -80,13 +85,16 @@ public class TzStrategyEncryptController extends BaseController {
 		}
 		TzStrategyEncrypt strategy = model.toStrategy();
 		TzStrategyWatermark watermark = model.toWatermark();
+		List<TzStrategySoftware> softwares = model.toSoftwares();
 		initModel(strategy);
 		initModel(watermark);
+		for(TzStrategySoftware software : softwares)
+			initModel(software);
 		if(model.getId() == null) {
-			tzStrategyEncryptService.insert(strategy, watermark);
+			tzStrategyEncryptService.insert(strategy, watermark, softwares);
 		}
 		else {
-			tzStrategyEncryptService.update(strategy, watermark);
+			tzStrategyEncryptService.update(strategy, watermark, softwares);
 		}
 		return list(modelMap);
 	}
@@ -103,6 +111,8 @@ public class TzStrategyEncryptController extends BaseController {
 		log.debug(id);
 		TzStrategyEncrypt strategy = tzStrategyEncryptService.selectByPrimaryKey(Long.parseLong(id));
 		TzStrategyWatermark watermark = watermarkService.selectByStrategyId(Long.parseLong(id));
+		Set<String> softwares = softwareService.selectSoftwareCodesByStrategyName(strategy.getStrategyName());
+		
 		Map<Integer,String> appTypeMap = new HashMap<>();
 		List<SysParamValue> appTypes =  getParams(SysParamEnum.Application_Type.getConstant());
 		for(SysParamValue spv : appTypes)
@@ -125,7 +135,9 @@ public class TzStrategyEncryptController extends BaseController {
 			sa.setAppList(e.getValue());
 			strategApps.add(sa);
 		}
-		modelMap.put("model", new StrategyEncrypt(strategy,watermark));
+		StrategyEncrypt model = new StrategyEncrypt(strategy,watermark);
+		model.setSelectedAppIds(String.join(",", softwares));
+		modelMap.put("model", model);
 		modelMap.put("strategApps", strategApps);
 		return webPrefix()+"edit";
 	}

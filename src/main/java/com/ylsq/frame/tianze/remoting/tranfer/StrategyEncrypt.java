@@ -1,8 +1,13 @@
 package com.ylsq.frame.tianze.remoting.tranfer;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 
 import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyEncrypt;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategySoftware;
 import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyWatermark;
 
 public class StrategyEncrypt {
@@ -56,7 +61,17 @@ public class StrategyEncrypt {
     
     private Long watermarkId;
 
-    /**
+    private String selectedAppIds;
+    
+    public String getSelectedAppIds() {
+		return selectedAppIds;
+	}
+
+	public void setSelectedAppIds(String selectedAppIds) {
+		this.selectedAppIds = selectedAppIds;
+	}
+
+	/**
      * 策略名
      *
      * @mbg.generated
@@ -462,6 +477,21 @@ public class StrategyEncrypt {
 
 	public void setWatermarkId(Long watermarkId) {
 		this.watermarkId = watermarkId;
+	}
+	
+	public List<TzStrategySoftware> toSoftwares(){
+		String names = StringUtils.defaultIfBlank(getSelectedAppIds(),"");
+		String[] nameArray = StringUtils.split(names, ",");
+		List<TzStrategySoftware> softwares = new ArrayList<>();
+		for(String name: nameArray) {
+			if(name.startsWith("j") && name.indexOf("_")>1) //jstree default node id
+				continue;
+			TzStrategySoftware one = new TzStrategySoftware();
+			one.setStrategyName(getStrategyName());
+			one.setSoftwareCode(name);
+			softwares.add(one);
+		}
+		return softwares;
 	}
 	
 	public TzStrategyEncrypt toStrategy() {

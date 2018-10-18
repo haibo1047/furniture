@@ -71,15 +71,16 @@
                   	</div>
 				</div> ## tabpanel
 				<div role="tabpanel" class="tab-pane fade" id="tab_3s" aria-labelledby="software_tab">
+					<input type="hidden" name="selectedAppIds" id="selectedAppIds" value="$!{model.selectedAppIds}">
 					<div class="clearfix"></div>
-					<div id="jstree_org">
+					<div id="jstree_apps">
 						<ul>
 						#foreach($sa in $strategApps)
 					   		<li class="jstree-closed">${sa.appTypeName}
 						   		#if($sa.appList)
 						   			<ul>##level2 start
 									#foreach($e in $!{sa.appList} )
-								   		<li id="$!{e.id}">${e.processName}</li>
+								   		<li id="$!{e.processName}">${e.processName} - ${e.processPath}</li>
 									#end
 									</ul>##level2 end
 						   		#end
@@ -192,14 +193,14 @@ var watermark_tab = false;
 
 function frameinit(){
 	initJstree();
-	
+	initForm();
 	tabchange($("#basic_tab"));
-	
+}
+
+function initForm(){
 	$("#editForm").submit(function(e){
 		e.preventDefault();
 		var submit = true;
-		// you can put your own custom validations below
-	
 		// check all the rerquired fields
 		if( !validator.checkAll( $(this) ) )
 			submit = false;
@@ -215,15 +216,14 @@ function frameinit(){
 		            checkbox_this.attr('value','0');
 		        }
 	    	})
+	    	$("#selectedAppIds").val($('#jstree_apps').jstree("get_checked"));
 			this.submit();
 		}
 		return false;
 	});
-	
 }
-
 function initJstree(){
-	$("#jstree_org").jstree(
+	$("#jstree_apps").jstree(
 		{
 			"core" : 
 			{
@@ -231,14 +231,15 @@ function initJstree(){
 			},
 			"types" : {
 				"default" : {
-					"icon" : "glyphicon glyphicon-flash"
+					"icon" : "glyphicon"
 				}
 			},
 			"plugins" : [ "checkbox", "types"]
 		}
 	)
 	;
-	jQuery("#jstree_org").jstree().open_all();
+	jQuery("#jstree_apps").jstree().open_all();
+	$("#jstree_apps").jstree('check_node',"$!{model.selectedAppIds}".split(",")); 
 }
 function tabchange(aobj){
 	$(aobj).parent().parent().find("li>a").each(
