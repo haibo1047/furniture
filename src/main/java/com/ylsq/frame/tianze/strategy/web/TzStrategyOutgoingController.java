@@ -1,10 +1,7 @@
 package com.ylsq.frame.tianze.strategy.web;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
@@ -21,18 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ylsq.frame.common.base.BaseExample;
 import com.ylsq.frame.common.base.BaseModel;
-import com.ylsq.frame.common.base.BaseModelController;
 import com.ylsq.frame.common.base.BaseService;
 import com.ylsq.frame.common.base.SysParamEnum;
 import com.ylsq.frame.common.base.ValidateResult;
-import com.ylsq.frame.sys.secu.dao.model.SecuUser;
-import com.ylsq.frame.sys.secu.dao.model.SecuUserExample;
-import com.ylsq.frame.sys.secu.service.SecuUserService;
 import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyOutgoing;
 import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyOutgoingExample;
-import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyUser;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyRole;
 import com.ylsq.frame.tianze.strategy.service.TzStrategyOutgoingService;
-import com.ylsq.frame.tianze.strategy.service.TzStrategyUserService;
+import com.ylsq.frame.tianze.strategy.service.TzStrategyRoleService;
 
 
 
@@ -41,73 +34,26 @@ import com.ylsq.frame.tianze.strategy.service.TzStrategyUserService;
  */
 @Controller
 @RequestMapping("/tz/strategy/outgoing")
-public class TzStrategyOutgoingController extends BaseModelController {
+public class TzStrategyOutgoingController extends TzStrategyRoleController {
     private static final Logger log = LoggerFactory.getLogger(TzStrategyOutgoingController.class);
 	
 	@Autowired
 	private TzStrategyOutgoingService tzStrategyOutgoingService;
 	@Autowired
-	private TzStrategyUserService strategyUserService;
-	@Autowired
-	private SecuUserService secuUserService;
+	private TzStrategyRoleService strategyRoleService;
 	
-	@RequestMapping(value="/configUsers/{strategyName}", method = RequestMethod.GET)
-	public String configUsers(@PathVariable(name="strategyName") String strategyName, ModelMap modelMap) {
-		TzStrategyOutgoing currStrategy = tzStrategyOutgoingService.selectByStrategyName(strategyName);
-		List<TzStrategyUser> mappingList = strategyUserService.selectByStrategyName(strategyName);
-		List<String> selectedUserNames = new ArrayList<String>();
-		for(TzStrategyUser tsu: mappingList)
-			selectedUserNames.add(tsu.getUserName());
-		
-		List<SecuUser> unselectedUsers = new ArrayList<>();
-		List<SecuUser> selectedUsers = new ArrayList<>();
-		List<SecuUser> allUsers = secuUserService.selectByExample(new SecuUserExample());
-		for(SecuUser user: allUsers) {
-			if(selectedUserNames.contains(user.getUserName())) {
-				selectedUsers.add(user);
-			}
-			else {
-				unselectedUsers.add(user);
-			}
-		}
-		log.debug("size:" + mappingList.size());
-		modelMap.put("selectedList", selectedUsers);
-		modelMap.put("unselectedList", unselectedUsers);
-		modelMap.put("strategy", currStrategy);
-		
-		return webPrefix() + "/configUsers";
+	@Override
+	protected BaseModel getCurrentStrategy(String strategyName) {
+		// TODO Auto-generated method stub
+		return tzStrategyOutgoingService.selectByStrategyName(strategyName);
 	}
-	
-	
-	@RequestMapping(value="/configUsers", method = RequestMethod.POST)
-	public String configUsers(@RequestParam(value="strategyName") String strategyName, @RequestParam(value="selectedIds") String selectedUserNames, ModelMap modelMap) {
-		log.debug(strategyName);
-		List<TzStrategyUser> mappingList = strategyUserService.selectByStrategyName(strategyName);
-		Map<String,TzStrategyUser> existingMap = new HashMap<>();
-		for(TzStrategyUser tsu: mappingList)
-			existingMap.put(tsu.getUserName(),tsu);
-		
-		String[] idArray = StringUtils.defaultIfEmpty(selectedUserNames, "").split("-");
-		for(String userName : idArray) {
-			if(existingMap.keySet().contains(userName)) {
-				mappingList.remove(existingMap.get(userName));
-			}
-			else {
-				TzStrategyUser tsu = new TzStrategyUser();
-				tsu.setStrategyName(strategyName);
-				tsu.setUserName(userName);
-				tsu.setStrategyType(TzStrategyOutgoing.Strategy_Type);
-				initModel(tsu);
-				strategyUserService.insert(tsu);
-			}
-		}
-		for(TzStrategyUser sur: mappingList) {
-			strategyUserService.deleteByPrimaryKey(sur.getId());
-		}
-		return list(modelMap);
+
+	@Override
+	protected String getStrategyType() {
+		// TODO Auto-generated method stub
+		return TzStrategyOutgoing.Strategy_Type;
 	}
-	
-	
+
 	@Override
 	protected void beforeList(ModelMap modelMap) {
 		// TODO Auto-generated method stub
@@ -184,7 +130,7 @@ public class TzStrategyOutgoingController extends BaseModelController {
 				Long uid = Long.parseLong(idStr);
 				TzStrategyOutgoing strategy = tzStrategyOutgoingService.selectByPrimaryKey(uid);
 				if(strategy != null) {
-					List<TzStrategyUser> list = strategyUserService.selectByStrategyName(strategy.getStrategyName());
+					List<TzStrategyRole> list = strategyRoleService.selectByStrategyName(strategy.getStrategyName());
 					if(list.size() > 0) {
 						log.warn(strategy.getStrategyName() + "已经被配置了某些用户，请先移除绑定的用户");
 						failedNames.add(strategy.getStrategyName());

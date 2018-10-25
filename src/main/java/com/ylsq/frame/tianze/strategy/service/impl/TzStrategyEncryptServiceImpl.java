@@ -89,4 +89,15 @@ public class TzStrategyEncryptServiceImpl extends BaseServiceImpl<TzStrategyEncr
 		return total;
 	}
 
+	@Override
+	public TzStrategyEncrypt selectByName(String strategyName) {
+		// TODO Auto-generated method stub
+		TzStrategyEncryptExample example = new TzStrategyEncryptExample();
+		example.createCriteria().andStrategyNameEqualTo(strategyName);
+		List<TzStrategyEncrypt> list = selectByExample(example);
+		if(list.size()>0)
+			return list.get(0);
+		return null;
+	}
+
 }

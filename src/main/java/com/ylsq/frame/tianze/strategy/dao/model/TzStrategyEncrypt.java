@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class TzStrategyEncrypt implements BaseModel, Serializable {
+	public static String Strategy_Type = "encrypt";
+	
     /**
      * 编号
      *

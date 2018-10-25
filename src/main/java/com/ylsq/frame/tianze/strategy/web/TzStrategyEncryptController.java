@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ylsq.frame.common.base.BaseController;
+import com.ylsq.frame.common.base.BaseModel;
 import com.ylsq.frame.common.base.SysParamEnum;
 import com.ylsq.frame.common.base.ValidateResult;
 import com.ylsq.frame.sys.base.dao.model.SysParamValue;
@@ -41,7 +41,7 @@ import com.ylsq.frame.tianze.strategy.service.TzStrategyWatermarkService;
  */
 @Controller
 @RequestMapping("/tz/strategy/encrypt")
-public class TzStrategyEncryptController extends BaseController {
+public class TzStrategyEncryptController extends TzStrategyRoleController {
     private static final Logger log = LoggerFactory.getLogger(TzStrategyEncryptController.class);
 	
 	@Autowired
@@ -106,13 +106,8 @@ public class TzStrategyEncryptController extends BaseController {
 		return list(modelMap);
 	}
 	
-	@RequestMapping(value= "/edit/{id}", method = RequestMethod.GET)
-	public String edit(@PathVariable(name="id") String id,ModelMap modelMap) {
-		log.debug(id);
-		TzStrategyEncrypt strategy = tzStrategyEncryptService.selectByPrimaryKey(Long.parseLong(id));
-		TzStrategyWatermark watermark = watermarkService.selectByStrategyId(Long.parseLong(id));
-		Set<String> softwares = softwareService.selectSoftwareCodesByStrategyName(strategy.getStrategyName());
-		
+	
+	private void initApps(ModelMap modelMap) {
 		Map<Integer,String> appTypeMap = new HashMap<>();
 		List<SysParamValue> appTypes =  getParams(SysParamEnum.Application_Type.getConstant());
 		for(SysParamValue spv : appTypes)
@@ -127,19 +122,51 @@ public class TzStrategyEncryptController extends BaseController {
 			}
 			mapValues.add(tea);
 		}
-		List<StrategyApplications> strategApps = new ArrayList<>(map.size());
+		List<StrategyApplications> strategyApps = new ArrayList<>(map.size());
 		for(Map.Entry<Integer, List<TzEncryptApplication>> e: map.entrySet()) {
 			StrategyApplications sa = new StrategyApplications();
 			sa.setAppType(e.getKey());
 			sa.setAppTypeName(appTypeMap.get(e.getKey()));
 			sa.setAppList(e.getValue());
-			strategApps.add(sa);
+			strategyApps.add(sa);
 		}
+		modelMap.put("strategyApps", strategyApps);
+	}
+	@RequestMapping(value= "/edit/{id}", method = RequestMethod.GET)
+	public String edit(@PathVariable(name="id") String id,ModelMap modelMap) {
+		log.debug(id);
+		TzStrategyEncrypt strategy = tzStrategyEncryptService.selectByPrimaryKey(Long.parseLong(id));
+		TzStrategyWatermark watermark = watermarkService.selectByStrategyId(Long.parseLong(id));
+		Set<String> softwares = softwareService.selectSoftwareCodesByStrategyName(strategy.getStrategyName());
+		
 		StrategyEncrypt model = new StrategyEncrypt(strategy,watermark);
 		model.setSelectedAppIds(String.join(",", softwares));
 		modelMap.put("model", model);
-		modelMap.put("strategApps", strategApps);
+		initApps(modelMap);
 		return webPrefix()+"edit";
+	}
+	
+	@RequestMapping(value= "/create", method = RequestMethod.GET)
+	public String create(ModelMap modelMap) {
+		initApps(modelMap);
+//		TzStrategyWatermark watermark = new TzStrategyWatermark();
+//		watermark.setLayout("oblique");
+//		watermark.setDisplayCondition("always");
+//		StrategyEncrypt model = new StrategyEncrypt(null,watermark);
+//		modelMap.put("model", model);
+		return webPrefix()+"edit";
+	}
+	
+	@Override
+	protected BaseModel getCurrentStrategy(String strategyName) {
+		// TODO Auto-generated method stub
+		return tzStrategyEncryptService.selectByName(strategyName);
+	}
+
+	@Override
+	protected String getStrategyType() {
+		// TODO Auto-generated method stub
+		return TzStrategyEncrypt.Strategy_Type;
 	}
 
 	@Override

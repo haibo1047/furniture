@@ -75,7 +75,7 @@
 					<div class="clearfix"></div>
 					<div id="jstree_apps">
 						<ul>
-						#foreach($sa in $strategApps)
+						#foreach($sa in $strategyApps)
 					   		<li class="jstree-closed">${sa.appTypeName}
 						   		#if($sa.appList)
 						   			<ul>##level2 start
@@ -165,7 +165,7 @@
 						<label class="control-label col-xs-2" for="first-name">透明度</label>
 						<div class="col-md-2">
                       		<input name="transparency" class="knob" data-width="100" data-height="120" data-angleOffset=-125 data-angleArc=250 data-fgColor="#34495E" data-rotation="anticlockwise" 
-                      			value="$!{model.transparency}">
+                      			value="#defaultIfNull(${model.transparency},50)">
                     	</div>
 					</div>
 						
@@ -194,12 +194,32 @@ var software_tab = false;
 var watermark_tab = false;
 
 function frameinit(){
+	initRadio();
 	initJstree();
 	initForm();
 	tabchange($("#basic_tab"));
-	tabchange($("#watermark_tab"));
+	##tabchange($("#watermark_tab"));
+	
 }
-
+function initRadio(){
+	var alreadyChecked = false;
+	$("input:radio[name='layout']").each( function () {
+		if( $(this).is(":checked") == true ){
+			alreadyChecked = true;
+		}
+	});
+	if(alreadyChecked == false)
+		$("input:radio[name='layout']:first").attr('checked', true);
+		
+	alreadyChecked = false;
+	$("input:radio[name='displayCondition']").each( function () {
+		if( $(this).is(":checked") == true ){
+			alreadyChecked = true;
+		}
+	});
+	if(alreadyChecked == false)
+		$("input:radio[name='displayCondition']:first").attr('checked', true);
+}
 function initForm(){
 	$("#editForm").submit(function(e){
 		e.preventDefault();

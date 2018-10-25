@@ -29,4 +29,12 @@ public interface TzStrategyEncryptService extends BaseService<TzStrategyEncrypt,
 	 * @return
 	 */
 	public int update(TzStrategyEncrypt strategy, TzStrategyWatermark watermark, List<TzStrategySoftware> softwares);
+	
+	/**
+	 * 根据策略名查找
+	 * @param strategyName
+	 * @return
+	 */
+	public TzStrategyEncrypt selectByName(String strategyName);
+	
 }

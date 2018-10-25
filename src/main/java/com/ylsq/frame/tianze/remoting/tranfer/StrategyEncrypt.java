@@ -20,20 +20,22 @@ public class StrategyEncrypt {
     }
     
     public StrategyEncrypt(TzStrategyEncrypt strategy, TzStrategyWatermark watermark){
-    	setId(strategy.getId());
-    	setAllowCopy(strategy.getAllowCopy());
-    	setAllowHackerSoftware(strategy.getAllowHackerSoftware());
-    	setAllowOffline(strategy.getAllowOffline());
-    	setAllowPrint(strategy.getAllowPrint());
-    	setAllowScreen(strategy.getAllowScreen());
-    	setAllowSendout(strategy.getAllowSendout());
-    	setEncryptFlag(strategy.getEncryptFlag());
-    	setStrategyName(strategy.getStrategyName());
-    	setStrategyRemark(strategy.getStrategyRemark());
-    	setWatermark(strategy.getWatermark());
-    	setCreateTime(strategy.getCreateTime());
-    	setCreateUser(strategy.getCreateUser());
-    	setRecStatus(strategy.getRecStatus());
+    	if(strategy != null) {
+    		setId(strategy.getId());
+    		setAllowCopy(strategy.getAllowCopy());
+    		setAllowHackerSoftware(strategy.getAllowHackerSoftware());
+    		setAllowOffline(strategy.getAllowOffline());
+    		setAllowPrint(strategy.getAllowPrint());
+    		setAllowScreen(strategy.getAllowScreen());
+    		setAllowSendout(strategy.getAllowSendout());
+    		setEncryptFlag(strategy.getEncryptFlag());
+    		setStrategyName(strategy.getStrategyName());
+    		setStrategyRemark(strategy.getStrategyRemark());
+    		setWatermark(strategy.getWatermark());
+    		setCreateTime(strategy.getCreateTime());
+    		setCreateUser(strategy.getCreateUser());
+    		setRecStatus(strategy.getRecStatus());
+    	}
     	
     	if(watermark != null) {
     		setDisplayCondition(watermark.getDisplayCondition());

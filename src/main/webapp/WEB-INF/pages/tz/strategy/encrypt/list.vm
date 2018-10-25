@@ -41,7 +41,7 @@
 			        <td class=" last">
 						<a href="#" onclick="editRecord(this)">Edit</a> &nbsp;
 						<a href="#" onclick="delRecord(this)">Delete</a> &nbsp;
-						<a href="#" onclick="configUsers('${model.strategyName}')">Users</a> &nbsp;
+						<a href="#" onclick="configGroups('${model.strategyName}')">用户组配置</a> &nbsp;
 			        </td>
 				</tr>
 			#end
@@ -80,7 +80,7 @@ function delRecord(o){
 		location = "$rc.contextPath/tz/strategy/encrypt/delete/"+objId
 	}
 }
-function configUsers(name){
-	location = "$rc.contextPath/tz/strategy/encrypt/configUsers/"+name
+function configGroups(name){
+	location = "$rc.contextPath/tz/strategy/encrypt/configGroups/"+name
 }
 </script>

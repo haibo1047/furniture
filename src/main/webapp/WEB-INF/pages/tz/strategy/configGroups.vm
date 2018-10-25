@@ -1,22 +1,22 @@
 
 <div class="title_left">
-    <h3>为策略${strategy.strategyName}配置用户</h3>
+    <h3>为策略${strategy.strategyName}配置用户组</h3>
   </div>
 <br>
 
 <div class="x_content">
-	<form id="configUsersForm" method="post" action="$rc.contextPath/tz/strategy/outgoing/configUsers">
+	<form id="configGroupsForm" method="post" action="$rc.contextPath/tz/strategy/$!{strategyType}/configGroups">
 		<input type="hidden" name="selectedIds" id="selectedIds">
 		<input type="hidden" name="strategyName" value="${strategy.strategyName}">
 		<div id="jquery-script-center">
-	        <select id="sourceUsers" name="unselected" data-search="Search for options">
+	        <select id="sourceRoles" name="unselected" data-search="Search for options">
 	        	#foreach($left in $unselectedList)
-		            <option value="$!{left.userName}">$!{left.userName} - $!{left.realName}</option>
+		            <option value="$!{left.roleName}">$!{left.roleName} - $!{left.realName}</option>
 	            #end
 	        </select>
-	        <select id="destinationUsers" name="selected"  data-search="Search for options">
+	        <select id="destinationRoles" name="selected"  data-search="Search for options">
 	        	#foreach($right in $selectedList)
-		            <option value="$!{right.userName}">$!{right.userName} - $!{right.realName}</option>
+		            <option value="$!{right.roleName}">$!{right.roleName} - $!{right.realName}</option>
 	            #end
 	        </select>
 		</div>
@@ -34,7 +34,7 @@
 
 <script>
 function frameinit(){
-	$('#sourceUsers, #destinationUsers').listswap({
+	$('#sourceRoles, #destinationRoles').listswap({
 		truncate:true, 
 		height:300,
 		is_scroll:true,
@@ -45,14 +45,14 @@ function frameinit(){
 
 function f_submit(){
 	var ids = "";
-	$("#destinationUsers option").each(function(){
+	$("#destinationRoles option").each(function(){
 		ids = ids + (ids.length===0?'':'-') + $(this).val();
 	});
 	$("#selectedIds").val(ids);
-	$("#configUsersForm").submit();
+	$("#configGroupsForm").submit();
 }
 
 function goback(){
-	location = "$rc.contextPath/tz/strategy/outgoing/list";
+	location = "$rc.contextPath/tz/strategy/$!{strategyType}/list";
 }
 </script>

@@ -4,7 +4,7 @@ import com.ylsq.frame.common.base.BaseModel;
 import java.io.Serializable;
 import java.util.Date;
 
-public class TzStrategyUser implements BaseModel, Serializable {
+public class TzStrategyRole implements BaseModel, Serializable {
     /**
      * 编号
      *
@@ -27,11 +27,11 @@ public class TzStrategyUser implements BaseModel, Serializable {
     private String strategyType;
 
     /**
-     * 用户
+     * 角色（用户组）
      *
      * @mbg.generated
      */
-    private String userName;
+    private String roleName;
 
     /**
      * 创建时间
@@ -80,12 +80,12 @@ public class TzStrategyUser implements BaseModel, Serializable {
         this.strategyType = strategyType;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public Date getCreateTime() {
@@ -121,7 +121,7 @@ public class TzStrategyUser implements BaseModel, Serializable {
         sb.append(", id=").append(id);
         sb.append(", strategyName=").append(strategyName);
         sb.append(", strategyType=").append(strategyType);
-        sb.append(", userName=").append(userName);
+        sb.append(", roleName=").append(roleName);
         sb.append(", createTime=").append(createTime);
         sb.append(", createUser=").append(createUser);
         sb.append(", recStatus=").append(recStatus);
@@ -140,11 +140,11 @@ public class TzStrategyUser implements BaseModel, Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        TzStrategyUser other = (TzStrategyUser) that;
+        TzStrategyRole other = (TzStrategyRole) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getStrategyName() == null ? other.getStrategyName() == null : this.getStrategyName().equals(other.getStrategyName()))
             && (this.getStrategyType() == null ? other.getStrategyType() == null : this.getStrategyType().equals(other.getStrategyType()))
-            && (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
+            && (this.getRoleName() == null ? other.getRoleName() == null : this.getRoleName().equals(other.getRoleName()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
             && (this.getRecStatus() == null ? other.getRecStatus() == null : this.getRecStatus().equals(other.getRecStatus()));
@@ -157,7 +157,7 @@ public class TzStrategyUser implements BaseModel, Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getStrategyName() == null) ? 0 : getStrategyName().hashCode());
         result = prime * result + ((getStrategyType() == null) ? 0 : getStrategyType().hashCode());
-        result = prime * result + ((getUserName() == null) ? 0 : getUserName().hashCode());
+        result = prime * result + ((getRoleName() == null) ? 0 : getRoleName().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getCreateUser() == null) ? 0 : getCreateUser().hashCode());
         result = prime * result + ((getRecStatus() == null) ? 0 : getRecStatus().hashCode());
