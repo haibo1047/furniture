@@ -1,6 +1,9 @@
 package com.ylsq.frame.tianze.remoting.web;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -14,12 +17,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ylsq.frame.sys.base.service.SysLogService;
 import com.ylsq.frame.sys.secu.dao.model.SecuUser;
+import com.ylsq.frame.sys.secu.dao.model.SecuUserRole;
+import com.ylsq.frame.sys.secu.service.SecuUserRoleService;
 import com.ylsq.frame.sys.secu.service.SecuUserService;
 import com.ylsq.frame.tianze.base.RemotingResult;
 import com.ylsq.frame.tianze.base.utils.TokenUtil;
 import com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptTerminal;
 import com.ylsq.frame.tianze.encrypt.service.TzEncryptTerminalService;
 import com.ylsq.frame.tianze.remoting.base.BaseRemotingController;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyEncrypt;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyOutgoing;
+import com.ylsq.frame.tianze.strategy.dao.model.TzStrategyRole;
+import com.ylsq.frame.tianze.strategy.service.TzStrategyEncryptService;
+import com.ylsq.frame.tianze.strategy.service.TzStrategyOutgoingService;
+import com.ylsq.frame.tianze.strategy.service.TzStrategyRoleService;
 
 @Controller
 @RequestMapping("/remoting/user")
@@ -32,6 +43,14 @@ public class RemotingUserController extends BaseRemotingController{
 	private TzEncryptTerminalService terminalService;
 	@Autowired
 	private SysLogService sysLogService;
+	@Autowired
+	private SecuUserRoleService secuUserRoleService;
+	@Autowired
+	private TzStrategyRoleService strategyRoleService;
+	@Autowired
+	private TzStrategyOutgoingService strategyOutgoingService;
+	@Autowired
+	private TzStrategyEncryptService strategyEncryptService;
 	
 	@ResponseBody
 	@RequestMapping(value="/login", method = RequestMethod.GET)
@@ -107,6 +126,75 @@ public class RemotingUserController extends BaseRemotingController{
 			toBeUpdated.setPassword(StringUtils.reverse(newPassword));
 			secuUserService.updateByPrimaryKeySelective(toBeUpdated);
 			return RemotingResult.SU;
+		}
+		return RemotingResult.FA;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/getEncryptStrategyNames", method = RequestMethod.GET)
+	public RemotingResult getEncryptStrategyNames(
+			@RequestParam(required = false,name="userName") String userName, 
+			@RequestParam(required = false,name="token") String token) {
+		if(verifyToken(userName, token)) {
+			Set<String> strategyNames = new HashSet<>();
+			List<SecuUserRole> urList = secuUserRoleService.selectByUserName(userName);
+			for(SecuUserRole sur: urList) {
+				List<TzStrategyRole> mappingList = strategyRoleService.selectByRoleName(sur.getRoleName());
+				for(TzStrategyRole map : mappingList) {
+					if(TzStrategyEncrypt.Strategy_Type.equals(map.getStrategyType())) {
+						strategyNames.add(map.getStrategyName());
+					}
+				}
+			}
+			return new RemotingResult(token, strategyNames);
+		}
+		return RemotingResult.FA;
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/getEncryptStrategy", method = RequestMethod.GET)
+	public RemotingResult getEncryptStrategy(
+			@RequestParam(required = false,name="userName") String userName, 
+			@RequestParam(required = false,name="token") String token, 
+			@RequestParam(required = false,name="strategyName") String strategyName) {
+		if(verifyToken(userName, token) && !StringUtils.isBlank(strategyName)) {
+			TzStrategyEncrypt strategy = strategyEncryptService.selectByName(strategyName);
+			return new RemotingResult(token, strategy);
+		}
+		return RemotingResult.FA;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/getOutgoingStrategyNames", method = RequestMethod.GET)
+	public RemotingResult getOutgoingStrategyNames(
+			@RequestParam(required = false,name="userName") String userName, 
+			@RequestParam(required = false,name="token") String token) {
+		if(verifyToken(userName, token)) {
+			Set<String> strategyNames = new HashSet<>();
+			List<SecuUserRole> urList = secuUserRoleService.selectByUserName(userName);
+			for(SecuUserRole sur: urList) {
+				List<TzStrategyRole> mappingList = strategyRoleService.selectByRoleName(sur.getRoleName());
+				for(TzStrategyRole map : mappingList) {
+					if(TzStrategyOutgoing.Strategy_Type.equals(map.getStrategyType())) {
+						strategyNames.add(map.getStrategyName());
+					}
+				}
+			}
+			return new RemotingResult(token, strategyNames);
+		}
+		return RemotingResult.FA;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/getOutgoingStrategy", method = RequestMethod.GET)
+	public RemotingResult getOutgoingStrategy(
+			@RequestParam(required = false,name="userName") String userName, 
+			@RequestParam(required = false,name="token") String token, 
+			@RequestParam(required = false,name="strategyName") String strategyName) {
+		if(verifyToken(userName, token) && !StringUtils.isBlank(strategyName)) {
+			TzStrategyOutgoing strategy = strategyOutgoingService.selectByStrategyName(strategyName);
+			return new RemotingResult(token, strategy);
 		}
 		return RemotingResult.FA;
 	}

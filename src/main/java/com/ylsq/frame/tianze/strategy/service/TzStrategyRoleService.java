@@ -18,4 +18,11 @@ public interface TzStrategyRoleService extends BaseService<TzStrategyRole, TzStr
 	 * @return
 	 */
 	public List<TzStrategyRole> selectByStrategyName(String strategyName);
+	
+	/**
+	 * 根据角色查询所有策略
+	 * @param roleName
+	 * @return
+	 */
+	public List<TzStrategyRole> selectByRoleName(String roleName);
 }

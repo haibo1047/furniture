@@ -37,4 +37,12 @@ public class TzStrategyRoleServiceImpl extends BaseServiceImpl<TzStrategyRoleMap
 		return selectByExample(example);
 	}
 
+	@Override
+	public List<TzStrategyRole> selectByRoleName(String roleName) {
+		// TODO Auto-generated method stub
+		TzStrategyRoleExample example = new TzStrategyRoleExample();
+		example.createCriteria().andRoleNameEqualTo(roleName);
+		return selectByExample(example);
+	}
+
 }
