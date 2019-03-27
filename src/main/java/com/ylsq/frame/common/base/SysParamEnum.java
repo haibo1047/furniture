@@ -10,7 +10,8 @@ public enum SysParamEnum {
 	Sys_Log_Type("system_log_type"),
 	System_Config("system_config"),
 	Strategy_Type("strategy_type"),
-	Strategy_outgoing_level("outgoing_level")
+	Strategy_outgoing_level("outgoing_level"),
+	Request_Approve_Status("approve_status")
 	;
 	
 	private final String constant;

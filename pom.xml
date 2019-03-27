@@ -418,12 +418,6 @@
 	      <artifactId>activiti-spring</artifactId>
 	      <version>5.17.0</version>
 	    </dependency>
-	    
-		 <dependency>
-		    <groupId>org.quartz-scheduler</groupId>
-		    <artifactId>quartz</artifactId>
-		    <version>${quartz.version}</version>
-		</dependency>
 		
 		<dependency>
 			<groupId>org.apache.poi</groupId>

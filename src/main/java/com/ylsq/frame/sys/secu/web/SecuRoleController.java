@@ -1,6 +1,7 @@
 package com.ylsq.frame.sys.secu.web;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -37,6 +38,7 @@ import com.ylsq.frame.sys.secu.service.SecuRoleMenuService;
 import com.ylsq.frame.sys.secu.service.SecuRoleService;
 import com.ylsq.frame.sys.secu.service.SecuUserRoleService;
 import com.ylsq.frame.sys.secu.service.SecuUserService;
+import com.ylsq.frame.sys.secu.sorter.MenuSorter;
 
 
 @Controller
@@ -152,7 +154,9 @@ public class SecuRoleController extends BaseModelController {
 		for(SecuRoleMenu srm: mappingList)
 			names.add("'" + srm.getMenuName() +"'");
 		String selectedMenuNames = String.join(",", names);
-		List<SecuMenu> allMenus = secuMenuService.selectByExample(new SecuMenuExample());
+		SecuMenuExample example = new SecuMenuExample();
+		example.setOrderByClause(" id desc");
+		List<SecuMenu> allMenus = secuMenuService.selectByExample(example);
 		log.debug("size:" + mappingList.size());
 		modelMap.put("selectedMenuNames", "["+selectedMenuNames+"]");
 		modelMap.put("allMenus", allMenus);
