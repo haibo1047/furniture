@@ -97,7 +97,7 @@ public class TzRequestOutgoingServiceImpl extends BaseServiceImpl<TzRequestOutgo
 		int result = updateByPrimaryKeySelective(model);
 		
 		if(result > 0)
-			sysLogService.doApprove(login, new Date(), "外发审批", requestId);
+			sysLogService.doReject(login, new Date(), "外发审批", requestId);
 		
 		return result;
 	}
