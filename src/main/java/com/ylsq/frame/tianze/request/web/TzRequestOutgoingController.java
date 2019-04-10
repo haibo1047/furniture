@@ -1,6 +1,8 @@
 package com.ylsq.frame.tianze.request.web;
 
 import java.util.List;
+
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import org.apache.shiro.SecurityUtils;
-import com.ylsq.frame.common.base.BaseModelController;
 import com.ylsq.frame.common.base.BaseExample;
 import com.ylsq.frame.common.base.BaseModel;
+import com.ylsq.frame.common.base.BaseModelController;
 import com.ylsq.frame.common.base.BaseService;
+import com.ylsq.frame.common.base.SysParamEnum;
 import com.ylsq.frame.common.base.ValidateResult;
 import com.ylsq.frame.tianze.request.dao.model.TzRequestOutgoing;
 import com.ylsq.frame.tianze.request.dao.model.TzRequestOutgoingExample;
@@ -38,10 +40,10 @@ public class TzRequestOutgoingController extends BaseModelController {
 	public String list(@RequestParam(required = false, defaultValue = "1", value = "pageNum") int pageNum,ModelMap modelMap) {
 		// TODO Auto-generated method stub
 		int pageSize = (int)SecurityUtils.getSubject().getSession().getAttribute("pageSize");
-		List<TzRequestOutgoing> list = tzRequestOutgoingService.selectByExampleForStartPage(new TzRequestOutgoingExample(),pageNum,pageSize);
-		
+		List<TzRequestOutgoing> list = tzRequestOutgoingService.selectMineForStartPage(currentLogin(), pageNum, pageSize);
 		modelMap.put("modelList", list);
 		modelMap.put("total", tzRequestOutgoingService.countByExample(new TzRequestOutgoingExample()));
+		modelMap.put("statusList", getParams(SysParamEnum.Request_Approve_Status.getConstant()));
 		return webPrefix() + "list";
 	}
 	
