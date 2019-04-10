@@ -41,4 +41,24 @@ public interface SysLogService extends BaseService<SysLog, SysLogExample> {
 	 * @return
 	 */
 	public int doMenuClick(String login,Date clickTime, String ip,String menu);
+	
+	/**
+	 * 记录审批日志
+	 * @param login
+	 * @param time
+	 * @param approveType
+	 * @param requestId
+	 * @return
+	 */
+	public int doApprove(String login, Date time, String approveType, Long requestId);
+	
+	/**
+	 * 记录驳回日志
+	 * @param login
+	 * @param time
+	 * @param approveType
+	 * @param requestId
+	 * @return
+	 */
+	public int doReject(String login, Date time, String approveType, Long requestId);
 }

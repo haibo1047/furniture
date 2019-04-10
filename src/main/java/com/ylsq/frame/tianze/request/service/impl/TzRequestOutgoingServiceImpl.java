@@ -1,5 +1,6 @@
 package com.ylsq.frame.tianze.request.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ylsq.frame.common.annotation.BaseService;
 import com.ylsq.frame.common.base.BaseServiceImpl;
+import com.ylsq.frame.sys.base.service.SysLogService;
 import com.ylsq.frame.tianze.request.cons.ApproveStatus;
 import com.ylsq.frame.tianze.request.dao.mapper.TzRequestOutgoingMapper;
 import com.ylsq.frame.tianze.request.dao.model.TzRequestOutgoing;
@@ -30,6 +32,9 @@ public class TzRequestOutgoingServiceImpl extends BaseServiceImpl<TzRequestOutgo
 
     @Autowired
     TzRequestOutgoingMapper tzRequestOutgoingMapper;
+    
+    @Autowired
+    private SysLogService sysLogService;
 
 	@Override
 	public List<TzRequestOutgoing> selectMineForStartPage(String login, int pageNum, int pageSize) {
@@ -75,7 +80,12 @@ public class TzRequestOutgoingServiceImpl extends BaseServiceImpl<TzRequestOutgo
 		TzRequestOutgoing model = new TzRequestOutgoing();
 		model.setId(requestId);
 		model.setApproveStatus(ApproveStatus.APPROVED);
-		return updateByPrimaryKeySelective(model);
+		int result = updateByPrimaryKeySelective(model);
+		
+		if(result > 0)
+			sysLogService.doApprove(login, new Date(), "外发审批", requestId);
+		
+		return result;
 	}
 
 	@Override
@@ -84,7 +94,12 @@ public class TzRequestOutgoingServiceImpl extends BaseServiceImpl<TzRequestOutgo
 		TzRequestOutgoing model = new TzRequestOutgoing();
 		model.setId(requestId);
 		model.setApproveStatus(ApproveStatus.REJECTED);
-		return updateByPrimaryKeySelective(model);
+		int result = updateByPrimaryKeySelective(model);
+		
+		if(result > 0)
+			sysLogService.doApprove(login, new Date(), "外发审批", requestId);
+		
+		return result;
 	}
 
 }

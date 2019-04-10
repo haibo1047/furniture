@@ -66,4 +66,27 @@ public class SysLogServiceImpl extends BaseServiceImpl<SysLogMapper, SysLog, Sys
 		return sysLogMapper.insert(sl);
 	}
 
+	@Override
+	public int doApprove(String login, Date time, String approveType, Long requestId) {
+		// TODO Auto-generated method stub
+		SysLog sl = new SysLog();
+		sl.setLogin(login);
+		sl.setOperateTime(time);
+		sl.setLogType(LogTypeEnum.Approve.getV());
+		sl.setLogContent("[type]"+approveType +";[id]" + requestId);
+		return sysLogMapper.insert(sl);
+	}
+
+	@Override
+	public int doReject(String login, Date time, String approveType, Long requestId) {
+		// TODO Auto-generated method stub
+		SysLog sl = new SysLog();
+		sl.setLogin(login);
+		sl.setOperateTime(time);
+		sl.setLogType(LogTypeEnum.Reject.getV());
+		sl.setLogContent("[type]"+approveType +";[id]" + requestId);
+		return sysLogMapper.insert(sl);
+	}
+
+	
 }
