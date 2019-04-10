@@ -42,7 +42,7 @@ public class TzRequestOutgoingController extends BaseModelController {
 		int pageSize = (int)SecurityUtils.getSubject().getSession().getAttribute("pageSize");
 		List<TzRequestOutgoing> list = tzRequestOutgoingService.selectMineForStartPage(currentLogin(), pageNum, pageSize);
 		modelMap.put("modelList", list);
-		modelMap.put("total", tzRequestOutgoingService.countByExample(new TzRequestOutgoingExample()));
+		modelMap.put("total", tzRequestOutgoingService.countAllMine(currentLogin()));
 		modelMap.put("statusList", getParams(SysParamEnum.Request_Approve_Status.getConstant()));
 		return webPrefix() + "list";
 	}

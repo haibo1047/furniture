@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ylsq.frame.common.annotation.BaseService;
 import com.ylsq.frame.common.base.BaseServiceImpl;
+import com.ylsq.frame.tianze.request.cons.ApproveStatus;
 import com.ylsq.frame.tianze.request.dao.mapper.TzRequestOutgoingMapper;
 import com.ylsq.frame.tianze.request.dao.model.TzRequestOutgoing;
 import com.ylsq.frame.tianze.request.dao.model.TzRequestOutgoingExample;
@@ -39,6 +40,51 @@ public class TzRequestOutgoingServiceImpl extends BaseServiceImpl<TzRequestOutgo
 			example.createCriteria().andCreateUserEqualTo(login);
 		}
 		return selectByExampleForStartPage(example, pageNum, pageSize);
+	}
+
+	@Override
+	public int countAllMine(String login) {
+		// TODO Auto-generated method stub
+		TzRequestOutgoingExample example = new TzRequestOutgoingExample();
+		if(StringUtils.isNotBlank(login)) {
+			log.debug("No login passed in.");
+			example.createCriteria().andCreateUserEqualTo(login);
+		}
+		return countByExample(example);
+	}
+
+	@Override
+	public List<TzRequestOutgoing> selectMyPendingForStartPage(String login, int pageNum, int pageSize) {
+		// TODO Auto-generated method stub
+		TzRequestOutgoingExample example = new TzRequestOutgoingExample();
+		example.createCriteria().andApproveStatusEqualTo(ApproveStatus.PENDING);
+		return selectByExampleForStartPage(example, pageNum, pageSize);
+	}
+
+	@Override
+	public int countAllMyPending(String login) {
+		// TODO Auto-generated method stub
+		TzRequestOutgoingExample example = new TzRequestOutgoingExample();
+		example.createCriteria().andApproveStatusEqualTo(ApproveStatus.PENDING);
+		return countByExample(example);
+	}
+
+	@Override
+	public int approve(String login, Long requestId) {
+		// TODO Auto-generated method stub
+		TzRequestOutgoing model = new TzRequestOutgoing();
+		model.setId(requestId);
+		model.setApproveStatus(ApproveStatus.APPROVED);
+		return updateByPrimaryKeySelective(model);
+	}
+
+	@Override
+	public int reject(String login, Long requestId) {
+		// TODO Auto-generated method stub
+		TzRequestOutgoing model = new TzRequestOutgoing();
+		model.setId(requestId);
+		model.setApproveStatus(ApproveStatus.REJECTED);
+		return updateByPrimaryKeySelective(model);
 	}
 
 }
