@@ -3,6 +3,7 @@ package com.ylsq.frame.tianze.request.web;
 import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,24 +43,33 @@ public class TzApproveController extends BaseController {
 	private String outgoing(ModelMap modelMap) {
 		return outgoing(1, modelMap);
 	}
-	 
-	 @RequestMapping(value= "/pass/{id}", method = RequestMethod.GET)
-	 public String approve(@PathVariable(name="id") String id,ModelMap modelMap) {
-		 log.debug(id);
+	
+	
+	@RequiresRoles("外发审批人")
+	@RequestMapping(value= "/pass/{id}", method = RequestMethod.GET)
+	public String approve(@PathVariable(name="id") String id,ModelMap modelMap) {
+		 log.debug("role:"+ SecurityUtils.getSubject().hasRole("外发审批人"));
 		 int result = tzRequestOutgoingService.approve(currentLogin(), Long.parseLong(id));
 		 if(result <= 0) {
 			 modelMap.put("errorMsg", "审批操作失败！");
+		 }
+		 else {
+			 modelMap.put("errorMsg", "审批成功！");
 		 }
 		 return outgoing(modelMap);
 		 
 	 }
 	 
+	 @RequiresRoles("外发审批人")
 	 @RequestMapping(value= "/reject/{id}", method = RequestMethod.GET)
 	 public String reject(@PathVariable(name="id") String id,ModelMap modelMap) {
 		 log.debug(id);
 		 int result = tzRequestOutgoingService.reject(currentLogin(), Long.parseLong(id));
 		 if(result <= 0) {
 			 modelMap.put("errorMsg", "审批操作失败！");
+		 }
+		 else {
+			 modelMap.put("errorMsg", "审批成功！");
 		 }
 		 return outgoing(modelMap);
 		 

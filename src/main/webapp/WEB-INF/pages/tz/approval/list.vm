@@ -57,11 +57,15 @@
 <script>
 var ID_INDEX=1
 function approveRecord(o){
-	var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-	location = "$rc.contextPath/tz/approval/pass/"+objId
+	if (confirm('确认要批准此记录？')) {
+		var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
+		location = "$rc.contextPath/tz/approval/pass/"+objId
+	}
 }
 function rejectRecord(o){
-	var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
-	location = "$rc.contextPath/tz/approval/reject/"+objId
+	if (confirm('确认要驳回此记录？')) {
+		var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
+		location = "$rc.contextPath/tz/approval/reject/"+objId
+	}
 }
 </script>
