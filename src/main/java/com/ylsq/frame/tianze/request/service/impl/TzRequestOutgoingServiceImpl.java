@@ -1,5 +1,6 @@
 package com.ylsq.frame.tianze.request.service.impl;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +38,12 @@ public class TzRequestOutgoingServiceImpl extends BaseServiceImpl<TzRequestOutgo
     private SysLogService sysLogService;
 
 	@Override
+	public TzRequestOutgoing getInfo(Long requestId) {
+		// TODO Auto-generated method stub
+		return selectByPrimaryKey(requestId);
+	}
+
+	@Override
 	public List<TzRequestOutgoing> selectMineForStartPage(String login, int pageNum, int pageSize) {
 		// TODO Auto-generated method stub
 		TzRequestOutgoingExample example = new TzRequestOutgoingExample();
@@ -59,11 +66,30 @@ public class TzRequestOutgoingServiceImpl extends BaseServiceImpl<TzRequestOutgo
 	}
 
 	@Override
+	public List<TzRequestOutgoing> selectMine(String login) {
+		// TODO Auto-generated method stub
+		TzRequestOutgoingExample example = new TzRequestOutgoingExample();
+		if(StringUtils.isNotBlank(login)) {
+			example.createCriteria().andCreateUserEqualTo(login);
+			return selectByExample(example);
+		}
+		return Collections.EMPTY_LIST;
+	}
+
+	@Override
 	public List<TzRequestOutgoing> selectMyPendingForStartPage(String login, int pageNum, int pageSize) {
 		// TODO Auto-generated method stub
 		TzRequestOutgoingExample example = new TzRequestOutgoingExample();
 		example.createCriteria().andApproveStatusEqualTo(ApproveStatus.PENDING);
 		return selectByExampleForStartPage(example, pageNum, pageSize);
+	}
+
+	@Override
+	public List<TzRequestOutgoing> selectMyPending(String login) {
+		// TODO Auto-generated method stub
+		TzRequestOutgoingExample example = new TzRequestOutgoingExample();
+		example.createCriteria().andApproveStatusEqualTo(ApproveStatus.PENDING);
+		return selectByExample(example);
 	}
 
 	@Override

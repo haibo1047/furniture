@@ -29,6 +29,21 @@ public interface TzRequestOutgoingService extends BaseService<TzRequestOutgoing,
 	public int countAllMine(String login);
 	
 	/**
+	 * 查询我发出的请求
+	 * @param login
+	 * @return
+	 */
+	public List<TzRequestOutgoing> selectMine(String login);
+	
+	/**
+	 * 根据ID查
+	 * @param requestId
+	 * @return
+	 */
+	public TzRequestOutgoing getInfo(Long requestId);
+	
+	
+	/**
 	 * 查询等待用户审批的外发请求
 	 * @param login
 	 * @param pageNum
@@ -36,6 +51,13 @@ public interface TzRequestOutgoingService extends BaseService<TzRequestOutgoing,
 	 * @return
 	 */
 	public List<TzRequestOutgoing> selectMyPendingForStartPage(String login,int pageNum, int pageSize);
+	
+	/**
+	 * 查询所有待审批列表
+	 * @param login
+	 * @return
+	 */
+	public List<TzRequestOutgoing> selectMyPending(String login);
 	
 	/**
 	 * 等待我审批的

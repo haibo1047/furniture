@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ylsq.frame.tianze.base.RemotingResult;
@@ -28,15 +27,8 @@ public class RemotingSystemController extends BaseRemotingController{
 	
 	@ResponseBody
 	@RequestMapping(value="/checkUpdate", method=RequestMethod.GET)
-	public RemotingResult checkUpdate(
-			@RequestParam(required = false,name="userName") String userName, 
-			@RequestParam(required = false,name="token") String token, 
-			@RequestParam(required = false,name="clientVersion") String clientVersion) {
-		if(verifyToken(userName, token)) {
-			return new RemotingResult(token, clientService.getLatestVersion());
-		}
-		log.warn("not a valid token");
-		return RemotingResult.FA;
+	public RemotingResult checkUpdate() {
+			return new RemotingResult(null, clientService.getLatestVersion());
 	}
 	
 	@ResponseBody
