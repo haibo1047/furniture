@@ -16,6 +16,7 @@ import com.ylsq.frame.tianze.base.cons.TerminalStatus;
 import com.ylsq.frame.tianze.encrypt.dao.mapper.TzEncryptTerminalMapper;
 import com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptTerminal;
 import com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptTerminalExample;
+import com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptTerminalExample.Criteria;
 import com.ylsq.frame.tianze.encrypt.service.TzEncryptTerminalService;
 
 /**
@@ -73,13 +74,17 @@ public class TzEncryptTerminalServiceImpl extends BaseServiceImpl<TzEncryptTermi
 	}
 
 	@Override
-	public boolean heartbeat(String userName) {
+	public boolean heartbeat(String guid, String userName) {
 		// TODO Auto-generated method stub
 		TzEncryptTerminal terminal = new TzEncryptTerminal();
+		terminal.setGuid(guid);
 		terminal.setLoginId(userName);
 		terminal.setUpdateTime(new Date());
 		TzEncryptTerminalExample example = new TzEncryptTerminalExample();
-		example.createCriteria().andLoginIdEqualTo(userName);
+		Criteria criteria = example.createCriteria();
+		criteria.andGuidEqualTo(guid);
+		if(StringUtils.isNotEmpty(userName))
+			criteria.andLoginIdEqualTo(userName);
 		int cnt = updateByExampleSelective(terminal, example);
 		if(cnt ==1)
 			return true;

@@ -103,9 +103,13 @@ public class RemotingUserController extends BaseRemotingController{
 	@ResponseBody
 	@RequestMapping(value="/heartbeat", method = RequestMethod.GET)
 	public RemotingResult heartbeat(
-			@RequestParam(required = false,name="userName") String userName, 
+			@RequestParam(required = true,name="guid") String guid,
+			@RequestParam(required = false,name="userName") String userName,
 			@RequestParam(required = false,name="token") String token) {
-		if(verifyToken(userName, token) && terminalService.heartbeat(userName)){
+		if(!(StringUtils.isNotBlank(userName) && StringUtils.isNotBlank(token) && verifyToken(userName, token))) {
+			userName = null;
+		}
+		if(terminalService.heartbeat(guid, userName)){
 			return RemotingResult.SU;
 		}
 		return RemotingResult.FA;

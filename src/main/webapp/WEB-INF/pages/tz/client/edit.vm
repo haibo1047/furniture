@@ -22,6 +22,13 @@
 			</div>
 		</div>
 		<div class="form-group">
+		    <label for="dataType" class="control-label col-md-3 col-sm-3 col-xs-12"> 是否强制升级 </label>
+			</label>
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				#buildSelect ($$alternativeList "forceFlag" "$model.forceFlag" "value1" "value2")
+			</div>
+		</div>
+		<div class="form-group">
 			<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> Md5值
 			</label>
 			<div class="col-md-6 col-sm-6 col-xs-12">

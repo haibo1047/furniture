@@ -29,5 +29,5 @@ public interface TzEncryptTerminalService extends BaseService<TzEncryptTerminal,
 	 * @param id
 	 * @return
 	 */
-	public boolean heartbeat(String userName);
+	public boolean heartbeat(String guid, String userName);
 }

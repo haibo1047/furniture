@@ -70,8 +70,17 @@ public class TzEncryptClientController extends BaseModelController {
 		int pageSize = (int)SecurityUtils.getSubject().getSession().getAttribute("pageSize");
 		modelMap.put("modelList", tzEncryptClientService.selectByExampleForStartPage(new TzEncryptClientExample(), pageNum, pageSize));
 		modelMap.put("total", tzEncryptClientService.countByExample(new TzEncryptClientExample()));
-		modelMap.put("appTypeList", getParams(SysParamEnum.Application_Type.getConstant()));
+//		modelMap.put("appTypeList", getParams(SysParamEnum.Application_Type.getConstant()));
+		modelMap.put("alternativeList", getParams(SysParamEnum.Alternative.getConstant()));
 		return webPrefix() + "list";
+	}
+
+
+	@Override
+	protected void beforeEdit(ModelMap modelMap) {
+		// TODO Auto-generated method stub
+		super.beforeEdit(modelMap);
+		modelMap.put("alternativeList", getParams(SysParamEnum.Alternative.getConstant()));
 	}
 
 
