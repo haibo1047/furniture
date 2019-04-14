@@ -5,6 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="client_name" jdbcType="VARCHAR" property="clientName" />
     <result column="client_version" jdbcType="VARCHAR" property="clientVersion" />
+    <result column="force_flag" jdbcType="INTEGER" property="forceFlag" />
     <result column="client_MD5" jdbcType="VARCHAR" property="clientMd5" />
     <result column="blob_id" jdbcType="BIGINT" property="blobId" />
     <result column="client_size" jdbcType="BIGINT" property="clientSize" />
@@ -14,9 +15,11 @@
     <result column="rec_status" jdbcType="INTEGER" property="recStatus" />
   </resultMap>
   
+    
   <select id="getLatestVersion" resultType="java.lang.String">
     select  max(client_version) from tz_encrypt_client
   </select>
+  
   
   <sql id="Example_Where_Clause">
     <where>
@@ -77,8 +80,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, client_name, client_version, client_MD5, blob_id, client_size, client_type, create_time, 
-    create_user, rec_status
+    id, client_name, client_version, force_flag, client_MD5, blob_id, client_size, client_type, 
+    create_time, create_user, rec_status
   </sql>
   <select id="selectByExample" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptClientExample" resultMap="BaseResultMap">
     select
@@ -112,13 +115,13 @@
   </delete>
   <insert id="insert" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptClient">
     insert into tz_encrypt_client (id, client_name, client_version, 
-      client_MD5, blob_id, client_size, 
-      client_type, create_time, create_user, 
-      rec_status)
+      force_flag, client_MD5, blob_id, 
+      client_size, client_type, create_time, 
+      create_user, rec_status)
     values (#{id,jdbcType=BIGINT}, #{clientName,jdbcType=VARCHAR}, #{clientVersion,jdbcType=VARCHAR}, 
-      #{clientMd5,jdbcType=VARCHAR}, #{blobId,jdbcType=BIGINT}, #{clientSize,jdbcType=BIGINT}, 
-      #{clientType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
-      #{recStatus,jdbcType=INTEGER})
+      #{forceFlag,jdbcType=INTEGER}, #{clientMd5,jdbcType=VARCHAR}, #{blobId,jdbcType=BIGINT}, 
+      #{clientSize,jdbcType=BIGINT}, #{clientType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=VARCHAR}, #{recStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptClient">
     insert into tz_encrypt_client
@@ -131,6 +134,9 @@
       </if>
       <if test="clientVersion != null">
         client_version,
+      </if>
+      <if test="forceFlag != null">
+        force_flag,
       </if>
       <if test="clientMd5 != null">
         client_MD5,
@@ -163,6 +169,9 @@
       </if>
       <if test="clientVersion != null">
         #{clientVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="forceFlag != null">
+        #{forceFlag,jdbcType=INTEGER},
       </if>
       <if test="clientMd5 != null">
         #{clientMd5,jdbcType=VARCHAR},
@@ -205,6 +214,9 @@
       <if test="record.clientVersion != null">
         client_version = #{record.clientVersion,jdbcType=VARCHAR},
       </if>
+      <if test="record.forceFlag != null">
+        force_flag = #{record.forceFlag,jdbcType=INTEGER},
+      </if>
       <if test="record.clientMd5 != null">
         client_MD5 = #{record.clientMd5,jdbcType=VARCHAR},
       </if>
@@ -236,6 +248,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       client_name = #{record.clientName,jdbcType=VARCHAR},
       client_version = #{record.clientVersion,jdbcType=VARCHAR},
+      force_flag = #{record.forceFlag,jdbcType=INTEGER},
       client_MD5 = #{record.clientMd5,jdbcType=VARCHAR},
       blob_id = #{record.blobId,jdbcType=BIGINT},
       client_size = #{record.clientSize,jdbcType=BIGINT},
@@ -255,6 +268,9 @@
       </if>
       <if test="clientVersion != null">
         client_version = #{clientVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="forceFlag != null">
+        force_flag = #{forceFlag,jdbcType=INTEGER},
       </if>
       <if test="clientMd5 != null">
         client_MD5 = #{clientMd5,jdbcType=VARCHAR},
@@ -284,6 +300,7 @@
     update tz_encrypt_client
     set client_name = #{clientName,jdbcType=VARCHAR},
       client_version = #{clientVersion,jdbcType=VARCHAR},
+      force_flag = #{forceFlag,jdbcType=INTEGER},
       client_MD5 = #{clientMd5,jdbcType=VARCHAR},
       blob_id = #{blobId,jdbcType=BIGINT},
       client_size = #{clientSize,jdbcType=BIGINT},

@@ -239,6 +239,76 @@ public class TzEncryptTerminalExample implements BaseExample, Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andGuidIsNull() {
+            addCriterion("guid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGuidIsNotNull() {
+            addCriterion("guid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGuidEqualTo(String value) {
+            addCriterion("guid =", value, "guid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGuidNotEqualTo(String value) {
+            addCriterion("guid <>", value, "guid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGuidGreaterThan(String value) {
+            addCriterion("guid >", value, "guid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGuidGreaterThanOrEqualTo(String value) {
+            addCriterion("guid >=", value, "guid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGuidLessThan(String value) {
+            addCriterion("guid <", value, "guid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGuidLessThanOrEqualTo(String value) {
+            addCriterion("guid <=", value, "guid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGuidLike(String value) {
+            addCriterion("guid like", value, "guid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGuidNotLike(String value) {
+            addCriterion("guid not like", value, "guid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGuidIn(List<String> values) {
+            addCriterion("guid in", values, "guid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGuidNotIn(List<String> values) {
+            addCriterion("guid not in", values, "guid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGuidBetween(String value1, String value2) {
+            addCriterion("guid between", value1, value2, "guid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGuidNotBetween(String value1, String value2) {
+            addCriterion("guid not between", value1, value2, "guid");
+            return (Criteria) this;
+        }
+
         public Criteria andTerminalStatusIsNull() {
             addCriterion("terminal_status is null");
             return (Criteria) this;

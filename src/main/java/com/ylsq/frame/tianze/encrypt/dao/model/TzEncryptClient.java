@@ -27,6 +27,13 @@ public class TzEncryptClient implements BaseModel, Serializable {
     private String clientVersion;
 
     /**
+     * 强制升级标志
+     *
+     * @mbg.generated
+     */
+    private Integer forceFlag;
+
+    /**
      * Md5值
      *
      * @mbg.generated
@@ -101,6 +108,14 @@ public class TzEncryptClient implements BaseModel, Serializable {
         this.clientVersion = clientVersion;
     }
 
+    public Integer getForceFlag() {
+        return forceFlag;
+    }
+
+    public void setForceFlag(Integer forceFlag) {
+        this.forceFlag = forceFlag;
+    }
+
     public String getClientMd5() {
         return clientMd5;
     }
@@ -166,6 +181,7 @@ public class TzEncryptClient implements BaseModel, Serializable {
         sb.append(", id=").append(id);
         sb.append(", clientName=").append(clientName);
         sb.append(", clientVersion=").append(clientVersion);
+        sb.append(", forceFlag=").append(forceFlag);
         sb.append(", clientMd5=").append(clientMd5);
         sb.append(", blobId=").append(blobId);
         sb.append(", clientSize=").append(clientSize);
@@ -192,6 +208,7 @@ public class TzEncryptClient implements BaseModel, Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getClientName() == null ? other.getClientName() == null : this.getClientName().equals(other.getClientName()))
             && (this.getClientVersion() == null ? other.getClientVersion() == null : this.getClientVersion().equals(other.getClientVersion()))
+            && (this.getForceFlag() == null ? other.getForceFlag() == null : this.getForceFlag().equals(other.getForceFlag()))
             && (this.getClientMd5() == null ? other.getClientMd5() == null : this.getClientMd5().equals(other.getClientMd5()))
             && (this.getBlobId() == null ? other.getBlobId() == null : this.getBlobId().equals(other.getBlobId()))
             && (this.getClientSize() == null ? other.getClientSize() == null : this.getClientSize().equals(other.getClientSize()))
@@ -208,6 +225,7 @@ public class TzEncryptClient implements BaseModel, Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getClientName() == null) ? 0 : getClientName().hashCode());
         result = prime * result + ((getClientVersion() == null) ? 0 : getClientVersion().hashCode());
+        result = prime * result + ((getForceFlag() == null) ? 0 : getForceFlag().hashCode());
         result = prime * result + ((getClientMd5() == null) ? 0 : getClientMd5().hashCode());
         result = prime * result + ((getBlobId() == null) ? 0 : getBlobId().hashCode());
         result = prime * result + ((getClientSize() == null) ? 0 : getClientSize().hashCode());

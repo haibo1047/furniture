@@ -309,6 +309,66 @@ public class TzEncryptClientExample implements BaseExample, Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andForceFlagIsNull() {
+            addCriterion("force_flag is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andForceFlagIsNotNull() {
+            addCriterion("force_flag is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andForceFlagEqualTo(Integer value) {
+            addCriterion("force_flag =", value, "forceFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andForceFlagNotEqualTo(Integer value) {
+            addCriterion("force_flag <>", value, "forceFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andForceFlagGreaterThan(Integer value) {
+            addCriterion("force_flag >", value, "forceFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andForceFlagGreaterThanOrEqualTo(Integer value) {
+            addCriterion("force_flag >=", value, "forceFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andForceFlagLessThan(Integer value) {
+            addCriterion("force_flag <", value, "forceFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andForceFlagLessThanOrEqualTo(Integer value) {
+            addCriterion("force_flag <=", value, "forceFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andForceFlagIn(List<Integer> values) {
+            addCriterion("force_flag in", values, "forceFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andForceFlagNotIn(List<Integer> values) {
+            addCriterion("force_flag not in", values, "forceFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andForceFlagBetween(Integer value1, Integer value2) {
+            addCriterion("force_flag between", value1, value2, "forceFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andForceFlagNotBetween(Integer value1, Integer value2) {
+            addCriterion("force_flag not between", value1, value2, "forceFlag");
+            return (Criteria) this;
+        }
+
         public Criteria andClientMd5IsNull() {
             addCriterion("client_MD5 is null");
             return (Criteria) this;

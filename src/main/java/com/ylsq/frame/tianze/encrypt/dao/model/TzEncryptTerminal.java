@@ -20,6 +20,13 @@ public class TzEncryptTerminal implements BaseModel, Serializable {
     private String loginId;
 
     /**
+     * Guid
+     *
+     * @mbg.generated
+     */
+    private String guid;
+
+    /**
      * 终端状态
      *
      * @mbg.generated
@@ -112,6 +119,14 @@ public class TzEncryptTerminal implements BaseModel, Serializable {
 
     public void setLoginId(String loginId) {
         this.loginId = loginId;
+    }
+
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
     }
 
     public Integer getTerminalStatus() {
@@ -210,6 +225,7 @@ public class TzEncryptTerminal implements BaseModel, Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", loginId=").append(loginId);
+        sb.append(", guid=").append(guid);
         sb.append(", terminalStatus=").append(terminalStatus);
         sb.append(", terminalName=").append(terminalName);
         sb.append(", mac=").append(mac);
@@ -239,6 +255,7 @@ public class TzEncryptTerminal implements BaseModel, Serializable {
         TzEncryptTerminal other = (TzEncryptTerminal) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getLoginId() == null ? other.getLoginId() == null : this.getLoginId().equals(other.getLoginId()))
+            && (this.getGuid() == null ? other.getGuid() == null : this.getGuid().equals(other.getGuid()))
             && (this.getTerminalStatus() == null ? other.getTerminalStatus() == null : this.getTerminalStatus().equals(other.getTerminalStatus()))
             && (this.getTerminalName() == null ? other.getTerminalName() == null : this.getTerminalName().equals(other.getTerminalName()))
             && (this.getMac() == null ? other.getMac() == null : this.getMac().equals(other.getMac()))
@@ -258,6 +275,7 @@ public class TzEncryptTerminal implements BaseModel, Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getLoginId() == null) ? 0 : getLoginId().hashCode());
+        result = prime * result + ((getGuid() == null) ? 0 : getGuid().hashCode());
         result = prime * result + ((getTerminalStatus() == null) ? 0 : getTerminalStatus().hashCode());
         result = prime * result + ((getTerminalName() == null) ? 0 : getTerminalName().hashCode());
         result = prime * result + ((getMac() == null) ? 0 : getMac().hashCode());

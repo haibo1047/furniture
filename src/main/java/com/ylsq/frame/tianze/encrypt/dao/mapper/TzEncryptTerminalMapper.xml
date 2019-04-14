@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptTerminal">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="login_id" jdbcType="VARCHAR" property="loginId" />
+    <result column="guid" jdbcType="VARCHAR" property="guid" />
     <result column="terminal_status" jdbcType="INTEGER" property="terminalStatus" />
     <result column="terminal_name" jdbcType="VARCHAR" property="terminalName" />
     <result column="MAC" jdbcType="VARCHAR" property="mac" />
@@ -75,7 +76,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, login_id, terminal_status, terminal_name, MAC, last_login_time, IP, version_num, 
+    id, login_id, guid, terminal_status, terminal_name, MAC, last_login_time, IP, version_num, 
     model_num, update_time, create_time, create_user, rec_status
   </sql>
   <select id="selectByExample" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptTerminalExample" resultMap="BaseResultMap">
@@ -109,16 +110,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptTerminal">
-    insert into tz_encrypt_terminal (id, login_id, terminal_status, 
-      terminal_name, MAC, last_login_time, 
-      IP, version_num, model_num, 
-      update_time, create_time, create_user, 
-      rec_status)
-    values (#{id,jdbcType=BIGINT}, #{loginId,jdbcType=VARCHAR}, #{terminalStatus,jdbcType=INTEGER}, 
-      #{terminalName,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
-      #{ip,jdbcType=VARCHAR}, #{versionNum,jdbcType=VARCHAR}, #{modelNum,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
-      #{recStatus,jdbcType=INTEGER})
+    insert into tz_encrypt_terminal (id, login_id, guid, 
+      terminal_status, terminal_name, MAC, 
+      last_login_time, IP, version_num, 
+      model_num, update_time, create_time, 
+      create_user, rec_status)
+    values (#{id,jdbcType=BIGINT}, #{loginId,jdbcType=VARCHAR}, #{guid,jdbcType=VARCHAR}, 
+      #{terminalStatus,jdbcType=INTEGER}, #{terminalName,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, 
+      #{lastLoginTime,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR}, #{versionNum,jdbcType=VARCHAR}, 
+      #{modelNum,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=VARCHAR}, #{recStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptTerminal">
     insert into tz_encrypt_terminal
@@ -128,6 +129,9 @@
       </if>
       <if test="loginId != null">
         login_id,
+      </if>
+      <if test="guid != null">
+        guid,
       </if>
       <if test="terminalStatus != null">
         terminal_status,
@@ -169,6 +173,9 @@
       </if>
       <if test="loginId != null">
         #{loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="guid != null">
+        #{guid,jdbcType=VARCHAR},
       </if>
       <if test="terminalStatus != null">
         #{terminalStatus,jdbcType=INTEGER},
@@ -220,6 +227,9 @@
       <if test="record.loginId != null">
         login_id = #{record.loginId,jdbcType=VARCHAR},
       </if>
+      <if test="record.guid != null">
+        guid = #{record.guid,jdbcType=VARCHAR},
+      </if>
       <if test="record.terminalStatus != null">
         terminal_status = #{record.terminalStatus,jdbcType=INTEGER},
       </if>
@@ -262,6 +272,7 @@
     update tz_encrypt_terminal
     set id = #{record.id,jdbcType=BIGINT},
       login_id = #{record.loginId,jdbcType=VARCHAR},
+      guid = #{record.guid,jdbcType=VARCHAR},
       terminal_status = #{record.terminalStatus,jdbcType=INTEGER},
       terminal_name = #{record.terminalName,jdbcType=VARCHAR},
       MAC = #{record.mac,jdbcType=VARCHAR},
@@ -282,6 +293,9 @@
     <set>
       <if test="loginId != null">
         login_id = #{loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="guid != null">
+        guid = #{guid,jdbcType=VARCHAR},
       </if>
       <if test="terminalStatus != null">
         terminal_status = #{terminalStatus,jdbcType=INTEGER},
@@ -322,6 +336,7 @@
   <update id="updateByPrimaryKey" parameterType="com.ylsq.frame.tianze.encrypt.dao.model.TzEncryptTerminal">
     update tz_encrypt_terminal
     set login_id = #{loginId,jdbcType=VARCHAR},
+      guid = #{guid,jdbcType=VARCHAR},
       terminal_status = #{terminalStatus,jdbcType=INTEGER},
       terminal_name = #{terminalName,jdbcType=VARCHAR},
       MAC = #{mac,jdbcType=VARCHAR},
