@@ -13,6 +13,7 @@
 	    	<thead>
 	      		<tr class="headings">
 			        <th class="column-title"> 登录名 </th>
+			        <th class="column-title"> GUID </th>
 			        <th class="column-title"> 终端状态 </th>
 			        <th class="column-title"> 终端名称 </th>
 			        <th class="column-title"> MAC地址 </th>
@@ -20,7 +21,7 @@
 			        <th class="column-title"> IP </th>
 			        <th class="column-title"> 版本号 </th>
 			        <th class="column-title"> 设备型号 </th>
-			        <th class="bulk-actions" colspan="9">
+			        <th class="bulk-actions" colspan="10">
 			          <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
 			        </th>
 	     		</tr>
@@ -29,6 +30,7 @@
 	    	#foreach ($model in $modelList)
 	      		<tr class="#if($foreach.count %2 ==0) even #else odd #end pointer">
 			        <td class=" "> $!{model.loginId} </td>
+			        <td class=" "> $!{model.guid} </td>
 			        <td class=" "> #dictDisplay($statusList $model.terminalStatus "value1" "value2") </td>
 			        <td class=" "> $!{model.terminalName} </td>
 			        <td class=" "> $!{model.mac} </td>

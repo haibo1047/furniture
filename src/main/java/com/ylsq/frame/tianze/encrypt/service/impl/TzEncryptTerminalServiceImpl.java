@@ -77,9 +77,10 @@ public class TzEncryptTerminalServiceImpl extends BaseServiceImpl<TzEncryptTermi
 	public boolean heartbeat(String guid, String userName) {
 		// TODO Auto-generated method stub
 		TzEncryptTerminal terminal = new TzEncryptTerminal();
-		terminal.setGuid(guid);
 		terminal.setLoginId(userName);
 		terminal.setUpdateTime(new Date());
+		terminal.setLastLoginTime(new Date());
+		terminal.setTerminalStatus(TerminalStatus.Normal);
 		TzEncryptTerminalExample example = new TzEncryptTerminalExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andGuidEqualTo(guid);

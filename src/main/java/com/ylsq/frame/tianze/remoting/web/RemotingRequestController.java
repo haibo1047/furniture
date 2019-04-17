@@ -31,7 +31,7 @@ public class RemotingRequestController extends BaseRemotingController {
 	private SysBlobService sysBlobService;
 	
 	@ResponseBody
-	@RequestMapping(value="/outgoing", method=RequestMethod.POST)
+	@RequestMapping(value="/new", method=RequestMethod.POST)
 	public RemotingResult outgoing(@RequestBody OutgoingRequest outgoing) {
 		if(verifyToken(outgoing.getUserName(), outgoing.getToken())) {
 			TzRequestOutgoing tzOutgoing = outgoing.convert();
