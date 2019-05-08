@@ -9,7 +9,7 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-
+        
 	<!-- 扫描controller -->
     <context:component-scan base-package="**.*web"/>
     
@@ -46,7 +46,19 @@
         </property>
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
-    
+
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="zh" />
+		<property name="cookieName" value="myAppLocaleCookie"/>
+		<property name="cookieMaxAge" value="3600"/>
+	</bean>
+
+	<mvc:interceptors>
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="locale" />
+		</bean>
+	</mvc:interceptors>
+
     <!-- 根目录'/'对应页面 -->
     <mvc:view-controller path="/" view-name="/common/index" />
 

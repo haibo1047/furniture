@@ -38,7 +38,7 @@
           <br><br>
           <section class="login_content">
             <form id="login_form" action="$rc.contextPath/sys/login" method="post">
-              <h1>Login Form</h1>
+              <h1>#springMessage("system.loginform")</h1>
               <div>
                 <input type="text" class="form-control" id="username" name="username" placeholder="username" required="true" />
               </div>
@@ -46,7 +46,7 @@
                 <input type="password" class="form-control" id="password" name="password" placeholder="password" required="true" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="#" onclick="login()">Log in</a>
+                <a class="btn btn-default submit" href="#" onclick="login()">#springMessage("system.login")</a>
                 <a class="reset_pass" href="#">Lost your password?</a>
               </div>
 
