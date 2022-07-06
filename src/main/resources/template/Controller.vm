@@ -16,9 +16,9 @@ import com.ylsq.frame.common.base.BaseExample;
 import com.ylsq.frame.common.base.BaseModel;
 import com.ylsq.frame.common.base.BaseService;
 import com.ylsq.frame.common.base.ValidateResult;
-import ${package_name}.dao.model.${model};
-import ${package_name}.dao.model.${model}Example;
-import ${package_name}.service.${model}Service;
+import ${package_name}.dao.model.${model_name};
+import ${package_name}.dao.model.${model_name}Example;
+import ${package_name}.service.${model_name}Service;
 
 
 
@@ -27,30 +27,30 @@ import ${package_name}.service.${model}Service;
  */
 @Controller
 @RequestMapping("${tableName}")
-public class ${model}Controller extends BaseModelController {
-    private static final Logger log = LoggerFactory.getLogger(${model}Controller.class);
+public class ${model_name}Controller extends BaseModelController {
+    private static final Logger log = LoggerFactory.getLogger(${model_name}Controller.class);
 	
 	@Autowired
-	private ${model}Service ${modelVariable}Service;
+	private ${model_name}Service ${modelVariable}Service;
 	
 	
 	@Override
 	public String list(@RequestParam(required = false, defaultValue = "1", value = "pageNum") int pageNum,ModelMap modelMap) {
 		// TODO Auto-generated method stub
 		int pageSize = (int)SecurityUtils.getSubject().getSession().getAttribute("pageSize");
-		List<${model}> list = ${modelVariable}Service.selectByExampleForStartPage(new ${model}Example(),pageNum,pageSize);
+		List<${model_name}> list = ${modelVariable}Service.selectByExampleForStartPage(new ${model_name}Example(),pageNum,pageSize);
 		
 		modelMap.put("modelList", list);
-		modelMap.put("total", ${modelVariable}Service.countByExample(new ${model}Example()));
+		modelMap.put("total", ${modelVariable}Service.countByExample(new ${model_name}Example()));
 		return webPrefix() + "list";
 	}
 	
-	protected ValidateResult validate(${model} model) {
+	protected ValidateResult validate(${model_name} model) {
 		return ValidateResult.Passed;
 	}
 	
 	@RequestMapping(value= "/save", method = RequestMethod.POST)
-	public String save(${model} model,ModelMap modelMap) {
+	public String save(${model_name} model,ModelMap modelMap) {
 		log.debug(model.toString());
 		initModel(model);
 		
@@ -78,7 +78,7 @@ public class ${model}Controller extends BaseModelController {
 	@Override
 	protected List<? extends BaseModel> getModelList() {
 		// TODO Auto-generated method stub
-		List<${model}> list = ${modelVariable}Service.selectByExample(new ${model}Example());
+		List<${model_name}> list = ${modelVariable}Service.selectByExample(new ${model_name}Example());
 		return list;
 	}
 

@@ -35,7 +35,7 @@ public class PasswordUtils {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			System.out.println(encode("test"));
+			System.out.println("password" + encode("frame"));
 		}catch(Exception e) {
 			
 		}

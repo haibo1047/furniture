@@ -50,7 +50,7 @@
 		               	 	<img src="$rc.contextPath/images/img.jpg" alt="..." class="img-circle profile_img">
 		             	 </div>
 		             	 <div class="profile_info">
-		              	  	<span>Welcome,</span>
+		              	  	<span>#springMessage("system.welcome"),</span>
 							#set($loginName = $session.getAttribute("system_login_name_") )
 		               		<h2>$!{loginName}</h2>
 		             	 </div>

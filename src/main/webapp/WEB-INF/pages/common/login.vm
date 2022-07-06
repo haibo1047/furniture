@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>YLSQ frame </title>
+    <title>#springMessage("system.appname")</title>
 
 
     <!-- Bootstrap -->
@@ -40,22 +40,19 @@
             <form id="login_form" action="$rc.contextPath/sys/login" method="post">
               <h1>#springMessage("system.loginform")</h1>
               <div>
-                <input type="text" class="form-control" id="username" name="username" placeholder="username" required="true" />
+                <input type="text" class="form-control" id="username" name="username" placeholder="#springMessage("system.username")" required="true" />
               </div>
               <div>
-                <input type="password" class="form-control" id="password" name="password" placeholder="password" required="true" />
+                <input type="password" class="form-control" id="password" name="password" placeholder="#springMessage("system.password")" required="true" />
               </div>
               <div>
                 <a class="btn btn-default submit" href="#" onclick="login()">#springMessage("system.login")</a>
-                <a class="reset_pass" href="#">Lost your password?</a>
+                <a class="reset_pass" href="#">#springMessage("system.lostPassword")?</a>
               </div>
 
               <div class="clearfix"></div>
 
               <div class="separator">
-                <p class="change_link">New to site?
-                  <a href="#signup" class="to_register"> Create Account </a>
-                </p>
 
                 <div class="clearfix"></div>
 

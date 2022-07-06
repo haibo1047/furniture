@@ -15,10 +15,10 @@ public class Generator {
 //		private static String PACKAGE_NAME = "com.ylsq.frame.tianze.encrypt";
 //		private static String TABLE_PREFIX = "sys_param";
 //		private static String PACKAGE_NAME = "com.ylsq.frame.sys.base";
-//		private static String TABLE_PREFIX = "tz_base_";
-//		private static String PACKAGE_NAME = "com.ylsq.frame.tianze.base";
-		private static String TABLE_PREFIX = "secu_user";
-		private static String PACKAGE_NAME = "com.ylsq.frame.sys.secu";  //注意设置该变量，它会想service项目的该文件夹下覆盖写入东西
+		private static String TABLE_PREFIX = "furn_product";
+		private static String PACKAGE_NAME = "com.ylsq.frame.furniture.product";
+//		private static String TABLE_PREFIX = "secu_user";
+//		private static String PACKAGE_NAME = "com.ylsq.frame.sys.secu";  //注意设置该变量，它会想service项目的该文件夹下覆盖写入东西
 
 		private static String JDBC_DRIVER = PropertiesFileUtil.getInstance("generator").get("generator.jdbc.driver");
 		private static String JDBC_URL = PropertiesFileUtil.getInstance("generator").get("generator.jdbc.url");

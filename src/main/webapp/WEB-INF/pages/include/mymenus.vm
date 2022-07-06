@@ -13,7 +13,7 @@
 		<ul class="nav side-menu">
 			<li>
 				<a href="$rc.contextPath/index">
-					<i class="fa fa-home"></i> Home 
+					<i class="fa fa-home"></i> #springMessage("system.home") 
 				</a>
 	 	 	</li>
 			#foreach($module in $myMenuMap.keySet() )

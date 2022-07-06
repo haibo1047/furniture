@@ -6,7 +6,7 @@ public enum SysParamEnum {
 	Param_Data_type("param_data_type"),
 	Alternative("alternative"),
 	Terminal_Status("terminal_status"),
-	Application_Type("application_type"),
+	Product_Type("product_type"),
 	Sys_Log_Type("system_log_type"),
 	System_Config("system_config"),
 	Strategy_Type("strategy_type"),

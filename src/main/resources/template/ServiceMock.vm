@@ -1,14 +1,14 @@
 package ${package_name}.service.impl;
 
 import com.ylsq.common.base.BaseServiceMock;
-import ${package_name}.dao.mapper.${model}Mapper;
-import ${package_name}.dao.model.${model};
-import ${package_name}.dao.model.${model}Example;
+import ${package_name}.dao.mapper.${model_name}Mapper;
+import ${package_name}.dao.model.${model_name};
+import ${package_name}.dao.model.${model_name}Example;
 
 /**
-* 降级实现${model}Service接口
+* 降级实现${model_name}Service接口
 * Created by shuzheng on ${ctime}.
 */
-public class ${model}ServiceMock extends BaseServiceMock<${model}Mapper, ${model}, ${model}Example> implements ${model}Service {
+public class ${model_name}ServiceMock extends BaseServiceMock<${model_name}Mapper, ${model_name}, ${model_name}Example> implements ${model_name}Service {
 
 }

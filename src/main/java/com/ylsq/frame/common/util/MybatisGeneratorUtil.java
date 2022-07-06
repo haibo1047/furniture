@@ -63,12 +63,12 @@ public class MybatisGeneratorUtil {
 		String targetProject = module + "/" + module + "-dao";
 		String basePath = MybatisGeneratorUtil.class.getResource("/").getPath().replace("/target/classes/", "").replace(targetProject, "");
 		if (os.toLowerCase().startsWith("win")) {
-			generatorConfig_vm = MybatisGeneratorUtil.class.getResource(generatorConfig_vm).getPath().replaceFirst("/", "");
-			service_vm = MybatisGeneratorUtil.class.getResource(service_vm).getPath().replaceFirst("/", "");
-			serviceMock_vm = MybatisGeneratorUtil.class.getResource(serviceMock_vm).getPath().replaceFirst("/", "");
-			serviceImpl_vm = MybatisGeneratorUtil.class.getResource(serviceImpl_vm).getPath().replaceFirst("/", "");
-			controller_vm = MybatisGeneratorUtil.class.getResource(controller_vm).getPath().replaceFirst("/", "");
-			basePath = basePath.replaceFirst("/", "");
+			generatorConfig_vm = MybatisGeneratorUtil.class.getResource(generatorConfig_vm).getPath().replaceFirst("/", "").replaceAll("/", "\\\\");
+			service_vm = MybatisGeneratorUtil.class.getResource(service_vm).getPath().replaceFirst("/", "").replaceAll("/", "\\\\");
+			serviceMock_vm = MybatisGeneratorUtil.class.getResource(serviceMock_vm).getPath().replaceFirst("/", "").replaceAll("/", "\\\\");
+			serviceImpl_vm = MybatisGeneratorUtil.class.getResource(serviceImpl_vm).getPath().replaceFirst("/", "").replaceAll("/", "\\\\");
+			controller_vm = MybatisGeneratorUtil.class.getResource(controller_vm).getPath().replaceFirst("/", "").replaceAll("/", "\\\\");
+			basePath = basePath.replaceFirst("/", "").replaceAll("/", "\\\\");
 		} else {
 			generatorConfig_vm = MybatisGeneratorUtil.class.getResource(generatorConfig_vm).getPath();
 			service_vm = MybatisGeneratorUtil.class.getResource(service_vm).getPath();
@@ -78,7 +78,6 @@ public class MybatisGeneratorUtil {
 			listPage_vm = MybatisGeneratorUtil.class.getResource(listPage_vm).getPath();
 			editPage_vm = MybatisGeneratorUtil.class.getResource(editPage_vm).getPath();
 		}
-
 		String generatorConfigXml = MybatisGeneratorUtil.class.getResource("/").getPath().replace("/target/classes/", "") + "/src/main/resources/generatorConfig.xml";
 //		targetProject = basePath + targetProject;
 		targetProject = basePath + "/";
@@ -119,6 +118,8 @@ public class MybatisGeneratorUtil {
 				deleteDir(new File(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/model"));
 				deleteDir(new File(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/mapper"));
 				deleteDir(new File(targetProjectSqlMap + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/mapper"));
+				deleteDir(new File(targetProjectSqlMap + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/service"));
+				deleteDir(new File(targetProjectSqlMap + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/web"));
 			}
 			else {
 				deleteExisting(targetProject + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/dao/mapper",tables,false);
@@ -163,7 +164,7 @@ public class MybatisGeneratorUtil {
 			if (!serviceFile.exists()) {
 				VelocityContext context = new VelocityContext();
 				context.put("package_name", packageName);
-				context.put("model", model);
+				context.put("model_name", model);
 				context.put("ctime", ctime);
 				VelocityUtil.generate(service_vm, service, context);
 				System.out.println(service);
@@ -173,7 +174,7 @@ public class MybatisGeneratorUtil {
 			if (!serviceMockFile.exists() ) {
 				VelocityContext context = new VelocityContext();
 				context.put("package_name", packageName);
-				context.put("model", model);
+				context.put("model_name", model);
 				context.put("ctime", ctime);
 //				VelocityUtil.generate(serviceMock_vm, serviceMock, context);
 				System.out.println(serviceMock);
@@ -183,7 +184,7 @@ public class MybatisGeneratorUtil {
 			if (!serviceImplFile.exists()) {
 				VelocityContext context = new VelocityContext();
 				context.put("package_name", packageName);
-				context.put("model", model);
+				context.put("model_name", model);
 				context.put("mapper", StringUtil.toLowerCaseFirstOne(model));
 				context.put("ctime", ctime);
 				VelocityUtil.generate(serviceImpl_vm, serviceImpl, context);
@@ -194,7 +195,7 @@ public class MybatisGeneratorUtil {
 			if (!controllerFile.exists()) {
 				VelocityContext context = new VelocityContext();
 				context.put("package_name", packageName);
-				context.put("model", model);
+				context.put("model_name", model);
 				context.put("tableName", tableName);
 				context.put("mapper", StringUtil.toLowerCaseFirstOne(model));
 				context.put("modelVariable", StringUtil.toLowerCaseFirstOne(model));
@@ -203,19 +204,19 @@ public class MybatisGeneratorUtil {
 				System.out.println(controller);
 			}
 			// 生成page
-			File listPageFolder = new File(pagesPath);
-			if (listPageFolder.exists()) {
-				VelocityContext context = new VelocityContext();
-				context.put("package_name", packageName);
-				context.put("tableName", tableName);
-				context.put("tableComment", tables.get(i).get("table_comment"));
-				context.put("model", model);
-				context.put("modelVariable", StringUtil.toLowerCaseFirstOne(model));
-				context.put("ctime", ctime);
+// 			File listPageFolder = new File(pagesPath);
+// 			if (listPageFolder.exists()) {
+// 				VelocityContext context = new VelocityContext();
+// 				context.put("package_name", packageName);
+// 				context.put("tableName", tableName);
+// 				context.put("tableComment", tables.get(i).get("table_comment"));
+// 				context.put("model", model);
+// 				context.put("modelVariable", StringUtil.toLowerCaseFirstOne(model));
+// 				context.put("ctime", ctime);
 //				VelocityUtil.generate(listPage_vm, pagesPath+"/list.vm", context);
 //				VelocityUtil.generate(listPage_vm, pagesPath+"/edit.vm", context);
-				System.out.println(pagesPath);
-			}
+// 				System.out.println(pagesPath);
+// 			}
 		}
 		System.out.println("========== 结束生成Service ==========");
 	}

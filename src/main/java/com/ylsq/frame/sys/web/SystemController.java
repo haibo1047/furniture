@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -62,7 +63,7 @@ public class SystemController extends BaseController {
 			log.debug("redirect to : /" );
 			return "redirect:/";
 		}
-		String url = sr.getRequestUrl().replaceAll(request.getContextPath(), "");
+		String url = StringUtils.defaultIfBlank(sr.getRequestUrl().replaceAll(request.getContextPath(), ""),"/");
 		log.debug("redirect to :" + url);
 		return "redirect:" + url;
 	}

@@ -26,47 +26,21 @@ public class VelocityUtil {
 	public static void generate(String inputVmFilePath, String outputFilePath, VelocityContext context) throws Exception {
 		try {
 			Properties properties = new Properties();
-			properties.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, getPath(inputVmFilePath));
+			properties.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, "");
 			properties.setProperty(VelocityEngine.RUNTIME_LOG_REFERENCE_LOG_INVALID, "null");
 			Velocity.init(properties);
 			//VelocityEngine engine = new VelocityEngine();
-			Template template = Velocity.getTemplate(getFile(inputVmFilePath), "utf-8");
-			File folder = new File(getPath(outputFilePath));
+			Template template = Velocity.getTemplate(inputVmFilePath, "utf-8");
+			File outputFile = new File(outputFilePath);
+			File folder = new File(outputFile.getParent());
 			if(!folder.exists())
 				folder.mkdirs();
-			File outputFile = new File(outputFilePath);
 			FileWriterWithEncoding writer = new FileWriterWithEncoding(outputFile, "utf-8");
 			template.merge(context, writer);
 			writer.close();
 		} catch (Exception ex) {
 			throw ex;
 		}
-	}
-
-	/**
-	 * 根据文件绝对路径获取目录
-	 * @param filePath
-	 * @return
-	 */
-	public static String getPath(String filePath) {
-		String path = "";
-		if (StringUtils.isNotBlank(filePath)) {
-			path = filePath.substring(0, filePath.lastIndexOf("/") + 1);
-		}
-		return path;
-	}
-
-	/**
-	 * 根据文件绝对路径获取文件
-	 * @param filePath
-	 * @return
-	 */
-	public static String getFile(String filePath) {
-		String file = "";
-		if (StringUtils.isNotBlank(filePath)) {
-			file = filePath.substring(filePath.lastIndexOf("/") + 1);
-		}
-		return file;
 	}
 
 }

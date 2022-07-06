@@ -48,7 +48,6 @@ public class SecuRealm extends AuthenticatingRealm {
 	
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		// TODO Auto-generated method stub
 		String userName = (String)token.getPrincipal();
 		String passwd = new String((char[])token.getCredentials());
 		SecuUser secuUser = secuUserService.selectByUsername(userName);

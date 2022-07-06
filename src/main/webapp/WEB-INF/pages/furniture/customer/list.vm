@@ -1,0 +1,66 @@
+ <div class="title_left">
+    <h3>客户列表</h3>
+</div>
+<div class="x_content">
+	
+	<p>
+		<button type="button" class="btn btn-round btn-primary" onclick="create()">#springMessage("opration.create")</button>
+		<button type="button" class="btn btn-round btn-primary" onclick="deletemultiple()">#springMessage("opration.delete")</button>
+	</p>
+	
+	<div class="table-responsive">
+	  	<table class="table table-striped jambo_table">
+	    	<thead>
+	      		<tr class="headings">
+			        <th class="column-title"> 客户名称 </th>
+			        <th class="column-title"> 地址 </th>
+			        <th class="column-title"> 手机 </th>
+			        <th class="bulk-actions" colspan="10">
+			          <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+			        </th>
+	     		</tr>
+	    	</thead>
+	    	<tbody>
+	    	#foreach ($model in $modelList)
+	      		<tr class="#if($foreach.count %2 ==0) even #else odd #end pointer">
+			        <td class=" "> $!{model.customerName} </td>
+			        <td class=" "> $!{model.address} </td>
+			        <td class=" "> $!{model.mobile} </td>
+	      		</tr>
+	      		#end
+	    	</tbody>
+	  	</table>
+	</div>
+	
+	#parse("include/pagination.vm")
+</div>
+
+<script>
+var ID_INDEX=1
+function create(){
+	location = "$rc.contextPath/furniture/customer/create"
+}
+function deletemultiple(){
+	var ids = "";
+	var selted = $("input[name='table_records']:checked");
+	$(selted).each(function(){
+		ids = ids + (ids.length===0?'':'-') + $(this).val();
+	});
+	if($(selted).length==0){
+		return;
+	}
+	if(confirm('确认要删除此'+$(selted).length+'条记录？')){
+		location = "$rc.contextPath/furniture/customer/delete/"+ids
+	}
+}
+function editRecord(o){
+	var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
+	location = "$rc.contextPath/furniture/customer/edit/"+objId
+}
+function delRecord(o){
+	if (confirm('确认要删除此记录？')) {
+		var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
+		location = "$rc.contextPath/furniture/customer/delete/"+objId
+	}
+}
+</script>

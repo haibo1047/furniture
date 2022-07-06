@@ -237,6 +237,8 @@ public class SecuRoleController extends BaseModelController {
 		
 		String[] idArray = StringUtils.defaultIfEmpty(selectedUserNames, "").split("-");
 		for(String userName : idArray) {
+			if(StringUtils.isBlank(userName))
+				continue;
 			if(existingMap.keySet().contains(userName)) {
 				mappingList.remove(existingMap.get(userName));
 			}

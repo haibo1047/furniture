@@ -30,14 +30,14 @@ function gotopage(pageNum){
 <div class="row">
 	<div class="col-sm-6">
 		<div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">
-		Showing ${pageNum}/${totalPages} page of ${total} entries  ##[for debug 1st: $the1st / 2nd: $the2nd]
+		#springMessage("pagination.showing") ${pageNum}/${totalPages} #springMessage("pagination.pageOf") ${total} #springMessage("pagination.entries")  ##[for debug 1st: $the1st / 2nd: $the2nd]
 		</div>
 	</div>
 	<div class="col-sm-6">
 		<div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
 			<ul class="pagination">
 				<li class="paginate_button previous #if($pageNum <= 1) disabled #end" id="datatable_previous">
-					<a href="#" aria-controls="datatable" data-dt-idx="1" tabindex="0" #if($pageNum > 1) onclick="gotopage($pageNum - 1)" #end>Previous</a>
+					<a href="#" aria-controls="datatable" data-dt-idx="1" tabindex="0" #if($pageNum > 1) onclick="gotopage($pageNum - 1)" #end>#springMessage("link.previous")</a>
 				</li>
 				#if($totalPages >1)
 				<li class="paginate_button #if(1 == $pageNum) active #end">
@@ -56,7 +56,7 @@ function gotopage(pageNum){
 					<a href="#" aria-controls="datatable" data-dt-idx="7" tabindex="0" onclick="gotopage(${totalPages})">${totalPages}</a>
 				</li>
 				<li class="paginate_button next #if($pageNum >= ${totalPages}) disabled #end" id="datatable_next">
-					<a href="#" aria-controls="datatable" data-dt-idx="7" tabindex="0" #if($pageNum < ${totalPages}) onclick="gotopage($pageNum + 1)" #end>Next</a>
+					<a href="#" aria-controls="datatable" data-dt-idx="7" tabindex="0" #if($pageNum < ${totalPages}) onclick="gotopage($pageNum + 1)" #end>#springMessage("link.next")</a>
 				</li>
 			</ul>
 		</div> ##datatable

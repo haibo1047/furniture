@@ -73,5 +73,6 @@
         <table tableName="$!table.table_name" domainObjectName="$!table.model_name"></table>
             #end
         #end
-    </context>
+
+	</context>
 </generatorConfiguration>
