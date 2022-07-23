@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+    id 'java-library'
+	id 'org.springframework.boot' version '2.7.2'
+	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+}
+
+
+group = 'com.ylsq.frame'
+version = '0.1'
+sourceCompatibility = '18'
+
+
+dependencies {
+    implementation project(':list')
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api: 5.8.2'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.security:spring-security-test'
+}

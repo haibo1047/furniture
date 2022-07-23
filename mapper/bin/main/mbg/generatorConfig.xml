@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="mbg/generator.properties"/>
+    <context id="MySqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`" />
+        <property name="endingDelimiter" value="`" />
+        <property name="javaFileEncoding" value="UTF-8" />
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        
+        <jdbcConnection driverClass="${generator.jdbc.driver}" connectionURL="${generator.jdbc.url}" userId="${generator.jdbc.username}" password="${generator.jdbc.password}">
+            <property name="nullCatalogMeansCurrent" value="true" />
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="${generator.outputpackage}.model" targetProject="src\main\java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="${generator.outputpackage}.mapper" targetProject="src\main\resources" />
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${generator.outputpackage}.mapper" targetProject="src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+
+        <table tableName="${generator.tablename}" domainObjectName="${generator.objectname}"></table>
+    </context>
+
+</generatorConfiguration>
