@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.7.2'
 	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
 	id 'java'
+	id 'java-library'
 }
 
 group = 'com.ylsq.frame'
@@ -18,9 +19,9 @@ ext {
 }
 
 dependencies {
-    implementation project(':list')
-    implementation project(':utilities')
-    implementation project(':mapper')
+    api project(':list')
+    api project(':utilities')
+    api project(':mapper')
 	
 	implementation 'org.springframework.boot:spring-boot-starter-quartz'
     implementation 'de.codecentric:spring-boot-admin-starter-server:2.6.6'

@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### gradle ###
+.gradle/
+.gradle/**/**
+.gradle/7*/**/**
+.gradle/7.5/checksums/sha1-checksums.bin

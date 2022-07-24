@@ -1,0 +1,35 @@
+server:
+  port: 10008
+  
+spring:
+  application:
+    name: app
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    max-active: 15
+    max-idle: 10
+    max-wait: 8000
+    minEvictableIdleTimeMillis: 30000
+    password: frame
+    testOnBorrow: true
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    url: jdbc:mysql://localhost:3306/frame?autoreconnect = true
+    username: frame
+    validationQuery: SELECT 1
+
+mybatis:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10001/eureka
+
+logging:
+  level:
+    com:
+      example:
+        demo: debug
+    org:
+      springframework: info

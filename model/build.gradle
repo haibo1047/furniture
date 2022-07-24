@@ -1,0 +1,13 @@
+plugins {
+    id 'java'
+	id 'java-library'
+}
+
+group = 'com.ylsq.frame'
+version = '0.1'
+sourceCompatibility = '18'
+
+dependencies {
+    api project(':list')
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+}
