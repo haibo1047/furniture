@@ -2,7 +2,6 @@ plugins {
 	id 'org.springframework.boot' version '2.7.2'
 	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
 	id 'java'
-	id 'java-library'
 }
 
 group = 'com.ylsq.frame'
@@ -19,12 +18,8 @@ ext {
 }
 
 dependencies {
-  api project(':model')
-
   implementation 'org.springframework.boot:spring-boot-starter-web'
-  implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-	implementation 'org.springframework.cloud:spring-cloud-starter-config'
-	implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+  implementation 'org.springframework.cloud:spring-cloud-config-server'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
@@ -37,5 +32,3 @@ dependencyManagement {
 tasks.named('test') {
   useJUnitPlatform()
 }
-
-    

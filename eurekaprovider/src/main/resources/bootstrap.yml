@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: eurekaprovider
+  profiles:
+    active: dev
+  cloud:
+    config:
+      uri: http://localhost:10101
+      fail-fast: true
+

@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'furniture'
-include('list', 'model','eurekaserver','eurekaprovider','eurekaconsumer','utilities','mapper','app')
+include('list', 'model','eurekaserver','configcenter','eurekaprovider','eurekaconsumer','utilities','mapper','app')
