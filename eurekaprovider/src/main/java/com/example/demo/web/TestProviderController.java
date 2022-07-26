@@ -17,7 +17,7 @@ public class TestProviderController {
 
     private static long ID = 0l;
     
-    @Value("${host1}")
+    @Value("${server.port}")
     private String configFromServer;
 
     @Autowired
@@ -29,7 +29,7 @@ public class TestProviderController {
         FurnProduct fd = providerService.getAllProducts();
         fd.setCreateTime(new Date());
         fd.setId(ID++);
-        System.out.println(configFromServer);
+        fd.setCreateUser(configFromServer);
         return fd;
     }
 

@@ -20,7 +20,7 @@ public class ProductController {
     @Autowired
     FurnProductService furnProductService;
 
-    @Value("${port2}")
+    @Value("${server.port}")
     private String configFromServer;
 
     @GetMapping("/list")
